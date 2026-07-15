@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+:root {
+  --background: #D5EDF5;
+  --foreground: #0957A0;
+  --color-strong-cyan: #11C7CA;
+  --color-dark-cyan: #068896;
+  --color-baltic-blue: #0957A0;
+  --color-ocean-blue: #0B87B6;
+  --color-dark-cyan-2: #05999D;
+  --color-azure-mist: #D5EDF5;
+  --color-turquoise-surf: #1BAACC;
+  --color-slate-indigo: #3E5DE0;
+  --color-brilliant-azure: #348ADA;
+  --color-bright-teal-blue: #0D73A9;
+  --color-turquoise: #48DDD5;
+  --color-lavender-mist: #EAE9F4;
+  --color-egyptian-blue: #3F37A2;
+  --color-neon-ice: #41EFE7;
+  --color-yale-blue: #274B70;
+  --color-ocean-twilight: #4347AB;
+  --color-steel-blue: #387AC4;
+  --color-ocean-twilight-2: #4352B1;
+  --color-violet-twilight: #4847DB;
+  --color-sky-blue-light: #5ECFF1;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--color-strong-cyan);
+  --color-secondary: var(--color-baltic-blue);
+  --color-accent: var(--color-turquoise);
+  --color-muted: var(--color-azure-mist);
+  --color-dark: var(--color-ocean-twilight);
+  --color-highlight: var(--color-lavender-mist);
+  --color-info: var(--color-neon-ice);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #1E2232;
+    --foreground: #EAE9F4;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
