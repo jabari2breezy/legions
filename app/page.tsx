@@ -1,47 +1,126 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Footer } from "./footer";
+import { Background3D } from "./background3d";
+import { Preloader } from "./preloader";
+import { GlimpseSection } from "./glimpse";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
+function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  return (
+    <nav
+      className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
+      style={{
+        background: scrolled
+          ? "rgba(10,14,26,0.75)"
+          : "transparent",
+        backdropFilter: scrolled ? "blur(20px)" : "none",
+        WebkitBackdropFilter: scrolled ? "blur(20px)" : "none",
+        borderBottom: scrolled ? "1px solid rgba(17,199,202,0.06)" : "1px solid transparent",
+      }}
+    >
+      <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-20 h-20 flex items-center justify-between">
+        <a href="#" className="flex items-center gap-3">
+          <div
+            className="w-9 h-9 rounded-xl flex items-center justify-center font-serif text-sm font-bold"
+            style={{
+              background: "linear-gradient(135deg, var(--color-strong-cyan), var(--color-dark-cyan))",
+              color: "var(--color-yale-blue)",
+            }}
+          >
+            L
+          </div>
+          <span
+            className="font-serif text-lg font-medium hidden sm:block"
+            style={{ color: "var(--color-foreground)" }}
+          >
+            Legions Club
+          </span>
+        </a>
+
+        <div className="hidden md:flex items-center gap-10">
+          {["About", "Programs", "Work", "Impact"].map((item) => (
+            <a
+              key={item}
+              href={`#${item.toLowerCase()}`}
+              className="font-mono text-[11px] tracking-[0.2em] uppercase transition-colors duration-300 hover:opacity-100 opacity-50"
+              style={{ color: "var(--color-azure-mist)" }}
+            >
+              {item}
+            </a>
+          ))}
+        </div>
+
+        <a
+          href="#join"
+          className="px-6 py-2.5 text-[11px] font-mono font-medium tracking-[0.15em] uppercase rounded-full transition-all duration-300 hover:shadow-[0_0_24px_rgba(17,199,202,0.2)]"
+          style={{
+            background: "var(--color-strong-cyan)",
+            color: "var(--color-yale-blue)",
+          }}
+        >
+          Join Now
+        </a>
+      </div>
+    </nav>
+  );
+}
+
 function HeroSection() {
   const heroRef = useRef<HTMLElement>(null);
-  const headingRef = useRef<HTMLHeadingElement>(null);
-  const subRef = useRef<HTMLParagraphElement>(null);
-  const ctaRef = useRef<HTMLDivElement>(null);
-  const tagRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
 
       tl.fromTo(
-        tagRef.current,
+        "[data-hero-tag]",
         { y: 20, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.8 }
       )
         .fromTo(
-          headingRef.current,
-          { y: 60, opacity: 0 },
-          { y: 0, opacity: 1, duration: 1.2 },
-          "-=0.4"
+          "[data-hero-line]",
+          { scaleX: 0 },
+          { scaleX: 1, duration: 1.4, ease: "power4.inOut" },
+          "-=0.5"
         )
         .fromTo(
-          subRef.current,
+          "[data-hero-heading]",
+          { y: 60, opacity: 0 },
+          { y: 0, opacity: 1, duration: 1.2 },
+          "-=1.0"
+        )
+        .fromTo(
+          "[data-hero-sub]",
           { y: 30, opacity: 0 },
           { y: 0, opacity: 1, duration: 0.9 },
           "-=0.6"
         )
         .fromTo(
-          ctaRef.current,
+          "[data-hero-cta]",
           { y: 20, opacity: 0 },
           { y: 0, opacity: 1, duration: 0.8 },
           "-=0.4"
+        )
+        .fromTo(
+          "[data-hero-scroll]",
+          { opacity: 0 },
+          { opacity: 0.4, duration: 1 },
+          "-=0.2"
         );
     }, heroRef);
 
@@ -54,125 +133,79 @@ function HeroSection() {
       className="relative min-h-screen flex items-center overflow-hidden"
       style={{ background: "var(--background)" }}
     >
-      <div className="absolute inset-0 opacity-[0.07]">
-        <div
-          className="absolute top-1/4 -left-32 w-[600px] h-[600px] rounded-full blur-[120px]"
-          style={{ background: "var(--color-strong-cyan)" }}
-        />
-        <div
-          className="absolute bottom-1/4 right-0 w-[500px] h-[500px] rounded-full blur-[100px]"
-          style={{ background: "var(--color-slate-indigo)" }}
-        />
-      </div>
+      <div className="hero-gradient absolute inset-0" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-12 lg:px-20 py-32 w-full">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          <div>
-            <div
-              ref={tagRef}
-              className="font-mono text-xs tracking-[0.3em] uppercase mb-8 opacity-0"
-              style={{ color: "var(--color-strong-cyan)" }}
-            >
-              Est. 2024 — Youth Development
-            </div>
-
-            <h1
-              ref={headingRef}
-              className="font-serif text-[clamp(3rem,7vw,6.5rem)] leading-[0.92] font-light tracking-tight mb-8 opacity-0"
-              style={{ color: "var(--color-foreground)" }}
-            >
-              Building
-              <br />
-              <span className="gradient-text font-semibold italic">Tomorrow&apos;s</span>
-              <br />
-              Leaders
-            </h1>
-
-            <p
-              ref={subRef}
-              className="text-lg sm:text-xl max-w-lg leading-relaxed mb-12 opacity-0"
-              style={{ color: "var(--color-steel-blue)" }}
-            >
-              Legions Club empowers the next generation through mentorship,
-              community engagement, and the relentless pursuit of excellence.
-            </p>
-
-            <div ref={ctaRef} className="flex flex-wrap gap-4 opacity-0">
-              <a
-                href="#join"
-                className="inline-flex items-center gap-3 px-8 py-4 text-sm font-medium tracking-wide uppercase rounded-full transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(17,199,202,0.3)]"
-                style={{
-                  background: "var(--color-strong-cyan)",
-                  color: "var(--color-yale-blue)",
-                }}
-              >
-                Join the Movement
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M3 8H13M13 8L9 4M13 8L9 12"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </a>
-              <a
-                href="#about"
-                className="inline-flex items-center gap-3 px-8 py-4 text-sm font-medium tracking-wide uppercase rounded-full border transition-all duration-300 hover:bg-[rgba(17,199,202,0.08)]"
-                style={{
-                  borderColor: "rgba(17,199,202,0.3)",
-                  color: "var(--color-strong-cyan)",
-                }}
-              >
-                Learn More
-              </a>
-            </div>
+        <div className="max-w-3xl">
+          <div
+            data-hero-tag
+            className="font-mono text-xs tracking-[0.3em] uppercase mb-8 opacity-0"
+            style={{ color: "var(--color-strong-cyan)" }}
+          >
+            Est. 2024 — Youth Development
           </div>
 
-          <div className="hidden lg:flex items-center justify-center">
-            <div className="relative w-full aspect-square max-w-md">
-              <div
-                className="absolute inset-0 rounded-3xl rotate-6 opacity-20"
-                style={{
-                  background:
-                    "linear-gradient(135deg, var(--color-strong-cyan), var(--color-slate-indigo))",
-                }}
-              />
-              <div
-                className="absolute inset-4 rounded-2xl -rotate-3 opacity-40"
-                style={{
-                  background:
-                    "linear-gradient(135deg, var(--color-egyptian-blue), var(--color-violet-twilight))",
-                }}
-              />
-              <div
-                className="absolute inset-8 rounded-xl flex items-center justify-center"
-                style={{
-                  background:
-                    "linear-gradient(135deg, var(--color-dark-cyan), var(--color-ocean-blue))",
-                }}
-              >
-                <span className="font-serif text-[8rem] font-bold opacity-30" style={{ color: "var(--color-azure-mist)" }}>
-                  L
-                </span>
-              </div>
-            </div>
+          <div className="overflow-hidden mb-2" data-hero-line>
+            <div
+              className="h-px w-24 origin-left"
+              style={{ background: "var(--color-strong-cyan)" }}
+            />
+          </div>
+
+          <h1
+            data-hero-heading
+            className="font-serif text-[clamp(3rem,8vw,7.5rem)] leading-[0.9] font-light tracking-tight mb-8 opacity-0"
+            style={{ color: "var(--color-foreground)" }}
+          >
+            Building
+            <br />
+            <span className="gradient-text font-semibold italic">Tomorrow&apos;s</span>
+            <br />
+            Leaders
+          </h1>
+
+          <p
+            data-hero-sub
+            className="text-lg sm:text-xl max-w-lg leading-relaxed mb-12 opacity-0"
+            style={{ color: "var(--color-steel-blue)" }}
+          >
+            Legions Club empowers the next generation through mentorship,
+            community engagement, and the relentless pursuit of excellence.
+          </p>
+
+          <div data-hero-cta className="flex flex-wrap gap-4 opacity-0">
+            <a
+              href="#join"
+              className="inline-flex items-center gap-3 px-8 py-4 text-sm font-medium tracking-wide uppercase rounded-full transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(17,199,202,0.3)]"
+              style={{
+                background: "var(--color-strong-cyan)",
+                color: "var(--color-yale-blue)",
+              }}
+            >
+              Join the Movement
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </a>
+            <a
+              href="#glimpse"
+              className="glass-card inline-flex items-center gap-3 px-8 py-4 text-sm font-medium tracking-wide uppercase rounded-full transition-all duration-300 hover:bg-[rgba(17,199,202,0.08)]"
+              style={{ color: "var(--color-strong-cyan)" }}
+            >
+              See Our Work
+            </a>
           </div>
         </div>
       </div>
 
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40">
-        <span className="font-mono text-[10px] tracking-[0.3em] uppercase" style={{ color: "var(--color-strong-cyan)" }}>
+      <div data-hero-scroll className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-0">
+        <span
+          className="font-mono text-[10px] tracking-[0.3em] uppercase"
+          style={{ color: "var(--color-strong-cyan)" }}
+        >
           Scroll
         </span>
-        <div className="w-px h-12 animate-pulse" style={{ background: "var(--color-strong-cyan)" }} />
+        <div className="w-px h-12 animate-pulse-glow" style={{ background: "var(--color-strong-cyan)" }} />
       </div>
     </section>
   );
@@ -227,19 +260,28 @@ function AboutSection() {
             >
               Our
               <br />
-              <span className="italic font-semibold" style={{ color: "var(--color-strong-cyan)" }}>
+              <span
+                className="italic font-semibold"
+                style={{ color: "var(--color-strong-cyan)" }}
+              >
                 Mission
               </span>
             </h2>
           </div>
 
           <div className="lg:col-span-3 space-y-8" data-reveal>
-            <p className="text-lg sm:text-xl leading-relaxed" style={{ color: "var(--color-azure-mist)" }}>
+            <p
+              className="text-lg sm:text-xl leading-relaxed"
+              style={{ color: "var(--color-azure-mist)" }}
+            >
               Legions Club exists to cultivate extraordinary young individuals
               who will shape the future. We believe every young person carries
               the potential for greatness — our role is to ignite that spark.
             </p>
-            <p className="text-base leading-relaxed opacity-80" style={{ color: "var(--color-azure-mist)" }}>
+            <p
+              className="text-base leading-relaxed opacity-80"
+              style={{ color: "var(--color-azure-mist)" }}
+            >
               Through carefully designed programs, world-class mentorship, and a
               community that champions ambition, we create environments where
               young leaders don&apos;t just learn — they transform.
@@ -349,7 +391,13 @@ function ProgramsSection() {
           >
             Where Ambition
             <br />
-            Meets <span className="italic font-semibold" style={{ color: "var(--color-strong-cyan)" }}>Opportunity</span>
+            Meets{" "}
+            <span
+              className="italic font-semibold"
+              style={{ color: "var(--color-strong-cyan)" }}
+            >
+              Opportunity
+            </span>
           </h2>
         </div>
 
@@ -358,11 +406,7 @@ function ProgramsSection() {
             <div
               key={p.tag}
               data-card
-              className="group relative p-8 sm:p-10 rounded-2xl border transition-all duration-500 hover:translate-y-[-4px]"
-              style={{
-                borderColor: "rgba(17,199,202,0.12)",
-                background: "rgba(17,199,202,0.03)",
-              }}
+              className="group glass-card rounded-2xl p-8 sm:p-10 transition-all duration-500 hover:translate-y-[-4px]"
             >
               <div
                 className="font-mono text-xs tracking-[0.3em] uppercase mb-6"
@@ -376,7 +420,10 @@ function ProgramsSection() {
               >
                 {p.title}
               </h3>
-              <p className="leading-relaxed opacity-70" style={{ color: "var(--color-azure-mist)" }}>
+              <p
+                className="leading-relaxed opacity-70"
+                style={{ color: "var(--color-azure-mist)" }}
+              >
                 {p.desc}
               </p>
               <div
@@ -432,10 +479,11 @@ function ImpactSection() {
   return (
     <section
       ref={sectionRef}
+      id="impact"
       className="relative py-32 sm:py-40 overflow-hidden"
       style={{
         background:
-          "linear-gradient(180deg, var(--color-yale-blue) 0%, var(--background) 100%)",
+          "linear-gradient(180deg, var(--background) 0%, var(--color-yale-blue) 100%)",
       }}
     >
       <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-20 text-center">
@@ -532,7 +580,10 @@ function CTASection() {
           >
             Ready to
             <br />
-            <span className="italic font-semibold" style={{ color: "var(--color-strong-cyan)" }}>
+            <span
+              className="italic font-semibold"
+              style={{ color: "var(--color-strong-cyan)" }}
+            >
               Lead?
             </span>
           </h2>
@@ -567,11 +618,8 @@ function CTASection() {
           </a>
           <a
             href="#"
-            className="inline-flex items-center gap-3 px-10 py-5 text-sm font-medium tracking-wide uppercase rounded-full border transition-all duration-300 hover:bg-[rgba(17,199,202,0.08)]"
-            style={{
-              borderColor: "rgba(17,199,202,0.3)",
-              color: "var(--color-strong-cyan)",
-            }}
+            className="glass-card inline-flex items-center gap-3 px-10 py-5 text-sm font-medium tracking-wide uppercase rounded-full transition-all duration-300 hover:bg-[rgba(17,199,202,0.08)]"
+            style={{ color: "var(--color-strong-cyan)" }}
           >
             Become a Mentor
           </a>
@@ -582,14 +630,29 @@ function CTASection() {
 }
 
 export default function Home() {
+  const [loaded, setLoaded] = useState(false);
+
+  const handlePreloaderComplete = useCallback(() => {
+    setLoaded(true);
+  }, []);
+
   return (
-    <main className="flex flex-col min-h-screen" style={{ background: "var(--background)" }}>
-      <HeroSection />
-      <AboutSection />
-      <ProgramsSection />
-      <ImpactSection />
-      <CTASection />
-      <Footer />
-    </main>
+    <>
+      {!loaded && <Preloader onComplete={handlePreloaderComplete} />}
+      <Background3D />
+      <Navbar />
+      <main
+        className="flex flex-col min-h-screen"
+        style={{ background: "var(--background)" }}
+      >
+        <HeroSection />
+        <AboutSection />
+        <ProgramsSection />
+        <GlimpseSection />
+        <ImpactSection />
+        <CTASection />
+        <Footer />
+      </main>
+    </>
   );
 }
