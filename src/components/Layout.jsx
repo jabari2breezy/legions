@@ -4,6 +4,7 @@ import { Menu, X, Leaf } from 'lucide-react';
 import useLenis from '../hooks/useLenis';
 import CustomCursor from './CustomCursor';
 import LoadingIntro from './LoadingIntro';
+import Footer from './Footer';
 import './Layout.css';
 
 export default function Layout() {
@@ -106,50 +107,7 @@ export default function Layout() {
           <Outlet />
         </main>
 
-        <footer className="footer">
-          <div className="container">
-            <div className="footer-grid">
-              <div className="footer-brand reveal-up">
-                <Link to="/" className="logo" style={{ marginBottom: '1.5rem', display: 'inline-flex' }}>
-                  <Leaf className="logo-icon" size={28} strokeWidth={1.5} />
-                  <span className="logo-text">Legions Club.</span>
-                </Link>
-                <p className="text-muted">
-                  A student-led organization dedicated to meeting the humanitarian and environmental needs of Dar es Salaam.
-                </p>
-              </div>
-
-              <div className="reveal-up" data-delay="1">
-                <h4 className="footer-heading">Quick Links</h4>
-                <ul className="footer-links">
-                  <li><Link to="/about" data-cursor-hover>About Us</Link></li>
-                  <li><Link to="/impact" data-cursor-hover>Our Impact</Link></li>
-                  <li><Link to="/programs" data-cursor-hover>Programs</Link></li>
-                  <li><Link to="/get-involved" data-cursor-hover>Get Involved</Link></li>
-                </ul>
-              </div>
-
-              <div className="reveal-up" data-delay="2">
-                <h4 className="footer-heading">Connect</h4>
-                <ul className="footer-links">
-                  <li><a href="mailto:hello@legionsclub.org" data-cursor-hover>Email Us</a></li>
-                  <li><a href="#" data-cursor-hover>Instagram</a></li>
-                  <li><a href="#" data-cursor-hover>Twitter</a></li>
-                  <li><a href="#" data-cursor-hover>Facebook</a></li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="footer-bottom reveal-up" data-delay="3">
-              <p className="text-muted">© {new Date().getFullYear()} Legions Club. All rights reserved.</p>
-              <div style={{ display: 'flex', gap: '1.5rem' }}>
-                <a href="#" className="text-muted" data-cursor-hover>Twitter</a>
-                <a href="#" className="text-muted" data-cursor-hover>Facebook</a>
-                <a href="mailto:hello@legionsclub.org" className="text-muted" data-cursor-hover>Email</a>
-              </div>
-            </div>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </>
   );
