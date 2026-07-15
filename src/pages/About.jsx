@@ -1,66 +1,92 @@
 import React from 'react';
+import useScrollReveal from '../hooks/useScrollReveal';
 import './pages.css';
 
 export default function About() {
+  useScrollReveal();
+
   return (
-    <div className="page-container about-page">
-      <section className="section">
-        <div className="section-content text-center">
-          <h1 className="hero-title text-glow">About Legions Club</h1>
-          <p className="lead-text">
-            Legions Club is a non-profit, student-led organisation that organises and participates in initiatives addressing humanitarian and environmental needs across Dar es Salaam. Our work goes beyond one-off projects. We're actively building initiatives that improve community well-being and promote environmental sustainability.
-          </p>
-          <p className="lead-text">
-            Legions Club aims to inspire youth to take action, and we do this through multiple avenues: fundraisers, awareness days, beach cleanups, tree plantings, and more. All of it is powered by the volunteers who work with us.
-          </p>
-          <p className="lead-text">
-            We're not just trying to finish projects. We're trying to build a generation of young people who see service as normal, who volunteer once and keep coming back, and who bring others along with them.
-          </p>
+    <>
+      <section className="section hero">
+        <div className="section__inner" style={{ paddingTop: '5rem', paddingBottom: '2rem' }}>
+          <div className="container">
+            <h1 className="heading-xl reveal">About Legions Club</h1>
+            <p className="text-body text-muted reveal" data-delay="1">
+              Building a city where young people aren't just beneficiaries of change, but the ones driving it.
+            </p>
+          </div>
         </div>
       </section>
 
-      <section className="section">
-        <div className="section-content">
-          <div className="cards-grid">
-            <div className="glass-panel text-center">
-              <h3 className="text-glow mb-2">Mission</h3>
-              <p className="lead-text">
-                To meet the humanitarian and environmental needs of Dar es Salaam through student-led action, while building young people into lifelong changemakers.
+      <section className="section section--darker">
+        <div className="section__inner">
+          <div className="container" style={{ maxWidth: '900px' }}>
+            <h2 className="heading-lg reveal text-serif">Our Story</h2>
+            <div className="reveal" data-delay="1">
+              <p className="text-body" style={{ fontSize: '1.25rem' }}>
+                Legions began with a simple observation: Dar es Salaam is full of young people who want to make a difference, but lack the platform and resources to do so effectively. 
               </p>
-            </div>
-            <div className="glass-panel text-center">
-              <h3 className="text-glow mb-2">Vision</h3>
-              <p className="lead-text">
-                A city where young people aren't just beneficiaries of change. They're the ones driving it.
+              <p className="text-body" style={{ fontSize: '1.25rem' }}>
+                We started as a small group of students organizing local beach cleanups. As we saw the impact of our collective effort, we realized that our generation has the energy and creativity to tackle much larger issues facing our city.
+              </p>
+              <p className="text-body text-muted" style={{ fontSize: '1.125rem' }}>
+                Today, Legions Club has grown into a network of over 130 dedicated student volunteers across multiple schools. We organize major environmental initiatives, fundraise for essential humanitarian projects, and prove that young people are capable of creating lasting, sustainable change in our communities.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="section">
-        <div className="section-content">
-          <h2 className="text-center mb-4">Our Values</h2>
-          <div className="cards-grid">
-            <div className="value-card glass-panel">
-              <h3>Youth-Led</h3>
-              <p>Every initiative is designed and run by students who care.</p>
-            </div>
-            <div className="value-card glass-panel">
-              <h3>Community-Centered</h3>
-              <p>We listen to the needs of the communities we serve.</p>
-            </div>
-            <div className="value-card glass-panel">
-              <h3>Sustainable Impact</h3>
-              <p>We aim for lasting change, not one-off gestures.</p>
-            </div>
-            <div className="value-card glass-panel">
-              <h3>Collaboration</h3>
-              <p>We work alongside like-minded organisations to multiply our impact.</p>
+      <section className="section section--dark">
+        <div className="section__inner">
+          <div className="container">
+            <div className="grid-2">
+              <div className="glass-card reveal" data-delay="1">
+                <span className="badge" style={{ backgroundColor: 'rgba(67, 97, 238, 0.1)', color: '#4361EE', borderColor: 'rgba(67, 97, 238, 0.2)' }}>Mission</span>
+                <h3 className="heading-md" style={{ marginTop: '1rem', fontSize: '1.75rem' }}>To meet the humanitarian and environmental needs of Dar es Salaam through student-led action, while building young people into lifelong changemakers.</h3>
+              </div>
+              <div className="glass-card reveal" data-delay="2">
+                <span className="badge">Vision</span>
+                <h3 className="heading-md" style={{ marginTop: '1rem', fontSize: '1.75rem' }}>A city where young people aren't just beneficiaries of change. They're the ones driving it.</h3>
+              </div>
             </div>
           </div>
         </div>
       </section>
-    </div>
+
+      <section className="section section--darker">
+        <div className="section__inner">
+          <div className="container">
+            <h2 className="heading-lg reveal text-serif" style={{ textAlign: 'center', marginBottom: '4rem' }}>Our Values</h2>
+            <div className="grid-4">
+              <div className="glass-card reveal" data-delay="1">
+                <h3 className="heading-md text-accent">Youth-Led</h3>
+                <p className="text-body text-muted">
+                  Every project is conceptualized, planned, and executed by students. We believe in learning by doing.
+                </p>
+              </div>
+              <div className="glass-card reveal" data-delay="2">
+                <h3 className="heading-md text-accent">Community-Centered</h3>
+                <p className="text-body text-muted">
+                  We don't impose solutions. We listen to community needs and work alongside them to create sustainable impact.
+                </p>
+              </div>
+              <div className="glass-card reveal" data-delay="3">
+                <h3 className="heading-md text-accent">Sustainable Impact</h3>
+                <p className="text-body text-muted">
+                  We focus on long-term solutions, not just quick fixes. Whether it's planting trees or building wells.
+                </p>
+              </div>
+              <div className="glass-card reveal" data-delay="4">
+                <h3 className="heading-md text-accent">Collaboration</h3>
+                <p className="text-body text-muted">
+                  We partner with schools, local organizations, and community leaders because real change requires teamwork.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }

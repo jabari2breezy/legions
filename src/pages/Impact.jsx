@@ -1,87 +1,104 @@
 import React from 'react';
+import useScrollReveal from '../hooks/useScrollReveal';
 import './pages.css';
 
 export default function Impact() {
+  useScrollReveal();
+
   return (
-    <div className="page-container impact-page">
-      <section className="section">
-        <div className="section-content text-center">
-          <h1 className="hero-title text-glow">The Numbers So Far</h1>
-          <p className="lead-text">
-            Legions has mobilised 139 high school and university student volunteers, contributing over 2,600 hours of service toward community initiatives.
-          </p>
+    <>
+      <section className="section hero">
+        <div className="section__inner" style={{ paddingTop: '5rem', paddingBottom: '2rem' }}>
+          <div className="container">
+            <h1 className="heading-xl reveal">The Numbers So Far</h1>
+            <p className="text-body text-muted reveal" data-delay="1">
+              Real change happens when consistency meets passion. Here's what our 139+ volunteers 
+              have achieved over 2,600+ hours of dedicated service.
+            </p>
+          </div>
         </div>
       </section>
 
-      <section className="section pt-0">
-        <div className="section-content">
-          <div className="stats-grid">
-            <div className="stat-card glass-panel">
-              <h3 className="text-glow">139+</h3>
-              <p>Volunteers Mobilised</p>
-            </div>
-            <div className="stat-card glass-panel">
-              <h3 className="text-glow">2,600+</h3>
-              <p>Hours of Service</p>
-            </div>
-            <div className="stat-card glass-panel">
-              <h3 className="text-glow">550</h3>
-              <p>Orphans Supported</p>
-            </div>
-            <div className="stat-card glass-panel">
-              <h3 className="text-glow">2</h3>
-              <p>Public Schools Greened</p>
-            </div>
-            <div className="stat-card glass-panel">
-              <h3 className="text-glow">1</h3>
-              <p>Hospital Ward Renovated</p>
-            </div>
-            <div className="stat-card glass-panel">
-              <h3 className="text-glow">1</h3>
-              <p>Village Well Constructed</p>
+      <section className="section section--darker">
+        <div className="section__inner">
+          <div className="container">
+            <div className="grid-3">
+              <div className="glass-card reveal" data-delay="1">
+                <div className="stat-number">139+</div>
+                <h3 className="heading-md">Volunteers Mobilised</h3>
+              </div>
+              <div className="glass-card reveal" data-delay="2">
+                <div className="stat-number">2,600+</div>
+                <h3 className="heading-md">Hours of Service</h3>
+              </div>
+              <div className="glass-card reveal" data-delay="3">
+                <div className="stat-number">550</div>
+                <h3 className="heading-md">Orphans Supported</h3>
+              </div>
+              <div className="glass-card reveal" data-delay="4">
+                <div className="stat-number">2</div>
+                <h3 className="heading-md">Public Schools Greened</h3>
+              </div>
+              <div className="glass-card reveal" data-delay="5">
+                <div className="stat-number">1</div>
+                <h3 className="heading-md">Hospital Ward Renovated</h3>
+              </div>
+              <div className="glass-card reveal" data-delay="5">
+                <div className="stat-number">1</div>
+                <h3 className="heading-md">Village Well Constructed</h3>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="section">
-        <div className="section-content">
-          <h2 className="text-center mb-4">Milestones</h2>
-          <div className="cards-grid">
-            <div className="glass-panel">
-              <div className="badge mb-2">Environment</div>
-              <h3 className="text-glow mb-2">Tree-Planting & Botanical Gardens</h3>
-              <p>Established green spaces and botanical gardens in two public schools, giving students a living classroom and greener surroundings.</p>
-            </div>
-            
-            <div className="glass-panel">
-              <div className="badge mb-2">Humanitarian</div>
-              <h3 className="text-glow mb-2">Ujasiri House Renovation</h3>
-              <p>Renovated the childhood cancer ward at Muhimbili National Hospital, creating a more comforting environment for young patients and their families.</p>
-            </div>
-
-            <div className="glass-panel">
-              <div className="badge mb-2">Humanitarian</div>
-              <h3 className="text-glow mb-2">Village Well Construction</h3>
-              <p>Built a well for a village in the Pwani Region, improving access to clean water for the community.</p>
-            </div>
-
-            <div className="glass-panel">
-              <div className="badge mb-2">Humanitarian</div>
-              <h3 className="text-glow mb-2">Ramadan Orphan Support</h3>
-              <p>Provided 550 orphans with essential food supplies and hygiene kits over the past two years, including our annual Ramadan Iftar gathering.</p>
+      <section className="section section--dark">
+        <div className="section__inner">
+          <div className="container">
+            <h2 className="heading-lg reveal text-serif" style={{ textAlign: 'center', marginBottom: '4rem' }}>Milestones</h2>
+            <div className="grid-2">
+              <div className="glass-card reveal" data-delay="1">
+                <span className="badge">Environment</span>
+                <h3 className="heading-md" style={{ marginTop: '1rem', fontSize: '1.75rem' }}>School Tree-Planting Initiative</h3>
+                <p className="text-body text-muted">
+                  We partnered with two local public schools to plant over 300 indigenous trees, creating shaded areas for students and teaching environmental stewardship.
+                </p>
+              </div>
+              <div className="glass-card reveal" data-delay="2">
+                <span className="badge" style={{ backgroundColor: 'rgba(67, 97, 238, 0.1)', color: '#4361EE', borderColor: 'rgba(67, 97, 238, 0.2)' }}>Humanitarian</span>
+                <h3 className="heading-md" style={{ marginTop: '1rem', fontSize: '1.75rem' }}>Ujasiri House Renovation</h3>
+                <p className="text-body text-muted">
+                  Our volunteers spent three weekends painting, cleaning, and decorating a children's ward at the local hospital, creating a brighter environment for recovery.
+                </p>
+              </div>
+              <div className="glass-card reveal" data-delay="3">
+                <span className="badge" style={{ backgroundColor: 'rgba(67, 97, 238, 0.1)', color: '#4361EE', borderColor: 'rgba(67, 97, 238, 0.2)' }}>Humanitarian</span>
+                <h3 className="heading-md" style={{ marginTop: '1rem', fontSize: '1.75rem' }}>Kigamboni Village Well</h3>
+                <p className="text-body text-muted">
+                  Through student-led fundraising, we successfully financed and helped construct a clean water well for a community of 400 families in rural Kigamboni.
+                </p>
+              </div>
+              <div className="glass-card reveal" data-delay="4">
+                <span className="badge" style={{ backgroundColor: 'rgba(67, 97, 238, 0.1)', color: '#4361EE', borderColor: 'rgba(67, 97, 238, 0.2)' }}>Humanitarian</span>
+                <h3 className="heading-md" style={{ marginTop: '1rem', fontSize: '1.75rem' }}>Ramadan Orphan Support</h3>
+                <p className="text-body text-muted">
+                  Our annual flagship program providing food packages, clothing, and hosting Iftar dinners for 550 orphans across three centers in Dar es Salaam.
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="section">
-        <div className="section-content text-center glass-panel">
-          <p className="lead-text mb-0" style={{ fontStyle: 'italic', margin: 0 }}>
-            "Through community outreach, environmental action, and collaboration with like-minded organisations, Legions Club continues to serve as a catalyst for meaningful, sustainable change."
-          </p>
+      <section className="section section--darker">
+        <div className="section__inner">
+          <div className="container" style={{ maxWidth: '800px', textAlign: 'center' }}>
+            <h2 className="heading-lg reveal text-serif" style={{ color: 'var(--color-accent-cyan)' }}>
+              "The impact isn't just in the trees we plant or the wells we build. It's in the mindset shift of every student who realizes they have the power to change their community."
+            </h2>
+          </div>
         </div>
       </section>
-    </div>
+    </>
   );
 }
