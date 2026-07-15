@@ -23,9 +23,6 @@ function AnimatedParticles() {
     return [pos, vel];
   }, []);
 
-  const cyanColor = useMemo(() => new THREE.Color("#11C7CA"), []);
-  const indigoColor = useMemo(() => new THREE.Color("#3E5DE0"), []);
-
   useFrame(() => {
     if (!pointsRef.current) return;
     const posAttr = pointsRef.current.geometry.attributes.position;
@@ -59,7 +56,7 @@ function AnimatedParticles() {
         sizeAttenuation
         transparent
         opacity={0.6}
-        vertexColors
+        color="#11C7CA"
       />
     </points>
   );

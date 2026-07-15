@@ -1,12 +1,17 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
+import dynamic from "next/dynamic";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Footer } from "./footer";
-import { Background3D } from "./background3d";
 import { Preloader } from "./preloader";
 import { GlimpseSection } from "./glimpse";
+
+const Background3D = dynamic(
+  () => import("./background3d").then((m) => m.Background3D),
+  { ssr: false }
+);
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
