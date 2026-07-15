@@ -1,0 +1,139 @@
+.thermometer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 40px 0;
+  width: 100%;
+}
+
+.goal-badge {
+  margin-bottom: 20px;
+  font-size: 1.25rem;
+  padding: 8px 24px;
+}
+
+.thermometer-wrapper {
+  position: relative;
+  display: flex;
+  height: 400px;
+  width: 120px;
+  justify-content: center;
+}
+
+.scale-markers {
+  position: absolute;
+  left: -60px;
+  top: 0;
+  bottom: 0;
+  width: 50px;
+}
+
+.marker {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  transform: translateY(50%);
+}
+
+.marker-label {
+  color: var(--color-accent-cyan);
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+
+.marker-line {
+  height: 1px;
+  flex: 1;
+  background-color: var(--color-accent-cyan);
+  opacity: 0.5;
+}
+
+.thermometer-body {
+  position: relative;
+  width: 100px;
+  height: 100%;
+  border-radius: 50px 50px 0 0;
+  border: 2px solid var(--color-accent-cyan);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  box-shadow: inset 0 0 20px rgba(77, 232, 212, 0.2), 0 0 20px rgba(77, 232, 212, 0.2);
+  /* Arched top */
+  clip-path: polygon(50% 0%, 100% 20%, 100% 100%, 0% 100%, 0% 20%);
+}
+
+.thermometer-logo {
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  opacity: 0.8;
+}
+
+.thermometer-fill {
+  width: 100%;
+  background: var(--color-accent-cyan);
+  box-shadow: 0 0 30px var(--color-accent-cyan);
+  transition: height 1s ease-out;
+  border-radius: 5px 5px 0 0;
+}
+
+.current-badge-wrapper {
+  position: absolute;
+  right: -140px;
+  transform: translateY(50%);
+  z-index: 20;
+  transition: bottom 1s ease-out;
+}
+
+.current-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: transparent;
+  border: 1px solid var(--color-accent-cyan);
+  padding: 8px 16px;
+  border-radius: 8px;
+  color: var(--color-accent-cyan);
+  position: relative;
+}
+
+.current-badge::before {
+  content: '';
+  position: absolute;
+  left: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 1px;
+  background-color: var(--color-accent-cyan);
+}
+
+.current-badge-label {
+  font-size: 0.65rem;
+  letter-spacing: 1px;
+  opacity: 0.8;
+  margin-bottom: 2px;
+}
+
+.current-badge-value {
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+@media (max-width: 600px) {
+  .thermometer-wrapper {
+    height: 300px;
+  }
+  .scale-markers {
+    left: -40px;
+  }
+  .current-badge-wrapper {
+    right: -100px;
+  }
+}

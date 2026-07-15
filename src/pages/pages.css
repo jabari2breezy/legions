@@ -1,0 +1,151 @@
+.page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 5%;
+}
+
+.section {
+  padding: 80px 0;
+}
+
+.section-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mb-2 { margin-bottom: 10px; }
+.mb-4 { margin-bottom: 30px; }
+.my-3 { margin-top: 20px; margin-bottom: 20px; }
+
+h1, h2, h3 {
+  color: var(--color-text-main);
+}
+
+h2 {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+}
+
+.lead-text {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+  margin-bottom: 20px;
+}
+
+/* Hero Section */
+.hero-section {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-top: 60px;
+}
+
+.hero-content {
+  max-width: 800px;
+}
+
+.hero-title {
+  font-size: 4rem;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: var(--color-text-muted);
+  margin-bottom: 40px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Grids */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+  text-align: center;
+}
+
+.stat-card h3 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.service-card p {
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+/* Value Cards */
+.value-card h3 {
+  color: var(--color-accent-cyan);
+  margin-bottom: 15px;
+}
+
+/* Forms */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: var(--color-accent-cyan);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  border-radius: 8px;
+  color: var(--color-text-main);
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--color-accent-cyan);
+  box-shadow: 0 0 10px rgba(77, 232, 212, 0.2);
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  h2 {
+    font-size: 2rem;
+  }
+}
