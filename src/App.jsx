@@ -10,22 +10,19 @@ import Contact from './pages/Contact';
 
 function App() {
   return (
-    <>
-      <div className="global-bg"></div>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route path="about" element={<About />} />
-            <Route path="impact" element={<Impact />} />
-            <Route path="programs" element={<Programs />} />
-            <Route path="get-involved" element={<GetInvolved />} />
-            <Route path="gallery" element={<Gallery />} />
-            <Route path="contact" element={<Contact />} />
-          </Route>
-        </Routes>
-      </Router>
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="about" element={<About />} />
+          <Route path="impact" element={<Impact />} />
+          <Route path="programs" element={<Programs />} />
+          <Route path="get-involved" element={<GetInvolved />} />
+          <Route path="gallery" element={<Gallery />} />
+          <Route path="contact" element={<Contact />} />
+        </Route>
+      </Routes>
+    </Router>
   );
 }
 

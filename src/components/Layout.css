@@ -5,14 +5,15 @@
   left: 0;
   width: 100%;
   padding: 1.5rem 0;
-  z-index: 100;
-  transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
+  z-index: 1000;
+  transition: background-color 0.4s ease, backdrop-filter 0.4s ease, padding 0.3s ease;
 }
 
 .header.scrolled {
-  background-color: rgba(13, 10, 43, 0.8);
-  backdrop-filter: blur(12px);
+  background-color: rgba(13, 10, 43, 0.85);
+  backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--color-glass-border);
+  padding: 1rem 0;
 }
 
 .header .container {
@@ -26,7 +27,7 @@
   align-items: center;
   gap: 0.75rem;
   text-decoration: none;
-  z-index: 101; /* Above mobile menu */
+  z-index: 101;
 }
 
 .logo-icon {
@@ -58,17 +59,17 @@
   color: var(--color-text-white);
   text-decoration: none;
   font-weight: 400;
-  font-size: 1rem;
+  font-size: 0.95rem;
   position: relative;
   padding: 0.5rem 0;
   transition: color 0.3s;
 }
 
-.nav-link:hover, .nav-link.active {
+.nav-link:hover,
+.nav-link.active {
   color: var(--color-accent-cyan);
 }
 
-/* Elegant Underline Hover Animation */
 .nav-link::after {
   content: '';
   position: absolute;
@@ -82,12 +83,13 @@
   transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-.nav-link:hover::after, .nav-link.active::after {
+.nav-link:hover::after,
+.nav-link.active::after {
   transform: scaleX(1);
   transform-origin: left;
 }
 
-/* Mobile Hamburger Button */
+/* Mobile Hamburger */
 .mobile-menu-btn {
   display: flex;
   background: none;
@@ -115,7 +117,7 @@
   align-items: center;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.5s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .mobile-nav-overlay.is-open {
@@ -137,9 +139,9 @@
   color: var(--color-text-white);
   text-decoration: none;
   font-weight: 700;
-  transform: translateY(20px);
+  transform: translateY(30px);
   opacity: 0;
-  transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.4s ease, color 0.3s;
+  transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.5s ease, color 0.3s;
 }
 
 .mobile-nav-overlay.is-open .mobile-nav-link {
@@ -154,7 +156,7 @@
 /* Footer */
 .footer {
   background-color: var(--color-bg-darkest);
-  padding: var(--section-padding-y) 0 3rem;
+  padding: clamp(5rem, 10vw, 10rem) 0 3rem;
   border-top: 1px solid var(--color-glass-border);
 }
 
