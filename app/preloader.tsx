@@ -1,73 +1,69 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 
 export function Preloader({ onComplete }: { onComplete: () => void }) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const counterRef = useRef<HTMLDivElement>(null);
-  const [count, setCount] = useState(0);
-  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const numberRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let current = 0;
-    intervalRef.current = setInterval(() => {
-      current += Math.floor(Math.random() * 8) + 3;
+    const interval = setInterval(() => {
+      current += Math.floor(Math.random() * 6) + 2;
       if (current >= 100) {
         current = 100;
-        if (intervalRef.current) clearInterval(intervalRef.current);
-        setTimeout(() => {
-          if (!containerRef.current) return;
-          const tl = gsap.timeline({
-            onComplete,
-          });
-          tl.to(containerRef.current, {
-            yPercent: -100,
-            duration: 1,
-            ease: "power4.inOut",
-          });
-        }, 300);
-      }
-      setCount(current);
-    }, 60);
+        clearInterval(interval);
 
-    return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
-    };
+        const tl = gsap.timeline({ onComplete });
+
+        tl.to(numberRef.current, {
+          yPercent: -120,
+          opacity: 0,
+          duration: 0.6,
+          ease: "power3.in",
+          delay: 0.3,
+        })
+          .to(
+            containerRef.current,
+            {
+              clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)",
+              duration: 1.2,
+              ease: "power4.inOut",
+            },
+            "-=0.2"
+          );
+      }
+      if (numberRef.current) {
+        numberRef.current.textContent = String(current).padStart(3, "0");
+      }
+    }, 50);
+
+    return () => clearInterval(interval);
   }, [onComplete]);
 
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 z-[9999] flex items-center justify-center"
-      style={{ background: "var(--color-yale-blue)" }}
+      className="fixed inset-0 z-[9999] flex flex-col items-center justify-center"
+      style={{
+        background: "var(--color-yale-blue)",
+        clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+      }}
     >
-      <div className="text-center">
-        <div
-          ref={counterRef}
-          className="font-serif text-[clamp(4rem,12vw,10rem)] font-light leading-none"
-          style={{ color: "var(--color-strong-cyan)" }}
-        >
-          {count}
-        </div>
-        <div
-          className="font-mono text-xs tracking-[0.4em] uppercase mt-4"
-          style={{ color: "var(--color-steel-blue)" }}
-        >
-          Loading Experience
-        </div>
+      <div
+        ref={numberRef}
+        className="font-serif text-[clamp(5rem,15vw,12rem)] font-light leading-none tracking-tighter"
+        style={{ color: "var(--color-strong-cyan)" }}
+      >
+        000
       </div>
-
-      <div className="absolute bottom-12 left-1/2 -translate-x-1/2">
-        <div className="w-32 h-px bg-white/10 overflow-hidden">
-          <div
-            className="h-full transition-all duration-200"
-            style={{
-              width: `${count}%`,
-              background: "var(--color-strong-cyan)",
-            }}
-          />
-        </div>
+      <div className="w-24 h-px mt-8 opacity-30" style={{ background: "var(--color-strong-cyan)" }} />
+      <div
+        className="font-mono text-[10px] tracking-[0.4em] uppercase mt-4"
+        style={{ color: "var(--color-steel-blue)" }}
+      >
+        Loading
       </div>
     </div>
   );
