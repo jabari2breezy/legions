@@ -25,7 +25,8 @@ export function TextReveal({
   delay = 0,
   splitBy = "words",
 }: TextRevealProps) {
-  const containerRef = useRef<HTMLElement>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const containerRef = useRef<any>(null);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -73,7 +74,7 @@ export function TextReveal({
 
   return (
     <Tag
-      ref={containerRef as React.Ref<HTMLElement>}
+      ref={containerRef}
       className={className}
       style={{ perspective: "600px", ...style }}
     >
