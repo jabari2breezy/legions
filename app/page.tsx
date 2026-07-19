@@ -154,7 +154,7 @@ function Preloader({ onComplete }: { onComplete: () => void }) {
           key="preloader"
           className="fixed inset-0 z-[9999] flex flex-col items-center justify-center"
           style={{ background: "var(--navy)" }}
-          exit={{ yPercent: -100 }}
+          exit={{ y: "-100vh" }}
           transition={{ duration: 0.9, ease: [0.76, 0, 0.24, 1] }}
         >
           <motion.div
