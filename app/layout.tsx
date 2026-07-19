@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
-import { LenisProvider } from "./lenis-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,7 +22,7 @@ const cormorant = Cormorant_Garamond({
 export const metadata: Metadata = {
   title: "Legions Club — Premium Youth Development",
   description:
-    "Legions Club is a premium youth development organization building the next generation of leaders through mentorship, community, and excellence.",
+    "Legions Club empowers the next generation through mentorship, community, and the relentless pursuit of excellence.",
   keywords: ["youth development", "mentorship", "leadership", "community"],
 };
 
@@ -35,11 +34,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${cormorant.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${cormorant.variable} antialiased`}
     >
-      <body className="min-h-full flex flex-col">
-        <LenisProvider>{children}</LenisProvider>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
