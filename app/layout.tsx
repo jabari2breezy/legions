@@ -1,28 +1,32 @@
-import type { Metadata } from 'next'
-import { Geist, Geist_Mono, Cormorant_Garamond } from 'next/font/google'
-import './globals.css'
-
-const geistSans = Geist({ variable: '--font-geist-sans', subsets: ['latin'] })
-const geistMono = Geist_Mono({ variable: '--font-geist-mono', subsets: ['latin'] })
-const cormorant = Cormorant_Garamond({
-  variable: '--font-cormorant',
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  style: ['normal', 'italic'],
-})
+import type { Metadata } from 'next';
+import './globals.css';
 
 export const metadata: Metadata = {
   title: 'Legions Club Tanzania - Youth-Led Humanitarian & Environmental Action',
-  description: 'Legions Club is a student-led non-profit in Dar es Salaam mobilizing youth for humanitarian and environmental impact. 139 volunteers, 2600+ service hours, tree planting, hospital renovations, orphan support.',
+  description: 'Legions Club is a student-led non-profit based in Dar es Salaam mobilizing youth for humanitarian and environmental impact. 139 volunteers, 2600+ service hours, tree planting, hospital renovations, orphan support.',
   keywords: ['youth non-profit', 'student volunteers', 'Dar es Salaam', 'humanitarian aid', 'environmental action', 'Tanzania'],
-}
+};
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} ${cormorant.variable}`}>
-      <body className="antialiased">
+    <html lang="en" className="h-full">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;900&family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body className="h-full antialiased">
+        {/* Global grain overlay */}
+        <div className="grain-overlay" aria-hidden="true" />
         {children}
       </body>
     </html>
-  )
+  );
 }
