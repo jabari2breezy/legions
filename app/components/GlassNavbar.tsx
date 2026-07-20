@@ -11,7 +11,7 @@ interface GlassNavbarProps {
 const navItems = [
   { label: 'About', href: '#about' },
   { label: 'Programs', href: '#programs' },
-  { label: 'Members', href: '#members' },
+  { label: 'Impact', href: '#impact' },
   { label: 'Contact', href: '#contact' },
 ]
 
@@ -67,7 +67,7 @@ export default function GlassNavbar({ className = '' }: GlassNavbarProps) {
         backdropFilter: scrolled ? 'blur(40px) saturate(180%)' : 'none',
         background: scrolled ? 'rgba(6, 10, 20, 0.85)' : 'transparent',
         borderBottom: scrolled ? '1px solid rgba(255, 255, 255, 0.06)' : 'none',
-        boxShadow: scrolled ? '0 8px 32px rgba(0, 0, 0, 0.3), 0 0 60px -10px rgba(17, 199, 202, 0.08)' : 'none',
+        boxShadow: scrolled ? '0 8px 32px rgba(0, 0, 0, 0.3), 0 0 60px -10px rgba(0, 212, 200, 0.08)' : 'none',
       }}
     >
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 flex items-center justify-between">
@@ -76,8 +76,8 @@ export default function GlassNavbar({ className = '' }: GlassNavbarProps) {
           <div
             className="w-8 h-8 rounded-full flex items-center justify-center"
             style={{
-              background: 'linear-gradient(135deg, #11C7CA 0%, #00D4C8 50%, #3E5DE0 100%)',
-              boxShadow: '0 0 20px rgba(17, 199, 202, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
+              background: 'linear-gradient(135deg, #00D4C8 0%, #10B981 50%, #059669 100%)',
+              boxShadow: '0 0 20px rgba(0, 212, 200, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
             }}
           >
             <svg
@@ -97,7 +97,7 @@ export default function GlassNavbar({ className = '' }: GlassNavbarProps) {
             </svg>
           </div>
           <span className="font-serif text-xl tracking-[0.1em] uppercase text-white">
-            <span className="text-cyan">Legions</span>
+            <span className="text-teal">Legions</span>
             <span className="text-white/40 ml-1">Club</span>
           </span>
         </a>
@@ -109,7 +109,7 @@ export default function GlassNavbar({ className = '' }: GlassNavbarProps) {
               key={item.label}
               ref={(el) => { navLinksRef.current[i] = el! }}
               href={item.href}
-              className="px-5 py-2 text-sm tracking-widest uppercase text-text-secondary hover:text-cyan transition-colors duration-300 relative overflow-hidden rounded-md"
+              className="px-5 py-2 text-sm tracking-widest uppercase text-text-secondary hover:text-teal transition-colors duration-300 relative overflow-hidden rounded-md"
               whileHover={{ scale: 1.02 }}
               onClick={closeMenu}
             >
@@ -120,7 +120,7 @@ export default function GlassNavbar({ className = '' }: GlassNavbarProps) {
                 {item.label}
               </motion.span>
               <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-cyan/20 to-indigo/20"
+                className="absolute inset-0 bg-gradient-to-r from-teal/20 to-emerald/20"
                 initial={{ scaleX: 0 }}
                 whileHover={{ scaleX: 1 }}
                 transition={{ duration: 0.3, ease: [0.33, 1, 0.68, 1] }}
@@ -134,11 +134,11 @@ export default function GlassNavbar({ className = '' }: GlassNavbarProps) {
         <div className="hidden md:block">
           <a
             href="#contact"
-            className="group relative px-6 py-2.5 border border-cyan/30 text-cyan text-sm tracking-widest uppercase hover:bg-cyan hover:text-bg-deep transition-all duration-300 rounded-none overflow-hidden"
+            className="group relative px-6 py-2.5 border border-teal/30 text-teal text-sm tracking-widest uppercase hover:bg-teal hover:text-bg-deep transition-all duration-300 rounded-none overflow-hidden"
           >
-            <span className="relative z-10">Apply</span>
+            <span className="relative z-10">Volunteer</span>
             <motion.div
-              className="absolute inset-0 bg-neon-ice"
+              className="absolute inset-0 bg-emerald-300"
               initial={{ scaleX: 0 }}
               whileHover={{ scaleX: 1 }}
               transition={{ duration: 0.3, ease: [0.33, 1, 0.68, 1] }}
@@ -191,12 +191,12 @@ export default function GlassNavbar({ className = '' }: GlassNavbarProps) {
                   key={item.label}
                   ref={(el) => { navLinksRef.current[i] = el! }}
                   href={item.href}
-                  className="text-3xl md:text-4xl font-serif tracking-widest uppercase text-white hover:text-cyan transition-colors text-center w-full py-4 relative overflow-hidden"
+                  className="text-3xl md:text-4xl font-serif tracking-widest uppercase text-white hover:text-teal transition-colors text-center w-full py-4 relative overflow-hidden"
                   onClick={closeMenu}
                 >
                   <motion.span className="relative z-10">{item.label}</motion.span>
                   <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-cyan/10 to-indigo/10"
+                    className="absolute inset-0 bg-gradient-to-r from-teal/10 to-emerald/10"
                     initial={{ scaleX: 0 }}
                     whileHover={{ scaleX: 1 }}
                     transition={{ duration: 0.4, ease: [0.33, 1, 0.68, 1] }}
@@ -213,11 +213,11 @@ export default function GlassNavbar({ className = '' }: GlassNavbarProps) {
               >
                 <a
                   href="#contact"
-                  className="group relative w-full block px-8 py-4 border border-cyan/30 text-cyan text-sm tracking-widest uppercase text-center hover:bg-cyan hover:text-bg-deep transition-all duration-300 overflow-hidden"
+                  className="group relative w-full block px-8 py-4 border border-teal/30 text-teal text-sm tracking-widest uppercase text-center hover:bg-teal hover:text-bg-deep transition-all duration-300 overflow-hidden"
                 >
-                  <span className="relative z-10">Request Membership</span>
+                  <span className="relative z-10">Become a Volunteer</span>
                   <motion.div
-                    className="absolute inset-0 bg-neon-ice"
+                    className="absolute inset-0 bg-emerald-300"
                     initial={{ scaleX: 0 }}
                     whileHover={{ scaleX: 1 }}
                     transition={{ duration: 0.3, ease: [0.33, 1, 0.68, 1] }}

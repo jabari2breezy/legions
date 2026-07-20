@@ -32,7 +32,8 @@ export default function Hero3DLogo({ className = '', size = 400 }: Hero3DLogoPro
   // CSS-animated 3D placeholder using layered divs with transforms
   // TODO: Replace this placeholder with the final rendered 3D video asset
   // Drop the rendered MP4/WebM file at /public/hero-logo.mp4
-  // The video should feature: teal spheres orbiting a chrome ribbon swoosh
+  // The video should feature: teal/emerald spheres (representing youth/global action) 
+  // orbiting a chrome ribbon swoosh forming a tree/leaf motif
   // Recommended specs: 1080p, 30fps, 10-15s loop, muted, alpha channel if possible
   // Once the video is added, this component will auto-detect and use it instead
 
@@ -53,7 +54,7 @@ export default function Hero3DLogo({ className = '', size = 400 }: Hero3DLogoPro
           style={{ filter: 'drop-shadow(0 0 80px rgba(0, 212, 200, 0.4))' }}
         />
         <div
-          className="absolute inset-0 bg-gradient-to-br from-cyan/10 via-transparent to-indigo/10 pointer-events-none"
+          className="absolute inset-0 bg-gradient-to-br from-teal/10 via-transparent to-emerald/10 pointer-events-none"
           aria-hidden="true"
         />
       </div>
@@ -69,10 +70,10 @@ export default function Hero3DLogo({ className = '', size = 400 }: Hero3DLogoPro
     >
       {/* Outer glow ring */}
       <div
-        className="absolute inset-0 rounded-full border border-cyan/20"
+        className="absolute inset-0 rounded-full border border-teal/20"
         style={{
           animation: 'pulse-ring 4s ease-in-out infinite',
-          boxShadow: '0 0 60px rgba(17, 199, 202, 0.2), inset 0 0 60px rgba(17, 199, 202, 0.1)',
+          boxShadow: '0 0 60px rgba(0, 212, 200, 0.2), inset 0 0 60px rgba(0, 212, 200, 0.1)',
         }}
       />
 
@@ -87,30 +88,30 @@ export default function Hero3DLogo({ className = '', size = 400 }: Hero3DLogoPro
 
       {/* Inner rotating ring (opposite direction) */}
       <div
-        className="absolute inset-12 rounded-full border border-indigo-bright/30"
+        className="absolute inset-12 rounded-full border border-emerald/30"
         style={{
           animation: 'rotate-ring-reverse 15s linear infinite',
-          boxShadow: '0 0 30px rgba(61, 47, 168, 0.15)',
+          boxShadow: '0 0 30px rgba(16, 185, 129, 0.15)',
         }}
       />
 
-      {/* Central sphere cluster - teal spheres */}
+      {/* Central sphere cluster - teal/emerald spheres representing youth & nature */}
       <div className="absolute inset-0 flex items-center justify-center">
         {/* Main central sphere */}
         <div
           className="relative w-24 h-24 rounded-full"
           style={{
-            background: 'radial-gradient(circle at 30% 30%, #00D4C8 0%, #11C7CA 40%, #006B66 100%)',
+            background: 'radial-gradient(circle at 30% 30%, #00D4C8 0%, #10B981 40%, #006B66 100%)',
             boxShadow: `
               0 0 40px rgba(0, 212, 200, 0.6),
-              0 0 80px rgba(0, 212, 200, 0.3),
+              0 0 80px rgba(16, 185, 129, 0.3),
               inset 0 -10px 20px rgba(0, 0, 0, 0.3),
               inset 0 10px 20px rgba(255, 255, 255, 0.1)
             `,
             animation: 'float-sphere 3s ease-in-out infinite',
           }}
         >
-          {/* Chrome ribbon swoosh - CSS approximation */}
+          {/* Chrome ribbon swoosh - CSS approximation with leaf/tree motif */}
           <div
             className="absolute inset-0"
             style={{
@@ -135,7 +136,7 @@ export default function Hero3DLogo({ className = '', size = 400 }: Hero3DLogoPro
               style={{
                 border: '2px solid transparent',
                 borderBottomColor: 'rgba(0, 212, 200, 0.5)',
-                borderLeftColor: 'rgba(0, 212, 200, 0.3)',
+                borderLeftColor: 'rgba(16, 185, 129, 0.3)',
                 borderRadius: '50%',
                 animation: 'rotate-swoosh-inner 6s linear infinite reverse',
               }}
@@ -143,14 +144,18 @@ export default function Hero3DLogo({ className = '', size = 400 }: Hero3DLogoPro
           </div>
         </div>
 
-        {/* Orbiting teal spheres */}
+        {/* Orbiting teal/emerald spheres - representing youth volunteers & nature */}
         {[0, 1, 2, 3].map((i) => (
           <div
             key={i}
             className="absolute w-6 h-6 rounded-full"
             style={{
-              background: 'radial-gradient(circle at 30% 30%, #41EFE7 0%, #11C7CA 50%, #006B66 100%)',
-              boxShadow: '0 0 20px rgba(17, 199, 202, 0.5), 0 0 40px rgba(17, 199, 202, 0.2)',
+              background: i % 2 === 0
+                ? 'radial-gradient(circle at 30% 30%, #41EFE7 0%, #00D4C8 50%, #006B66 100%)'
+                : 'radial-gradient(circle at 30% 30%, #34D399 0%, #10B981 50%, #059669 100%)',
+              boxShadow: i % 2 === 0
+                ? '0 0 20px rgba(0, 212, 200, 0.5), 0 0 40px rgba(0, 212, 200, 0.2)'
+                : '0 0 20px rgba(16, 185, 129, 0.5), 0 0 40px rgba(16, 185, 129, 0.2)',
               animation: `orbit-sphere-${i} ${12 + i * 2}s linear infinite`,
               transformOrigin: `${size / 2}px ${size / 2}px`,
             }}
@@ -160,7 +165,7 @@ export default function Hero3DLogo({ className = '', size = 400 }: Hero3DLogoPro
 
       {/* Outer particle ring */}
       <div
-        className="absolute inset-[-20px] rounded-full border border-cyan/10"
+        className="absolute inset-[-20px] rounded-full border border-teal/10"
         style={{
           animation: 'rotate-ring 30s linear infinite reverse',
         }}

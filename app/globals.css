@@ -17,6 +17,9 @@
   --color-egyptian: #3F37A2;
   --color-lavender: #EAE9F4;
   --color-sky-light: #5ECFF1;
+  --color-teal: #00D4C8;
+  --color-teal-glow: #00D4C8;
+  --color-emerald: #10B981;
   --color-surface: rgba(255, 255, 255, 0.03);
   --color-surface-hover: rgba(255, 255, 255, 0.06);
   --color-border-subtle: rgba(255, 255, 255, 0.06);
@@ -29,7 +32,6 @@
   --color-indigo-deep: #1A1147;
   --color-indigo-mid: #2D1F6B;
   --color-indigo-bright: #3D2FA8;
-  --color-teal-glow: #00D4C8;
 
   --font-serif: 'Cormorant Garamond', Georgia, serif;
   --font-sans: 'Geist', -apple-system, sans-serif;
@@ -71,6 +73,13 @@ body {
 
 .text-gradient-cyan {
   background: linear-gradient(135deg, var(--color-cyan), var(--color-neon-ice), var(--color-indigo));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-teal {
+  background: linear-gradient(135deg, var(--color-teal-glow), var(--color-cyan), var(--color-emerald));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

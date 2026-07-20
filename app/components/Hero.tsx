@@ -135,11 +135,11 @@ export default function Hero() {
           id="hero"
           aria-labelledby="hero-title"
         >
-          {/* Dark indigo gradient background */}
+          {/* Dark teal/emerald gradient background */}
           <div
             className="absolute inset-0 z-[-2]"
             style={{
-              background: 'linear-gradient(145deg, #1A1147 0%, #2D1F6B 35%, #3D2FA8 70%, #4A38C0 100%)',
+              background: 'linear-gradient(145deg, #061A14 0%, #0A2D1F 35%, #0D4A38 70%, #146048 100%)',
             }}
           />
 
@@ -176,13 +176,13 @@ export default function Hero() {
             <div className="flex-1 flex flex-col items-center justify-center md:items-end text-center md:text-right max-w-2xl">
               {/* Tagline */}
               <motion.p
-                className="hero-tagline text-sm md:text-base tracking-[0.5em] uppercase text-cyan/70 font-mono mb-6"
+                className="hero-tagline text-sm md:text-base tracking-[0.5em] uppercase text-teal/70 font-mono mb-6"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1], delay: reducedMotion ? 0 : 1.2 }}
                 style={{ opacity: reducedMotion ? 1 : 0 }}
               >
-                Invitation Only
+                Youth-Led Action
               </motion.p>
 
               {/* Main "LEGIONS" headline with SplitType/GSAP character reveal */}
@@ -195,26 +195,26 @@ export default function Hero() {
 
               {/* Sub-headline */}
               <motion.p
-                className="hero-tagline text-lg md:text-xl tracking-[0.1em] text-azure/80 font-serif italic mb-12 max-w-lg"
+                className="hero-tagline text-lg md:text-xl tracking-[0.1em] text-emerald/80 font-serif italic mb-12 max-w-lg"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1], delay: reducedMotion ? 0 : 1.8 }}
                 style={{ opacity: reducedMotion ? 1 : 0 }}
               >
-                Where Legends Rise
+                Student Volunteers. Real Community Impact.
               </motion.p>
 
               {/* CTA Buttons */}
               <div className="hero-cta flex flex-col sm:flex-row items-center justify-center md:justify-end gap-6 w-full">
                 <MagneticButton strength={0.25}>
                   <motion.button
-                    className="group relative px-10 py-4 bg-cyan text-bg-deep text-sm tracking-[0.3em] uppercase font-medium overflow-hidden"
+                    className="group relative px-10 py-4 bg-teal text-bg-deep text-sm tracking-[0.3em] uppercase font-medium overflow-hidden"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
-                    <span className="relative z-10">Request Membership</span>
+                    <span className="relative z-10">Become a Volunteer</span>
                     <motion.div
-                      className="absolute inset-0 bg-neon-ice"
+                      className="absolute inset-0 bg-emerald-300"
                       initial={{ scaleX: 0 }}
                       whileHover={{ scaleX: 1 }}
                       transition={{ duration: 0.4, ease: [0.33, 1, 0.68, 1] }}
@@ -224,11 +224,11 @@ export default function Hero() {
                 </MagneticButton>
                 <MagneticButton strength={0.25}>
                   <motion.button
-                    className="px-10 py-4 border border-white/15 text-white/70 text-sm tracking-[0.3em] uppercase hover:border-cyan/40 hover:text-cyan transition-all duration-500"
+                    className="px-10 py-4 border border-white/15 text-white/70 text-sm tracking-[0.3em] uppercase hover:border-teal/40 hover:text-teal transition-all duration-500"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
-                    Our Story
+                    Our Projects
                   </motion.button>
                 </MagneticButton>
               </div>
@@ -243,7 +243,7 @@ export default function Hero() {
               >
                 <span className="text-[10px] tracking-[0.5em] uppercase text-white/30">Scroll</span>
                 <motion.div
-                  className="w-[1px] h-10 bg-gradient-to-b from-cyan/50 to-transparent"
+                  className="w-[1px] h-10 bg-gradient-to-b from-teal/50 to-transparent"
                   animate={{ scaleY: [0, 1, 0] }}
                   transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
                 />
@@ -252,8 +252,8 @@ export default function Hero() {
           </motion.div>
 
           {/* Ambient glow orbs */}
-          <div className="absolute top-1/4 -right-40 w-[500px] h-[500px] rounded-full bg-cyan/5 blur-[150px] pointer-events-none" aria-hidden="true" />
-          <div className="absolute bottom-1/4 -left-40 w-[400px] h-[400px] rounded-full bg-indigo/5 blur-[150px] pointer-events-none" aria-hidden="true" />
+          <div className="absolute top-1/4 -right-40 w-[500px] h-[500px] rounded-full bg-teal/5 blur-[150px] pointer-events-none" aria-hidden="true" />
+          <div className="absolute bottom-1/4 -left-40 w-[400px] h-[400px] rounded-full bg-emerald/5 blur-[150px] pointer-events-none" aria-hidden="true" />
         </section>
       </main>
     </>
