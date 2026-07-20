@@ -25,6 +25,12 @@
   --color-text-secondary: rgba(240, 244, 248, 0.6);
   --color-text-muted: rgba(240, 244, 248, 0.35);
 
+  /* Hero upgrade colors */
+  --color-indigo-deep: #1A1147;
+  --color-indigo-mid: #2D1F6B;
+  --color-indigo-bright: #3D2FA8;
+  --color-teal-glow: #00D4C8;
+
   --font-serif: 'Cormorant Garamond', Georgia, serif;
   --font-sans: 'Geist', -apple-system, sans-serif;
   --font-mono: 'Geist Mono', monospace;
@@ -181,6 +187,68 @@ body {
   width: 60px;
   height: 1px;
   background: linear-gradient(90deg, var(--color-cyan), transparent);
+}
+
+/* Liquid glass utility */
+.liquid-glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.05) inset,
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 0 60px -10px rgba(17, 199, 202, 0.08);
+}
+
+.liquid-glass-hover:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(17, 199, 202, 0.2);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.08) inset,
+    0 12px 48px rgba(0, 0, 0, 0.4),
+    0 0 80px -10px rgba(17, 199, 202, 0.15);
+}
+
+/* Gradient text utilities */
+.text-gradient-indigo {
+  background: linear-gradient(135deg, var(--color-indigo-bright), var(--color-teal-glow), var(--color-indigo));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-hero {
+  background: linear-gradient(135deg, #FFFFFF 0%, var(--color-teal-glow) 40%, var(--color-indigo-bright) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Grid pattern background */
+.grid-pattern {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* Spotlight mask */
+.spotlight-mask {
+  mask-image: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), black 0%, transparent 70%);
+  -webkit-mask-image: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), black 0%, transparent 70%);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 @media (max-width: 768px) {
