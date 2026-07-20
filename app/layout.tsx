@@ -12,9 +12,9 @@ const cormorant = Cormorant_Garamond({
 })
 
 export const metadata: Metadata = {
-  title: 'Legions Club — Where Legends Rise',
-  description: 'An invitation-only sanctuary for visionary founders, elite investors, and industry titans. Legions Club curates experiences that forge legacy.',
-  keywords: ['private club', 'luxury networking', 'elite community', 'founders', 'investors'],
+  title: 'Legions Club Tanzania - Youth-Led Humanitarian & Environmental Action',
+  description: 'Legions Club is a student-led non-profit in Dar es Salaam mobilizing youth for humanitarian and environmental impact. 139 volunteers, 2600+ service hours, tree planting, hospital renovations, orphan support.',
+  keywords: ['youth non-profit', 'student volunteers', 'Dar es Salaam', 'humanitarian aid', 'environmental action', 'Tanzania'],
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

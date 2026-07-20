@@ -128,7 +128,7 @@ export default function Hero() {
       )}
 
       <main>
-        {/* ═══════════════ HERO ═══════════════ */}
+        {/* HERO */}
         <section
           ref={heroRef}
           className="relative h-screen min-h-[100vh] overflow-hidden"
@@ -142,6 +142,15 @@ export default function Hero() {
               background: 'linear-gradient(145deg, #061A14 0%, #0A2D1F 35%, #0D4A38 70%, #146048 100%)',
             }}
           />
+
+          {/* Hero background image - students in action */}
+          <div className="absolute inset-0 z-[-1] opacity-10">
+            <img
+              src="/images/hero-students-action.jpg"
+              alt="Students in action"
+              className="w-full h-full object-cover"
+            />
+          </div>
 
           {/* Grid pattern background with cursor parallax */}
           <GridBackground
@@ -250,6 +259,16 @@ export default function Hero() {
               </motion.div>
             </div>
           </motion.div>
+
+          {/* Hero group photo - bottom decorative */}
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-64 md:h-80 opacity-20 pointer-events-none">
+            <img
+              src="/images/hero-group-photo.png"
+              alt="Legions volunteers group photo"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-bg-deep via-bg-deep/50 to-transparent" />
+          </div>
 
           {/* Ambient glow orbs */}
           <div className="absolute top-1/4 -right-40 w-[500px] h-[500px] rounded-full bg-teal/5 blur-[150px] pointer-events-none" aria-hidden="true" />

@@ -18,36 +18,36 @@ const programs = [
   {
     title: 'Environmental Action',
     desc: 'Tree planting campaigns, botanical gardens in schools, beach cleanups, and waste management initiatives across Dar es Salaam.',
-    image: '/images/environmental.jpg',
+    image: '/images/programs-environmental.jpg',
     icon: '01',
   },
   {
     title: 'Healthcare Support',
     desc: 'Renovating Ujasiri House (childhood cancer ward) at Muhimbili National Hospital, providing medical supplies and patient comfort.',
-    image: '/images/healthcare.jpg',
+    image: '/images/programs-healthcare.jpg',
     icon: '02',
   },
   {
     title: 'Community Welfare',
     desc: 'Annual Ramadan Iftar for 550+ orphans, food security programs, hygiene kit distribution, and well construction in Pwani Region.',
-    image: '/images/welfare.jpg',
+    image: '/images/programs-welfare.jpg',
     icon: '03',
   },
   {
     title: 'Youth Leadership',
     desc: 'Empowering 139 student volunteers through hands-on project management, community organizing, and sustainable impact training.',
-    image: '/images/youth.jpg',
+    image: '/images/programs-youth.jpg',
     icon: '04',
   },
 ]
 
 const projects = [
-  { title: 'Ujasiri House Renovation', category: 'Healthcare', year: '2024', impact: 'Childhood cancer ward' },
-  { title: 'School Botanical Gardens', category: 'Environment', year: '2024', impact: '2 public schools' },
-  { title: 'Pwani Region Water Well', category: 'Infrastructure', year: '2023', impact: 'Clean water access' },
-  { title: 'Annual Ramadan Iftar', category: 'Welfare', year: '2024', impact: '550+ orphans served' },
-  { title: 'Beach Cleanup Series', category: 'Environment', year: '2024', impact: 'Monthly coastal action' },
-  { title: 'Hygiene Kit Distribution', category: 'Welfare', year: '2024', impact: 'Orphan support program' },
+  { title: 'Ujasiri House Renovation', category: 'Healthcare', year: '2024', impact: 'Childhood cancer ward', image: '/images/impact-ujasiri-house.jpg' },
+  { title: 'School Botanical Gardens', category: 'Environment', year: '2024', impact: '2 public schools', image: '/images/impact-botanical-garden.jpg' },
+  { title: 'Pwani Region Water Well', category: 'Infrastructure', year: '2023', impact: 'Clean water access', image: '/images/impact-water-well.jpg' },
+  { title: 'Annual Ramadan Iftar', category: 'Welfare', year: '2024', impact: '550+ orphans served', image: '/images/impact-ramadan-iftar.jpg' },
+  { title: 'Beach Cleanup Series', category: 'Environment', year: '2024', impact: 'Monthly coastal action', image: '/images/impact-beach-cleanup.jpg' },
+  { title: 'Hygiene Kit Distribution', category: 'Welfare', year: '2024', impact: 'Orphan support program', image: '/images/impact-hygiene-kits.jpg' },
 ]
 
 const stats = [
@@ -58,9 +58,9 @@ const stats = [
 ]
 
 const testimonials = [
-  { quote: 'Legions taught me that age doesn&apos;t limit impact. As a student, I helped renovate a cancer ward — that changes how you see your own potential.', name: 'Aisha M.', role: 'Volunteer, Medical Student' },
-  { quote: 'Seeing 139 young people show up every month for beach cleanups, tree planting, hospital visits — that&apos;s the future of Tanzania right there.', name: 'Dr. Kamau', role: 'Muhimbili Hospital Partner' },
-  { quote: 'The Ramadan Iftar isn&apos;t just a meal. It&apos;s 550 children feeling seen, celebrated, and cared for by their own community. That&apos;s Legions.', name: 'Fatuma K.', role: 'Orphanage Director' },
+  { quote: 'Legions taught me that age does not limit impact. As a student, I helped renovate a cancer ward - that changes how you see your own potential.', name: 'Aisha M.', role: 'Volunteer, Medical Student' },
+  { quote: 'Seeing 139 young people show up every month for beach cleanups, tree planting, hospital visits - that is the future of Tanzania right there.', name: 'Dr. Kamau', role: 'Muhimbili Hospital Partner' },
+  { quote: 'The Ramadan Iftar is not just a meal. It is 550 children feeling seen, celebrated, and cared for by their own community. That is Legions.', name: 'Fatuma K.', role: 'Orphanage Director' },
 ]
 
 const ecos = [
@@ -134,10 +134,10 @@ export default function Home() {
       )}
 
       <main>
-        {/* ═══════════════ HORIZONTAL SCROLL ═══════════════ */}
+        {/* HORIZONTAL SCROLL */}
         <HorizontalScroll />
 
-        {/* ═══════════════ ABOUT ═══════════════ */}
+        {/* ABOUT */}
         <section id="about" className="relative py-32 md:py-48 overflow-hidden">
           <GlowOrb className="w-[400px] h-[400px] bg-teal/10 top-20 -right-60" />
 
@@ -160,17 +160,17 @@ export default function Home() {
 
                 <ScrollReveal delay={0.4}>
                   <p className="text-text-secondary text-lg leading-relaxed max-w-xl mb-6">
-                    Legions Club is a non-profit, student-led organisation based in Dar es Salaam, Tanzania. 
-                    We mobilise high school and university students to lead humanitarian and environmental 
-                    initiatives across the city — from tree planting and beach cleanups to hospital renovations 
+                    Legions Club is a non-profit, student-led organisation based in Dar es Salaam, Tanzania.
+                    We mobilise high school and university students to lead humanitarian and environmental
+                    initiatives across the city - from tree planting and beach cleanups to hospital renovations
                     and orphan support.
                   </p>
                 </ScrollReveal>
 
                 <ScrollReveal delay={0.5}>
                   <p className="text-text-muted leading-relaxed max-w-xl">
-                    Founded on the belief that young people are not just future leaders — they are 
-                    current changemakers. Every project is student-designed, student-led, and 
+                    Founded on the belief that young people are not just future leaders - they are
+                    current changemakers. Every project is student-designed, student-led, and
                     student-executed. No paid staff. 100% volunteer-powered.
                   </p>
                 </ScrollReveal>
@@ -180,7 +180,7 @@ export default function Home() {
                 <ScrollReveal clipPath delay={0.3}>
                   <div className="relative aspect-[4/5] overflow-hidden">
                     <ParallaxImage
-                      src="https://images.unsplash.com/photo-1593113598332-cd288d649433?w=800&q=80"
+                      src="/images/about-tree-planting.jpg"
                       alt="Students planting trees in Tanzania"
                       className="w-full h-full"
                       speed={0.2}
@@ -197,10 +197,32 @@ export default function Home() {
                 </ScrollReveal>
               </div>
             </div>
+
+            {/* About gallery - second row of images */}
+            <ScrollReveal delay={0.7} className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
+                <img
+                  src="/images/about-beach-cleanup.jpg"
+                  alt="Beach cleanup volunteers"
+                  className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-bg-deep/60 via-transparent to-transparent" />
+                <div className="absolute bottom-4 left-4 text-white text-sm font-medium">Beach Cleanup Action</div>
+              </div>
+              <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
+                <img
+                  src="/images/about-team-photo.png"
+                  alt="Legions team photo"
+                  className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-bg-deep/60 via-transparent to-transparent" />
+                <div className="absolute bottom-4 left-4 text-white text-sm font-medium">Our Volunteer Team</div>
+              </div>
+            </ScrollReveal>
           </div>
         </section>
 
-        {/* ═══════════════ PROGRAMS ═══════════════ */}
+        {/* PROGRAMS */}
         <section id="programs" className="relative py-32 md:py-48">
           <div className="max-w-[1400px] mx-auto px-6 md:px-12">
             <ScrollReveal>
@@ -248,6 +270,15 @@ export default function Home() {
                       </div>
                     </div>
 
+                    {/* Program background image */}
+                    <div className="absolute inset-0 opacity-5">
+                      <img
+                        src={prog.image}
+                        alt={prog.title}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+
                     <motion.div
                       className="absolute inset-0 bg-gradient-to-br from-teal/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                     />
@@ -258,9 +289,9 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ═══════════════ IMPACT HIGHLIGHTS ═══════════════ */}
+        {/* IMPACT HIGHLIGHTS */}
         <section id="impact" className="relative py-32 md:py-48 overflow-hidden">
-          <GlowOrb className="w-[500px] h-[500px] bg-indigo/8 top-1/4 -left-60" />
+          <GlowOrb className="w-[500px] h-[500px] bg-emerald/8 top-1/4 -left-60" />
 
           <div className="max-w-[1400px] mx-auto px-6 md:px-12">
             <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-20">
@@ -293,6 +324,11 @@ export default function Home() {
                     whileHover={{ scale: 0.98 }}
                     transition={{ duration: 0.5 }}
                   >
+                    <img
+                      src={proj.image}
+                      alt={proj.title}
+                      className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                    />
                     <div className="absolute inset-0 bg-gradient-to-br from-teal/10 via-emerald/10 to-cyan/10 opacity-60" />
                     <div className="absolute inset-0 bg-gradient-to-t from-bg-deep/90 via-bg-deep/20 to-transparent" />
 
@@ -308,7 +344,7 @@ export default function Home() {
                     </div>
 
                     <div className="absolute top-6 right-6 w-8 h-8 border border-white/10 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <span className="text-xs">↗</span>
+                      <span className="text-xs">→</span>
                     </div>
                   </motion.div>
                 </ScrollReveal>
@@ -317,7 +353,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ═══════════════ STATS ═══════════════ */}
+        {/* STATS */}
         <section className="relative py-32 md:py-40 border-y border-border-subtle">
           <div className="max-w-[1400px] mx-auto px-6 md:px-12">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-12 md:gap-8">
@@ -340,7 +376,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ═══════════════ TESTIMONIALS ═══════════════ */}
+        {/* TESTIMONIALS */}
         <section className="relative py-32 md:py-48 overflow-hidden">
           <GlowOrb className="w-[400px] h-[400px] bg-teal/8 top-1/3 right-[-200px]" />
 
@@ -367,7 +403,7 @@ export default function Home() {
                     whileHover={{ y: -4 }}
                     transition={{ duration: 0.4 }}
                   >
-                    <div className="text-teal text-4xl font-serif mb-4">&ldquo;</div>
+                    <div className="text-teal text-4xl font-serif mb-4">"</div>
                     <p className="text-text-secondary leading-relaxed flex-1 italic font-serif text-lg mb-8">
                       {t.quote}
                     </p>
@@ -382,7 +418,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ═══════════════ HOW IT WORKS ═══════════════ */}
+        {/* HOW IT WORKS */}
         <section className="relative py-32 md:py-48">
           <div className="max-w-[1400px] mx-auto px-6 md:px-12">
             <ScrollReveal>
@@ -425,7 +461,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ═══════════════ CTA ═══════════════ */}
+        {/* CTA */}
         <section id="contact" className="relative py-40 md:py-56 overflow-hidden">
           <GlowOrb className="w-[600px] h-[600px] bg-teal/10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
 
@@ -447,8 +483,8 @@ export default function Home() {
 
             <ScrollReveal delay={0.3}>
               <p className="text-text-secondary text-lg mb-12 max-w-xl mx-auto">
-                Whether you&apos;re a student wanting to volunteer, a school looking to start a chapter, 
-                or an organisation seeking youth partners — there&apos;s a place for you in Legions.
+                Whether you are a student wanting to volunteer, a school looking to start a chapter,
+                or an organisation seeking youth partners - there is a place for you in Legions.
               </p>
             </ScrollReveal>
 
@@ -490,10 +526,21 @@ export default function Home() {
                 </a>
               </div>
             </ScrollReveal>
+
+            {/* CTA volunteer photo */}
+            <ScrollReveal delay={0.7} className="mt-16">
+              <div className="relative aspect-[16/9] max-w-3xl mx-auto overflow-hidden rounded-lg">
+                <img
+                  src="/images/cta-volunteers.png"
+                  alt="Volunteers in action"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </ScrollReveal>
           </div>
         </section>
 
-        {/* ═══════════════ FOOTER ═══════════════ */}
+        {/* FOOTER */}
         <footer className="border-t border-border-subtle py-16 md:py-20">
           <div className="max-w-[1400px] mx-auto px-6 md:px-12">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
@@ -536,6 +583,17 @@ export default function Home() {
                 Powered by youth volunteers in Dar es Salaam
               </p>
             </div>
+
+            {/* Footer community photo */}
+            <ScrollReveal delay={0.2} className="mt-12">
+              <div className="relative aspect-[21/9] max-w-5xl mx-auto overflow-hidden rounded-lg opacity-50">
+                <img
+                  src="/images/footer-community.png"
+                  alt="Community gathering"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </ScrollReveal>
           </div>
         </footer>
       </main>
