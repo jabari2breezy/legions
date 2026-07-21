@@ -1,17 +1,10 @@
 'use client';
 
-import { useEffect } from 'react';
-import { gsap } from 'gsap';
 import { LiquidGlassPill } from '../ui/LiquidGlass';
 import { useCursor } from '../ui/CustomCursor';
-import { sectionIndices } from '../../lib/constants';
 
 export function NavLink({ label, section, isActive, onClick }) {
   const { setHoverLabel, clearHover } = useCursor();
-
-  useEffect(() => {
-    if (isActive) return;
-  }, [isActive]);
 
   return (
     <LiquidGlassPill

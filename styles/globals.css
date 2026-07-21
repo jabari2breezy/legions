@@ -231,8 +231,9 @@
 
 /* Section Container */
 .section-wrapper {
-  height: 400vh;
+  height: 100vh;
   width: 100%;
+  overflow: hidden;
   will-change: transform;
 }
 

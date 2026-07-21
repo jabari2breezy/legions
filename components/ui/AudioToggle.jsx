@@ -4,15 +4,9 @@ import { useEffect, useRef, useState } from 'react';
 import { Howl } from 'howler';
 import { LiquidGlassCircle } from './LiquidGlass';
 
-interface AudioToggleProps {
-  src: string[];
-  volume?: number;
-  className?: string;
-}
-
-export function AudioToggle({ src, volume = 0.3, className = '' }: AudioToggleProps) {
+export function AudioToggle({ src, volume = 0.3, className = '' }) {
   const [playing, setPlaying] = useState(false);
-  const howlRef = useRef<Howl | null>(null);
+  const howlRef = useRef(null);
 
   useEffect(() => {
     howlRef.current = new Howl({
