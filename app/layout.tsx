@@ -1,23 +1,23 @@
 import type { Metadata } from 'next'
+import { Space_Grotesk, Geist_Mono } from 'next/font/google'
 import './globals.css'
 
+const spaceGrotesk = Space_Grotesk({ 
+  variable: '--font-sans', 
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'] 
+})
+const geistMono = Geist_Mono({ variable: '--font-mono', subsets: ['latin'] })
+
 export const metadata: Metadata = {
-  title: 'Legions — Synthetic Nature & Youth-Led Community Action',
-  description: 'An odyssey through youth community service, environment restoration, and local empowerment in Dar es Salaam.',
+  title: 'Legions — Youth-Led Action. Real Community Change.',
+  description: 'Student-led community service in Dar es Salaam. Impacting lives through action.',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link 
-          href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Geist:wght@300;400;500;600;700&display=swap" 
-          rel="stylesheet" 
-        />
-      </head>
-      <body className="antialiased bg-[#010101] text-white">
+    <html lang="en" className={`${spaceGrotesk.variable} ${geistMono.variable}`}>
+      <body className="antialiased">
         {children}
       </body>
     </html>
