@@ -1,112 +1,193 @@
 import Navbar from './components/Navbar'
-import FilmGrain from './components/FilmGrain'
+import Footer from './components/Footer'
 import InteractiveHero from './components/InteractiveHero'
-import HorizontalScroll from './components/HorizontalScroll'
-import BentoGrid from './components/BentoGrid'
-import BentoCard from './components/BentoCard'
+import Marquee from './components/Marquee'
 import SectionHeader from './components/SectionHeader'
+import ProcessStep from './components/ProcessStep'
+import TestimonialCard from './components/TestimonialCard'
 import ImpactCounter from './components/ImpactCounter'
-import Link from 'next/link'
+import ProjectCard from './components/ProjectCard'
+import Button from './components/Button'
 
 export default function Home() {
   return (
-    <main className="relative bg-bg-deep min-h-screen text-text-primary overflow-hidden">
-      <FilmGrain />
+    <main className="min-h-screen bg-[var(--color-bg-deep)]">
       <Navbar />
-
-      {/* Interactive 3D/Glass Hero */}
+      
+      {/* 1. Interactive Hero */}
       <InteractiveHero />
+      
+      {/* 2. Trust Marquee */}
+      <Marquee items={[
+        '7 PROJECTS COMPLETED',
+        'TSH 12M+ RAISED',
+        '25,000+ TREES PLANTED',
+        '100+ STUDENT VOLUNTEERS'
+      ]} />
 
-      {/* Horizontal Scroll Showcase (Raben Rifaie style) */}
-      <HorizontalScroll />
+      {/* 3. The Mission / Story (Asymmetric 2-column) */}
+      <section className="py-[var(--spacing-section-y)] container mx-auto px-[var(--spacing-section-x)]">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-center">
+          <div className="lg:col-span-5">
+            <SectionHeader 
+              eyebrow="Our Story"
+              title="Built by Students. Driven by Impact."
+              align="left"
+            />
+            <p className="mt-6 text-[var(--font-size-body-large)] text-[var(--color-text-secondary)] leading-relaxed max-w-lg">
+              What started in 2022 as a small group of high school students has evolved into one of Dar es Salaam's most active youth-led service organizations. We saw a gap between wanting to help and actually doing the work—so we bridged it.
+            </p>
+            <p className="mt-4 text-[var(--font-size-body-large)] text-[var(--color-text-secondary)] leading-relaxed max-w-lg mb-8">
+              From building wells in Pwani to funding pediatric heart surgeries, our mandate is simple: direct action, zero bureaucracy, total transparency.
+            </p>
+            <Button href="/about" variant="secondary">Read Our History</Button>
+          </div>
+          <div className="lg:col-span-7 relative">
+            <div className="aspect-square md:aspect-[4/3] rounded-3xl overflow-hidden relative glass-panel p-2">
+              <div className="absolute inset-0 rounded-3xl overflow-hidden bg-[var(--color-bg-deep)]">
+                {/* Fallback pattern if no image */}
+                <div className="w-full h-full opacity-20 bg-[radial-gradient(circle_at_center,var(--color-cyan)_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="text-[var(--color-cyan)] font-mono tracking-widest text-sm">[Field Operation Photo]</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-      {/* Bento Grid Highlights */}
-      <section className="relative z-10 py-32 px-6 md:px-12 max-w-[1400px] mx-auto">
-        <SectionHeader title="Our Pillars of Impact" subtitle="Core Initiatives" align="left" />
+      {/* 4. Animated Stats */}
+      <section className="py-[var(--spacing-section-y)] bg-[var(--color-bg-deep)] relative overflow-hidden border-y border-[var(--color-border-subtle)]">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[var(--color-cyan)]/5 blur-[150px] rounded-full pointer-events-none"></div>
+        <div className="container mx-auto px-[var(--spacing-section-x)] relative z-10">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 md:gap-8">
+            <ImpactCounter end={12} prefix="TZS " suffix="M+" label="Funds Raised" />
+            <ImpactCounter end={25000} suffix="+" label="Trees Planted" />
+            <ImpactCounter end={7} label="Major Projects" />
+            <ImpactCounter end={100} suffix="+" label="Active Volunteers" />
+          </div>
+        </div>
+      </section>
+
+      {/* 5. Projects Preview Grid */}
+      <section className="py-[var(--spacing-section-y)] container mx-auto px-[var(--spacing-section-x)]">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
+          <SectionHeader 
+            eyebrow="Our Work"
+            title="Projects That Matter."
+            align="left"
+          />
+          <Button href="/projects" variant="secondary">View All Projects</Button>
+        </div>
         
-        <BentoGrid>
-          <BentoCard
-            className="md:col-span-2 md:row-span-2"
-            title="Ujasiri House Renovation"
-            description="Complete overhaul and restoration of the Ujasiri House facilities to provide safe, comfortable, and empowering living spaces for vulnerable children."
-            imageSrc="https://images.unsplash.com/photo-1541888946425-d0fbb186a5b7?q=80&w=1200"
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          <ProjectCard 
+            slug="tree-planting"
+            title="MYK Tree Planting"
+            category="Environment"
+            impact="25k+ Trees"
+            imageSrc="/hero-attached.jpg"
+          />
+          <ProjectCard 
+            slug="ujasiri-house"
+            title="Ujasiri House"
+            category="Health"
+            impact="TZS 2M Raised"
+            imageSrc="/hero-attached.jpg"
+          />
+          <ProjectCard 
+            slug="pwani-well"
+            title="Pwani Well"
+            category="Infrastructure"
+            impact="Clean Water Access"
+            imageSrc="/hero-attached.jpg"
+          />
+        </div>
+      </section>
+
+      {/* 6. How It Works (Process) */}
+      <section className="py-[var(--spacing-section-y)] bg-[var(--color-surface)] border-y border-[var(--color-border-subtle)]">
+        <div className="container mx-auto px-[var(--spacing-section-x)]">
+          <SectionHeader 
+            eyebrow="The Playbook"
+            title="How We Operate."
+            subtitle="We don't wait for permission to make a difference. Our model is built on speed, transparency, and community integration."
+            className="mb-20"
           />
           
-          <BentoCard
-            className="md:col-span-2 md:row-span-1"
-            title="AMSEN Mentorship Visits"
-            description="Engaging educational sessions, art therapy, and companionship with the AMSEN community."
-            imageSrc="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=1200"
-          />
-
-          <BentoCard
-            className="md:col-span-1 md:row-span-1"
-            title="Tree Planting"
-            description="Reforestation drives across urban Dar es Salaam."
-            imageSrc="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=1200"
-          />
-
-          <BentoCard
-            className="md:col-span-1 md:row-span-1"
-            title="Beach Cleanups"
-            description="Coastal ecosystem cleanup drives."
-            imageSrc="https://images.unsplash.com/photo-1618477461853-cf6ed80faba5?q=80&w=1200"
-          />
-
-          <BentoCard
-            className="md:col-span-4 md:row-span-1"
-            title="Ramadhan Community Relief"
-            description="Annual food packages and healthcare support delivered to vulnerable households."
-            imageSrc="https://images.unsplash.com/photo-1532629345422-7515f3d16bb0?q=80&w=1200"
-          />
-        </BentoGrid>
-      </section>
-
-      {/* Impact Statistics */}
-      <section className="relative z-10 py-20 px-6 md:px-12 max-w-[1400px] mx-auto border-t border-white/10">
-        <SectionHeader title="Driven by Measurable Results" subtitle="Community Stats" align="center" />
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          <ImpactCounter end={18} suffix="+" label="Completed Projects" />
-          <ImpactCounter end={750} suffix="+" label="Lives Impacted" />
-          <ImpactCounter end={85} suffix="+" label="Student Volunteers" />
-          <ImpactCounter end={1500} suffix="+" label="Trees Planted" />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 max-w-5xl mx-auto">
+            <ProcessStep 
+              number="01"
+              title="Identify Needs"
+              description="We consult with local leaders, schools, and hospitals to find areas where targeted action can create immediate relief or long-term growth."
+            />
+            <ProcessStep 
+              number="02"
+              title="Mobilize Resources"
+              description="Using our network, we crowdfund, secure in-kind donations, and organize volunteer squads faster than traditional NGOs."
+            />
+            <ProcessStep 
+              number="03"
+              title="Execute"
+              description="We show up. Whether it's planting trees, painting wards, or distributing rations, our volunteers do the physical work."
+            />
+            <ProcessStep 
+              number="04"
+              title="Report Back"
+              description="Complete transparency. Every shilling raised and every hour worked is documented and shared with our donors and community."
+            />
+          </div>
         </div>
       </section>
 
-      {/* Call to Action Banner */}
-      <section className="relative z-10 py-24 px-6 md:px-12 max-w-[1200px] mx-auto text-center">
-        <div className="p-12 rounded-3xl glass-panel border border-cyan/30 bg-gradient-to-r from-bg-deep via-bg-teal/20 to-bg-deep">
-          <span className="text-cyan font-mono uppercase text-xs tracking-widest block mb-3">
-            [ GET INVOLVED TODAY ]
-          </span>
-          <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-6 tracking-tight">
-            Ready to Make a Real Impact?
+      {/* 7. Testimonials */}
+      <section className="py-[var(--spacing-section-y)] container mx-auto px-[var(--spacing-section-x)]">
+        <SectionHeader 
+          eyebrow="Community Voices"
+          title="The Impact We Leave."
+          className="mb-16"
+        />
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+          <TestimonialCard 
+            quote="Legions stepped in when we needed them most. The dedication these students showed in rebuilding the pediatric ward was nothing short of inspiring."
+            author="Dr. Amina"
+            role="Muhimbili National Hospital"
+            delay={0}
+          />
+          <TestimonialCard 
+            quote="Seeing the youth take charge of our environment gives me hope. The MYK initiative changed the landscape of our school completely."
+            author="Mr. Mussa"
+            role="Local Headmaster"
+            delay={0.2}
+          />
+          <TestimonialCard 
+            quote="I joined to get service hours, but I stayed because of the family. Legions taught me that my age doesn't limit my ability to help."
+            author="Sarah"
+            role="Student Volunteer"
+            delay={0.4}
+          />
+        </div>
+      </section>
+
+      {/* 8. Closing CTA */}
+      <section className="py-[var(--spacing-section-y)] relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-cyan)]/10 to-transparent"></div>
+        <div className="container mx-auto px-[var(--spacing-section-x)] relative z-10 text-center flex flex-col items-center">
+          <h2 className="text-[var(--font-size-h1)] font-bold text-white mb-6 tracking-tight max-w-4xl text-balance">
+            Ready to Do the Work?
           </h2>
-          <p className="text-text-secondary text-base md:text-lg max-w-xl mx-auto mb-8">
-            Whether you want to volunteer, sponsor an initiative, or partner with us in Dar es Salaam, we welcome you to join the Legions movement.
+          <p className="text-[var(--font-size-body-large)] text-[var(--color-text-secondary)] mb-12 max-w-2xl text-balance">
+            Whether you want to volunteer on the frontlines or partner with us to fund the next major initiative, there is a place for you here.
           </p>
-          <div className="flex justify-center gap-4">
-            <Link
-              href="/contact"
-              className="px-8 py-4 rounded-full bg-cyan text-bg-deep font-mono text-sm font-bold uppercase tracking-wider hover:bg-white transition-all shadow-lg shadow-cyan/20"
-            >
-              Become a Volunteer
-            </Link>
+          <div className="flex flex-col sm:flex-row gap-4">
+            <Button href="/volunteer" variant="primary">Become a Volunteer</Button>
+            <Button href="/partner" variant="secondary">Partner With Us</Button>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="relative z-10 py-12 px-6 border-t border-white/10 text-center text-text-muted text-xs font-mono">
-        <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-          <div>&copy; {new Date().getFullYear()} LEGIONS. Youth-Led Community Service.</div>
-          <div className="flex gap-6">
-            <Link href="/projects" className="hover:text-cyan transition-colors">Projects</Link>
-            <Link href="/about" className="hover:text-cyan transition-colors">About</Link>
-            <Link href="/contact" className="hover:text-cyan transition-colors">Contact</Link>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </main>
   )
 }

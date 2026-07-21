@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Space_Grotesk, Geist_Mono } from 'next/font/google'
 import './globals.css'
+import SmoothScrollProvider from './components/SmoothScrollProvider'
 
 const spaceGrotesk = Space_Grotesk({ 
   variable: '--font-sans', 
@@ -18,7 +19,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${spaceGrotesk.variable} ${geistMono.variable}`}>
       <body className="antialiased">
-        {children}
+        <SmoothScrollProvider>
+          {children}
+        </SmoothScrollProvider>
       </body>
     </html>
   )

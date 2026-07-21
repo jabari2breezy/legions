@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg-deep: #2B2A8C; /* Deep indigo */
+  --color-bg-deep: #15144d; /* Deep indigo */
   --color-bg-teal: #3FE0C5; /* Electric teal */
   --color-bg-card: rgba(255, 255, 255, 0.03);
   --color-bg-card-hover: rgba(255, 255, 255, 0.08);
@@ -19,17 +19,35 @@
 
   --font-sans: 'Space Grotesk', -apple-system, sans-serif;
   --font-mono: 'Geist Mono', monospace;
+  
+  /* Typography Scale */
+  --font-size-display: clamp(3rem, 8vw, 6rem);
+  --font-size-h1: clamp(2.5rem, 6vw, 4.5rem);
+  --font-size-h2: clamp(2rem, 5vw, 3.5rem);
+  --font-size-h3: clamp(1.5rem, 3vw, 2rem);
+  --font-size-h4: 0.875rem; /* eyebrow */
+  --font-size-body-large: 1.125rem;
+  --font-size-body: 1rem;
+  --font-size-body-small: 0.875rem;
+  
+  --line-height-display: 0.95;
+  --line-height-heading: 1.1;
+  --line-height-body: 1.6;
+  
+  /* Section Rhythm */
+  --spacing-section-y: clamp(4rem, 10vw, 10rem);
+  --spacing-section-x: clamp(1.5rem, 5vw, 4rem);
 }
 
 html {
   background: var(--color-bg-deep);
   color: var(--color-text-primary);
-  scroll-behavior: smooth;
+  /* smooth scroll is handled by lenis now */
 }
 
 body {
   font-family: var(--font-sans);
-  background: linear-gradient(135deg, var(--color-bg-deep) 0%, var(--color-bg-teal) 100%);
+  background: linear-gradient(135deg, #15144d 0%, #2B2A8C 100%);
   background-attachment: fixed;
   overflow-x: hidden;
   min-height: 100vh;
@@ -75,7 +93,6 @@ body {
   border-radius: 1.5rem;
 }
 
-/* For GSAP text reveal masks */
 .text-mask {
   overflow: hidden;
   display: block;
@@ -85,7 +102,6 @@ body {
   display: block;
 }
 
-/* Hide scrollbar for marquee */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }

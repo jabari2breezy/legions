@@ -1,91 +1,95 @@
 import Navbar from '../components/Navbar'
-import FilmGrain from '../components/FilmGrain'
+import Footer from '../components/Footer'
 import SectionHeader from '../components/SectionHeader'
 import ImpactCounter from '../components/ImpactCounter'
-import Link from 'next/link'
 
-export default function AboutPage() {
+export default function About() {
   return (
-    <main className="relative bg-bg-deep min-h-screen text-text-primary overflow-hidden pt-28 pb-24">
-      <FilmGrain />
+    <main className="min-h-screen bg-[var(--color-bg-deep)]">
       <Navbar />
-
-      <div className="relative z-10 max-w-[1200px] mx-auto px-6 md:px-12">
-        <SectionHeader title="About Legions" subtitle="Youth Action in Dar es Salaam" align="left" />
-
-        {/* Mission & Vision */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-          <div className="glass-panel p-8 space-y-4">
-            <span className="text-cyan font-mono text-xs uppercase tracking-widest">[ OUR MISSION ]</span>
-            <h2 className="text-3xl font-bold text-white tracking-tight">
-              Action Over Words.
-            </h2>
-            <p className="text-text-secondary leading-relaxed text-sm md:text-base">
-              Legions was founded by passionate high school and university students in Dar es Salaam who recognized that real community change requires active, hands-on participation. We bridge the gap between student ambition and grassroots community needs.
-            </p>
-          </div>
-
-          <div className="glass-panel p-8 space-y-4">
-            <span className="text-cyan font-mono text-xs uppercase tracking-widest">[ OUR VISION ]</span>
-            <h2 className="text-3xl font-bold text-white tracking-tight">
-              Empowering Next-Gen Leaders.
-            </h2>
-            <p className="text-text-secondary leading-relaxed text-sm md:text-base">
-              We envision a future where youth lead sustainable environmental, educational, and social initiatives across East Africa, building compassionate networks that uplift underserved communities.
-            </p>
-          </div>
+      
+      {/* Hero */}
+      <section className="pt-40 pb-20 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[var(--color-cyan)]/10 blur-[150px] rounded-full pointer-events-none"></div>
+        <div className="container mx-auto px-[var(--spacing-section-x)] relative z-10">
+          <SectionHeader 
+            eyebrow="Our Story"
+            title="Founded by Students in 2022."
+            subtitle="We didn't want to wait until we were older to make a difference. We started Legions because Dar es Salaam needed action, not just awareness."
+            align="left"
+            className="mb-12"
+          />
         </div>
+      </section>
 
-        {/* Core Values */}
-        <div className="mb-20">
-          <SectionHeader title="Our Core Values" subtitle="Principles" align="center" />
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-            <div className="glass-panel p-6 text-center space-y-3">
-              <div className="text-cyan font-mono text-2xl font-bold">01</div>
-              <h3 className="text-xl font-bold text-white">Direct Engagement</h3>
-              <p className="text-xs text-text-secondary leading-relaxed">
-                We work directly with community members and shelter staff on the ground to ensure maximum utility and respect.
-              </p>
-            </div>
-
-            <div className="glass-panel p-6 text-center space-y-3">
-              <div className="text-cyan font-mono text-2xl font-bold">02</div>
-              <h3 className="text-xl font-bold text-white">Sustainability</h3>
-              <p className="text-xs text-text-secondary leading-relaxed">
-                Every project—from tree planting to facility renovation—is designed for long-term survival and community ownership.
-              </p>
-            </div>
-
-            <div className="glass-panel p-6 text-center space-y-3">
-              <div className="text-cyan font-mono text-2xl font-bold">03</div>
-              <h3 className="text-xl font-bold text-white">Inclusive Growth</h3>
-              <p className="text-xs text-text-secondary leading-relaxed">
-                We welcome students from all schools, backgrounds, and disciplines to share skills and collaborate freely.
-              </p>
-            </div>
+      {/* Stats */}
+      <section className="py-[var(--spacing-section-y)] bg-[var(--color-surface)] border-y border-[var(--color-border-subtle)]">
+        <div className="container mx-auto px-[var(--spacing-section-x)]">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 md:gap-8">
+            <ImpactCounter end={12} prefix="TZS " suffix="M+" label="Total Raised" />
+            <ImpactCounter end={25000} suffix="+" label="Trees Planted" />
+            <ImpactCounter end={100} suffix="+" label="Active Members" />
+            <ImpactCounter end={7} label="Completed Projects" />
           </div>
         </div>
+      </section>
 
-        {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
-          <ImpactCounter end={85} suffix="+" label="Active Volunteers" />
-          <ImpactCounter end={18} suffix="+" label="Projects Launched" />
-          <ImpactCounter end={750} suffix="+" label="Lives Impacted" />
-          <ImpactCounter end={4} suffix=" yrs" label="Operating" />
+      {/* Tenets */}
+      <section className="py-[var(--spacing-section-y)] container mx-auto px-[var(--spacing-section-x)]">
+        <SectionHeader 
+          eyebrow="Core Tenets"
+          title="What We Believe."
+          className="mb-16"
+        />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="glass-panel p-8">
+            <h3 className="text-xl font-semibold text-white mb-4">Radical Transparency</h3>
+            <p className="text-[var(--color-text-secondary)]">Every donation is accounted for. We show exactly where the money goes and the physical impact it creates.</p>
+          </div>
+          <div className="glass-panel p-8">
+            <h3 className="text-xl font-semibold text-white mb-4">Action Over Words</h3>
+            <p className="text-[var(--color-text-secondary)]">We don't host galas to talk about problems; we get our hands dirty to fix them. Field work is our primary metric.</p>
+          </div>
+          <div className="glass-panel p-8">
+            <h3 className="text-xl font-semibold text-white mb-4">Youth Empowerment</h3>
+            <p className="text-[var(--color-text-secondary)]">Age is not a barrier to impact. We train the next generation of Tanzanian leaders through real-world service.</p>
+          </div>
         </div>
+      </section>
 
-        {/* Call to action */}
-        <div className="text-center">
-          <Link
-            href="/contact"
-            className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-cyan text-bg-deep font-mono text-sm font-bold uppercase tracking-wider hover:bg-white transition-all shadow-lg shadow-cyan/20"
-          >
-            <span>Get Involved with Legions</span>
-            <span>&rarr;</span>
-          </Link>
+      {/* Timeline */}
+      <section className="py-[var(--spacing-section-y)] relative border-t border-[var(--color-border-subtle)] bg-[var(--color-bg-deep)]">
+        <div className="container mx-auto px-[var(--spacing-section-x)]">
+          <SectionHeader 
+            eyebrow="History"
+            title="The Journey So Far."
+            align="left"
+            className="mb-16"
+          />
+          <div className="flex flex-col gap-8 max-w-4xl border-l border-[var(--color-cyan)]/30 ml-4 pl-8">
+            <div className="relative">
+              <div className="absolute -left-[41px] top-1 w-4 h-4 rounded-full bg-[var(--color-cyan)] shadow-[0_0_10px_rgba(63,224,197,0.5)]"></div>
+              <h4 className="text-[var(--color-cyan)] font-mono text-sm mb-2">2022</h4>
+              <h3 className="text-xl text-white font-semibold mb-2">Legions Founded</h3>
+              <p className="text-[var(--color-text-secondary)]">A small group of high schoolers decides to formalize their community service efforts.</p>
+            </div>
+            <div className="relative">
+              <div className="absolute -left-[41px] top-1 w-4 h-4 rounded-full bg-[var(--color-surface)] border border-[var(--color-cyan)]"></div>
+              <h4 className="text-[var(--color-cyan)] font-mono text-sm mb-2">2023</h4>
+              <h3 className="text-xl text-white font-semibold mb-2">First Major Success</h3>
+              <p className="text-[var(--color-text-secondary)]">The MYK Tree Planting initiative hits 10,000 trees, proving the model works at scale.</p>
+            </div>
+            <div className="relative">
+              <div className="absolute -left-[41px] top-1 w-4 h-4 rounded-full bg-[var(--color-surface)] border border-[var(--color-cyan)]"></div>
+              <h4 className="text-[var(--color-cyan)] font-mono text-sm mb-2">2024</h4>
+              <h3 className="text-xl text-white font-semibold mb-2">Expanding Scope</h3>
+              <p className="text-[var(--color-text-secondary)]">Moving into healthcare infrastructure with Ujasiri House and clean water with the Pwani Well.</p>
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
+
+      <Footer />
     </main>
   )
 }
