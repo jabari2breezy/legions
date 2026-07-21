@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg-deep: #1A1147;
+  --color-white: #FFFFFF;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html, body, #__next {
+    height: 100%;
+    width: 100%;
+    background: var(--color-bg-deep);
+    color: var(--color-white);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background: #4DE8D4;
+    color: #1A1147;
+  }
+
+  :focus-visible {
+    outline: 2px solid #4DE8D4;
+    outline-offset: 2px;
+  }
+}
