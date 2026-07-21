@@ -1,7 +1,7 @@
 import Navbar from '../components/Navbar'
 import FilmGrain from '../components/FilmGrain'
 import RollingGallery from '../components/RollingGallery'
-import { projectsList } from '../components/HorizontalProjects'
+import { projectsList } from '../data/projects'
 import Image from 'next/image'
 
 export default function ProjectsPage() {
