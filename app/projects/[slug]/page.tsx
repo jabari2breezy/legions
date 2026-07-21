@@ -7,7 +7,23 @@ import ImpactCounter from '../../components/ImpactCounter'
 import Button from '../../components/Button'
 
 // Project Database
-const projectsDB = {
+interface Stat {
+  number: number;
+  prefix?: string;
+  suffix?: string;
+  label: string;
+}
+
+interface ProjectData {
+  title: string;
+  category: string;
+  heroImage: string;
+  stats: Stat[];
+  story: string;
+  impact: string;
+}
+
+const projectsDB: Record<string, ProjectData> = {
   'tree-planting': {
     title: 'MYK Tree Planting',
     category: 'Environment',
