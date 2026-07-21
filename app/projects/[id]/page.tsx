@@ -2,7 +2,7 @@ import Navbar from '../../components/Navbar'
 import FilmGrain from '../../components/FilmGrain'
 import Image from 'next/image'
 import Link from 'next/link'
-import { notFound } from 'nextimport'
+import { notFound } from 'next/navigation'
 
 interface ProjectDetail {
   title: string
