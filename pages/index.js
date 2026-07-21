@@ -30,7 +30,7 @@ function PageContent() {
   useEffect(() => {
     if (!mounted || !wrapperRef.current) return;
 
-    const targetY = -activeIndex * 100;
+    const targetY = -(activeIndex * 25);
     gsap.to(wrapperRef.current, {
       yPercent: targetY,
       duration: 1.1,
