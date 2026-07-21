@@ -1,25 +1,22 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono, Cormorant_Garamond } from 'next/font/google'
+import { Space_Grotesk, Geist_Mono } from 'next/font/google'
 import './globals.css'
 
-const geistSans = Geist({ variable: '--font-geist-sans', subsets: ['latin'] })
-const geistMono = Geist_Mono({ variable: '--font-geist-mono', subsets: ['latin'] })
-const cormorant = Cormorant_Garamond({
-  variable: '--font-cormorant',
+const spaceGrotesk = Space_Grotesk({ 
+  variable: '--font-sans', 
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  style: ['normal', 'italic'],
+  weight: ['300', '400', '500', '600', '700'] 
 })
+const geistMono = Geist_Mono({ variable: '--font-mono', subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Legions Club — Where Legends Rise',
-  description: 'An invitation-only sanctuary for visionary founders, elite investors, and industry titans. Legions Club curates experiences that forge legacy.',
-  keywords: ['private club', 'luxury networking', 'elite community', 'founders', 'investors'],
+  title: 'Legions — Youth-Led Action. Real Community Change.',
+  description: 'Student-led community service in Dar es Salaam. Impacting lives through action.',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} ${cormorant.variable}`}>
+    <html lang="en" className={`${spaceGrotesk.variable} ${geistMono.variable}`}>
       <body className="antialiased">
         {children}
       </body>
