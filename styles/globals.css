@@ -229,17 +229,21 @@
   background-size: 256px 256px;
 }
 
-/* Section Container */
+/* Section Container - Horizontal Layout */
 .section-wrapper {
-  height: 400vh;
-  width: 100%;
+  width: 400vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
   will-change: transform;
 }
 
 .section {
+  width: 100vw;
   height: 100vh;
-  width: 100%;
+  flex-shrink: 0;
   position: relative;
+  overflow: hidden;
 }
 
 /* Marquee Row */

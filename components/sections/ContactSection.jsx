@@ -55,7 +55,7 @@ export function ContactSection({ isActive }) {
   return (
     <section
       id="contact"
-      className="relative h-screen flex items-center justify-center overflow-hidden"
+      className="relative w-screen h-screen flex-shrink-0 flex items-center justify-center overflow-hidden"
       style={sectionStyle}
       data-section="contact"
       aria-labelledby="contact-headline"

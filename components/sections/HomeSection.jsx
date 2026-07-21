@@ -112,7 +112,7 @@ export function HomeSection({ isActive }) {
   return (
     <section
       id="home"
-      className="relative h-screen flex items-start justify-center overflow-hidden"
+      className="relative w-screen h-screen flex-shrink-0 flex items-start justify-center overflow-hidden"
       style={sectionStyle}
       data-section="home"
       aria-labelledby="home-headline"
@@ -168,16 +168,16 @@ export function HomeSection({ isActive }) {
           </div>
         </div>
 
-        {/* Scroll cue */}
+        {/* Scroll cue - horizontal arrow */}
         <div
           ref={scrollCueRef}
-          className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
+          className="absolute bottom-12 right-12 flex items-center gap-3"
           aria-hidden="true"
         >
           <span className="text-[10px] uppercase tracking-widest text-white/50">Scroll</span>
-          <div className="relative w-[12px] h-[32px] border border-white/30 rounded-full">
+          <div className="relative w-[32px] h-[12px] border border-white/30 rounded-full">
             <div
-              className="scroll-dot absolute left-1/2 top-2 -translate-x-1/2 w-[4px] h-[4px] rounded-full bg-[var(--color-teal)]"
+              className="scroll-dot absolute top-1/2 left-2 -translate-y-1/2 w-[4px] h-[4px] rounded-full bg-[var(--color-teal)]"
             />
           </div>
         </div>

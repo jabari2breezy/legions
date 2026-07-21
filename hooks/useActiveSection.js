@@ -14,8 +14,8 @@ export function useActiveSection() {
   }, []);
 
   const scrollToSection = useCallback((index) => {
-    if (animationLockRef.current || isAnimating) return;
-    if (index === activeIndex) return;
+    if (animationLockRef.current) return;
+    if (index < 0 || index > 3) return;
 
     animationLockRef.current = true;
     setIsAnimating(true);
@@ -30,8 +30,9 @@ export function useActiveSection() {
       animationLockRef.current = false;
       setIsAnimating(false);
     }, 1200);
-  }, [activeIndex, isAnimating]);
+  }, []);
 
+  // Wheel: deltaX for horizontal trackpads, deltaY for vertical scroll
   useEffect(() => {
     let lastWheel = 0;
     const handleWheel = (e) => {
@@ -41,7 +42,8 @@ export function useActiveSection() {
 
       if (animationLockRef.current) return;
 
-      const direction = e.deltaY > 0 ? 1 : -1;
+      const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+      const direction = delta > 0 ? 1 : -1;
       const nextIndex = Math.max(0, Math.min(3, activeIndex + direction));
       if (nextIndex !== activeIndex) {
         scrollToSection(nextIndex);
@@ -52,17 +54,18 @@ export function useActiveSection() {
     return () => window.removeEventListener('wheel', handleWheel);
   }, [activeIndex, scrollToSection]);
 
+  // Touch: horizontal swipe
   useEffect(() => {
-    let touchStartY = 0;
+    let touchStartX = 0;
     const handleTouchStart = (e) => {
-      touchStartY = e.touches[0].clientY;
+      touchStartX = e.touches[0].clientX;
     };
     const handleTouchEnd = (e) => {
       if (animationLockRef.current) return;
-      const touchEndY = e.changedTouches[0].clientY;
-      const deltaY = touchStartY - touchEndY;
-      if (Math.abs(deltaY) > 50) {
-        const direction = deltaY > 0 ? 1 : -1;
+      const touchEndX = e.changedTouches[0].clientX;
+      const deltaX = touchStartX - touchEndX;
+      if (Math.abs(deltaX) > 50) {
+        const direction = deltaX > 0 ? 1 : -1;
         const nextIndex = Math.max(0, Math.min(3, activeIndex + direction));
         if (nextIndex !== activeIndex) {
           scrollToSection(nextIndex);
@@ -78,14 +81,19 @@ export function useActiveSection() {
     };
   }, [activeIndex, scrollToSection]);
 
+  // Keyboard: left/right arrows, page up/down
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (animationLockRef.current) return;
-      const keys = ['ArrowDown', 'PageDown', 'ArrowUp', 'PageUp'];
-      if (!keys.includes(e.key)) return;
+
+      let direction = 0;
+      if (e.key === 'ArrowRight' || e.key === 'PageDown') direction = 1;
+      else if (e.key === 'ArrowLeft' || e.key === 'PageUp') direction = -1;
+      else if (e.key === 'ArrowDown') direction = 1;
+      else if (e.key === 'ArrowUp') direction = -1;
+      else return;
 
       e.preventDefault();
-      const direction = ['ArrowDown', 'PageDown'].includes(e.key) ? 1 : -1;
       const nextIndex = Math.max(0, Math.min(3, activeIndex + direction));
       if (nextIndex !== activeIndex) {
         scrollToSection(nextIndex);

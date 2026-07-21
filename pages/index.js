@@ -9,7 +9,6 @@ import { ProjectGrid } from '../components/projects/ProjectGrid';
 import { ContactSection } from '../components/sections/ContactSection';
 import { useActiveSection } from '../hooks/useActiveSection';
 import { sectionIndices } from '../lib/constants';
-import { ErrorBoundary } from '../components/ui/ErrorBoundary';
 
 function PageContent() {
   const { activeIndex, setActiveIndex, isAnimating } = useActiveSection();
@@ -30,9 +29,9 @@ function PageContent() {
   useEffect(() => {
     if (!mounted || !wrapperRef.current) return;
 
-    const targetY = -(activeIndex * 25);
+    const targetX = -(activeIndex * 25);
     gsap.to(wrapperRef.current, {
-      yPercent: targetY,
+      xPercent: targetX,
       duration: 1.1,
       ease: 'power3.inOut',
     });
@@ -62,20 +61,8 @@ function PageContent() {
 export default function Home() {
   return (
     <div className="h-full">
-      {/* Global grain overlay */}
       <div className="grain-overlay" aria-hidden="true" />
-      <ErrorBoundary
-        fallback={
-          <div className="h-screen w-full bg-[var(--color-bg-deep)] flex items-center justify-center p-8 text-center">
-            <h1 className="font-[Playfair_Display] text-4xl text-white mb-4">Something went wrong</h1>
-            <p className="text-white/70 font-[Poppins] mb-6 max-w-md mx-auto">
-              The page failed to load. Please refresh or try again later.
-            </p>
-          </div>
-        }
-      >
-        <PageContent />
-      </ErrorBoundary>
+      <PageContent />
     </div>
   );
 }

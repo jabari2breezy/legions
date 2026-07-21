@@ -1,16 +1,14 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useRef, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { gsap } from 'gsap';
 import { projects } from '../../lib/projects-data';
 import { ProjectCard } from './ProjectCard';
-import { ProjectDetail } from './ProjectDetail';
 import { ProjectMarquee } from './ProjectMarquee';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
 
 export function ProjectGrid({ isActive }) {
-  const [openProjectId, setOpenProjectId] = useState(null);
   const reducedMotion = useReducedMotion();
   const animationCtxRef = useRef(null);
 
@@ -20,14 +18,9 @@ export function ProjectGrid({ isActive }) {
       animationCtxRef.current = null;
     }
 
-    if (!isActive) {
-      setOpenProjectId(null);
-      return;
-    }
+    if (!isActive) return;
 
-    animationCtxRef.current = gsap.context(() => {
-      // Cards animate via Framer Motion initial/animate
-    });
+    animationCtxRef.current = gsap.context(() => {});
 
     return () => {
       if (animationCtxRef.current) {
@@ -36,15 +29,6 @@ export function ProjectGrid({ isActive }) {
     };
   }, [isActive, reducedMotion]);
 
-  const handleCardClick = (projectId) => {
-    setOpenProjectId(projectId);
-  };
-
-  const handleClose = () => {
-    setOpenProjectId(null);
-  };
-
-  // Section background
   const sectionStyle = {
     background: `
       radial-gradient(50vmax circle at 80% 30%, rgba(77,232,212,0.1) 0%, transparent 60%),
@@ -56,18 +40,15 @@ export function ProjectGrid({ isActive }) {
   return (
     <section
       id="projects"
-      className="relative h-screen flex flex-col overflow-hidden"
+      className="relative w-screen h-screen flex-shrink-0 flex flex-col overflow-hidden"
       style={sectionStyle}
       data-section="projects"
       aria-labelledby="projects-headline"
     >
-      {/* Background marquee */}
       <ProjectMarquee isActive={isActive} />
 
-      {/* Foreground content */}
       <div className="relative z-10 flex-1 flex flex-col w-full max-w-[1400px] mx-auto px-6 md:px-12">
-        {/* Header */}
-        <div className="pt-12 md:pt-16 pb-8">
+        <div className="pt-12 md:pt-16 pb-6">
           <h2 id="projects-headline" className="font-[Playfair_Display] font-bold text-white text-3xl md:text-4xl lg:text-5xl mb-4">
             Our Projects
           </h2>
@@ -77,15 +58,9 @@ export function ProjectGrid({ isActive }) {
           </p>
         </div>
 
-        {/* Grid */}
-        <div className="flex-1 flex items-center justify-center min-h-0">
+        <div className="flex-1 flex items-center justify-center min-h-0 pb-8">
           <motion.div
-            className="w-full"
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(3, 1fr)',
-              gap: '24px',
-            }}
+            className="w-full grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6"
             initial={false}
             animate={isActive ? { opacity: 1 } : { opacity: 0 }}
             transition={{ duration: 0.5 }}
@@ -94,26 +69,12 @@ export function ProjectGrid({ isActive }) {
               <ProjectCard
                 key={project.id}
                 project={project}
-                layoutId={`project-${project.id}`}
-                onOpen={() => handleCardClick(project.id)}
                 index={i}
               />
             ))}
           </motion.div>
         </div>
       </div>
-
-      {/* Project Detail Overlay */}
-      <AnimatePresence>
-        {openProjectId && (
-          <ProjectDetail
-            project={projects.find((p) => p.id === openProjectId)}
-            layoutId={`project-${openProjectId}`}
-            onClose={handleClose}
-            isOpen={true}
-          />
-        )}
-      </AnimatePresence>
     </section>
   );
 }
