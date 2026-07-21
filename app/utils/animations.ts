@@ -3,45 +3,49 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
-export const initHeroAnimation = (heroRef: React.RefObject<HTMLElement | null>, imageRef: React.RefObject<HTMLImageElement | null>) => {
-  if (!heroRef.current || !imageRef.current) return
+export const initHeroAnimation = (heroElement: HTMLElement | Element | null, imageElement: HTMLElement | Element | null) => {
+  if (!heroElement || !imageElement) return
 
   gsap.fromTo(
-    imageRef.current,
+    imageElement,
     { scale: 1.05 },
     { scale: 1, duration: 1.5, ease: 'power3.out' }
   )
 }
 
-export const initTextReveal = (containerRef: React.RefObject<HTMLElement | null>) => {
-  if (!containerRef.current) return
+export const initTextReveal = (container: HTMLElement | Element | null) => {
+  if (!container) return
 
-  const elements = containerRef.current.querySelectorAll('.reveal-up')
+  const elements = container.querySelectorAll('.reveal-text')
   
+  if (elements.length === 0) return
+
   gsap.fromTo(
     elements,
-    { y: '100%' },
+    { y: 50, opacity: 0 },
     {
-      y: '0%',
+      y: 0,
+      opacity: 1,
       duration: 1,
-      stagger: 0.05,
+      stagger: 0.15,
       ease: 'power3.out',
       scrollTrigger: {
-        trigger: containerRef.current,
+        trigger: container,
         start: 'top 85%',
+        once: true
       },
     }
   )
 }
 
-export const initParallaxDrift = (bgRef: React.RefObject<HTMLElement | null>, fgRef: React.RefObject<HTMLElement | null>) => {
-  if (!bgRef.current || !fgRef.current) return
+export const initParallaxDrift = (bgElement: HTMLElement | Element | null, fgElement: HTMLElement | Element | null) => {
+  if (!bgElement || !fgElement) return
 
-  gsap.to(bgRef.current, {
+  gsap.to(bgElement, {
     yPercent: 20,
     ease: 'none',
     scrollTrigger: {
-      trigger: fgRef.current,
+      trigger: fgElement,
       start: 'top bottom',
       end: 'bottom top',
       scrub: true,
@@ -49,16 +53,16 @@ export const initParallaxDrift = (bgRef: React.RefObject<HTMLElement | null>, fg
   })
 }
 
-export const initBentoHover = (cardRef: React.RefObject<HTMLElement | null>, imageRef: React.RefObject<HTMLElement | null>) => {
-  if (!cardRef.current || !imageRef.current) return
+export const initBentoHover = (cardElement: HTMLElement | Element | null, imageElement: HTMLElement | Element | null) => {
+  if (!cardElement || !imageElement) return
 
-  cardRef.current.addEventListener('mouseenter', () => {
-    gsap.to(imageRef.current, { scale: 1.05, duration: 0.6, ease: 'power2.out' })
-    gsap.to(cardRef.current, { borderColor: 'rgba(63, 224, 197, 0.4)', duration: 0.4 })
+  cardElement.addEventListener('mouseenter', () => {
+    gsap.to(imageElement, { scale: 1.05, duration: 0.6, ease: 'power2.out' })
+    gsap.to(cardElement, { borderColor: 'rgba(63, 224, 197, 0.4)', duration: 0.4 })
   })
 
-  cardRef.current.addEventListener('mouseleave', () => {
-    gsap.to(imageRef.current, { scale: 1, duration: 0.6, ease: 'power2.out' })
-    gsap.to(cardRef.current, { borderColor: 'rgba(255, 255, 255, 0.15)', duration: 0.4 })
+  cardElement.addEventListener('mouseleave', () => {
+    gsap.to(imageElement, { scale: 1, duration: 0.6, ease: 'power2.out' })
+    gsap.to(cardElement, { borderColor: 'rgba(255, 255, 255, 0.15)', duration: 0.4 })
   })
 }
