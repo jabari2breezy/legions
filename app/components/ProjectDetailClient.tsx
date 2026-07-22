@@ -1,24 +1,50 @@
 'use client'
 
-import { useRef } from 'react'
+import { useRef, useMemo } from 'react'
 import { useGSAP } from '@gsap/react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import SectionHeader from './SectionHeader'
 import Button from './Button'
 import SubpageCanvas from './SubpageCanvas'
-import GrainOverlay from './GrainOverlay'
 import ProjectHero from './ProjectHero'
 import ProjectStats from './ProjectStats'
 import ProjectStory from './ProjectStory'
 import ProjectGallery from './ProjectGallery'
 import RelatedProjects from './RelatedProjects'
+import { GalleryScene } from './WebGL/GalleryScene'
+import { AssetPreloader } from './WebGL/AssetPreloader'
+import { useShouldUseWebGLGallery, GalleryFallback } from './WebGL/GalleryFallback'
 import type { Project } from '../../types/project'
 
 gsap.registerPlugin(ScrollTrigger)
 
 export default function ProjectDetailClient({ project }: { project: Project }) {
   const mainRef = useRef<HTMLDivElement>(null)
+  const { shouldUseWebGL, checked } = useShouldUseWebGLGallery()
+
+  const allImages = useMemo(
+    () => project.groups.flatMap((g) => g.images),
+    [project.groups]
+  )
+
+  const webglImages = useMemo(
+    () =>
+      allImages.map((img, i) => ({
+        id: img.id,
+        url: `/projects/${img.filename}`,
+        x: (i % 3) * 340 + 40,
+        y: Math.floor(i / 3) * 280 + 200,
+        width: 320,
+        height: 240,
+      })),
+    [allImages]
+  )
+
+  const preloadUrls = useMemo(
+    () => allImages.slice(0, 6).map((img) => `/projects/${img.filename}`),
+    [allImages]
+  )
 
   useGSAP(() => {
     const sections = document.querySelectorAll('.content-section')
@@ -84,7 +110,27 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
                 align="left"
                 className="mb-8"
               />
-              <ProjectGallery groups={project.groups} />
+
+              {checked && shouldUseWebGL && allImages.length > 0 ? (
+                <AssetPreloader urls={preloadUrls}>
+                  <div className="relative" style={{ minHeight: `${Math.ceil(allImages.length / 3) * 280 + 200}px` }}>
+                    <GalleryScene images={webglImages} />
+                    <ProjectGallery groups={project.groups} />
+                  </div>
+                </AssetPreloader>
+              ) : checked ? (
+                <div>
+                  <GalleryFallback
+                    images={allImages.map((img) => ({
+                      id: img.id,
+                      url: `/projects/${img.filename}`,
+                      alt: img.alt,
+                    }))}
+                  />
+                </div>
+              ) : (
+                <ProjectGallery groups={project.groups} />
+              )}
             </div>
           )}
         </div>

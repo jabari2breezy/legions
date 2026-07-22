@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import Link from 'next/link'
+import { useFlipTransition } from './Transitions/PageTransition'
 
 interface HorizontalProjectCardProps {
   slug: string
@@ -20,10 +20,19 @@ export default function HorizontalProjectCard({
   imageSrc,
   index,
 }: HorizontalProjectCardProps) {
+  const { navigateWithFlip } = useFlipTransition()
+
+  function handleClick(e: React.MouseEvent<HTMLDivElement>) {
+    e.preventDefault()
+    navigateWithFlip(`/projects/${slug}`, `project-${slug}`, e.currentTarget)
+  }
+
   return (
-    <Link
-      href={`/projects/${slug}`}
-      className="group relative w-full h-full rounded-3xl overflow-hidden block"
+    <div
+      className="group relative w-full h-full rounded-3xl overflow-hidden block cursor-pointer"
+      data-cursor-type="cta"
+      data-magnetic
+      onClick={handleClick}
     >
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
@@ -75,6 +84,6 @@ export default function HorizontalProjectCard({
 
       {/* Border glow on hover */}
       <div className="absolute inset-0 z-20 rounded-3xl border border-white/5 group-hover:border-[var(--color-cyan)]/30 transition-colors duration-500 pointer-events-none" />
-    </Link>
+    </div>
   )
 }

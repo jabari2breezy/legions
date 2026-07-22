@@ -3,6 +3,7 @@
 import { useRef } from 'react'
 import { useGSAP } from '@gsap/react'
 import { initTextReveal } from '../utils/animations'
+import { SplitReveal } from './Transitions/SplitReveal'
 
 interface SectionHeaderProps {
   eyebrow?: string
@@ -34,9 +35,13 @@ export default function SectionHeader({
           {eyebrow}
         </h4>
       )}
-      <h2 className="text-[var(--font-size-h2)] leading-[var(--line-height-heading)] font-semibold text-balance reveal-text opacity-0 text-white">
+      <SplitReveal
+        as="h2"
+        className={`text-[var(--font-size-h2)] leading-[var(--line-height-heading)] font-semibold text-balance text-white`}
+        splitBy="words"
+      >
         {title}
-      </h2>
+      </SplitReveal>
       {subtitle && (
         <p className="text-[var(--font-size-body-large)] text-[var(--color-text-secondary)] mt-2 reveal-text opacity-0 max-w-2xl text-balance leading-[var(--line-height-body)]">
           {subtitle}
