@@ -33,36 +33,40 @@ export default function Projects() {
     const pin = pinRef.current
     if (!track || !pin) return
 
-    const totalScroll = track.scrollWidth - window.innerWidth
+    // Wait a frame so layout + images settle before measuring width
+    const id = requestAnimationFrame(() => {
+      const totalScroll = track.scrollWidth - window.innerWidth
+      if (totalScroll <= 0) return
 
-    // Horizontal scroll — pin section and move track left
-    const scrollTween = gsap.to(track, {
-      x: -totalScroll,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: pin,
-        start: 'top top',
-        end: () => '+=' + totalScroll,
-        pin: true,
-        scrub: 1,
-        anticipatePin: 1,
-        invalidateOnRefresh: true,
-      },
-    })
-
-    // Progress bar
-    if (progressRef.current) {
-      gsap.to(progressRef.current, {
-        scaleX: 1,
+      // Horizontal scroll — pin section and move track left
+      gsap.to(track, {
+        x: -totalScroll,
         ease: 'none',
         scrollTrigger: {
           trigger: pin,
           start: 'top top',
-          end: () => '+=' + totalScroll,
-          scrub: 0.3,
+          end: () => `+=${totalScroll}`,
+          pin: true,
+          scrub: 1,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
         },
       })
-    }
+
+      // Progress bar
+      if (progressRef.current) {
+        gsap.to(progressRef.current, {
+          scaleX: 1,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: pin,
+            start: 'top top',
+            end: () => `+=${totalScroll}`,
+            scrub: 0.3,
+          },
+        })
+      }
+    })
 
     // Fade in hero text
     gsap.fromTo(
@@ -71,24 +75,7 @@ export default function Projects() {
       { opacity: 1, y: 0, duration: 1, ease: 'power3.out', delay: 0.2 }
     )
 
-    // Stagger card entrance
-    const cards = track.querySelectorAll('.h-project-card')
-    gsap.fromTo(
-      cards,
-      { opacity: 0, x: 80 },
-      {
-        opacity: 1,
-        x: 0,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: pin,
-          start: 'top 80%',
-          once: true,
-        },
-      }
-    )
+    return () => cancelAnimationFrame(id)
   }, { scope: mainRef })
 
   return (
@@ -114,13 +101,14 @@ export default function Projects() {
 
       {/* Horizontal Scroll Section */}
       <div ref={pinRef} className="relative h-screen overflow-hidden z-10">
+        {/* Track — single row, no wrap, no overlap */}
         <div
           ref={trackRef}
-          className="flex items-center h-full gap-6 md:gap-10 pl-[8vw] pr-[20vw]"
-          style={{ width: 'max-content' }}
+          className="flex items-center h-full gap-8 pl-[8vw] pr-[20vw]"
+          style={{ width: 'max-content', willChange: 'transform' }}
         >
           {projects.map((project, i) => (
-            <div key={project.slug} className="h-project-card flex-shrink-0">
+            <div key={project.slug} className="flex-shrink-0 w-[65vw] md:w-[55vw] lg:w-[45vw] h-[60vh]">
               <HorizontalProjectCard
                 slug={project.slug}
                 title={project.title}

@@ -23,7 +23,7 @@ export default function HorizontalProjectCard({
   return (
     <Link
       href={`/projects/${slug}`}
-      className="group relative flex-shrink-0 w-[70vw] h-[65vh] rounded-3xl overflow-hidden isolate"
+      className="group relative w-full h-full rounded-3xl overflow-hidden block"
     >
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
@@ -34,7 +34,7 @@ export default function HorizontalProjectCard({
           alt={title}
           fill
           className="object-cover transition-transform duration-1000 group-hover:scale-105 filter grayscale group-hover:grayscale-0"
-          sizes="70vw"
+          sizes="(max-width: 768px) 65vw, (max-width: 1024px) 55vw, 45vw"
         />
       </div>
 
