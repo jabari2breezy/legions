@@ -1,9 +1,43 @@
+'use client'
+
+import { useRef } from 'react'
+import { useGSAP } from '@gsap/react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import SectionHeader from '../components/SectionHeader'
 import ProjectCard from '../components/ProjectCard'
+import AnimatedBackground from '../components/AnimatedBackground'
+import GrainOverlay from '../components/GrainOverlay'
+import FloatingParticles from '../components/FloatingParticles'
+
+gsap.registerPlugin(ScrollTrigger)
 
 export default function Projects() {
+  const mainRef = useRef<HTMLDivElement>(null)
+
+  useGSAP(() => {
+    // Project cards stagger animation
+    const projectCards = document.querySelectorAll('.project-card-wrapper')
+    gsap.fromTo(projectCards,
+      { opacity: 0, y: 50, scale: 0.95 },
+      {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 0.8,
+        stagger: 0.12,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: projectCards[0],
+          start: 'top 85%',
+          once: true
+        }
+      }
+    )
+  }, { scope: mainRef })
+
   const projects = [
     {
       slug: 'amsen-visits',
@@ -43,11 +77,14 @@ export default function Projects() {
   ]
 
   return (
-    <main className="min-h-screen bg-[var(--color-bg-deep)]">
+    <main ref={mainRef} className="min-h-screen bg-[var(--color-bg-deep)]">
       <Navbar />
       
-      <section className="pt-40 pb-20 relative">
-        <div className="container mx-auto px-[var(--spacing-section-x)] relative z-10">
+      <section className="pt-40 pb-20 relative overflow-hidden">
+        <AnimatedBackground variant="hero" />
+        <GrainOverlay opacity={0.08} />
+        <FloatingParticles count={18} />
+        <div className="container mx-auto px-[var(--spacing-section-x)] relative z-20">
           <SectionHeader 
             eyebrow="Our Work"
             title="Projects That Matter."
@@ -57,14 +94,15 @@ export default function Projects() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {projects.map((project) => (
-              <ProjectCard 
-                key={project.slug}
-                slug={project.slug}
-                title={project.title}
-                category={project.category}
-                impact={project.impact}
-                imageSrc={project.imageSrc}
-              />
+              <div key={project.slug} className="project-card-wrapper">
+                <ProjectCard 
+                  slug={project.slug}
+                  title={project.title}
+                  category={project.category}
+                  impact={project.impact}
+                  imageSrc={project.imageSrc}
+                />
+              </div>
             ))}
           </div>
         </div>

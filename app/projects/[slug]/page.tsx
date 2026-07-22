@@ -1,10 +1,7 @@
 import { notFound } from 'next/navigation'
-import Image from 'next/image'
 import Navbar from '../../components/Navbar'
 import Footer from '../../components/Footer'
-import SectionHeader from '../../components/SectionHeader'
-import ImpactCounter from '../../components/ImpactCounter'
-import Button from '../../components/Button'
+import ProjectDetailClient from '../../components/ProjectDetailClient'
 
 interface Stat {
   number: number
@@ -209,131 +206,7 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
   return (
     <main className="min-h-screen bg-[var(--color-bg-deep)]">
       <Navbar />
-      
-      {/* Hero */}
-      <section className="relative pt-40 pb-20 md:pt-48 md:pb-32 border-b border-[var(--color-border-subtle)] overflow-hidden">
-        <div className="absolute inset-0 z-0 opacity-40 mix-blend-overlay">
-          <Image 
-            src={project.heroImage}
-            alt={project.title}
-            fill
-            className="object-cover"
-            priority
-          />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-bg-deep)] via-[var(--color-bg-deep)]/70 to-transparent z-0"></div>
-        
-        <div className="container mx-auto px-[var(--spacing-section-x)] relative z-10 text-center">
-          <div className="inline-block px-3 py-1 rounded-full border border-[var(--color-cyan)] text-[var(--color-cyan)] text-xs font-mono tracking-widest uppercase mb-8 bg-[var(--color-bg-deep)]/50 backdrop-blur-md">
-            {project.category}
-          </div>
-          <h1 className="text-[var(--font-size-h1)] font-bold text-white mb-6 tracking-tight text-balance">
-            {project.title}
-          </h1>
-        </div>
-      </section>
-
-      {/* Stats */}
-      <section className="py-12 bg-[var(--color-surface)] border-b border-[var(--color-border-subtle)]">
-        <div className="container mx-auto px-[var(--spacing-section-x)] flex flex-wrap justify-center gap-12 md:gap-24">
-          {project.stats.map((stat, i) => (
-            <ImpactCounter 
-              key={i}
-              end={stat.number} 
-              prefix={stat.prefix} 
-              suffix={stat.suffix} 
-              label={stat.label} 
-            />
-          ))}
-        </div>
-      </section>
-
-      {/* Content */}
-      <section className="py-[var(--spacing-section-y)] container mx-auto px-[var(--spacing-section-x)]">
-        <div className="max-w-4xl mx-auto">
-          
-          {/* Context & Motivation */}
-          <div className="mb-20">
-            <div className="flex items-center gap-3 mb-6">
-              <span className="w-8 h-[2px] bg-[var(--color-cyan)]"></span>
-              <span className="text-xs font-mono tracking-widest uppercase text-[var(--color-cyan)]">Context & Motivation</span>
-            </div>
-            <h2 className="text-2xl md:text-3xl font-semibold text-white mb-8 leading-tight">Why This Matters</h2>
-            <p className="text-[var(--font-size-body-large)] text-[var(--color-text-secondary)] leading-relaxed">
-              {project.context}
-            </p>
-          </div>
-          
-          {/* Planning & Preparation */}
-          <div className="mb-20">
-            <div className="flex items-center gap-3 mb-6">
-              <span className="w-8 h-[2px] bg-[var(--color-cyan)]"></span>
-              <span className="text-xs font-mono tracking-widest uppercase text-[var(--color-cyan)]">Planning & Preparation</span>
-            </div>
-            <h2 className="text-2xl md:text-3xl font-semibold text-white mb-8 leading-tight">How We Organized</h2>
-            <div className="space-y-4">
-              {project.planning.map((step, idx) => (
-                <div key={idx} className="flex gap-4 items-start group">
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full border border-[var(--color-border-subtle)] bg-[var(--color-surface)] flex items-center justify-center text-xs font-mono text-[var(--color-cyan)] group-hover:bg-[var(--color-cyan)]/10 group-hover:border-[var(--color-cyan)]/40 transition-all duration-300">
-                    {String(idx + 1).padStart(2, '0')}
-                  </div>
-                  <p className="text-[var(--color-text-secondary)] leading-relaxed pt-1">
-                    {step}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Impact */}
-          <div className="mb-20">
-            <div className="flex items-center gap-3 mb-6">
-              <span className="w-8 h-[2px] bg-[var(--color-cyan)]"></span>
-              <span className="text-xs font-mono tracking-widest uppercase text-[var(--color-cyan)]">Results & Impact</span>
-            </div>
-            <h2 className="text-2xl md:text-3xl font-semibold text-white mb-8 leading-tight">What We Achieved</h2>
-            <div className="space-y-4">
-              {project.impactHighlights.map((highlight, idx) => (
-                <div key={idx} className="glass-panel p-6 border-l-4 border-l-[var(--color-cyan)] hover:bg-white/[0.03] transition-colors duration-300">
-                  <p className="text-[var(--color-text-primary)] leading-relaxed font-medium">
-                    {highlight}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Project Gallery */}
-          {project.gallery.length > 0 && (
-            <div className="mb-16">
-              <SectionHeader 
-                eyebrow="Field Documentation"
-                title="Project Gallery"
-                align="left"
-                className="mb-8"
-              />
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                {project.gallery.map((imgSrc, idx) => (
-                  <div key={idx} className="relative aspect-[4/3] rounded-2xl overflow-hidden glass-panel group">
-                    <Image
-                      src={imgSrc}
-                      alt={`${project.title} photo ${idx + 1}`}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-          
-          <div className="flex flex-col sm:flex-row gap-4 items-center justify-center pt-12 border-t border-[var(--color-border-subtle)] mt-20">
-            <Button href="/projects" variant="secondary">Back to Projects</Button>
-            <Button href="/volunteer" variant="primary">Help on the Next One</Button>
-          </div>
-        </div>
-      </section>
-
+      <ProjectDetailClient project={project} />
       <Footer />
     </main>
   )
