@@ -1,0 +1,67 @@
+[
+  {
+    "slug": "amsen-visits",
+    "title": "AMSEN Visits",
+    "category": "Community & Special Needs",
+    "stats": [
+      { "label": "Students Engaged", "value": "40+" },
+      { "label": "Youth Volunteers", "value": "25+" }
+    ],
+    "heroImage": {
+      "filename": "amsen-visits/IMG_8275.jpg",
+      "alt": "Legions volunteers engaging with special needs students at AMSEN center"
+    }
+  },
+  {
+    "slug": "beach-cleanups",
+    "title": "Beach Cleanups",
+    "category": "Environment",
+    "stats": [
+      { "label": "Waste Collected", "value": "1.5+ Tons" },
+      { "label": "Volunteers", "value": "150+" }
+    ],
+    "heroImage": {
+      "filename": "beach-cleanups/IMG_8270.jpg",
+      "alt": "Volunteers collecting plastic waste along Dar-es-Salaam coastline"
+    }
+  },
+  {
+    "slug": "ramadhan-project",
+    "title": "Ramadhan Project",
+    "category": "Community & Food Relief",
+    "stats": [
+      { "label": "Individuals Reached", "value": "1,200+" },
+      { "label": "Direct Allocation", "value": "100%" }
+    ],
+    "heroImage": {
+      "filename": "ramadhan-project/IMG_8248.jpg",
+      "alt": "Volunteers packing food hampers during the Ramadhan Project"
+    }
+  },
+  {
+    "slug": "tree-planting",
+    "title": "Tree Planting — Project MYK",
+    "category": "Environment",
+    "stats": [
+      { "label": "Trees Planted", "value": "500+" },
+      { "label": "Survival Rate", "value": "90%+" }
+    ],
+    "heroImage": {
+      "filename": "tree-planting/IMG_8271.jpg",
+      "alt": "Volunteers planting indigenous shade tree saplings at a public school"
+    }
+  },
+  {
+    "slug": "ujasiri-house",
+    "title": "Ujasiri House Renovation",
+    "category": "Health & Infrastructure",
+    "stats": [
+      { "label": "Families Hosted Daily", "value": "30+" },
+      { "label": "Sweat-Equity", "value": "100%" }
+    ],
+    "heroImage": {
+      "filename": "ujasiri-house/IMG_8290.jpg",
+      "alt": "Ujasiri House after renovation with fresh paint and murals"
+    }
+  }
+]

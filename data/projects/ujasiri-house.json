@@ -1,0 +1,74 @@
+{
+  "slug": "ujasiri-house",
+  "title": "Ujasiri House Renovation",
+  "category": "Health & Infrastructure",
+  "shortDescription": "Transforming a pediatric cancer care facility into a colorful, therapeutic space that supports children's mental health and resilience.",
+  "storyParagraphs": [
+    "The Ujasiri House, operated by Tumaini La Maisha (TLM), is a vital non-clinical hostel that offers free housing, meals, and psycho-social support to pediatric cancer patients and their primary caregivers during multi-month treatment cycles at Muhimbili National Hospital. Years of continuous use had left the facility worn, faded, and sterile.",
+    "Legions Tz undertook this project to transform the physical environment into a colorful, lively, and therapeutic space that supports the mental health and emotional resilience of recovering children. The team conducted multi-stage site surveys alongside TLM staff to assess structural wall damage, painting requirements, and spatial design needs.",
+    "Over several coordinated weekend shifts, volunteers managed the physical labor — scraping, plastering, priming interior and exterior walls, and hand-painting large-scale custom art murals across living quarters and play areas. By providing all voluntary labor, 100% of donor funds were spent directly on high-quality construction and art materials."
+  ],
+  "timeframe": {
+    "startDate": "2024-06-01",
+    "endDate": "2024-09-15",
+    "displayLabel": "June — September 2024",
+    "status": "completed"
+  },
+  "stats": [
+    { "label": "Families Hosted Daily", "value": "30+" },
+    { "label": "Sweat-Equity Efficiency", "value": "100%" },
+    { "label": "Volunteer Hours", "value": "480+" }
+  ],
+  "heroImage": {
+    "id": "ujasiri-hero",
+    "filename": "ujasiri-house/IMG_8290.jpg",
+    "alt": "Ujasiri House exterior after renovation with fresh paint and custom therapeutic murals",
+    "width": 4032,
+    "height": 3024,
+    "orientation": "landscape"
+  },
+  "groups": [
+    {
+      "groupId": "before",
+      "label": "Before",
+      "description": "The facility's condition prior to renovation work.",
+      "images": [
+        { "id": "uj-001", "filename": "ujasiri-house/IMG_8290.jpg", "alt": "Ujasiri House exterior before renovation showing faded paint and wear", "width": 4032, "height": 3024, "orientation": "landscape" },
+        { "id": "uj-002", "filename": "ujasiri-house/IMG_8292.jpg", "alt": "Interior common area with worn walls and sterile appearance", "width": 4032, "height": 3024, "orientation": "landscape" },
+        { "id": "uj-003", "filename": "ujasiri-house/IMG_8293.jpg", "alt": "Structural wall damage assessed during the site survey", "width": 3024, "height": 4032, "orientation": "portrait" }
+      ]
+    },
+    {
+      "groupId": "renovation",
+      "label": "The Renovation",
+      "description": "Volunteers at work transforming the facility.",
+      "images": [
+        { "id": "uj-010", "filename": "ujasiri-house/IMG_8294.jpg", "alt": "Volunteers scraping and preparing walls for new plaster", "width": 4032, "height": 3024, "orientation": "landscape" },
+        { "id": "uj-011", "filename": "ujasiri-house/IMG_8295.jpg", "alt": "Priming interior walls with non-toxic paint in preparation for murals", "width": 4032, "height": 3024, "orientation": "landscape" },
+        { "id": "uj-012", "filename": "ujasiri-house/IMG_8297.jpg", "alt": "Hand-painting large-scale therapeutic murals on living quarter walls", "width": 4032, "height": 3024, "orientation": "landscape" },
+        { "id": "uj-013", "filename": "ujasiri-house/IMG_8298.jpg", "alt": "Volunteers working on exterior wall repainting during a weekend shift", "width": 4032, "height": 3024, "orientation": "landscape" },
+        { "id": "uj-014", "filename": "ujasiri-house/IMG_8299.jpg", "alt": "Detailed mural work in the children's play area", "width": 3024, "height": 4032, "orientation": "portrait" },
+        { "id": "uj-015", "filename": "ujasiri-house/IMG_8300.jpg", "alt": "Team coordinating paint colors and mural designs with TLM staff", "width": 4032, "height": 3024, "orientation": "landscape" },
+        { "id": "uj-016", "filename": "ujasiri-house/IMG_8301.jpg", "alt": "Volunteers applying fresh color to the facility's corridors", "width": 4032, "height": 3024, "orientation": "landscape" },
+        { "id": "uj-017", "filename": "ujasiri-house/IMG_8302.jpg", "alt": "Progress shot showing the transformation from faded to vibrant walls", "width": 4032, "height": 3024, "orientation": "landscape" }
+      ]
+    },
+    {
+      "groupId": "completion",
+      "label": "The Result",
+      "description": "The completed, revitalized facility.",
+      "images": [
+        { "id": "uj-020", "filename": "ujasiri-house/IMG_8303.jpg", "alt": "Completed interior with colorful therapeutic murals in the children's living area", "width": 4032, "height": 3024, "orientation": "landscape" },
+        { "id": "uj-021", "filename": "ujasiri-house/IMG_8304.jpg", "alt": "Revitalized exterior with fresh paint and uplifting artwork", "width": 4032, "height": 3024, "orientation": "landscape" },
+        { "id": "uj-022", "filename": "ujasiri-house/IMG_8305.jpg", "alt": "Children's play area transformed with vibrant colors and murals", "width": 4032, "height": 3024, "orientation": "landscape" },
+        { "id": "uj-023", "filename": "ujasiri-house/IMG_8306.jpg", "alt": "Volunteers and TLM staff posing at the completed Ujasiri House", "width": 4032, "height": 3024, "orientation": "landscape" }
+      ]
+    }
+  ],
+  "testimonial": {
+    "quote": "The renovated space has meant families no longer have to wait outside in poor conditions. The murals bring genuine joy to children undergoing treatment.",
+    "name": "TLM Staff Member",
+    "role": "Tumaini La Maisha — Ujasiri House"
+  },
+  "relatedSlugs": ["amsen-visits", "beach-cleanups"]
+}

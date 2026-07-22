@@ -1,0 +1,57 @@
+{
+  "slug": "ramadhan-project",
+  "title": "Ramadhan Project",
+  "category": "Community & Food Relief",
+  "shortDescription": "Providing dignified food security to vulnerable families, orphanages, and hospital caregivers during the holy month of Ramadan.",
+  "storyParagraphs": [
+    "During the holy month of Ramadan, underprivileged households, local orphanages, and families supporting sick relatives in hospitals face severe economic strain due to rising food prices. Legions Tz initiated the Ramadhan Project to uphold values of charity and mutual aid, ensuring that vulnerable, fasting individuals receive reliable, dignified, and nutritious food security.",
+    "The initiative began with community needs assessments to identify underfunded orphanages, pediatric long-term care stays, and low-income families across Dar-es-Salaam. Peer-to-peer digital fundraising drives across social media and mobile money platforms collected micro-donations from the community.",
+    "Volunteers negotiated directly with local wholesale food suppliers to buy in bulk, maximizing purchasing power for key staples. A logistics and assembly line was set up to pack balanced food hampers, with pre-mapped distribution routes for direct hand-delivery across target neighborhoods."
+  ],
+  "timeframe": {
+    "startDate": "2025-03-01",
+    "endDate": "2025-03-30",
+    "displayLabel": "March 2025",
+    "status": "completed"
+  },
+  "stats": [
+    { "label": "Individuals Reached", "value": "1,200+" },
+    { "label": "Direct Allocation", "value": "100%" },
+    { "label": "Orphanages Served", "value": "Multiple" }
+  ],
+  "heroImage": {
+    "id": "ramadhan-hero",
+    "filename": "ramadhan-project/IMG_8248.jpg",
+    "alt": "Volunteers packing food hampers for distribution during the Ramadhan Project",
+    "width": 4032,
+    "height": 3024,
+    "orientation": "landscape"
+  },
+  "groups": [
+    {
+      "groupId": "gallery",
+      "label": null,
+      "images": [
+        { "id": "ram-001", "filename": "ramadhan-project/IMG_8248.jpg", "alt": "Volunteers packing food hampers for distribution during the Ramadhan Project", "width": 4032, "height": 3024, "orientation": "landscape" },
+        { "id": "ram-002", "filename": "ramadhan-project/IMG_8255.jpg", "alt": "Bulk food supplies including rice, flour, and cooking oil ready for packing", "width": 4032, "height": 3024, "orientation": "landscape" },
+        { "id": "ram-003", "filename": "ramadhan-project/IMG_8256.jpg", "alt": "Assembly line of volunteers packing balanced food hampers", "width": 4032, "height": 3024, "orientation": "landscape" },
+        { "id": "ram-004", "filename": "ramadhan-project/IMG_8257.jpg", "alt": "Volunteers loading packed food hampers for distribution", "width": 4032, "height": 3024, "orientation": "landscape" },
+        { "id": "ram-005", "filename": "ramadhan-project/IMG_8258.jpg", "alt": "Hand-delivery of food packages to families in need", "width": 3024, "height": 4032, "orientation": "portrait" },
+        { "id": "ram-006", "filename": "ramadhan-project/IMG_8259.jpg", "alt": "Food hamper distribution at a local orphanage", "width": 4032, "height": 3024, "orientation": "landscape" },
+        { "id": "ram-007", "filename": "ramadhan-project/IMG_8260.jpg", "alt": "Volunteers organizing bulk food deliveries for hospital caregivers", "width": 4032, "height": 3024, "orientation": "landscape" },
+        { "id": "ram-008", "filename": "ramadhan-project/IMG_8261.jpg", "alt": "Community members receiving food packages during Ramadan", "width": 3024, "height": 4032, "orientation": "portrait" },
+        { "id": "ram-009", "filename": "ramadhan-project/IMG_8262.jpg", "alt": "Group of volunteers during a break in distribution", "width": 4032, "height": 3024, "orientation": "landscape" },
+        { "id": "ram-010", "filename": "ramadhan-project/IMG_8264.jpg", "alt": "Close-up of packed food hampers with dates, rice, and essential staples", "width": 4032, "height": 3024, "orientation": "landscape" },
+        { "id": "ram-011", "filename": "ramadhan-project/IMG_8265.jpg", "alt": "Distribution route team preparing for neighborhood deliveries", "width": 4032, "height": 3024, "orientation": "landscape" },
+        { "id": "ram-012", "filename": "ramadhan-project/IMG_8266.jpg", "alt": "Beneficiary families receiving iftar provisions", "width": 4032, "height": 3024, "orientation": "landscape" },
+        { "id": "ram-013", "filename": "ramadhan-project/IMG_8267.jpg", "alt": "Volunteers posing after completing the Ramadhan distribution", "width": 4032, "height": 3024, "orientation": "landscape" }
+      ]
+    }
+  ],
+  "testimonial": {
+    "quote": "Zero administrative overhead meant every shilling went directly to food on someone's table. That's rare and it matters.",
+    "name": "Ramadhan Project Beneficiary",
+    "role": "Dar-es-Salaam Community Member"
+  },
+  "relatedSlugs": ["amsen-visits", "ujasiri-house"]
+}

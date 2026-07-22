@@ -1,0 +1,52 @@
+{
+  "slug": "amsen-visits",
+  "title": "AMSEN Visits",
+  "category": "Community & Special Needs",
+  "shortDescription": "Bridging social isolation through direct, empathetic youth interaction with special needs students at the Al Muntazir center.",
+  "storyParagraphs": [
+    "Children with neurodivergence and special physical or intellectual needs in Dar-es-Salaam often face social isolation due to lingering societal stigma and a lack of inclusive youth-led community interaction. Legions Tz recognized that institutional care needs to be complemented by genuine human connection, social integration, and peer companionship.",
+    "The goal was to bridge this gap by bringing active, empathetic youth interaction directly to the students at the Al Muntazir Special Needs (AMSEN) center. Through structured, sensory-friendly itineraries featuring creative arts, crafts, interactive music, and gentle physical games, volunteers created meaningful moments of connection.",
+    "Every purchased sensory art supply, game, and learning material was left as a permanent donation to the center's therapy department — ensuring the impact extends far beyond the visit itself."
+  ],
+  "timeframe": {
+    "startDate": "2024-01-01",
+    "endDate": null,
+    "displayLabel": "Ongoing Since 2024",
+    "status": "ongoing"
+  },
+  "stats": [
+    { "label": "Students Engaged", "value": "40+" },
+    { "label": "Youth Volunteers", "value": "25+" },
+    { "label": "Resources Donated", "value": "100%" }
+  ],
+  "heroImage": {
+    "id": "amsen-hero",
+    "filename": "amsen-visits/IMG_8275.jpg",
+    "alt": "Legions volunteers engaging with special needs students at AMSEN center through creative activities",
+    "width": 4032,
+    "height": 3024,
+    "orientation": "landscape"
+  },
+  "groups": [
+    {
+      "groupId": "gallery",
+      "label": null,
+      "images": [
+        { "id": "amsen-001", "filename": "amsen-visits/IMG_8275.jpg", "alt": "Legions volunteers engaging with special needs students at AMSEN center through creative activities", "width": 4032, "height": 3024, "orientation": "landscape" },
+        { "id": "amsen-002", "filename": "amsen-visits/IMG_8276.jpg", "alt": "Student participating in art and craft activities during the AMSEN visit", "width": 4032, "height": 3024, "orientation": "landscape" },
+        { "id": "amsen-003", "filename": "amsen-visits/IMG_8277.jpg", "alt": "Volunteers and students sharing a creative music session together", "width": 4032, "height": 3024, "orientation": "landscape" },
+        { "id": "amsen-004", "filename": "amsen-visits/IMG_8278.jpg", "alt": "One-on-one interaction between a volunteer and a special needs student", "width": 3024, "height": 4032, "orientation": "portrait" },
+        { "id": "amsen-005", "filename": "amsen-visits/IMG_8279.jpg", "alt": "Group activity session with students and volunteers at the center", "width": 4032, "height": 3024, "orientation": "landscape" },
+        { "id": "amsen-006", "filename": "amsen-visits/IMG_8280.jpg", "alt": "Sensory-friendly games set up for the students at AMSEN", "width": 4032, "height": 3024, "orientation": "landscape" },
+        { "id": "amsen-007", "filename": "amsen-visits/IMG_8281.jpg", "alt": "Art supplies and educational materials donated to the therapy department", "width": 3024, "height": 4032, "orientation": "portrait" },
+        { "id": "amsen-008", "filename": "amsen-visits/IMG_8282.jpg", "alt": "Volunteers posing with students after a successful engagement session", "width": 4032, "height": 3024, "orientation": "landscape" }
+      ]
+    }
+  ],
+  "testimonial": {
+    "quote": "The one-on-one sessions gave our students a sense of companionship they rarely get from outside visitors.",
+    "name": "AMSEN Staff",
+    "role": "Al Muntazir Special Needs Center"
+  },
+  "relatedSlugs": ["ujasiri-house", "ramadhan-project"]
+}

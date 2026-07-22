@@ -11,16 +11,18 @@ import HorizontalProjectCard from '../components/HorizontalProjectCard'
 import ProjectImageBelt from '../components/ProjectImageBelt'
 import SubpageCanvas from '../components/SubpageCanvas'
 import GrainOverlay from '../components/GrainOverlay'
+import projectsIndex from '../../data/projects-index.json'
+import type { ProjectSummary } from '../../types/project'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const projects = [
-  { slug: 'amsen-visits', title: 'AMSEN Visits', category: 'Community & Special Needs', impact: '40+ Students Engaged', imageSrc: '/projects/amsen-visits/IMG_8275.jpg' },
-  { slug: 'beach-cleanups', title: 'Beach Cleanups', category: 'Environment', impact: '1.5+ Tons Collected', imageSrc: '/projects/beach-cleanups/IMG_8270.jpg' },
-  { slug: 'ramadhan-project', title: 'Ramadhan Project', category: 'Community & Food Relief', impact: '1,200+ Individuals Reached', imageSrc: '/projects/ramadhan-project/IMG_8248.jpg' },
-  { slug: 'tree-planting', title: 'Tree Planting — Project MYK', category: 'Environment', impact: '500+ Trees Planted', imageSrc: '/projects/tree-planting/IMG_8271.jpg' },
-  { slug: 'ujasiri-house', title: 'Ujasiri House Renovation', category: 'Health & Infrastructure', impact: '30+ Families Hosted Daily', imageSrc: '/projects/ujasiri-house/IMG_8290.jpg' },
-]
+const projects = (projectsIndex as ProjectSummary[]).map((p) => ({
+  slug: p.slug,
+  title: p.title,
+  category: p.category,
+  impact: p.stats[0] ? `${p.stats[0].value} ${p.stats[0].label}` : '',
+  imageSrc: `/projects/${p.heroImage.filename}`,
+}))
 
 export default function Projects() {
   const mainRef = useRef<HTMLDivElement>(null)
@@ -33,12 +35,10 @@ export default function Projects() {
     const pin = pinRef.current
     if (!track || !pin) return
 
-    // Wait a frame so layout + images settle before measuring width
     const id = requestAnimationFrame(() => {
       const totalScroll = track.scrollWidth - window.innerWidth
       if (totalScroll <= 0) return
 
-      // Horizontal scroll — pin section and move track left
       gsap.to(track, {
         x: -totalScroll,
         ease: 'none',
@@ -53,7 +53,6 @@ export default function Projects() {
         },
       })
 
-      // Progress bar
       if (progressRef.current) {
         gsap.to(progressRef.current, {
           scaleX: 1,
@@ -68,7 +67,6 @@ export default function Projects() {
       }
     })
 
-    // Fade in hero text
     gsap.fromTo(
       '.projects-hero-text',
       { opacity: 0, y: 40 },
@@ -101,7 +99,6 @@ export default function Projects() {
 
       {/* Horizontal Scroll Section */}
       <div ref={pinRef} className="relative h-screen overflow-hidden z-10">
-        {/* Track — single row, no wrap, no overlap */}
         <div
           ref={trackRef}
           className="flex items-center h-full gap-8 pl-[8vw] pr-[20vw]"
@@ -121,7 +118,6 @@ export default function Projects() {
           ))}
         </div>
 
-        {/* Scroll progress bar */}
         <div className="absolute bottom-10 left-[8vw] right-[8vw] h-[2px] bg-white/10 z-30 rounded-full overflow-hidden">
           <div
             ref={progressRef}
@@ -130,7 +126,6 @@ export default function Projects() {
           />
         </div>
 
-        {/* Scroll hint */}
         <div className="absolute bottom-16 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2 opacity-40">
           <span className="text-[10px] font-mono tracking-[0.3em] uppercase text-white">Scroll</span>
           <div className="w-[1px] h-6 bg-white/30 overflow-hidden relative">
@@ -139,7 +134,6 @@ export default function Projects() {
         </div>
       </div>
 
-      {/* Spacer for scroll distance */}
       <div className="h-[10vh] relative z-10" />
 
       <div className="relative z-10">

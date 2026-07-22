@@ -1,0 +1,50 @@
+{
+  "slug": "beach-cleanups",
+  "title": "Beach Cleanups",
+  "category": "Environment",
+  "shortDescription": "Grassroots youth action to restore Dar-es-Salaam's coastlines through organized waste collection and marine stewardship.",
+  "storyParagraphs": [
+    "Rapid urban growth along Dar-es-Salaam's coastline — Coco Beach, Msasani, and surrounding areas — has led to severe plastic accumulation, endangering marine wildlife and degrading public coastal spaces. Driven by the urgent need for localized environmental stewardship, Legions Tz stepped in to address marine pollution directly through grassroots youth action.",
+    "Planning began with site reconnaissance to identify heavily polluted coastal sections and coordinate permissions with municipal beach governance committees. Digital recruitment campaigns rallied youth volunteers and secured micro-sponsorships for equipment.",
+    "The team established an organized waste-sorting strategy on site, separating collection streams into recyclable plastics, glass, and non-recyclable waste, and partnered with local waste management collectors to ensure proper post-pickup recycling."
+  ],
+  "timeframe": {
+    "startDate": "2023-06-01",
+    "endDate": null,
+    "displayLabel": "Ongoing Since 2023",
+    "status": "ongoing"
+  },
+  "stats": [
+    { "label": "Waste Collected", "value": "1.5+ Tons" },
+    { "label": "Volunteers Mobilized", "value": "150+" },
+    { "label": "Cleanup Days", "value": "12+" }
+  ],
+  "heroImage": {
+    "id": "beach-hero",
+    "filename": "beach-cleanups/IMG_8270.jpg",
+    "alt": "Volunteers collecting plastic waste along Dar-es-Salaam coastline during a beach cleanup event",
+    "width": 4032,
+    "height": 3024,
+    "orientation": "landscape"
+  },
+  "groups": [
+    {
+      "groupId": "gallery",
+      "label": null,
+      "images": [
+        { "id": "beach-001", "filename": "beach-cleanups/IMG_8270.jpg", "alt": "Volunteers collecting plastic waste along Dar-es-Salaam coastline during a beach cleanup event", "width": 4032, "height": 3024, "orientation": "landscape" },
+        { "id": "beach-002", "filename": "beach-cleanups/IMG_8199.jpg", "alt": "Team sorting collected recyclable plastics and glass on the beach", "width": 4032, "height": 3024, "orientation": "landscape" },
+        { "id": "beach-003", "filename": "beach-cleanups/IMG_8200.jpg", "alt": "Volunteers using trash pickers to collect micro-debris from the shoreline", "width": 4032, "height": 3024, "orientation": "landscape" },
+        { "id": "beach-004", "filename": "beach-cleanups/IMG_8201.jpg", "alt": "Group of youth volunteers posing with bags of collected waste", "width": 4032, "height": 3024, "orientation": "landscape" },
+        { "id": "beach-005", "filename": "beach-cleanups/screenshot-1.png", "alt": "Before and after comparison of cleaned coastal section", "width": 1080, "height": 1080, "orientation": "square" },
+        { "id": "beach-006", "filename": "beach-cleanups/screenshot-2.png", "alt": "Social media post documenting the cleanup impact and volunteer count", "width": 1080, "height": 1080, "orientation": "square" }
+      ]
+    }
+  ],
+  "testimonial": {
+    "quote": "Seeing the beach transform from a plastic-covered shore to a clean public space was the most tangible proof that youth action works.",
+    "name": "Beach Cleanup Volunteer",
+    "role": "Legions Tz Member"
+  },
+  "relatedSlugs": ["tree-planting", "ramadhan-project"]
+}

@@ -1,0 +1,51 @@
+{
+  "slug": "tree-planting",
+  "title": "Tree Planting — Project MYK",
+  "category": "Environment",
+  "shortDescription": "Combating urban heat and deforestation by planting resilient native trees across public schools and community grounds.",
+  "storyParagraphs": [
+    "Urban heat island effects and rapid deforestation in Dar-es-Salaam leave many public schools and community spaces barren, exposed to extreme heat, and lacking natural shade. As part of their Maboresho Ya Kijani (Green Improvements) initiative, Legions Tz sought to combat local climate vulnerability, improve air quality, and create vibrant, eco-friendly learning environments for students.",
+    "The team surveyed public school grounds and urban sites that lacked green cover, then partnered with horticultural nurseries and environmental organizations like Humanitrees to select resilient native shade trees and fruit saplings suitable for the local soil and climate.",
+    "To ensure long-term sustainability, Legions Tz established tree-guardianship agreements with school student committees, assigning specific responsibilities for daily watering and maintenance — resulting in a 90%+ survival rate across all planted saplings."
+  ],
+  "timeframe": {
+    "startDate": "2024-01-01",
+    "endDate": null,
+    "displayLabel": "Ongoing Since 2024",
+    "status": "ongoing"
+  },
+  "stats": [
+    { "label": "Trees Planted", "value": "500+" },
+    { "label": "Survival Rate", "value": "90%+" },
+    { "label": "Students Benefiting", "value": "Hundreds" }
+  ],
+  "heroImage": {
+    "id": "tree-hero",
+    "filename": "tree-planting/IMG_8271.jpg",
+    "alt": "Volunteers planting indigenous shade tree saplings at a public school in Dar-es-Salaam",
+    "width": 4032,
+    "height": 3024,
+    "orientation": "landscape"
+  },
+  "groups": [
+    {
+      "groupId": "gallery",
+      "label": null,
+      "images": [
+        { "id": "tree-001", "filename": "tree-planting/IMG_8271.jpg", "alt": "Volunteers planting indigenous shade tree saplings at a public school in Dar-es-Salaam", "width": 4032, "height": 3024, "orientation": "landscape" },
+        { "id": "tree-002", "filename": "tree-planting/IMG_8272.jpg", "alt": "Student committee members learning about tree care and guardianship", "width": 4032, "height": 3024, "orientation": "landscape" },
+        { "id": "tree-003", "filename": "tree-planting/IMG_8273.jpg", "alt": "Preparing soil and digging holes for fruit sapling planting", "width": 4032, "height": 3024, "orientation": "landscape" },
+        { "id": "tree-004", "filename": "tree-planting/IMG_8274.jpg", "alt": "Volunteers watering newly planted saplings with organic fertilizer", "width": 4032, "height": 3024, "orientation": "landscape" },
+        { "id": "tree-005", "filename": "tree-planting/IMG_8285.jpg", "alt": "Row of planted shade trees along a school corridor", "width": 4032, "height": 3024, "orientation": "landscape" },
+        { "id": "tree-006", "filename": "tree-planting/IMG_8286.jpg", "alt": "Students standing next to their assigned tree-guardianship saplings", "width": 3024, "height": 4032, "orientation": "portrait" },
+        { "id": "tree-007", "filename": "tree-planting/IMG_8287.jpg", "alt": "Completed planting site with mulched saplings and guardian signs", "width": 4032, "height": 3024, "orientation": "landscape" }
+      ]
+    }
+  ],
+  "testimonial": {
+    "quote": "The students take genuine pride in their trees. It's taught them that environmental stewardship starts in their own schoolyard.",
+    "name": "School Administrator",
+    "role": "Partner Public School, Dar-es-Salaam"
+  },
+  "relatedSlugs": ["beach-cleanups", "amsen-visits"]
+}
