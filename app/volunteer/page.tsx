@@ -8,9 +8,8 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import SectionHeader from '../components/SectionHeader'
 import Button from '../components/Button'
-import AnimatedBackground from '../components/AnimatedBackground'
+import SubpageCanvas from '../components/SubpageCanvas'
 import GrainOverlay from '../components/GrainOverlay'
-import FloatingParticles from '../components/FloatingParticles'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -18,41 +17,21 @@ export default function Volunteer() {
   const mainRef = useRef<HTMLDivElement>(null)
 
   useGSAP(() => {
-    // Why Legions cards animation
     const whyCards = document.querySelectorAll('.why-card')
     gsap.fromTo(whyCards,
       { opacity: 0, y: 40, scale: 0.95 },
       {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 0.7,
-        stagger: 0.12,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: whyCards[0],
-          start: 'top 85%',
-          once: true
-        }
+        opacity: 1, y: 0, scale: 1, duration: 0.7, stagger: 0.12, ease: 'power3.out',
+        scrollTrigger: { trigger: whyCards[0], start: 'top 85%', once: true }
       }
     )
 
-    // Form reveal animation
     const formPanel = document.querySelector('.form-panel')
     if (formPanel) {
       gsap.fromTo(formPanel,
         { opacity: 0, y: 60, scale: 0.95 },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 0.8,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: formPanel,
-            start: 'top 85%',
-            once: true
-          }
+        { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: 'power3.out',
+          scrollTrigger: { trigger: formPanel, start: 'top 85%', once: true }
         }
       )
     }
@@ -60,15 +39,14 @@ export default function Volunteer() {
 
   return (
     <main ref={mainRef} className="min-h-screen bg-[var(--color-bg-deep)]">
+      <SubpageCanvas />
       <Navbar />
-      
+
       {/* Hero */}
       <section className="pt-40 pb-20 relative overflow-hidden">
-        <AnimatedBackground variant="hero" />
-        <GrainOverlay opacity={0.08} />
-        <FloatingParticles count={20} />
-        <div className="container mx-auto px-[var(--spacing-section-x)] relative z-20 text-center">
-          <SectionHeader 
+        <GrainOverlay opacity={0.06} />
+        <div className="container mx-auto px-[var(--spacing-section-x)] relative z-10 text-center">
+          <SectionHeader
             eyebrow="Join Us"
             title="Show Up. Do the Work."
             subtitle="We don't need passive supporters. We need people willing to get their hands dirty to build a better community."
@@ -78,10 +56,9 @@ export default function Volunteer() {
       </section>
 
       {/* Why Volunteer */}
-      <section className="py-[var(--spacing-section-y)] bg-[var(--color-surface)] border-y border-[var(--color-border-subtle)] relative overflow-hidden">
-        <AnimatedBackground variant="subtle" />
+      <section className="py-[var(--spacing-section-y)] bg-[var(--color-surface)]/60 backdrop-blur-md border-y border-[var(--color-border-subtle)] relative z-10 overflow-hidden">
         <div className="container mx-auto px-[var(--spacing-section-x)] relative z-10">
-          <SectionHeader 
+          <SectionHeader
             eyebrow="The Standard"
             title="Why Legions?"
             align="left"
@@ -129,9 +106,8 @@ export default function Volunteer() {
       </section>
 
       {/* Form Section */}
-      <section className="py-[var(--spacing-section-y)] container mx-auto px-[var(--spacing-section-x)] relative">
-        <AnimatedBackground variant="subtle" />
-        <div className="max-w-3xl mx-auto glass-panel p-8 md:p-12 relative z-10 form-panel">
+      <section className="py-[var(--spacing-section-y)] container mx-auto px-[var(--spacing-section-x)] relative z-10">
+        <div className="max-w-3xl mx-auto glass-panel p-8 md:p-12 form-panel">
           <h2 className="text-3xl font-semibold text-white mb-8 text-center">Apply to Volunteer</h2>
           <form className="flex flex-col gap-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

@@ -8,9 +8,8 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import SectionHeader from '../components/SectionHeader'
 import Button from '../components/Button'
-import AnimatedBackground from '../components/AnimatedBackground'
+import SubpageCanvas from '../components/SubpageCanvas'
 import GrainOverlay from '../components/GrainOverlay'
-import FloatingParticles from '../components/FloatingParticles'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -18,58 +17,28 @@ export default function Partner() {
   const mainRef = useRef<HTMLDivElement>(null)
 
   useGSAP(() => {
-    // Partner cards animation
     const partnerCards = document.querySelectorAll('.partner-card')
     gsap.fromTo(partnerCards,
       { opacity: 0, y: 40, scale: 0.95 },
-      {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 0.7,
-        stagger: 0.15,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: partnerCards[0],
-          start: 'top 85%',
-          once: true
-        }
+      { opacity: 1, y: 0, scale: 1, duration: 0.7, stagger: 0.15, ease: 'power3.out',
+        scrollTrigger: { trigger: partnerCards[0], start: 'top 85%', once: true }
       }
     )
 
-    // Benefits list animation
     const benefits = document.querySelectorAll('.benefit-item')
     gsap.fromTo(benefits,
       { opacity: 0, x: -30 },
-      {
-        opacity: 1,
-        x: 0,
-        duration: 0.6,
-        stagger: 0.1,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: benefits[0],
-          start: 'top 85%',
-          once: true
-        }
+      { opacity: 1, x: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out',
+        scrollTrigger: { trigger: benefits[0], start: 'top 85%', once: true }
       }
     )
 
-    // Form panel animation
     const formPanel = document.querySelector('.partner-form')
     if (formPanel) {
       gsap.fromTo(formPanel,
         { opacity: 0, x: 40 },
-        {
-          opacity: 1,
-          x: 0,
-          duration: 0.8,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: formPanel,
-            start: 'top 85%',
-            once: true
-          }
+        { opacity: 1, x: 0, duration: 0.8, ease: 'power3.out',
+          scrollTrigger: { trigger: formPanel, start: 'top 85%', once: true }
         }
       )
     }
@@ -77,15 +46,14 @@ export default function Partner() {
 
   return (
     <main ref={mainRef} className="min-h-screen bg-[var(--color-bg-deep)]">
+      <SubpageCanvas />
       <Navbar />
-      
+
       {/* Hero */}
       <section className="pt-40 pb-20 relative overflow-hidden">
-        <AnimatedBackground variant="hero" />
-        <GrainOverlay opacity={0.08} />
-        <FloatingParticles count={18} />
-        <div className="container mx-auto px-[var(--spacing-section-x)] relative z-20 text-center">
-          <SectionHeader 
+        <GrainOverlay opacity={0.06} />
+        <div className="container mx-auto px-[var(--spacing-section-x)] relative z-10 text-center">
+          <SectionHeader
             eyebrow="Corporate & Institutional"
             title="Invest in Real Change."
             subtitle="Partner with the most effective youth-led organization in Dar es Salaam to fulfill your CSR objectives with total transparency."
@@ -95,8 +63,7 @@ export default function Partner() {
       </section>
 
       {/* Ways to Partner */}
-      <section className="py-[var(--spacing-section-y)] bg-[var(--color-surface)] border-y border-[var(--color-border-subtle)] relative overflow-hidden">
-        <AnimatedBackground variant="subtle" />
+      <section className="py-[var(--spacing-section-y)] bg-[var(--color-surface)]/60 backdrop-blur-md border-y border-[var(--color-border-subtle)] relative z-10 overflow-hidden">
         <div className="container mx-auto px-[var(--spacing-section-x)] relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="glass-panel p-8 text-center flex flex-col items-center partner-card cursor-default">
@@ -125,11 +92,10 @@ export default function Partner() {
       </section>
 
       {/* Contact Form */}
-      <section className="py-[var(--spacing-section-y)] container mx-auto px-[var(--spacing-section-x)] relative">
-        <AnimatedBackground variant="subtle" />
-        <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 relative z-10">
+      <section className="py-[var(--spacing-section-y)] container mx-auto px-[var(--spacing-section-x)] relative z-10">
+        <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
           <div>
-            <SectionHeader 
+            <SectionHeader
               title="Let's build something together."
               align="left"
               className="mb-8"
