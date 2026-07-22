@@ -212,3 +212,31 @@ body {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* Project Image Belt — infinite horizontal scroll strips */
+@keyframes belt-scroll-left {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes belt-scroll-right {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes belt-scroll-left-slow {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.belt-scroll-left {
+  animation: belt-scroll-left 90s linear infinite;
+}
+
+.belt-scroll-right {
+  animation: belt-scroll-right 110s linear infinite;
+}
+
+.belt-scroll-left-slow {
+  animation: belt-scroll-left-slow 70s linear infinite;
+}
