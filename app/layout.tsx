@@ -1,12 +1,12 @@
 import type { Metadata } from 'next'
-import { Space_Grotesk, Geist_Mono } from 'next/font/google'
+import { Outfit, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import SmoothScrollProvider from './components/SmoothScrollProvider'
 
-const spaceGrotesk = Space_Grotesk({ 
+const outfit = Outfit({ 
   variable: '--font-sans', 
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'] 
+  weight: ['200', '300', '400', '500', '600', '700', '800', '900'] 
 })
 const geistMono = Geist_Mono({ variable: '--font-mono', subsets: ['latin'] })
 
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${spaceGrotesk.variable} ${geistMono.variable}`}>
+    <html lang="en" className={`${outfit.variable} ${geistMono.variable}`}>
       <body className="antialiased">
         <SmoothScrollProvider>
           {children}

@@ -21,8 +21,8 @@ export default function Home() {
       <Marquee items={[
         '5 CORE INITIATIVES',
         'TSH 12M+ RAISED',
-        '25,000+ TREES PLANTED',
-        '100+ STUDENT VOLUNTEERS'
+        '500+ TREES PLANTED',
+        '150+ STUDENT VOLUNTEERS'
       ]} />
 
       {/* 3. The Mission / Story (Asymmetric 2-column) */}
@@ -62,9 +62,9 @@ export default function Home() {
         <div className="container mx-auto px-[var(--spacing-section-x)] relative z-10">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 md:gap-8">
             <ImpactCounter end={12} prefix="TZS " suffix="M+" label="Funds Raised" />
-            <ImpactCounter end={25000} suffix="+" label="Trees Planted" />
+            <ImpactCounter end={500} suffix="+" label="Trees Planted" />
             <ImpactCounter end={5} label="Major Initiatives" />
-            <ImpactCounter end={100} suffix="+" label="Active Volunteers" />
+            <ImpactCounter end={150} suffix="+" label="Active Volunteers" />
           </div>
         </div>
       </section>
@@ -85,35 +85,35 @@ export default function Home() {
             slug="tree-planting"
             title="Tree Planting"
             category="Environment"
-            impact="25k+ Trees"
+            impact="500+ Trees"
             imageSrc="/projects/tree-planting/IMG_8271.jpg"
           />
           <ProjectCard 
             slug="ujasiri-house"
             title="Ujasiri House Renovation"
             category="Health"
-            impact="TZS 2M+ Raised"
+            impact="30+ Families Daily"
             imageSrc="/projects/ujasiri-house/IMG_8290.jpg"
           />
           <ProjectCard 
             slug="beach-cleanups"
             title="Beach Cleanups"
             category="Environment"
-            impact="500 kg+ Plastics"
+            impact="1.5+ Tons Collected"
             imageSrc="/projects/beach-cleanups/IMG_8270.jpg"
           />
           <ProjectCard 
             slug="ramadhan-project"
             title="Ramadhan Project"
             category="Community"
-            impact="500+ Meals"
+            impact="1,200+ Reached"
             imageSrc="/projects/ramadhan-project/IMG_8248.jpg"
           />
           <ProjectCard 
             slug="amsen-visits"
             title="AMSEN Visits"
             category="Special Needs"
-            impact="10+ Visits"
+            impact="40+ Students"
             imageSrc="/projects/amsen-visits/IMG_8275.jpg"
           />
         </div>

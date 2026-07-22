@@ -27,21 +27,26 @@ export default function InteractiveHero() {
     })
 
     // Text reveal sequence
-    const tl = gsap.timeline({ defaults: { ease: 'power4.out', duration: 1.2 } })
+    const tl = gsap.timeline({ defaults: { ease: 'power4.out', duration: 1.4 } })
     
-    tl.fromTo('.hero-text-mask > *', 
-      { y: 150, rotate: 5, opacity: 0 },
-      { y: 0, rotate: 0, opacity: 1, stagger: 0.15, delay: 0.2 }
-    )
-    .fromTo('.hero-badge', 
+    tl.fromTo('.hero-badge', 
       { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.8, delay: 0.3 }
+    )
+    .fromTo('.hero-title-main', 
+      { y: 120, opacity: 0, scale: 0.9 },
+      { y: 0, opacity: 1, scale: 1, duration: 1.6, ease: 'power4.out' },
+      '-=0.5'
+    )
+    .fromTo('.hero-subtitle',
+      { opacity: 0, y: 30 },
       { opacity: 1, y: 0, duration: 0.8 },
-      '-=1.0'
+      '-=0.8'
     )
     .fromTo('.hero-button',
       { opacity: 0, y: 30 },
       { opacity: 1, y: 0, duration: 0.8 },
-      '-=0.8'
+      '-=0.5'
     )
   }, { scope: containerRef })
 
@@ -117,13 +122,12 @@ export default function InteractiveHero() {
           <span className="text-[var(--color-cyan)] text-xs font-mono font-bold tracking-widest uppercase">Est. 2022 • Dar es Salaam</span>
         </div>
 
-        <h1 className="text-[var(--font-size-display)] font-bold text-white leading-[var(--line-height-display)] tracking-tight text-balance max-w-5xl">
-          <span className="text-mask"><span className="pb-2">YOUTH-LED ACTION.</span></span>
-          <span className="text-mask"><span className="pb-2 text-gradient-cyan">REAL COMMUNITY CHANGE.</span></span>
+        <h1 className="hero-title-main text-white leading-[0.85] tracking-tighter text-balance font-black" style={{ fontSize: 'clamp(6rem, 20vw, 18rem)' }}>
+          LEGIONS
         </h1>
         
-        <p className="hero-text-mask mt-6 text-[var(--font-size-body-large)] text-white/80 max-w-2xl font-light leading-relaxed">
-          <span>We don't just talk about tomorrow. We build it today. Join the new standard for student-led impact in Tanzania.</span>
+        <p className="hero-subtitle mt-8 text-[var(--font-size-body-large)] text-white/70 max-w-xl font-light leading-relaxed tracking-wide">
+          Youth-led action. Real community change. The new standard for student-led impact in Tanzania.
         </p>
 
         <div className="hero-button mt-12 flex flex-col sm:flex-row gap-4 items-center">

@@ -9,35 +9,35 @@ export default function Projects() {
       slug: 'amsen-visits',
       title: 'AMSEN Visits',
       category: 'Community & Special Needs',
-      impact: '10+ Visits Conducted',
+      impact: '40+ Students Engaged',
       imageSrc: '/projects/amsen-visits/IMG_8275.jpg'
     },
     {
       slug: 'beach-cleanups',
       title: 'Beach Cleanups',
       category: 'Environment',
-      impact: '500 kg+ Waste Removed',
+      impact: '1.5+ Tons Collected',
       imageSrc: '/projects/beach-cleanups/IMG_8270.jpg'
     },
     {
       slug: 'ramadhan-project',
       title: 'Ramadhan Project',
       category: 'Community & Food Relief',
-      impact: '500+ Meals Served',
+      impact: '1,200+ Individuals Reached',
       imageSrc: '/projects/ramadhan-project/IMG_8248.jpg'
     },
     {
       slug: 'tree-planting',
-      title: 'Tree Planting',
+      title: 'Tree Planting — Project MYK',
       category: 'Environment',
-      impact: '25,000+ Trees Planted',
+      impact: '500+ Trees Planted',
       imageSrc: '/projects/tree-planting/IMG_8271.jpg'
     },
     {
       slug: 'ujasiri-house',
       title: 'Ujasiri House Renovation',
       category: 'Health & Infrastructure',
-      impact: 'TZS 2M+ Raised',
+      impact: '30+ Families Hosted Daily',
       imageSrc: '/projects/ujasiri-house/IMG_8290.jpg'
     }
   ]
