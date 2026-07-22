@@ -38,10 +38,11 @@ export default function Footer() {
           <div className="md:col-span-2">
             <h4 className="text-white font-semibold mb-6 tracking-wide">Projects</h4>
             <ul className="flex flex-col gap-4">
-              <li><Link href="/projects/tree-planting" className="text-[var(--color-text-secondary)] hover:text-[var(--color-cyan)] transition-colors">MYK Tree Planting</Link></li>
+              <li><Link href="/projects/amsen-visits" className="text-[var(--color-text-secondary)] hover:text-[var(--color-cyan)] transition-colors">AMSEN Visits</Link></li>
+              <li><Link href="/projects/beach-cleanups" className="text-[var(--color-text-secondary)] hover:text-[var(--color-cyan)] transition-colors">Beach Cleanups</Link></li>
+              <li><Link href="/projects/ramadhan-project" className="text-[var(--color-text-secondary)] hover:text-[var(--color-cyan)] transition-colors">Ramadhan Project</Link></li>
+              <li><Link href="/projects/tree-planting" className="text-[var(--color-text-secondary)] hover:text-[var(--color-cyan)] transition-colors">Tree Planting</Link></li>
               <li><Link href="/projects/ujasiri-house" className="text-[var(--color-text-secondary)] hover:text-[var(--color-cyan)] transition-colors">Ujasiri House</Link></li>
-              <li><Link href="/projects/pwani-well" className="text-[var(--color-text-secondary)] hover:text-[var(--color-cyan)] transition-colors">Pwani Well</Link></li>
-              <li><Link href="/projects/ramadan-iftar" className="text-[var(--color-text-secondary)] hover:text-[var(--color-cyan)] transition-colors">Ramadan Iftar</Link></li>
             </ul>
           </div>
 

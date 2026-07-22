@@ -6,34 +6,39 @@ import ProjectCard from '../components/ProjectCard'
 export default function Projects() {
   const projects = [
     {
-      slug: 'tree-planting',
-      title: 'MYK Tree Planting',
+      slug: 'amsen-visits',
+      title: 'AMSEN Visits',
+      category: 'Community & Special Needs',
+      impact: '10+ Visits Conducted',
+      imageSrc: '/projects/amsen-visits/IMG_8275.jpg'
+    },
+    {
+      slug: 'beach-cleanups',
+      title: 'Beach Cleanups',
       category: 'Environment',
-      impact: '25,000+ Trees'
+      impact: '500 kg+ Waste Removed',
+      imageSrc: '/projects/beach-cleanups/IMG_8270.jpg'
+    },
+    {
+      slug: 'ramadhan-project',
+      title: 'Ramadhan Project',
+      category: 'Community & Food Relief',
+      impact: '500+ Meals Served',
+      imageSrc: '/projects/ramadhan-project/IMG_8248.jpg'
+    },
+    {
+      slug: 'tree-planting',
+      title: 'Tree Planting',
+      category: 'Environment',
+      impact: '25,000+ Trees Planted',
+      imageSrc: '/projects/tree-planting/IMG_8271.jpg'
     },
     {
       slug: 'ujasiri-house',
-      title: 'Ujasiri House',
-      category: 'Health',
-      impact: 'TZS 2M Raised'
-    },
-    {
-      slug: 'pwani-well',
-      title: 'Pwani Well',
-      category: 'Infrastructure',
-      impact: 'Clean Water'
-    },
-    {
-      slug: 'ramadan-iftar',
-      title: 'Ramadan Iftar',
-      category: 'Community',
-      impact: '500+ Meals'
-    },
-    {
-      slug: 'ration-packages',
-      title: 'Ration Packages',
-      category: 'Relief',
-      impact: 'Monthly Support'
+      title: 'Ujasiri House Renovation',
+      category: 'Health & Infrastructure',
+      impact: 'TZS 2M+ Raised',
+      imageSrc: '/projects/ujasiri-house/IMG_8290.jpg'
     }
   ]
 
@@ -44,7 +49,8 @@ export default function Projects() {
       <section className="pt-40 pb-20 relative">
         <div className="container mx-auto px-[var(--spacing-section-x)] relative z-10">
           <SectionHeader 
-            title="Our Projects."
+            eyebrow="Our Work"
+            title="Projects That Matter."
             subtitle="Explore the initiatives where Legions has directed funding, sweat, and community power."
             className="mb-16"
           />
@@ -57,7 +63,7 @@ export default function Projects() {
                 title={project.title}
                 category={project.category}
                 impact={project.impact}
-                imageSrc="/hero-attached.jpg"
+                imageSrc={project.imageSrc}
               />
             ))}
           </div>

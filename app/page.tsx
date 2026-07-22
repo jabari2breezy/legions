@@ -19,7 +19,7 @@ export default function Home() {
       
       {/* 2. Trust Marquee */}
       <Marquee items={[
-        '7 PROJECTS COMPLETED',
+        '5 CORE INITIATIVES',
         'TSH 12M+ RAISED',
         '25,000+ TREES PLANTED',
         '100+ STUDENT VOLUNTEERS'
@@ -38,18 +38,18 @@ export default function Home() {
               What started in 2022 as a small group of high school students has evolved into one of Dar es Salaam's most active youth-led service organizations. We saw a gap between wanting to help and actually doing the work—so we bridged it.
             </p>
             <p className="mt-4 text-[var(--font-size-body-large)] text-[var(--color-text-secondary)] leading-relaxed max-w-lg mb-8">
-              From building wells in Pwani to funding pediatric heart surgeries, our mandate is simple: direct action, zero bureaucracy, total transparency.
+              From renovating cancer patient housing at Ujasiri House to coastal beach cleanups and tree planting, our mandate is simple: direct action, zero bureaucracy, total transparency.
             </p>
             <Button href="/about" variant="secondary">Read Our History</Button>
           </div>
           <div className="lg:col-span-7 relative">
-            <div className="aspect-square md:aspect-[4/3] rounded-3xl overflow-hidden relative glass-panel p-2">
-              <div className="absolute inset-0 rounded-3xl overflow-hidden bg-[var(--color-bg-deep)]">
-                {/* Fallback pattern if no image */}
-                <div className="w-full h-full opacity-20 bg-[radial-gradient(circle_at_center,var(--color-cyan)_1px,transparent_1px)] bg-[size:24px_24px]"></div>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-[var(--color-cyan)] font-mono tracking-widest text-sm">[Field Operation Photo]</span>
-                </div>
+            <div className="aspect-[4/3] rounded-3xl overflow-hidden relative glass-panel p-2">
+              <div className="absolute inset-0 rounded-3xl overflow-hidden">
+                <img 
+                  src="/projects/ujasiri-house/IMG_8290.jpg"
+                  alt="Legions Team at Work"
+                  className="w-full h-full object-cover filter contrast-110"
+                />
               </div>
             </div>
           </div>
@@ -63,7 +63,7 @@ export default function Home() {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 md:gap-8">
             <ImpactCounter end={12} prefix="TZS " suffix="M+" label="Funds Raised" />
             <ImpactCounter end={25000} suffix="+" label="Trees Planted" />
-            <ImpactCounter end={7} label="Major Projects" />
+            <ImpactCounter end={5} label="Major Initiatives" />
             <ImpactCounter end={100} suffix="+" label="Active Volunteers" />
           </div>
         </div>
@@ -74,7 +74,7 @@ export default function Home() {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
           <SectionHeader 
             eyebrow="Our Work"
-            title="Projects That Matter."
+            title="Active Initiatives."
             align="left"
           />
           <Button href="/projects" variant="secondary">View All Projects</Button>
@@ -83,24 +83,38 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           <ProjectCard 
             slug="tree-planting"
-            title="MYK Tree Planting"
+            title="Tree Planting"
             category="Environment"
             impact="25k+ Trees"
-            imageSrc="/hero-attached.jpg"
+            imageSrc="/projects/tree-planting/IMG_8271.jpg"
           />
           <ProjectCard 
             slug="ujasiri-house"
-            title="Ujasiri House"
+            title="Ujasiri House Renovation"
             category="Health"
-            impact="TZS 2M Raised"
-            imageSrc="/hero-attached.jpg"
+            impact="TZS 2M+ Raised"
+            imageSrc="/projects/ujasiri-house/IMG_8290.jpg"
           />
           <ProjectCard 
-            slug="pwani-well"
-            title="Pwani Well"
-            category="Infrastructure"
-            impact="Clean Water Access"
-            imageSrc="/hero-attached.jpg"
+            slug="beach-cleanups"
+            title="Beach Cleanups"
+            category="Environment"
+            impact="500 kg+ Plastics"
+            imageSrc="/projects/beach-cleanups/IMG_8270.jpg"
+          />
+          <ProjectCard 
+            slug="ramadhan-project"
+            title="Ramadhan Project"
+            category="Community"
+            impact="500+ Meals"
+            imageSrc="/projects/ramadhan-project/IMG_8248.jpg"
+          />
+          <ProjectCard 
+            slug="amsen-visits"
+            title="AMSEN Visits"
+            category="Special Needs"
+            impact="10+ Visits"
+            imageSrc="/projects/amsen-visits/IMG_8275.jpg"
           />
         </div>
       </section>
@@ -150,21 +164,21 @@ export default function Home() {
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           <TestimonialCard 
-            quote="Legions stepped in when we needed them most. The dedication these students showed in rebuilding the pediatric ward was nothing short of inspiring."
-            author="Dr. Amina"
-            role="Muhimbili National Hospital"
+            quote="Legions stepped in when we needed them most. The dedication these students showed in renovating Ujasiri House was nothing short of inspiring."
+            author="Staff Representative"
+            role="Ujasiri House / Muhimbili"
             delay={0}
           />
           <TestimonialCard 
-            quote="Seeing the youth take charge of our environment gives me hope. The MYK initiative changed the landscape of our school completely."
-            author="Mr. Mussa"
-            role="Local Headmaster"
+            quote="Seeing the youth take charge of our environment gives me hope. The tree planting initiative changed our school environment completely."
+            author="School Headmaster"
+            role="Dar es Salaam Partner School"
             delay={0.2}
           />
           <TestimonialCard 
             quote="I joined to get service hours, but I stayed because of the family. Legions taught me that my age doesn't limit my ability to help."
-            author="Sarah"
-            role="Student Volunteer"
+            author="Student Volunteer"
+            role="Legions Member"
             delay={0.4}
           />
         </div>
