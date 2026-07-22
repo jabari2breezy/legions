@@ -1,12 +1,12 @@
 import type { Metadata } from 'next'
 import { Outfit, Geist_Mono } from 'next/font/google'
 import './globals.css'
-import SmoothScrollProvider from './components/SmoothScrollProvider'
+import Providers from './components/Providers'
 
-const outfit = Outfit({ 
-  variable: '--font-sans', 
+const outfit = Outfit({
+  variable: '--font-sans',
   subsets: ['latin'],
-  weight: ['200', '300', '400', '500', '600', '700', '800', '900'] 
+  weight: ['200', '300', '400', '500', '600', '700', '800', '900']
 })
 const geistMono = Geist_Mono({ variable: '--font-mono', subsets: ['latin'] })
 
@@ -19,9 +19,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${outfit.variable} ${geistMono.variable}`}>
       <body className="antialiased">
-        <SmoothScrollProvider>
+        <Providers>
           {children}
-        </SmoothScrollProvider>
+        </Providers>
       </body>
     </html>
   )
