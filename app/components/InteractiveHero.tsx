@@ -1,11 +1,13 @@
 'use client'
 
-import { useRef } from 'react'
+import { useRef, lazy, Suspense } from 'react'
 import Image from 'next/image'
 import { useGSAP } from '@gsap/react'
 import { gsap } from 'gsap'
 import Button from './Button'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+const GlassBlobBackground = lazy(() => import('./WebGL/GlassBlobBackground').then(m => ({ default: m.GlassBlobBackground })))
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -87,8 +89,12 @@ export default function InteractiveHero() {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      {/* Dynamic Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-bg-deep)] via-[#1a1966] to-[var(--color-cyan)]/20 z-0 mix-blend-multiply"></div>
+      {/* Liquid blob WebGL background */}
+      <Suspense fallback={
+        <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-bg-deep)] via-[#1a1966] to-[var(--color-cyan)]/20 z-0" />
+      }>
+        <GlassBlobBackground />
+      </Suspense>
       
       {/* 3D Glass/Chrome Image */}
       <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none transform-style-3d">

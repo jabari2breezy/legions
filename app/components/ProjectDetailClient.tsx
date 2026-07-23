@@ -9,11 +9,9 @@ import Button from './Button'
 import ProjectHero from './ProjectHero'
 import ProjectStats from './ProjectStats'
 import ProjectStory from './ProjectStory'
-import ProjectGallery from './ProjectGallery'
+import { RadialCarousel } from './RadialCarousel'
+import { CarouselSlider } from './CarouselSlider'
 import RelatedProjects from './RelatedProjects'
-import { GalleryScene } from './WebGL/GalleryScene'
-import { AssetPreloader } from './WebGL/AssetPreloader'
-import { useShouldUseWebGLGallery, GalleryFallback } from './WebGL/GalleryFallback'
 import type { Project } from '../../types/project'
 import dynamic from 'next/dynamic'
 
@@ -23,29 +21,10 @@ gsap.registerPlugin(ScrollTrigger)
 
 export default function ProjectDetailClient({ project }: { project: Project }) {
   const mainRef = useRef<HTMLDivElement>(null)
-  const { shouldUseWebGL, checked } = useShouldUseWebGLGallery()
 
   const allImages = useMemo(
     () => project.groups.flatMap((g) => g.images),
     [project.groups]
-  )
-
-  const webglImages = useMemo(
-    () =>
-      allImages.map((img, i) => ({
-        id: img.id,
-        url: `/projects/${img.filename}`,
-        x: (i % 3) * 340 + 40,
-        y: Math.floor(i / 3) * 280 + 200,
-        width: 320,
-        height: 240,
-      })),
-    [allImages]
-  )
-
-  const preloadUrls = useMemo(
-    () => allImages.slice(0, 6).map((img) => `/projects/${img.filename}`),
-    [allImages]
   )
 
   useGSAP(() => {
@@ -102,37 +81,33 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
       </section>
 
       {/* Gallery */}
-      <section className="pb-[var(--spacing-section-y)] container mx-auto px-[var(--spacing-section-x)] relative z-10">
+      <section className="pb-[var(--spacing-section-y)] relative z-10">
         <div className="max-w-6xl mx-auto">
-          {project.groups.some((g) => g.images.length > 0) && (
+          {allImages.length > 0 && (
             <div className="content-section">
               <SectionHeader
                 eyebrow="Field Documentation"
                 title="Project Gallery"
-                align="left"
-                className="mb-8"
+                align="center"
+                className="mb-8 px-[var(--spacing-section-x)]"
               />
 
-              {checked && shouldUseWebGL && allImages.length > 0 ? (
-                <AssetPreloader urls={preloadUrls}>
-                  <div className="relative" style={{ minHeight: `${Math.ceil(allImages.length / 3) * 280 + 200}px` }}>
-                    <GalleryScene images={webglImages} />
-                    <ProjectGallery groups={project.groups} />
-                  </div>
-                </AssetPreloader>
-              ) : checked ? (
-                <div>
-                  <GalleryFallback
-                    images={allImages.map((img) => ({
-                      id: img.id,
-                      url: `/projects/${img.filename}`,
-                      alt: img.alt,
-                    }))}
+              <div className="px-[var(--spacing-section-x)]">
+                {/* Mobile: CarouselSlider */}
+                <div className="md:hidden">
+                  <CarouselSlider slides={allImages} />
+                </div>
+
+                {/* Desktop: RadialCarousel */}
+                <div className="hidden md:block">
+                  <RadialCarousel
+                    items={allImages}
+                    radius={260}
+                    thumbnailSize={110}
+                    centerSize={400}
                   />
                 </div>
-              ) : (
-                <ProjectGallery groups={project.groups} />
-              )}
+              </div>
             </div>
           )}
         </div>
