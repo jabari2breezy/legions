@@ -25,7 +25,7 @@ export default function PartnerPage() {
 
       <Section>
         <div className="container" style={{ paddingBlock: "var(--space-section)" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(40px, 6vw, 96px)" }}>
+          <div className="split-2col" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(40px, 6vw, 96px)" }}>
             <div>
               <h2 className="t-h1" style={{ marginBottom: 24 }}>Why partner with Legions?</h2>
               <p className="t-body-lg" style={{ marginBottom: 16 }}>

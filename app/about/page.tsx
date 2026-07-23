@@ -51,7 +51,7 @@ function StorySection() {
   return (
     <Section>
       <div className="container" style={{ paddingBlock: "var(--space-section)" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(40px, 6vw, 96px)", alignItems: "start" }}>
+        <div className="about-grid-2col" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(40px, 6vw, 96px)", alignItems: "start" }}>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -96,7 +96,7 @@ function TenetsSection() {
           <p className="t-label" style={{ color: "var(--color-cyan)", marginBottom: 12 }}>Core Tenets</p>
           <h2 className="t-h1">What we stand on</h2>
         </div>
-        <div className="testimonials-columns" style={{ maxWidth: 1100 }}>
+        <div className="testimonials-columns tenets-columns" style={{ maxWidth: 1100 }}>
           {TENETS.map((t, i) => (
             <motion.div
               key={i}

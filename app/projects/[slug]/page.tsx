@@ -88,7 +88,7 @@ function ProjectStory({ project }: { project: Project }) {
   return (
     <Section dark>
       <div className="container" style={{ paddingBlock: "var(--space-section)" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr", gap: "clamp(40px, 6vw, 96px)", alignItems: "start" }}>
+        <div className="about-grid-2col" style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr", gap: "clamp(40px, 6vw, 96px)", alignItems: "start" }}>
           <div>
             <p className="t-label" style={{ color: "var(--color-cyan)", marginBottom: 12 }}>Story</p>
             <h2 className="t-h2">The full picture</h2>

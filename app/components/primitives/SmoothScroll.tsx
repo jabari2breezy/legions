@@ -7,6 +7,14 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
   const rafRef = useRef<number>(0);
 
   useEffect(() => {
+    const isMobile = window.matchMedia("(max-width: 768px)").matches ||
+      "ontouchstart" in window;
+
+    if (isMobile) {
+      document.documentElement.style.scrollBehavior = "smooth";
+      return;
+    }
+
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),

@@ -62,12 +62,14 @@ function ProjectsRail() {
   const railRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+    if (isMobile) return;
+
     const ctx = gsap.context(() => {
       const wrapper = wrapperRef.current;
       const rail = railRef.current;
       if (!wrapper || !rail) return;
 
-      // Calculate total scroll distance: rail width minus viewport width
       const totalScroll = rail.scrollWidth - window.innerWidth;
 
       gsap.to(rail, {
@@ -87,13 +89,15 @@ function ProjectsRail() {
     return () => ctx.revert();
   }, []);
 
+  const isMobile = false; // CSS handles the mobile layout via .projects-rail flex-direction
+
   return (
     <div
       ref={wrapperRef}
       className="projects-rail-wrapper section-dark"
       style={{ overflow: "hidden" }}
     >
-      <div style={{ height: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", overflow: "hidden" }}>
+      <div className="projects-rail-container">
         <div ref={railRef} className="projects-rail">
           {projectsIndex.map((p, i) => (
             <Link

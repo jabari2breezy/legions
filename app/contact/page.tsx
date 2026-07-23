@@ -27,7 +27,7 @@ export default function ContactPage() {
 
       <section className="section-dark">
         <div className="container" style={{ paddingBlock: "var(--space-section)" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(40px, 6vw, 96px)" }}>
+          <div className="contact-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(40px, 6vw, 96px)" }}>
             <div>
               <p className="t-body-lg" style={{ color: "var(--text-secondary-dark)", marginBottom: 32 }}>
                 Have a question, want to collaborate, or just want to say hi?
