@@ -98,7 +98,7 @@ function ProjectStory({ project }: { project: Project }) {
               <motion.p
                 key={i}
                 className="t-body-lg"
-                style={{ marginBottom: 16, color: "var(--text-secondary-dark)" }}
+                style={{ marginBottom: 16, color: "var(--text-secondary-dark)", maxWidth: "55ch" }}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: i * 0.08 }}
@@ -111,7 +111,7 @@ function ProjectStory({ project }: { project: Project }) {
         </div>
 
         {/* Stats row */}
-        <div style={{ display: "flex", gap: 40, marginTop: "var(--space-block)", borderTop: "1px solid var(--border-dark)", paddingTop: 32 }}>
+        <div className="pd-stats-row" style={{ display: "flex", gap: 40, marginTop: "var(--space-block)", borderTop: "1px solid var(--border-dark)", paddingTop: 32, flexWrap: "wrap" }}>
           {project.stats.map((s, i) => (
             <div key={i}>
               <p className="stat-value">{s.value}</p>

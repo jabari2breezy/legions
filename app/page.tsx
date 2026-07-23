@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useCallback } from "react";
+import { useRef, useCallback, useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "motion/react";
 import { Nav } from "@/app/components/layout/Nav";
@@ -154,7 +154,7 @@ const STATS = [
 
 function EditorialSection() {
   return (
-    <Section>
+    <Section className="liquid-metal">
       <motion.div
         className="editorial"
         initial={{ opacity: 0, y: 40 }}
@@ -197,34 +197,30 @@ function InitiativesSection() {
 }
 
 function InitiativeCard({ project, index }: { project: typeof projectsIndex[0]; index: number }) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: cardRef,
-    offset: ["start end", "center center"],
-  });
+  const [isMobile, setIsMobile] = useState(false);
 
-  const imgY = useTransform(scrollYProgress, [0, 1], [40, 0]);
-  const imgScale = useTransform(scrollYProgress, [0, 1], [1.08, 1]);
+  useEffect(() => {
+    setIsMobile(window.innerWidth <= 768);
+  }, []);
 
   return (
     <motion.div
-      ref={cardRef}
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: index * 0.08 }}
-      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.5, delay: index * 0.06 }}
+      viewport={{ once: true, margin: "-40px" }}
     >
       <Link
         href={`/projects/${project.slug}`}
         className="project-card"
-        onMouseEnter={() => cursorEnter("Explore")}
-        onMouseLeave={cursorLeave}
+        onMouseEnter={() => !isMobile && cursorEnter("Explore")}
+        onMouseLeave={() => !isMobile && cursorLeave()}
       >
         <div className="project-card-image">
-          <motion.img
+          <img
             src={`/projects/${project.heroImage.filename}`}
             alt={project.heroImage.alt}
-            style={{ y: imgY, scale: imgScale }}
+            loading={index > 1 ? "lazy" : "eager"}
           />
         </div>
         <div className="project-card-meta">
@@ -243,7 +239,7 @@ function InitiativeCard({ project, index }: { project: typeof projectsIndex[0]; 
 
 function ProcessSection() {
   return (
-    <Section>
+    <Section className="liquid-metal">
       <div className="container" style={{ paddingBlock: "var(--space-section)" }}>
         <div style={{ marginBottom: 48 }}>
           <p className="t-label" style={{ color: "var(--color-cyan)", marginBottom: 12 }}>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useLayoutEffect } from "react";
+import { useRef, useLayoutEffect, useState, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "motion/react";
 import gsap from "gsap";
@@ -55,14 +55,22 @@ function PageHero() {
 
 /* ========================================
    Pinned horizontal project rail (GSAP)
+   Desktop only — mobile shows vertical cards
    ======================================== */
 
 function ProjectsRail() {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const railRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(true);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth <= 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   useLayoutEffect(() => {
-    const isMobile = window.matchMedia("(max-width: 768px)").matches;
     if (isMobile) return;
 
     const ctx = gsap.context(() => {
@@ -87,9 +95,33 @@ function ProjectsRail() {
     }, wrapperRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [isMobile]);
 
-  const isMobile = false; // CSS handles the mobile layout via .projects-rail flex-direction
+  if (isMobile) {
+    return (
+      <div className="section-dark" style={{ paddingBlock: "var(--space-section)" }}>
+        <div className="container">
+          <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+            {projectsIndex.map((p, i) => (
+              <Link
+                key={p.slug}
+                href={`/projects/${p.slug}`}
+                className="project-card"
+              >
+                <div className="project-card-image" style={{ aspectRatio: "16/10" }}>
+                  <img src={`/projects/${p.heroImage.filename}`} alt={p.heroImage.alt} />
+                </div>
+                <div className="project-card-meta">
+                  <span className="project-card-num">({String(i + 1).padStart(2, "0")})</span>
+                  <span className="project-card-title">{p.title}</span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div

@@ -49,7 +49,7 @@ function PageHero() {
 
 function StorySection() {
   return (
-    <Section>
+    <Section className="liquid-metal">
       <div className="container" style={{ paddingBlock: "var(--space-section)" }}>
         <div className="about-grid-2col" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(40px, 6vw, 96px)", alignItems: "start" }}>
           <motion.div
