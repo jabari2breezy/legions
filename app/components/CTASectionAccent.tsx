@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'motion/react'
 
@@ -14,15 +13,6 @@ export default function CTASectionAccent() {
         viewport={{ once: true }}
         transition={{ type: 'spring', stiffness: 300, damping: 22 }}
       >
-        <Image
-          src="/hero-attached.jpg"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          style={{ objectFit: 'cover' }}
-        />
-        <div style={{ position: 'absolute', inset: 0, background: 'rgba(10, 10, 12, 0.55)', zIndex: 1 }} />
         <div className="cta-accent-content">
           <h2>Ready to serve?</h2>
           <div className="cta-accent-buttons">
