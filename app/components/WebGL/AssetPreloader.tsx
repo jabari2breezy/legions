@@ -55,7 +55,7 @@ export function AssetPreloader({ urls, children }: { urls: string[]; children: R
               position: "fixed",
               inset: 0,
               zIndex: 10000,
-              background: "#15144d",
+              background: "var(--color-bg-deep)",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
@@ -67,7 +67,7 @@ export function AssetPreloader({ urls, children }: { urls: string[]; children: R
                 fontVariantNumeric: "tabular-nums",
                 fontSize: "clamp(2rem, 6vw, 4rem)",
                 fontWeight: 600,
-                color: "#F0F4F8",
+                color: "var(--color-text-primary)",
                 letterSpacing: "-0.02em",
               }}
             >
@@ -77,7 +77,7 @@ export function AssetPreloader({ urls, children }: { urls: string[]; children: R
               style={{
                 width: 160,
                 height: 1,
-                background: "rgba(255,255,255,0.1)",
+                background: "var(--color-border-subtle)",
                 marginTop: 24,
                 position: "relative",
                 overflow: "hidden",
@@ -86,7 +86,7 @@ export function AssetPreloader({ urls, children }: { urls: string[]; children: R
               <motion.div
                 animate={{ width: `${progress}%` }}
                 transition={{ ease: [0.16, 1, 0.3, 1], duration: 0.4 }}
-                style={{ position: "absolute", inset: 0, background: "#F0F4F8" }}
+                style={{ position: "absolute", inset: 0, background: "var(--color-text-primary)" }}
               />
             </div>
           </motion.div>

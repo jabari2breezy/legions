@@ -54,14 +54,14 @@ export function GalleryFallback({ images }: { images: { id: string; url: string;
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.5, delay: (i % 6) * 0.05 }}
-          style={{ position: "relative", aspectRatio: "4/3", overflow: "hidden", borderRadius: "0.5rem" }}
+          style={{ position: "relative", aspectRatio: "4/3", overflow: "hidden", borderRadius: "var(--radius-sm)" }}
         >
           <Image
             src={img.url}
             alt={img.alt}
             fill
             sizes="(max-width: 768px) 50vw, 25vw"
-            style={{ objectFit: "cover", transition: "transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)" }}
+            style={{ objectFit: "cover", transition: "transform 0.4s var(--ease-standard)" }}
             className="fallback-gallery-image"
           />
         </motion.div>

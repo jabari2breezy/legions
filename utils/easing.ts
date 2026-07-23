@@ -1,14 +1,12 @@
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import CustomEase from "gsap/CustomEase";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(CustomEase);
 
 export const EASE = {
-  standard: "power3.out",
-  smooth: "power2.inOut",
-  snap: "power4.out",
-  magnetic: "elastic.out(1, 0.5)",
-  reveal: [0.16, 1, 0.3, 1] as const,
+  awwwards: CustomEase.create("awwwards", "M0,0 C0.19,1 0.22,1 1,1"),
+  magnetic: CustomEase.create("magnetic", "M0,0 C0.25,0.1 0.25,1 1,1"),
+  settle: CustomEase.create("settle", "M0,0 C0.16,1 0.3,1 1,1"),
 } as const;
 
 export const DURATION = {
@@ -18,15 +16,3 @@ export const DURATION = {
   slow: 0.8,
   reveal: 1.2,
 } as const;
-
-export function connectLenisToScrollTrigger() {
-  const lenis = (window as any).__lenis;
-  if (!lenis) return;
-
-  lenis.on("scroll", ScrollTrigger.update);
-
-  gsap.ticker.add((time) => {
-    lenis.raf(time * 1000);
-  });
-  gsap.ticker.lagSmoothing(0);
-}

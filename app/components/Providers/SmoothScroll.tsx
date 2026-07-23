@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import {
   createContext,
@@ -9,6 +9,7 @@ import {
   ReactNode,
 } from "react";
 import Lenis from "lenis";
+import { connectLenisToScrollTrigger } from "@/utils/scrollTriggerProxy";
 
 interface SmoothScrollContextValue {
   lenis: Lenis | null;
@@ -27,7 +28,7 @@ export function useSmoothScroll() {
 export function SmoothScrollProvider({ children }: { children: ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null);
   const [velocity, setVelocity] = useState(0);
-  const rafId = useRef<number>(0);
+  const rafId = useRef<number | null>(null);
 
   useEffect(() => {
     const lenis = new Lenis({
@@ -38,6 +39,7 @@ export function SmoothScrollProvider({ children }: { children: ReactNode }) {
       smoothWheel: true,
       wheelMultiplier: 1,
       touchMultiplier: 1.5,
+      syncTouch: false,
     });
 
     lenisRef.current = lenis;
@@ -53,9 +55,10 @@ export function SmoothScrollProvider({ children }: { children: ReactNode }) {
     rafId.current = requestAnimationFrame(raf);
 
     (window as any).__lenis = lenis;
+    connectLenisToScrollTrigger();
 
     return () => {
-      if (rafId.current) cancelAnimationFrame(rafId.current);
+      if (rafId.current !== null) cancelAnimationFrame(rafId.current);
       lenis.destroy();
       (window as any).__lenis = null;
     };

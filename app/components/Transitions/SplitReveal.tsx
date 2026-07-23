@@ -1,12 +1,11 @@
-'use client'
+"use client";
 
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import ScrollTrigger from "gsap/ScrollTrigger";
+import { EASE } from "@/utils/easing";
 
 gsap.registerPlugin(ScrollTrigger);
-
-const EASE_VAL = [0.16, 1, 0.3, 1] as const;
 
 interface SplitRevealProps {
   children: string;
@@ -97,7 +96,7 @@ export function SplitReveal({
       rotationX: 0,
       opacity: 1,
       duration: 1,
-      ease: EASE_VAL as unknown as string,
+      ease: EASE.awwwards,
       stagger: 0.035,
       delay,
       scrollTrigger:

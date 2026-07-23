@@ -22,9 +22,8 @@ export default function GlobalError({
         alignItems: "center",
         justifyContent: "center",
         gap: "1rem",
-        background: "#15144d",
-        color: "#F0F4F8",
-        fontFamily: "'Outfit', -apple-system, sans-serif",
+        background: "var(--color-bg-deep)",
+        color: "var(--color-text-primary)",
       }}
     >
       <p>Something didn&apos;t load correctly.</p>

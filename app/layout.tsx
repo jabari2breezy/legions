@@ -1,7 +1,12 @@
-import type { Metadata } from 'next'
-import { Outfit, Geist_Mono } from 'next/font/google'
-import './globals.css'
-import Providers from './components/Providers'
+import type { Metadata } from "next";
+import { Outfit, Geist_Mono } from "next/font/google";
+import "./globals.css";
+import "../styles/tokens.css";
+import "../styles/components.css";
+import { SmoothScrollProvider } from "./components/Providers/SmoothScroll";
+import { PageTransitionProvider } from "./components/Transitions/PageTransition";
+import { FluidCursor } from "./components/Cursor/FluidCursor";
+import GrainOverlay from "./components/GrainOverlay";
 
 const outfit = Outfit({
   variable: '--font-sans',
@@ -11,18 +16,22 @@ const outfit = Outfit({
 const geistMono = Geist_Mono({ variable: '--font-mono', subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Legions — Youth-Led Action. Real Community Change.',
-  description: 'Student-led community service in Dar es Salaam. Impacting lives through action.',
-}
+  title: "Legions — Youth-Led Action. Real Community Change.",
+  description: "Student-led community service in Dar es Salaam. Impacting lives through action.",
+};
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${outfit.variable} ${geistMono.variable}`}>
       <body className="antialiased">
-        <Providers>
-          {children}
-        </Providers>
+        <SmoothScrollProvider>
+          <PageTransitionProvider>
+            <FluidCursor />
+            <GrainOverlay />
+            <div data-page-content>{children}</div>
+          </PageTransitionProvider>
+        </SmoothScrollProvider>
       </body>
     </html>
-  )
+  );
 }

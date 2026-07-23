@@ -1,13 +1,12 @@
-'use client'
+"use client";
 
-import { createContext, useContext, useRef, ReactNode } from "react";
+import { createContext, useContext, ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Flip from "gsap/Flip";
+import { EASE } from "@/utils/easing";
 
-gsap.registerPlugin(ScrollTrigger);
-
-const EASE_VAL = [0.16, 1, 0.3, 1] as const;
+gsap.registerPlugin(Flip);
 
 interface FlipTransitionContextValue {
   navigateWithFlip: (href: string, flipId: string, sourceEl: HTMLElement) => void;
@@ -24,7 +23,7 @@ export function useFlipTransition() {
 export function PageTransitionProvider({ children }: { children: ReactNode }) {
   const router = useRouter();
 
-  function navigateWithFlip(href: string, _flipId: string, sourceEl: HTMLElement) {
+  function navigateWithFlip(href: string, flipId: string, sourceEl: HTMLElement) {
     const rect = sourceEl.getBoundingClientRect();
     const imgEl = sourceEl.querySelector("img");
     const src = imgEl?.currentSrc || imgEl?.src;
@@ -35,6 +34,7 @@ export function PageTransitionProvider({ children }: { children: ReactNode }) {
 
     const clone = document.createElement("img");
     clone.src = src;
+    clone.id = flipId;
     clone.style.position = "fixed";
     clone.style.top = `${rect.top}px`;
     clone.style.left = `${rect.left}px`;
@@ -43,30 +43,36 @@ export function PageTransitionProvider({ children }: { children: ReactNode }) {
     clone.style.objectFit = "cover";
     clone.style.zIndex = "9998";
     clone.style.borderRadius = getComputedStyle(sourceEl).borderRadius;
-    clone.style.transition = `all 0.9s ${EASE_VAL.join(" ")}`;
     document.body.appendChild(clone);
+
+    const state = Flip.getState(clone);
 
     gsap.to("[data-page-content]", {
       opacity: 0,
       duration: 0.4,
-      ease: EASE_VAL as unknown as string,
+      ease: EASE.awwwards,
     });
 
-    requestAnimationFrame(() => {
-      clone.style.top = "0";
-      clone.style.left = "0";
-      clone.style.width = "100vw";
-      clone.style.height = "100vh";
-      clone.style.borderRadius = "0";
+    gsap.set(clone, {
+      position: "fixed",
+      top: 0,
+      left: 0,
+      width: "100vw",
+      height: "100vh",
+      borderRadius: 0,
     });
 
-    setTimeout(() => {
-      router.push(href);
-      setTimeout(() => {
-        clone.remove();
-        gsap.set("[data-page-content]", { opacity: 1 });
-      }, 250);
-    }, 900);
+    Flip.from(state, {
+      duration: 0.9,
+      ease: EASE.awwwards,
+      onComplete: () => {
+        router.push(href);
+        setTimeout(() => {
+          clone.remove();
+          gsap.set("[data-page-content]", { opacity: 1 });
+        }, 250);
+      },
+    });
   }
 
   return (
