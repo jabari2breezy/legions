@@ -1,5 +1,4 @@
-'use client'
-
+"use client";
 import { useEffect } from "react";
 
 export default function GlobalError({
@@ -14,21 +13,12 @@ export default function GlobalError({
   }, [error]);
 
   return (
-    <div
-      style={{
-        height: "100dvh",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        gap: "1rem",
-        background: "#15144d",
-        color: "#F0F4F8",
-        fontFamily: "'Outfit', -apple-system, sans-serif",
-      }}
-    >
+    <div className="h-dvh flex flex-col items-center justify-center gap-4 bg-bg text-fg font-sans">
       <p>Something didn&apos;t load correctly.</p>
-      <button className="btn-secondary" onClick={reset}>
+      <button
+        onClick={reset}
+        className="px-6 py-3 rounded-full border border-line text-sm tracking-wide hover:border-accent hover:text-accent transition-colors"
+      >
         Try again
       </button>
     </div>
