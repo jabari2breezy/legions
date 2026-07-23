@@ -23,7 +23,7 @@ export default function Projects() {
       {/* Hero — light */}
       <Section variant="light">
         <section className="container-narrow" style={{ paddingTop: 'var(--space-section)', paddingBottom: 'var(--space-block)' }}>
-          <span className="stat-label" style={{ color: 'var(--color-text-secondary-light)', display: 'block', marginBottom: '12px' }}>Our Work</span>
+          <span style={{ font: 'var(--text-label)', textTransform: 'uppercase' as const, letterSpacing: 'var(--letter-spacing-label)', color: 'var(--color-cyan)', display: 'block', marginBottom: '12px' }}>Our Work</span>
           <h1 style={{ font: 'var(--text-h1)', letterSpacing: 'var(--letter-spacing-display)', maxWidth: '900px' }}>
             Projects that matter.
           </h1>
@@ -33,8 +33,8 @@ export default function Projects() {
         </section>
       </Section>
 
-      {/* Grid — light */}
-      <Section variant="light">
+      {/* Grid — dark, so project cards pop */}
+      <Section variant="dark">
         <section className="container-narrow" style={{ paddingBottom: 'var(--space-section)' }}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: 'var(--space-gap)' }}>
             {projects.map((p) => (

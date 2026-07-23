@@ -584,8 +584,8 @@ body {
   display: inline-block;
   padding: 6px 16px;
   border-radius: var(--radius-full);
-  border: 1px solid var(--color-border-dark);
-  color: var(--color-text-secondary-dark);
+  border: 1px solid var(--color-cyan);
+  color: var(--color-cyan);
   font: var(--text-label);
   text-transform: uppercase;
   letter-spacing: var(--letter-spacing-label);

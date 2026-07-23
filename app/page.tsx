@@ -21,12 +21,12 @@ export default function Home() {
         <InteractiveHero />
       </Section>
 
-      {/* 2. Stats — light, gradient stat values pop against white */}
+      {/* 2. Stats — light */}
       <Section variant="light">
         <StatMarquee />
       </Section>
 
-      {/* 3. Mission — dark, white text, cyan/blue accents pop */}
+      {/* 3. Mission — dark */}
       <Section variant="dark">
         <EditorialStatement>
           What started in 2022 as a small group of high school students has evolved into one of Dar es Salaam's most active youth-led service organizations. We saw a gap between wanting to help and actually doing the work — so we bridged it.
@@ -37,7 +37,7 @@ export default function Home() {
       <Section variant="light">
         <section className="container-narrow" style={{ paddingTop: 'var(--space-section)', paddingBottom: 'var(--space-section)' }}>
           <div style={{ marginBottom: 'clamp(32px, 4vw, 64px)' }}>
-            <span className="stat-label" style={{ marginBottom: '12px', display: 'block' }}>Our Work</span>
+            <span style={{ font: 'var(--text-label)', textTransform: 'uppercase' as const, letterSpacing: 'var(--letter-spacing-label)', color: 'var(--color-cyan)', display: 'block', marginBottom: '12px' }}>Our Work</span>
             <h2 style={{ font: 'var(--text-h2)', letterSpacing: 'var(--letter-spacing-display)' }}>Selected Initiatives</h2>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: 'var(--space-gap)' }}>
@@ -58,7 +58,7 @@ export default function Home() {
       {/* 5. Process — light */}
       <Section variant="light">
         <section className="container-narrow" style={{ paddingBottom: 'var(--space-section)' }}>
-          <span className="stat-label" style={{ marginBottom: '12px', display: 'block' }}>The Playbook</span>
+          <span style={{ font: 'var(--text-label)', textTransform: 'uppercase' as const, letterSpacing: 'var(--letter-spacing-label)', color: 'var(--color-cyan)', display: 'block', marginBottom: '12px' }}>The Playbook</span>
           <h2 style={{ font: 'var(--text-h2)', letterSpacing: 'var(--letter-spacing-display)', marginBottom: 'var(--space-block)' }}>How We Operate</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 'var(--space-block)' }}>
             {[
@@ -68,7 +68,7 @@ export default function Home() {
               { n: '04', title: 'Report Back', desc: 'Complete transparency. Every shilling raised and every hour worked is documented and shared with our donors and community.' },
             ].map((step) => (
               <div key={step.n}>
-                <span style={{ font: 'var(--text-hero)', letterSpacing: 'var(--letter-spacing-display)', color: 'var(--color-blue)', opacity: 0.2, lineHeight: 1 }}>{step.n}</span>
+                <span style={{ font: 'var(--text-hero)', letterSpacing: 'var(--letter-spacing-display)', color: 'var(--color-cyan)', lineHeight: 1 }}>{step.n}</span>
                 <h3 style={{ font: 'var(--text-h3)', marginTop: '8px', marginBottom: '12px' }}>{step.title}</h3>
                 <p style={{ font: 'var(--text-body)', color: 'var(--color-text-secondary-light)' }}>{step.desc}</p>
               </div>
@@ -77,10 +77,10 @@ export default function Home() {
         </section>
       </Section>
 
-      {/* 6. Testimonials — dark, quotes pop against black */}
+      {/* 6. Testimonials — dark */}
       <Section variant="dark">
         <section className="container-narrow" style={{ paddingTop: 'var(--space-section)', paddingBottom: 'var(--space-section)' }}>
-          <span className="stat-label text-secondary" style={{ marginBottom: '12px', display: 'block' }}>Community Voices</span>
+          <span style={{ font: 'var(--text-label)', textTransform: 'uppercase' as const, letterSpacing: 'var(--letter-spacing-label)', color: 'var(--color-cyan)', display: 'block', marginBottom: '12px' }}>Community Voices</span>
           <h2 style={{ font: 'var(--text-h2)', letterSpacing: 'var(--letter-spacing-display)', marginBottom: 'var(--space-block)' }}>The Impact We Leave</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 'var(--space-gap)' }}>
             {[
@@ -88,11 +88,12 @@ export default function Home() {
               { quote: "Seeing the youth take charge of our environment gives me hope. The tree planting initiative changed our school environment completely.", author: 'School Headmaster', role: 'Dar es Salaam Partner School' },
               { quote: "I joined to get service hours, but I stayed because of the family. Legions taught me that my age doesn't limit my ability to help.", author: 'Student Volunteer', role: 'Legions Member' },
             ].map((t) => (
-              <div key={t.author} style={{ borderTop: '1px solid var(--color-border-dark)', paddingTop: '24px' }}>
-                <p style={{ font: 'var(--text-body-lg)', marginBottom: '16px' }}>"{t.quote}"</p>
+              <div key={t.author} style={{ borderTop: '2px solid var(--color-cyan)', paddingTop: '24px' }}>
+                <span style={{ font: '4rem/1 serif', color: 'var(--color-cyan)', opacity: 0.4, display: 'block', marginBottom: '-12px' }}>&ldquo;</span>
+                <p style={{ font: 'var(--text-body-lg)', marginBottom: '16px' }}>{t.quote}</p>
                 <div>
-                  <span style={{ font: 'var(--text-label)', textTransform: 'uppercase' as const, letterSpacing: 'var(--letter-spacing-label)' }}>{t.author}</span>
-                  <span className="text-secondary" style={{ font: 'var(--text-label)', display: 'block', marginTop: '2px' }}>{t.role}</span>
+                  <span style={{ font: 'var(--text-label)', textTransform: 'uppercase' as const, letterSpacing: 'var(--letter-spacing-label)', color: 'var(--color-white)' }}>{t.author}</span>
+                  <span style={{ font: 'var(--text-label)', color: 'var(--color-text-secondary-dark)', display: 'block', marginTop: '2px' }}>{t.role}</span>
                 </div>
               </div>
             ))}
@@ -100,7 +101,7 @@ export default function Home() {
         </section>
       </Section>
 
-      {/* 7. CTA Accent — the gradient section where cyan/blue dominate */}
+      {/* 7. CTA — hero background */}
       <CTASectionAccent />
 
       <Footer />

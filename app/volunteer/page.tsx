@@ -13,7 +13,7 @@ export default function Volunteer() {
       {/* Hero — light */}
       <Section variant="light">
         <section className="container-narrow" style={{ paddingTop: 'var(--space-section)', paddingBottom: 'var(--space-block)' }}>
-          <span className="stat-label" style={{ color: 'var(--color-text-secondary-light)', display: 'block', marginBottom: '12px' }}>Join Us</span>
+          <span style={{ font: 'var(--text-label)', textTransform: 'uppercase' as const, letterSpacing: 'var(--letter-spacing-label)', color: 'var(--color-cyan)', display: 'block', marginBottom: '12px' }}>Join Us</span>
           <h1 style={{ font: 'var(--text-h1)', letterSpacing: 'var(--letter-spacing-display)', maxWidth: '900px' }}>
             Show up. Do the work.
           </h1>
@@ -30,7 +30,7 @@ export default function Volunteer() {
       {/* Why Legions — light */}
       <Section variant="light">
         <section className="container-narrow" style={{ paddingTop: 'var(--space-section)', paddingBottom: 'var(--space-section)' }}>
-          <span className="stat-label" style={{ color: 'var(--color-text-secondary-light)', display: 'block', marginBottom: '12px' }}>The Standard</span>
+          <span style={{ font: 'var(--text-label)', textTransform: 'uppercase' as const, letterSpacing: 'var(--letter-spacing-label)', color: 'var(--color-cyan)', display: 'block', marginBottom: '12px' }}>The Standard</span>
           <h2 style={{ font: 'var(--text-h2)', letterSpacing: 'var(--letter-spacing-display)', marginBottom: 'var(--space-block)' }}>Why Legions?</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 'var(--space-gap)' }}>
             {[
@@ -39,7 +39,7 @@ export default function Volunteer() {
               { title: 'The Network', desc: 'Join a brotherhood and sisterhood of the most driven, capable students in Dar es Salaam.' },
               { title: 'Service Hours', desc: 'We provide official documentation and verification for IB, CAS, and university application service requirements.' },
             ].map((item) => (
-              <div key={item.title} style={{ borderTop: '1px solid var(--color-border-light)', paddingTop: '24px' }}>
+              <div key={item.title} style={{ borderTop: '2px solid var(--color-cyan)', paddingTop: '24px' }}>
                 <h3 style={{ font: 'var(--text-h3)', marginBottom: '8px' }}>{item.title}</h3>
                 <p style={{ font: 'var(--text-body)', color: 'var(--color-text-secondary-light)' }}>{item.desc}</p>
               </div>
@@ -51,6 +51,7 @@ export default function Volunteer() {
       {/* Form — dark */}
       <Section variant="dark">
         <section className="container-narrow" style={{ paddingTop: 'var(--space-section)', paddingBottom: 'var(--space-section)' }}>
+          <span style={{ font: 'var(--text-label)', textTransform: 'uppercase' as const, letterSpacing: 'var(--letter-spacing-label)', color: 'var(--color-cyan)', display: 'block', marginBottom: '12px' }}>Apply</span>
           <h2 style={{ font: 'var(--text-h2)', letterSpacing: 'var(--letter-spacing-display)', marginBottom: 'var(--space-block)' }}>Apply to Volunteer</h2>
           <form style={{ maxWidth: '700px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>

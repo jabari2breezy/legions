@@ -1,14 +1,12 @@
 'use client'
 
-import { lazy, Suspense } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'motion/react'
 
-const GlassBlobBackground = lazy(() => import('./WebGL/GlassBlobBackground').then(m => ({ default: m.GlassBlobBackground })))
-
 export default function CTASectionAccent() {
   return (
-    <section className="section-accent" style={{ margin: 'clamp(96px, 14vw, 220px) 0 0 0', padding: '0 clamp(20px, 5vw, 64px)' }}>
+    <section style={{ margin: 'clamp(96px, 14vw, 220px) 0 0 0', padding: '0 clamp(20px, 5vw, 64px)' }}>
       <motion.div
         className="cta-accent"
         initial={{ opacity: 0, y: 24 }}
@@ -16,9 +14,15 @@ export default function CTASectionAccent() {
         viewport={{ once: true }}
         transition={{ type: 'spring', stiffness: 300, damping: 22 }}
       >
-        <Suspense fallback={<div className="absolute inset-0" style={{ background: 'linear-gradient(160deg, #3B4FE0, #4DE8D4)' }} />}>
-          <GlassBlobBackground />
-        </Suspense>
+        <Image
+          src="/hero-attached.jpg"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          style={{ objectFit: 'cover' }}
+        />
+        <div style={{ position: 'absolute', inset: 0, background: 'rgba(10, 10, 12, 0.55)', zIndex: 1 }} />
         <div className="cta-accent-content">
           <h2>Ready to serve?</h2>
           <div className="cta-accent-buttons">
