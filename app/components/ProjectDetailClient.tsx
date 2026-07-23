@@ -11,9 +11,7 @@ import ProjectStats from './ProjectStats'
 import ProjectStory from './ProjectStory'
 import ProjectGallery from './ProjectGallery'
 import RelatedProjects from './RelatedProjects'
-import { GalleryScene } from './WebGL/GalleryScene'
 import { AssetPreloader } from './WebGL/AssetPreloader'
-import { useShouldUseWebGLGallery, GalleryFallback } from './WebGL/GalleryFallback'
 import type { Project } from '../../types/project'
 import dynamic from 'next/dynamic'
 
@@ -23,24 +21,10 @@ gsap.registerPlugin(ScrollTrigger)
 
 export default function ProjectDetailClient({ project }: { project: Project }) {
   const mainRef = useRef<HTMLDivElement>(null)
-  const { shouldUseWebGL, checked } = useShouldUseWebGLGallery()
 
   const allImages = useMemo(
     () => project.groups.flatMap((g) => g.images),
     [project.groups]
-  )
-
-  const webglImages = useMemo(
-    () =>
-      allImages.map((img, i) => ({
-        id: img.id,
-        url: `/projects/${img.filename}`,
-        x: (i % 3) * 340 + 40,
-        y: Math.floor(i / 3) * 280 + 200,
-        width: 320,
-        height: 240,
-      })),
-    [allImages]
   )
 
   const preloadUrls = useMemo(
@@ -113,23 +97,10 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
                 className="mb-8"
               />
 
-              {checked && shouldUseWebGL && allImages.length > 0 ? (
+              {allImages.length > 0 ? (
                 <AssetPreloader urls={preloadUrls}>
-                  <div className="relative" style={{ minHeight: `${Math.ceil(allImages.length / 3) * 280 + 200}px` }}>
-                    <GalleryScene images={webglImages} />
-                    <ProjectGallery groups={project.groups} />
-                  </div>
+                  <ProjectGallery groups={project.groups} />
                 </AssetPreloader>
-              ) : checked ? (
-                <div>
-                  <GalleryFallback
-                    images={allImages.map((img) => ({
-                      id: img.id,
-                      url: `/projects/${img.filename}`,
-                      alt: img.alt,
-                    }))}
-                  />
-                </div>
               ) : (
                 <ProjectGallery groups={project.groups} />
               )}

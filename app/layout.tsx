@@ -7,6 +7,7 @@ import { SmoothScrollProvider } from "./components/Providers/SmoothScroll";
 import { PageTransitionProvider } from "./components/Transitions/PageTransition";
 import { FluidCursor } from "./components/Cursor/FluidCursor";
 import GrainOverlay from "./components/GrainOverlay";
+import { PageLoadScreen } from "./components/LoadingScreen";
 
 const outfit = Outfit({
   variable: '--font-sans',
@@ -26,6 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="antialiased">
         <SmoothScrollProvider>
           <PageTransitionProvider>
+            <PageLoadScreen />
             <FluidCursor />
             <GrainOverlay />
             <div data-page-content>{children}</div>

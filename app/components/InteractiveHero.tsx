@@ -1,153 +1,155 @@
-'use client'
+"use client";
 
-import { useRef } from 'react'
-import Image from 'next/image'
-import { useGSAP } from '@gsap/react'
-import { gsap } from 'gsap'
-import Button from './Button'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useRef } from "react";
+import Image from "next/image";
+import { useGSAP } from "@gsap/react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Button from "./Button";
 
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(ScrollTrigger);
 
 export default function InteractiveHero() {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const imageRef = useRef<HTMLImageElement>(null)
-  
-  useGSAP(() => {
-    // Parallax scroll effect
-    gsap.to(imageRef.current, {
-      yPercent: 30,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: 'top top',
-        end: 'bottom top',
-        scrub: true
-      }
-    })
+  const containerRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLImageElement>(null);
 
-    // Text reveal sequence
-    const tl = gsap.timeline({ defaults: { ease: 'power4.out', duration: 1.4 } })
-    
-    tl.fromTo('.hero-badge', 
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.8, delay: 0.3 }
-    )
-    .fromTo('.hero-title-main', 
-      { y: 120, opacity: 0, scale: 0.9 },
-      { y: 0, opacity: 1, scale: 1, duration: 1.6, ease: 'power4.out' },
-      '-=0.5'
-    )
-    .fromTo('.hero-subtitle',
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 0.8 },
-      '-=0.8'
-    )
-    .fromTo('.hero-button',
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 0.8 },
-      '-=0.5'
-    )
-  }, { scope: containerRef })
+  useGSAP(
+    () => {
+      if (!containerRef.current || !imageRef.current) return;
 
-  // Mouse move effect for subtle 3D tilt
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!containerRef.current || !imageRef.current) return
-    
-    const { left, top, width, height } = containerRef.current.getBoundingClientRect()
-    const x = (e.clientX - left) / width - 0.5
-    const y = (e.clientY - top) / height - 0.5
+      gsap.to(imageRef.current, {
+        yPercent: 12,
+        ease: "none",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
 
-    gsap.to(imageRef.current, {
-      x: x * 30,
-      y: y * 30,
-      rotationY: x * 10,
-      rotationX: -y * 10,
-      duration: 1,
-      ease: 'power2.out',
-    })
-  }
+      const tl = gsap.timeline({ defaults: { ease: "power3.out", duration: 1 } });
 
-  const handleMouseLeave = () => {
-    if (!imageRef.current) return
-    gsap.to(imageRef.current, {
-      x: 0,
-      y: 0,
-      rotationY: 0,
-      rotationX: 0,
-      duration: 1.5,
-      ease: 'power3.out',
-    })
-  }
+      tl.fromTo(
+        ".hero-badge",
+        { opacity: 0, y: 18 },
+        { opacity: 1, y: 0, duration: 0.7 }
+      )
+        .fromTo(
+          ".hero-title-main",
+          { y: 70, opacity: 0, scale: 0.98 },
+          { y: 0, opacity: 1, scale: 1, duration: 1.05 },
+          "-=0.4"
+        )
+        .fromTo(
+          ".hero-subtitle",
+          { opacity: 0, y: 18 },
+          { opacity: 1, y: 0, duration: 0.7 },
+          "-=0.7"
+        )
+        .fromTo(
+          ".hero-button",
+          { opacity: 0, y: 18 },
+          { opacity: 1, y: 0, duration: 0.7 },
+          "-=0.5"
+        );
+    },
+    { scope: containerRef }
+  );
 
   return (
-    <section 
-      ref={containerRef} 
-      className="relative h-[100svh] w-full flex items-center justify-center overflow-hidden perspective-1000"
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
+    <section
+      ref={containerRef}
+      className="relative min-h-[100svh] w-full overflow-hidden"
     >
-      {/* Dynamic Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-bg-deep)] via-[#1a1966] to-[var(--color-cyan)]/20 z-0 mix-blend-multiply"></div>
-      
-      {/* 3D Glass/Chrome Image */}
-      <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none transform-style-3d">
-        <div className="relative w-[120%] h-[120%] scale-110">
-          <Image
-            ref={imageRef}
-            src="/hero-attached.jpg"
-            alt="Abstract 3D Chrome and Glass shapes"
-            fill
-            priority
-            className="object-cover opacity-80 mix-blend-screen filter contrast-125"
-          />
-        </div>
-      </div>
-      
-      {/* Film Grain Overlay */}
-      <div className="absolute inset-0 z-10 pointer-events-none opacity-[0.15] mix-blend-overlay">
-        <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
-          <filter id="noiseFilter">
-            <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch" />
-          </filter>
-          <rect width="100%" height="100%" filter="url(#noiseFilter)" />
-        </svg>
-      </div>
-      
-      {/* Content */}
-      <div className="container relative z-20 mx-auto px-[var(--spacing-section-x)] flex flex-col items-center text-center mt-12">
-        
-        <div className="hero-badge inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-[var(--color-cyan)]/30 mb-8">
-          <span className="w-2 h-2 rounded-full bg-[var(--color-cyan)] animate-pulse"></span>
-          <span className="text-[var(--color-cyan)] text-xs font-mono font-bold tracking-widest uppercase">Est. 2022 • Dar es Salaam</span>
-        </div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(63,224,197,0.12),transparent_35%),linear-gradient(180deg,rgba(255,255,255,0.02),transparent_20%),linear-gradient(180deg,#080816_0%,#11113a_55%,#15144d_100%)]" />
+      <div className="absolute inset-x-0 top-0 h-px bg-white/10" />
 
-        <h1 className="hero-title-main text-white leading-[0.85] tracking-tighter text-balance font-black" style={{ fontSize: 'clamp(6rem, 20vw, 18rem)' }}>
-          LEGIONS
-        </h1>
-        
-        <p className="hero-subtitle mt-8 text-[var(--font-size-body-large)] text-white/70 max-w-xl font-light leading-relaxed tracking-wide">
-          Youth-led action. Real community change. The new standard for student-led impact in Tanzania.
-        </p>
+      <div className="container relative z-20 mx-auto flex min-h-[100svh] items-center px-[var(--spacing-section-x)] pt-28 pb-16">
+        <div className="grid w-full grid-cols-1 gap-10 lg:grid-cols-12 lg:items-center">
+          <div className="lg:col-span-5">
+            <div className="hero-badge glass inline-flex items-center gap-2 rounded-full border border-white/10 px-4 py-2 mb-8">
+              <span className="h-2 w-2 rounded-full bg-[var(--color-cyan)]" />
+              <span className="text-xs uppercase tracking-[0.24em] text-[var(--color-cyan)]">
+                Est. 2022 • Dar es Salaam
+              </span>
+            </div>
 
-        <div className="hero-button mt-12 flex flex-col sm:flex-row gap-4 items-center">
-          <Button href="/projects" variant="primary">
-            Explore Our Work
-          </Button>
-          <Button href="/volunteer" variant="secondary">
-            Join the Movement
-          </Button>
-        </div>
-        
-      </div>
-      
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 opacity-60">
-        <span className="text-xs font-mono tracking-widest uppercase text-white">Scroll</span>
-        <div className="w-[1px] h-12 bg-white/30 overflow-hidden relative">
-          <div className="w-full h-1/2 bg-[var(--color-cyan)] absolute top-0 left-0 animate-bounce"></div>
+            <h1
+              className="hero-title-main max-w-xl text-balance font-semibold tracking-[-0.06em] text-white leading-[0.88]"
+              style={{ fontSize: "clamp(4rem, 10vw, 8.5rem)" }}
+            >
+              Youth-led action, rendered with care.
+            </h1>
+
+            <p className="hero-subtitle mt-8 max-w-xl text-[var(--font-size-body-large)] leading-[var(--line-height-body)] text-[var(--color-text-secondary)]">
+              Legions brings together students, volunteers, and partners to build cleaner coastlines, stronger communities, and places that feel worth showing up for.
+            </p>
+
+            <div className="hero-button mt-10 flex flex-col items-start gap-4 sm:flex-row">
+              <Button href="/projects" variant="primary">
+                Explore Our Work
+              </Button>
+              <Button href="/volunteer" variant="secondary">
+                Join the Movement
+              </Button>
+            </div>
+
+            <div className="mt-10 grid max-w-xl grid-cols-3 gap-4">
+              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+                <div className="text-xs uppercase tracking-[0.22em] text-[var(--color-text-muted)]">
+                  Projects
+                </div>
+                <div className="mt-2 text-2xl font-semibold text-white">5</div>
+              </div>
+              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+                <div className="text-xs uppercase tracking-[0.22em] text-[var(--color-text-muted)]">
+                  Volunteers
+                </div>
+                <div className="mt-2 text-2xl font-semibold text-white">150+</div>
+              </div>
+              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+                <div className="text-xs uppercase tracking-[0.22em] text-[var(--color-text-muted)]">
+                  Raised
+                </div>
+                <div className="mt-2 text-2xl font-semibold text-white">TSH 12M+</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="lg:col-span-7">
+            <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.02] p-3 shadow-[0_30px_100px_rgba(0,0,0,0.45)]">
+              <div className="absolute inset-x-3 top-3 z-10 flex items-center justify-between rounded-full bg-black/20 px-4 py-2 backdrop-blur-md">
+                <span className="text-[0.7rem] uppercase tracking-[0.28em] text-white/60">
+                  Legions archive
+                </span>
+                <span className="text-[0.7rem] uppercase tracking-[0.28em] text-[var(--color-cyan)]">
+                  Scroll to explore
+                </span>
+              </div>
+
+              <div className="relative aspect-[4/5] overflow-hidden rounded-[1.5rem] lg:aspect-[5/6]">
+                <Image
+                  ref={imageRef}
+                  src="/hero-attached.jpg"
+                  alt="Legions community action collage"
+                  fill
+                  priority
+                  className="object-cover opacity-95"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#080816] via-transparent to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 p-6">
+                  <div className="max-w-md rounded-2xl border border-white/10 bg-black/30 p-4 backdrop-blur-md">
+                    <p className="text-sm leading-relaxed text-white/80">
+                      A calmer, more editorial way to experience the work — built for clarity, trust, and momentum.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
-  )
+  );
 }

@@ -18,11 +18,11 @@ export default function Button({
   onClick,
   type = 'button'
 }: ButtonProps) {
-  const baseStyles = 'inline-flex items-center justify-center px-8 py-4 rounded-full font-medium tracking-wide transition-all duration-300 transform hover:scale-105'
+  const baseStyles = 'inline-flex items-center justify-center rounded-full px-8 py-4 font-medium tracking-[0.02em] transition-all duration-500 hover:-translate-y-0.5'
   
   const variants = {
-    primary: 'bg-[var(--color-cyan)] text-[var(--color-bg-deep)] hover:bg-white hover:shadow-[0_0_20px_rgba(63,224,197,0.4)]',
-    secondary: 'glass border-[var(--color-border-subtle)] text-white hover:bg-white/10 hover:border-[var(--color-cyan)]'
+    primary: 'bg-[var(--color-cyan)] text-[var(--color-bg-deep)] shadow-[0_10px_30px_rgba(63,224,197,0.12)] hover:bg-white hover:shadow-[0_14px_40px_rgba(63,224,197,0.22)]',
+    secondary: 'glass border-[var(--color-border-subtle)] text-white hover:bg-white/[0.08] hover:border-[var(--color-cyan)]'
   }
 
   const combinedStyles = `${baseStyles} ${variants[variant]} ${className}`

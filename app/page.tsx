@@ -6,7 +6,7 @@ import SectionHeader from './components/SectionHeader'
 import ProcessStep from './components/ProcessStep'
 import TestimonialCard from './components/TestimonialCard'
 import ImpactCounter from './components/ImpactCounter'
-import ProjectCard from './components/ProjectCard'
+import HomeProjectRail from './components/HomeProjectRail'
 import Button from './components/Button'
 
 export default function Home() {
@@ -69,55 +69,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 5. Projects Preview Grid */}
-      <section className="py-[var(--spacing-section-y)] container mx-auto px-[var(--spacing-section-x)]">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
-          <SectionHeader 
-            eyebrow="Our Work"
-            title="Active Initiatives."
-            align="left"
-          />
-          <Button href="/projects" variant="secondary">View All Projects</Button>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          <ProjectCard 
-            slug="tree-planting"
-            title="Tree Planting"
-            category="Environment"
-            impact="500+ Trees"
-            imageSrc="/projects/tree-planting/IMG_8271.jpg"
-          />
-          <ProjectCard 
-            slug="ujasiri-house"
-            title="Ujasiri House Renovation"
-            category="Health"
-            impact="30+ Families Daily"
-            imageSrc="/projects/ujasiri-house/IMG_8290.jpg"
-          />
-          <ProjectCard 
-            slug="beach-cleanups"
-            title="Beach Cleanups"
-            category="Environment"
-            impact="1.5+ Tons Collected"
-            imageSrc="/projects/beach-cleanups/IMG_8270.jpg"
-          />
-          <ProjectCard 
-            slug="ramadhan-project"
-            title="Ramadhan Project"
-            category="Community"
-            impact="1,200+ Reached"
-            imageSrc="/projects/ramadhan-project/IMG_8248.jpg"
-          />
-          <ProjectCard 
-            slug="amsen-visits"
-            title="AMSEN Visits"
-            category="Special Needs"
-            impact="40+ Students"
-            imageSrc="/projects/amsen-visits/IMG_8275.jpg"
-          />
-        </div>
-      </section>
+      {/* 5. Projects Rail */}
+      <HomeProjectRail />
 
       {/* 6. How It Works (Process) */}
       <section className="py-[var(--spacing-section-y)] bg-[var(--color-surface)] border-y border-[var(--color-border-subtle)]">

@@ -47,7 +47,10 @@ html {
 
 body {
   font-family: var(--font-sans);
-  background: linear-gradient(135deg, #15144d 0%, #2B2A8C 100%);
+  background:
+    radial-gradient(circle at top, rgba(63, 224, 197, 0.08), transparent 28%),
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.05), transparent 18%),
+    linear-gradient(180deg, #080816 0%, #11113a 46%, #15144d 100%);
   background-attachment: fixed;
   overflow-x: hidden;
   min-height: 100vh;
@@ -86,10 +89,10 @@ body {
 }
 
 .glass-panel {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--color-border-subtle);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.015) 100%);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 1.5rem;
 }
 
@@ -174,13 +177,13 @@ body {
 
 /* Card Hover Glow */
 .glass-panel {
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-panel:hover {
-  border-color: rgba(63, 224, 197, 0.3);
+  border-color: rgba(63, 224, 197, 0.22);
   transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 30px rgba(63, 224, 197, 0.1);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.28), 0 0 30px rgba(63, 224, 197, 0.08);
 }
 
 /* Timeline Animation */
@@ -475,7 +478,7 @@ body {
 .gallery-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: 4rem;
 }
 
 .gallery-group-header {
@@ -522,7 +525,7 @@ body {
   padding: 0;
   cursor: pointer;
   background: none;
-  border-radius: 0.75rem;
+  border-radius: 1rem;
 }
 
 .gallery-image {
@@ -530,7 +533,7 @@ body {
   height: auto;
   display: block;
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  border-radius: 0.75rem;
+  border-radius: 1rem;
 }
 
 .gallery-item:hover .gallery-image {
@@ -549,7 +552,7 @@ body {
   opacity: 0;
   transition: opacity 0.3s ease;
   text-align: left;
-  border-radius: 0 0 0.75rem 0.75rem;
+  border-radius: 0 0 1rem 1rem;
   pointer-events: none;
 }
 
@@ -692,7 +695,7 @@ body {
   position: relative;
   aspect-ratio: 4 / 3;
   overflow: hidden;
-  border-radius: 0.75rem;
+  border-radius: 1rem;
   margin-bottom: 1rem;
 }
 
@@ -758,7 +761,7 @@ body {
 .leadership-photo-wrapper {
   position: relative;
   aspect-ratio: 1;
-  border-radius: 0.75rem;
+  border-radius: 1rem;
   overflow: hidden;
   margin-bottom: 1rem;
 }
@@ -857,16 +860,18 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.75rem 1.5rem;
+  padding: 0.85rem 1.6rem;
   border-radius: var(--radius-full);
-  border: 1px solid var(--color-border-subtle);
-  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(14px);
   color: var(--color-text-primary);
   font-family: var(--font-sans);
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   font-weight: 500;
+  letter-spacing: 0.02em;
   cursor: pointer;
-  transition: all var(--duration-fast) var(--ease-standard);
+  transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
   text-decoration: none;
 }
 
@@ -874,6 +879,7 @@ body {
   border-color: var(--color-cyan);
   color: var(--color-cyan);
   box-shadow: 0 0 20px rgba(63, 224, 197, 0.15);
+  transform: translateY(-1px);
 }
 
 .fallback-gallery-image:hover {
