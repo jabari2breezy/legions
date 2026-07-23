@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 import { motion } from "motion/react";
-import { Nav } from "../components/layout/Nav";
-import { SiteFooter } from "../components/layout/SiteFooter";
-import { FooterTeaser } from "../components/layout/FooterTeaser";
-import { Section } from "../components/primitives/Section";
+import { Nav } from "@/app/components/layout/Nav";
+import { SiteFooter } from "@/app/components/layout/SiteFooter";
+import { FooterTeaser } from "@/app/components/layout/FooterTeaser";
+import { Section } from "@/app/components/primitives/Section";
 
 export default function AboutPage() {
   return (

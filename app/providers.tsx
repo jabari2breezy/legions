@@ -1,9 +1,9 @@
 "use client";
 
 import { ReactNode, createContext, useContext, useState, useCallback } from "react";
-import { Preloader } from "../components/primitives/Preloader";
-import { SmoothScroll } from "../components/primitives/SmoothScroll";
-import { CustomCursor } from "../components/primitives/CustomCursor";
+import { Preloader } from "@/app/components/primitives/Preloader";
+import { SmoothScroll } from "@/app/components/primitives/SmoothScroll";
+import { CustomCursor } from "@/app/components/primitives/CustomCursor";
 
 const PreloaderContext = createContext<{
   complete: () => void;

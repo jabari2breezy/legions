@@ -3,9 +3,9 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "motion/react";
-import { Nav } from "../../components/layout/Nav";
-import { SiteFooter } from "../../components/layout/SiteFooter";
-import { Section } from "../../components/primitives/Section";
+import { Nav } from "@/app/components/layout/Nav";
+import { SiteFooter } from "@/app/components/layout/SiteFooter";
+import { Section } from "@/app/components/primitives/Section";
 import { cursorEnter, cursorLeave } from "@/app/utils/cursor";
 import projectsIndex from "@/data/projects-index.json";
 import type { Project } from "@/types/project";

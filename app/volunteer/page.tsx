@@ -3,9 +3,9 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion } from "motion/react";
-import { Nav } from "../../components/layout/Nav";
-import { SiteFooter } from "../../components/layout/SiteFooter";
-import { Section } from "../../components/primitives/Section";
+import { Nav } from "@/app/components/layout/Nav";
+import { SiteFooter } from "@/app/components/layout/SiteFooter";
+import { Section } from "@/app/components/primitives/Section";
 
 export default function VolunteerPage() {
   const [submitted, setSubmitted] = useState(false);

@@ -3,9 +3,9 @@
 import { useRef } from "react";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "motion/react";
-import { Nav } from "../components/layout/Nav";
-import { SiteFooter } from "../components/layout/SiteFooter";
-import { FooterTeaser } from "../components/layout/FooterTeaser";
+import { Nav } from "@/app/components/layout/Nav";
+import { SiteFooter } from "@/app/components/layout/SiteFooter";
+import { FooterTeaser } from "@/app/components/layout/FooterTeaser";
 import { cursorEnter, cursorLeave } from "@/app/utils/cursor";
 import projectsIndex from "@/data/projects-index.json";
 

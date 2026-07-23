@@ -3,8 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion } from "motion/react";
-import { Nav } from "../../components/layout/Nav";
-import { SiteFooter } from "../../components/layout/SiteFooter";
+import { Nav } from "@/app/components/layout/Nav";
+import { SiteFooter } from "@/app/components/layout/SiteFooter";
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
