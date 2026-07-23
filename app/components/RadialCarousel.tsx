@@ -8,6 +8,7 @@ import {
   useMotionValue,
   useSpring,
   useTransform,
+  type MotionValue,
 } from 'motion/react'
 import { X } from 'lucide-react'
 import type { ProjectImage } from '../../types/project'
@@ -174,7 +175,7 @@ interface ItemProps {
   baseAngle: number
   radius: number
   thumbnailSize: number
-  rotation: ReturnType<typeof useMotionValue>
+  rotation: MotionValue<number>
   onClick: () => void
 }
 
