@@ -20,12 +20,13 @@ export default function RelatedProjects({ slugs }: RelatedProjectsProps) {
   if (!projects.length) return null
 
   return (
-    <section className="related-projects">
+    <div>
       <motion.h2
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-60px' }}
-        transition={{ duration: 0.5 }}
+        transition={{ type: 'spring', stiffness: 300, damping: 22 }}
+        style={{ font: 'var(--text-h2)', letterSpacing: 'var(--letter-spacing-display)', marginBottom: '2rem' }}
       >
         Continue Exploring
       </motion.h2>
@@ -37,7 +38,7 @@ export default function RelatedProjects({ slugs }: RelatedProjectsProps) {
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.5, delay: i * 0.1 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 22, delay: i * 0.1 }}
           >
             <Link href={`/projects/${project.slug}`} className="related-card">
               <div className="related-card-image-wrapper">
@@ -51,11 +52,10 @@ export default function RelatedProjects({ slugs }: RelatedProjectsProps) {
               </div>
               <span className="related-card-category">{project.category}</span>
               <h3>{project.title}</h3>
-              <span className="related-card-arrow" aria-hidden="true">→</span>
             </Link>
           </motion.div>
         ))}
       </div>
-    </section>
+    </div>
   )
 }

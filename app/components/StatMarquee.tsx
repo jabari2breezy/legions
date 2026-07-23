@@ -1,25 +1,30 @@
-"use client";
+'use client'
 
-import { motion } from "motion/react";
+import { motion } from 'motion/react'
 
-interface Stat { value: string; label: string; }
+const stats = [
+  { value: 'TZS 12M+', label: 'Funds Raised' },
+  { value: '500+', label: 'Trees Planted' },
+  { value: '5', label: 'Major Initiatives' },
+  { value: '150+', label: 'Active Volunteers' },
+]
 
-export function StatMarquee({ stats }: { stats: Stat[] }) {
+export default function StatMarquee() {
   return (
-    <section className="stat-marquee">
+    <div className="stat-marquee">
       {stats.map((stat, i) => (
         <motion.div
           key={stat.label}
           className="stat-marquee-item"
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.6, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+          viewport={{ once: true }}
+          transition={{ type: 'spring', stiffness: 300, damping: 22, delay: i * 0.08 }}
         >
           <span className="stat-value">{stat.value}</span>
           <span className="stat-label">{stat.label}</span>
         </motion.div>
       ))}
-    </section>
-  );
+    </div>
+  )
 }

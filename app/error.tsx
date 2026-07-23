@@ -1,4 +1,4 @@
-"use client";
+'use client'
 
 import { useEffect } from "react";
 
@@ -22,9 +22,9 @@ export default function GlobalError({
         alignItems: "center",
         justifyContent: "center",
         gap: "1rem",
-        background: "var(--color-background)",
-        color: "var(--color-text-primary)",
-        fontFamily: "var(--font-body)",
+        background: "#15144d",
+        color: "#F0F4F8",
+        fontFamily: "'Outfit', -apple-system, sans-serif",
       }}
     >
       <p>Something didn&apos;t load correctly.</p>

@@ -1,19 +1,22 @@
-"use client";
+'use client'
 
-import { motion } from "motion/react";
-import { ReactNode } from "react";
+import { motion } from 'motion/react'
 
-export function EditorialStatement({ children }: { children: ReactNode }) {
+interface EditorialStatementProps {
+  children: string
+  className?: string
+}
+
+export default function EditorialStatement({ children, className = '' }: EditorialStatementProps) {
   return (
-    <section className="editorial-statement">
-      <motion.p
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      >
-        {children}
-      </motion.p>
-    </section>
-  );
+    <motion.div
+      className={`editorial-statement ${className}`}
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ type: 'spring', stiffness: 300, damping: 22 }}
+    >
+      <p>{children}</p>
+    </motion.div>
+  )
 }
