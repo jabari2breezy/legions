@@ -4,7 +4,7 @@ import { ReactNode, useEffect, useRef } from "react";
 import Lenis from "lenis";
 
 export function SmoothScroll({ children }: { children: ReactNode }) {
-  const rafRef = useRef<number>();
+  const rafRef = useRef<number>(0);
 
   useEffect(() => {
     const lenis = new Lenis({
