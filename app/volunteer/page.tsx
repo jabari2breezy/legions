@@ -1,149 +1,122 @@
 "use client";
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import ScrollReveal from "@/components/ScrollReveal";
 
-const reasons = [
-  { title: "Real Impact", desc: "No busywork. Every hour you spend volunteering translates directly into planted trees, fed families, or built infrastructure." },
-  { title: "Leadership Training", desc: "We don't just assign tasks; we build leaders. You will learn project management, logistics, and fundraising." },
-  { title: "The Network", desc: "Join a brotherhood and sisterhood of the most driven, capable students in Dar es Salaam." },
-  { title: "Service Hours", desc: "We provide official documentation and verification for IB, CAS, and university application service requirements." },
-];
+import { useState } from "react";
+import Link from "next/link";
+import { motion } from "motion/react";
+import { Nav } from "../../components/layout/Nav";
+import { SiteFooter } from "../../components/layout/SiteFooter";
+import { Section } from "../../components/primitives/Section";
 
-export default function Volunteer() {
-  const heroRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start end", "end start"] });
-  const heroY = useTransform(scrollYProgress, [0, 1], [30, -30]);
+export default function VolunteerPage() {
+  const [submitted, setSubmitted] = useState(false);
 
   return (
-    <div className="pt-24">
-      {/* Hero */}
-      <section ref={heroRef} className="mx-auto max-w-5xl px-6 py-24">
-        <ScrollReveal>
-          <p className="text-xs uppercase tracking-[0.25em] text-accent mb-6">Join Us</p>
-        </ScrollReveal>
-        <motion.div style={{ y: heroY }}>
-          <ScrollReveal delay={0.1}>
-            <h1 className="font-serif text-5xl md:text-7xl tracking-tight leading-[1.05] max-w-4xl">
-              Show up. Do the work.
-            </h1>
-          </ScrollReveal>
-        </motion.div>
-      </section>
-
-      {/* Mission */}
-      <section className="py-32 border-t border-line">
-        <div className="mx-auto max-w-5xl px-6">
-          <ScrollReveal>
-            <p className="font-serif text-3xl md:text-5xl leading-[1.2] tracking-tight max-w-4xl">
-              We don&apos;t need passive supporters. We need people willing to get their hands dirty
-              to build a better community.
-            </p>
-          </ScrollReveal>
+    <>
+      <Nav />
+      <div className="section-dark" style={{ paddingTop: "clamp(140px, 20vw, 260px)", paddingBottom: "var(--space-section)" }}>
+        <div className="container">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <p className="t-label" style={{ color: "var(--color-cyan)", marginBottom: 16 }}>Volunteer</p>
+            <h1 className="t-display">Show up.<br />Make a mark.</h1>
+          </motion.div>
         </div>
-      </section>
+      </div>
 
-      {/* Why Legions */}
-      <section className="mx-auto max-w-5xl px-6 py-24 border-t border-line">
-        <ScrollReveal>
-          <p className="text-xs uppercase tracking-[0.25em] text-accent mb-4">The Standard</p>
-          <h2 className="font-serif text-4xl md:text-5xl tracking-tight mb-16">Why Legions?</h2>
-        </ScrollReveal>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          {reasons.map((r, i) => (
-            <ScrollReveal key={r.title} delay={i * 0.1}>
-              <div className="border-t border-line pt-6">
-                <h3 className="font-serif text-xl mb-3">{r.title}</h3>
-                <p className="text-muted text-sm leading-relaxed">{r.desc}</p>
-              </div>
-            </ScrollReveal>
-          ))}
-        </div>
-      </section>
-
-      {/* Application Form */}
-      <section className="mx-auto max-w-3xl px-6 py-24 border-t border-line">
-        <ScrollReveal>
-          <p className="text-xs uppercase tracking-[0.25em] text-accent mb-4">Apply</p>
-          <h2 className="font-serif text-4xl md:text-5xl tracking-tight mb-12">Apply to Volunteer</h2>
-        </ScrollReveal>
-
-        <ScrollReveal delay={0.1}>
-          <form className="flex flex-col gap-5">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              <div className="flex flex-col gap-2">
-                <label htmlFor="vol-name" className="text-xs uppercase tracking-[0.15em] text-muted">Full Name</label>
-                <input
-                  id="vol-name"
-                  type="text"
-                  className="bg-transparent border border-line rounded-lg px-4 py-3 text-fg placeholder:text-line focus:outline-none focus:border-accent transition-colors"
-                  placeholder="Your name"
-                />
-              </div>
-              <div className="flex flex-col gap-2">
-                <label htmlFor="vol-email" className="text-xs uppercase tracking-[0.15em] text-muted">Email</label>
-                <input
-                  id="vol-email"
-                  type="email"
-                  className="bg-transparent border border-line rounded-lg px-4 py-3 text-fg placeholder:text-line focus:outline-none focus:border-accent transition-colors"
-                  placeholder="you@example.com"
-                />
+      <Section dark>
+        <div className="container" style={{ paddingBlock: "var(--space-section)" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(40px, 6vw, 96px)" }}>
+            <div>
+              <h2 className="t-h1" style={{ marginBottom: 24 }}>Why volunteer with Legions?</h2>
+              <p className="t-body-lg" style={{ color: "var(--text-secondary-dark)", marginBottom: 16 }}>
+                Legions runs on student energy. Every project is organized and executed
+                by volunteers who show up, get their hands dirty, and see the results
+                firsthand.
+              </p>
+              <p className="t-body-lg" style={{ color: "var(--text-secondary-dark)", marginBottom: 32 }}>
+                No experience needed. No prerequisites. Just bring your time and willingness.
+              </p>
+              <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+                {VOLUNTEER_BENEFITS.map((b, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: i * 0.08 }}
+                    viewport={{ once: true }}
+                    style={{ display: "flex", gap: 16, alignItems: "start" }}
+                  >
+                    <span className="process-num" style={{ fontSize: "1.5rem", flexShrink: 0 }}>
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <div>
+                      <h3 className="process-title">{b.title}</h3>
+                      <p className="process-desc">{b.desc}</p>
+                    </div>
+                  </motion.div>
+                ))}
               </div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              <div className="flex flex-col gap-2">
-                <label htmlFor="vol-school" className="text-xs uppercase tracking-[0.15em] text-muted">School / University</label>
-                <input
-                  id="vol-school"
-                  type="text"
-                  className="bg-transparent border border-line rounded-lg px-4 py-3 text-fg placeholder:text-line focus:outline-none focus:border-accent transition-colors"
-                  placeholder="Your institution"
-                />
-              </div>
-              <div className="flex flex-col gap-2">
-                <label htmlFor="vol-age" className="text-xs uppercase tracking-[0.15em] text-muted">Age</label>
-                <input
-                  id="vol-age"
-                  type="number"
-                  className="bg-transparent border border-line rounded-lg px-4 py-3 text-fg placeholder:text-line focus:outline-none focus:border-accent transition-colors"
-                  placeholder="16"
-                />
-              </div>
-            </div>
-            <div className="flex flex-col gap-2">
-              <label htmlFor="vol-why" className="text-xs uppercase tracking-[0.15em] text-muted">Why do you want to join Legions?</label>
-              <textarea
-                id="vol-why"
-                rows={5}
-                className="bg-transparent border border-line rounded-lg px-4 py-3 text-fg placeholder:text-line focus:outline-none focus:border-accent transition-colors resize-none"
-                placeholder="Tell us about yourself and what drives you to serve..."
-              />
-            </div>
-            <div className="pt-2">
-              <button
-                type="submit"
-                className="px-8 py-3 rounded-full bg-fg text-bg text-sm tracking-wide hover:opacity-90 transition"
-              >
-                Submit Application
-              </button>
-            </div>
-          </form>
-        </ScrollReveal>
-      </section>
 
-      {/* Contact */}
-      <section className="mx-auto max-w-5xl px-6 py-24 border-t border-line text-center">
-        <ScrollReveal>
-          <p className="text-xs uppercase tracking-[0.25em] text-muted mb-4">Get in Touch</p>
-          <h2 className="font-serif text-3xl md:text-4xl tracking-tight mb-6">Questions? Reach out.</h2>
-          <div className="flex flex-col sm:flex-row justify-center gap-6 text-sm text-muted">
-            <a href="mailto:legionsinitiative@gmail.com" className="hover:text-accent transition-colors">legionsinitiative@gmail.com</a>
-            <span className="hidden sm:inline text-line">|</span>
-            <a href="tel:+255768111035" className="hover:text-accent transition-colors">+255 768 111 035</a>
+            <div>
+              {submitted ? (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  style={{ textAlign: "center", padding: "80px 40px" }}
+                >
+                  <div style={{ fontSize: "3rem", marginBottom: 16 }}>✓</div>
+                  <h3 className="t-h2" style={{ marginBottom: 12 }}>Thank you</h3>
+                  <p className="t-body-lg" style={{ color: "var(--text-secondary-dark)" }}>
+                    We&apos;ll be in touch soon.
+                  </p>
+                </motion.div>
+              ) : (
+                <form
+                  className="contact-form"
+                  onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }}
+                  style={{ display: "flex", flexDirection: "column", gap: 28 }}
+                >
+                  <div className="form-group">
+                    <label className="form-label">Full Name</label>
+                    <input className="form-input" required />
+                  </div>
+                  <div className="form-group">
+                    <label className="form-label">Email</label>
+                    <input className="form-input" type="email" required />
+                  </div>
+                  <div className="form-group">
+                    <label className="form-label">Phone (optional)</label>
+                    <input className="form-input" />
+                  </div>
+                  <div className="form-group">
+                    <label className="form-label">Which project interests you?</label>
+                    <input className="form-input" placeholder="e.g. Beach Cleanups, Tree Planting" />
+                  </div>
+                  <div className="form-group">
+                    <label className="form-label">Why do you want to volunteer?</label>
+                    <textarea className="form-textarea" rows={4} />
+                  </div>
+                  <button type="submit" className="btn btn-primary" style={{ alignSelf: "start" }}>
+                    Sign Up
+                  </button>
+                </form>
+              )}
+            </div>
           </div>
-        </ScrollReveal>
-      </section>
-    </div>
+        </div>
+      </Section>
+      <SiteFooter />
+    </>
   );
 }
+
+const VOLUNTEER_BENEFITS = [
+  { title: "Real Impact", desc: "Your hours translate directly into community outcomes. No middlemen, no bureaucracy." },
+  { title: "Build Skills", desc: "Project management, logistics, teamwork — skills that look good on any resume." },
+  { title: "Join a Community", desc: "150+ like-minded students working together. Friendships built through action." },
+  { title: "Full Transparency", desc: "See exactly where your effort goes. Every project is documented and reported." },
+];

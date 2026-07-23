@@ -1,129 +1,169 @@
 "use client";
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import ScrollReveal from "@/components/ScrollReveal";
 
-const tenets = [
-  {
-    n: "01",
-    title: "Radical Transparency",
-    desc: "Every donation is accounted for. We show exactly where the money goes and the physical impact it creates.",
-  },
-  {
-    n: "02",
-    title: "Action Over Words",
-    desc: "We don't host galas to talk about problems; we get our hands dirty to fix them. Field work is our primary metric.",
-  },
-  {
-    n: "03",
-    title: "Youth Empowerment",
-    desc: "Age is not a barrier to impact. We train the next generation of Tanzanian leaders through real-world service.",
-  },
-];
+import Link from "next/link";
+import { motion } from "motion/react";
+import { Nav } from "../components/layout/Nav";
+import { SiteFooter } from "../components/layout/SiteFooter";
+import { FooterTeaser } from "../components/layout/FooterTeaser";
+import { Section } from "../components/primitives/Section";
 
-const timeline = [
-  { year: "2022", title: "Legions Founded", desc: "A small group of high schoolers decides to formalize their community service efforts." },
-  { year: "2023", title: "First Major Success", desc: "The MYK Tree Planting initiative hits 500+ trees, proving the model works at scale." },
-  { year: "2024", title: "Expanding Scope", desc: "Moving into healthcare infrastructure with Ujasiri House and coastal cleanups across Dar." },
-];
-
-export default function About() {
-  const missionRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: missionRef, offset: ["start end", "end start"] });
-  const missionY = useTransform(scrollYProgress, [0, 1], [50, -50]);
-
+export default function AboutPage() {
   return (
-    <div className="pt-24">
-      {/* Hero */}
-      <section className="mx-auto max-w-5xl px-6 py-24">
-        <ScrollReveal>
-          <p className="text-xs uppercase tracking-[0.25em] text-accent mb-6">Our Story</p>
-        </ScrollReveal>
-        <ScrollReveal delay={0.1}>
-          <h1 className="font-serif text-5xl md:text-7xl tracking-tight leading-[1.05] max-w-4xl">
-            Founded by students in 2022.
-          </h1>
-        </ScrollReveal>
-        <ScrollReveal delay={0.2}>
-          <p className="text-muted text-lg max-w-2xl mt-8 leading-relaxed">
-            We didn&apos;t want to wait until we were older to make a difference. We started Legions because
-            Dar es Salaam needed action, not just awareness.
-          </p>
-        </ScrollReveal>
-      </section>
-
-      {/* Mission — parallax editorial */}
-      <section ref={missionRef} className="py-32 border-t border-line">
-        <div className="mx-auto max-w-5xl px-6">
-          <motion.div style={{ y: missionY }}>
-            <p className="font-serif text-3xl md:text-5xl leading-[1.2] tracking-tight max-w-4xl">
-              From renovating cancer patient housing at Ujasiri House to coastal beach cleanups and tree planting,
-              our mandate is simple: direct action, zero bureaucracy, total transparency.
-            </p>
-          </motion.div>
+    <>
+      <Nav />
+      <PageHero />
+      <StorySection />
+      <TenetsSection />
+      <TimelineSection />
+      <FooterTeaser
+        label="See Our Work"
+        title="Five projects. One mission."
+        href="/projects"
+        imageSrc="/projects/amsen-visits/IMG_8275.jpg"
+      >
+        <div style={{ marginTop: 20 }}>
+          <Link href="/projects" className="btn btn-primary">View Projects</Link>
         </div>
-      </section>
+      </FooterTeaser>
+      <SiteFooter />
+    </>
+  );
+}
 
-      {/* Tenets — alternating numbered sequence */}
-      <section className="mx-auto max-w-5xl px-6 py-24 border-t border-line">
-        <ScrollReveal>
-          <p className="text-xs uppercase tracking-[0.25em] text-accent mb-4">Core Tenets</p>
-          <h2 className="font-serif text-4xl md:text-5xl tracking-tight mb-20">What We Believe</h2>
-        </ScrollReveal>
-
-        <div className="flex flex-col gap-20">
-          {tenets.map((t, i) => {
-            const isEven = i % 2 === 0;
-            return (
-              <ScrollReveal key={t.n} delay={i * 0.1}>
-                <div className={`flex flex-col md:flex-row items-start gap-8 ${isEven ? "" : "md:flex-row-reverse"}`}>
-                  <div className="flex-shrink-0">
-                    <span className="font-serif text-[120px] leading-none text-line/30 select-none">{t.n}</span>
-                  </div>
-                  <div className="max-w-xl pt-4">
-                    <h3 className="font-serif text-2xl mb-4">{t.title}</h3>
-                    <p className="text-muted leading-relaxed">{t.desc}</p>
-                  </div>
-                </div>
-              </ScrollReveal>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* Timeline */}
-      <section className="mx-auto max-w-5xl px-6 py-24 border-t border-line">
-        <ScrollReveal>
-          <p className="text-xs uppercase tracking-[0.25em] text-accent mb-4">History</p>
-          <h2 className="font-serif text-4xl md:text-5xl tracking-tight mb-16">The Journey So Far</h2>
-        </ScrollReveal>
-
-        <div className="flex flex-col gap-12 border-l-2 border-line pl-8 max-w-2xl">
-          {timeline.map((item, i) => (
-            <ScrollReveal key={item.year} delay={i * 0.12}>
-              <span className="text-xs uppercase tracking-[0.2em] text-accent">{item.year}</span>
-              <h3 className="font-serif text-xl mt-2 mb-2">{item.title}</h3>
-              <p className="text-muted text-sm leading-relaxed">{item.desc}</p>
-            </ScrollReveal>
-          ))}
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="mx-auto max-w-7xl px-6 py-32 text-center border-t border-line">
-        <ScrollReveal>
-          <h2 className="font-serif text-4xl md:text-5xl tracking-tight mb-6">Want to be part of the story?</h2>
-          <p className="text-muted max-w-lg mx-auto mb-10">
-            The next chapter of Legions is being written right now. You can be in it.
-          </p>
-          <a
-            href="/volunteer"
-            className="px-8 py-3 rounded-full bg-fg text-bg text-sm tracking-wide hover:opacity-90 transition"
-          >
-            Join Legions
-          </a>
-        </ScrollReveal>
-      </section>
+function PageHero() {
+  return (
+    <div className="section-dark" style={{ paddingTop: "clamp(140px, 20vw, 260px)", paddingBottom: "var(--space-section)" }}>
+      <div className="container">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <p className="t-label" style={{ color: "var(--color-cyan)", marginBottom: 16 }}>About Us</p>
+          <h1 className="t-display">Built different.<br />Built to last.</h1>
+        </motion.div>
+      </div>
     </div>
   );
 }
+
+function StorySection() {
+  return (
+    <Section>
+      <div className="container" style={{ paddingBlock: "var(--space-section)" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(40px, 6vw, 96px)", alignItems: "start" }}>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <p className="t-label" style={{ color: "var(--color-cyan)", marginBottom: 16 }}>Our Story</p>
+            <h2 className="t-h1" style={{ marginBottom: 24 }}>From a school club to a movement</h2>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            viewport={{ once: true }}
+          >
+            <p className="t-body-lg" style={{ marginBottom: 16, color: "var(--text-secondary-dark)" }}>
+              Legions started in 2022 as a small group of students in Dar es Salaam who
+              refused to sit idle. What began as weekend beach cleanups grew into organized
+              community projects spanning education, environment, and infrastructure.
+            </p>
+            <p className="t-body-lg" style={{ marginBottom: 16, color: "var(--text-secondary-dark)" }}>
+              Today, Legions engages over 150 volunteers and has reached more than 1,200
+              individuals across five major projects. Every initiative is youth-led,
+              community-driven, and fully documented.
+            </p>
+            <p className="t-body-lg" style={{ color: "var(--text-secondary-dark)" }}>
+              We don&apos;t wait for funding. We don&apos;t wait for approval. We organize,
+              show up, and get it done.
+            </p>
+          </motion.div>
+        </div>
+      </div>
+    </Section>
+  );
+}
+
+function TenetsSection() {
+  return (
+    <Section dark>
+      <div className="container" style={{ paddingBlock: "var(--space-section)" }}>
+        <div style={{ marginBottom: 48 }}>
+          <p className="t-label" style={{ color: "var(--color-cyan)", marginBottom: 12 }}>Core Tenets</p>
+          <h2 className="t-h1">What we stand on</h2>
+        </div>
+        <div style={{ maxWidth: 800 }}>
+          {TENETS.map((t, i) => (
+            <motion.div
+              key={i}
+              className="tenet-item"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: i * 0.08 }}
+              viewport={{ once: true }}
+            >
+              <div className="tenet-glyph">
+                <span className="t-number" style={{ fontSize: "1.5rem", color: "var(--color-cyan)", opacity: 0.35 }}>
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+              </div>
+              <div>
+                <h3 className="tenet-title">{t.title}</h3>
+                <p className="tenet-desc">{t.desc}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </Section>
+  );
+}
+
+const TENETS = [
+  { title: "Youth-Led, Always", desc: "Every project is organized and executed by students. No top-down directives — just grassroots energy channeled with purpose." },
+  { title: "Radical Transparency", desc: "Every shilling is tracked. Every outcome is documented. We publish results because accountability is non-negotiable." },
+  { title: "Show Up, Then Show Up Again", desc: "One-off events don't change communities. Consistent presence and follow-through do." },
+  { title: "Community First", desc: "We don't impose solutions. We listen, collaborate, and build what communities actually need." },
+];
+
+function TimelineSection() {
+  return (
+    <Section>
+      <div className="container" style={{ paddingBlock: "var(--space-section)" }}>
+        <div style={{ marginBottom: 48 }}>
+          <p className="t-label" style={{ color: "var(--color-cyan)", marginBottom: 12 }}>Timeline</p>
+          <h2 className="t-h1">How we got here</h2>
+        </div>
+        <div className="timeline">
+          {TIMELINE.map((item, i) => (
+            <motion.div
+              key={i}
+              className="timeline-item"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              viewport={{ once: true }}
+            >
+              <p className="timeline-year">{item.year}</p>
+              <h3 className="timeline-title">{item.title}</h3>
+              <p className="timeline-desc">{item.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </Section>
+  );
+}
+
+const TIMELINE = [
+  { year: "2022", title: "Legions Founded", desc: "A group of students in Dar es Salaam decide to stop waiting and start doing. First beach cleanup organized." },
+  { year: "2022", title: "AMSEN Partnership", desc: "First engagement with special needs students at AMSEN center. 40+ students and 25 volunteers participate." },
+  { year: "2023", title: "Tree Planting — Project MYK", desc: "500+ indigenous trees planted at public schools with a 90%+ survival rate." },
+  { year: "2023", title: "Ramadhan Project Launch", desc: "1,200+ individuals reached through food hamper distribution. 100% direct allocation." },
+  { year: "2024", title: "Ujasiri House Renovation", desc: "Complete renovation of Ujasiri House, a facility hosting 30+ families daily. 100% sweat-equity." },
+  { year: "2024", title: "150+ Active Volunteers", desc: "Legions grows to over 150 active volunteers across five major projects." },
+];
