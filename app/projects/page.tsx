@@ -1,13 +1,19 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useEffect, useLayoutEffect } from "react";
 import Link from "next/link";
-import { motion, useScroll, useTransform } from "motion/react";
+import { motion } from "motion/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Nav } from "@/app/components/layout/Nav";
 import { SiteFooter } from "@/app/components/layout/SiteFooter";
 import { FooterTeaser } from "@/app/components/layout/FooterTeaser";
 import { cursorEnter, cursorLeave } from "@/app/utils/cursor";
 import projectsIndex from "@/data/projects-index.json";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 export default function ProjectsPage() {
   return (
@@ -48,34 +54,47 @@ function PageHero() {
 }
 
 /* ========================================
-   Pinned horizontal project rail
+   Pinned horizontal project rail (GSAP)
    ======================================== */
 
 function ProjectsRail() {
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: wrapperRef,
-    offset: ["start start", "end end"],
-  });
+  const railRef = useRef<HTMLDivElement>(null);
 
-  // Transform scroll progress to horizontal translate
-  // The rail has N panels. We need to translate by (total width - viewport width)
-  const totalPanels = projectsIndex.length;
-  const panelWidth = 500; // approximate panel + gap
-  const x = useTransform(
-    scrollYProgress,
-    [0, 1],
-    ["0%", `-${(totalPanels - 1.5) * panelWidth}px`]
-  );
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      const wrapper = wrapperRef.current;
+      const rail = railRef.current;
+      if (!wrapper || !rail) return;
+
+      // Calculate total scroll distance: rail width minus viewport width
+      const totalScroll = rail.scrollWidth - window.innerWidth;
+
+      gsap.to(rail, {
+        x: () => -totalScroll,
+        ease: "none",
+        scrollTrigger: {
+          trigger: wrapper,
+          start: "top top",
+          end: () => `+=${totalScroll}`,
+          pin: true,
+          scrub: 1,
+          invalidateOnRefresh: true,
+        },
+      });
+    }, wrapperRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
     <div
       ref={wrapperRef}
       className="projects-rail-wrapper section-dark"
-      style={{ height: `${totalPanels * 60}vh` }}
+      style={{ overflow: "hidden" }}
     >
-      <div style={{ position: "sticky", top: 0, height: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", overflow: "hidden" }}>
-        <motion.div className="projects-rail" style={{ x }}>
+      <div style={{ height: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", overflow: "hidden" }}>
+        <div ref={railRef} className="projects-rail">
           {projectsIndex.map((p, i) => (
             <Link
               key={p.slug}
@@ -100,7 +119,7 @@ function ProjectsRail() {
               </div>
             </Link>
           ))}
-        </motion.div>
+        </div>
       </div>
     </div>
   );

@@ -558,7 +558,26 @@ a { color: inherit; text-decoration: none; }
   100% { transform: translateY(200%); }
 }
 
-/* Hero layered images */
+/* Hero hover glow */
+.hero-glow {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s;
+  background: radial-gradient(
+    ellipse 500px 400px at var(--mx, 50%) var(--my, 50%),
+    rgba(77, 232, 212, 0.1),
+    transparent 70%
+  );
+}
+
+.hero:hover .hero-glow {
+  opacity: 1;
+}
+
+/* Hero layered images — subtle ambient depth */
 .hero-layers {
   position: absolute;
   inset: 0;
@@ -570,13 +589,76 @@ a { color: inherit; text-decoration: none; }
   position: absolute;
   overflow: hidden;
   border-radius: var(--radius);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  border: 1px solid rgba(250,250,250,0.08);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.3);
 }
 
 .hero-layer img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.hero-layer--1 {
+  width: 16vw;
+  height: 22vh;
+  min-width: 120px;
+  min-height: 160px;
+  right: 10%;
+  top: 15%;
+  opacity: 0.35;
+  filter: blur(1px);
+}
+
+.hero-layer--2 {
+  width: 13vw;
+  height: 18vh;
+  min-width: 100px;
+  min-height: 130px;
+  right: 6%;
+  bottom: 22%;
+  opacity: 0.25;
+  filter: blur(2px);
+}
+
+@media (max-width: 768px) {
+  .hero-layer--1,
+  .hero-layer--2 {
+    display: none;
+  }
+}
+
+/* ========================================
+   Glass panel
+   ======================================== */
+
+.glass-panel {
+  background: rgba(250, 250, 250, 0.04);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(250, 250, 250, 0.06);
+  border-radius: var(--radius);
+}
+
+.section-light .glass-panel {
+  background: rgba(10, 10, 12, 0.03);
+  border: 1px solid rgba(10, 10, 12, 0.06);
+}
+
+/* ========================================
+   Testimonials columns layout
+   ======================================== */
+
+.testimonials-columns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 900px) {
+  .testimonials-columns {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ========================================
@@ -679,6 +761,11 @@ a { color: inherit; text-decoration: none; }
   gap: 6px;
 }
 .stat-item:last-child { border-right: none; }
+
+.stat-item.glass-panel {
+  border-right: 1px solid rgba(250, 250, 250, 0.06);
+}
+.stat-item.glass-panel:last-child { border-right: 1px solid rgba(250, 250, 250, 0.06); }
 
 .stat-value {
   font-family: var(--font-display);
@@ -849,7 +936,7 @@ a { color: inherit; text-decoration: none; }
    ======================================== */
 
 .testimonial-card {
-  padding-top: 24px;
+  padding: 32px;
   border-top: 2px solid var(--color-cyan);
 }
 

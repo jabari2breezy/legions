@@ -39,23 +39,22 @@ export default function VolunteerPage() {
               <p className="t-body-lg" style={{ color: "var(--text-secondary-dark)", marginBottom: 32 }}>
                 No experience needed. No prerequisites. Just bring your time and willingness.
               </p>
-              <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+              <div className="testimonials-columns" style={{ gap: 16 }}>
                 {VOLUNTEER_BENEFITS.map((b, i) => (
                   <motion.div
                     key={i}
-                    initial={{ opacity: 0, y: 16 }}
+                    className="glass-panel"
+                    style={{ padding: 24, borderTop: "2px solid var(--color-cyan)" }}
+                    initial={{ opacity: 0, y: 40 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: i * 0.08 }}
+                    transition={{ duration: 0.5, delay: i * 0.1 }}
                     viewport={{ once: true }}
-                    style={{ display: "flex", gap: 16, alignItems: "start" }}
                   >
-                    <span className="process-num" style={{ fontSize: "1.5rem", flexShrink: 0 }}>
+                    <span className="process-num" style={{ fontSize: "1.5rem" }}>
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <div>
-                      <h3 className="process-title">{b.title}</h3>
-                      <p className="process-desc">{b.desc}</p>
-                    </div>
+                    <h3 className="process-title" style={{ marginTop: 8 }}>{b.title}</h3>
+                    <p className="process-desc">{b.desc}</p>
                   </motion.div>
                 ))}
               </div>

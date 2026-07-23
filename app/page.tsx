@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
+import { useRef, useCallback } from "react";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "motion/react";
 import { Nav } from "@/app/components/layout/Nav";
@@ -27,69 +27,56 @@ export default function HomePage() {
 }
 
 /* ========================================
-   Hero — layered imagery + mask text
+   Hero — layered imagery + hover light
    ======================================== */
 
 function HeroSection() {
   const ref = useRef<HTMLDivElement>(null);
+  const glowRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
   });
 
-  const layer1Y = useTransform(scrollYProgress, [0, 1], [0, -80]);
-  const layer2Y = useTransform(scrollYProgress, [0, 1], [0, -140]);
-  const layer3Y = useTransform(scrollYProgress, [0, 1], [0, -60]);
-  const textY = useTransform(scrollYProgress, [0, 1], [0, 40]);
-  const textOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+  const layer1Y = useTransform(scrollYProgress, [0, 1], [0, -40]);
+  const layer2Y = useTransform(scrollYProgress, [0, 1], [0, -70]);
+  const layer1Scale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
+  const layer2Scale = useTransform(scrollYProgress, [0, 1], [1, 1.12]);
+  const textY = useTransform(scrollYProgress, [0, 1], [0, 30]);
+  const textOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+
+  const handleMouseMove = useCallback((e: React.MouseEvent) => {
+    if (!glowRef.current || !ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    glowRef.current.style.setProperty("--mx", `${x}%`);
+    glowRef.current.style.setProperty("--my", `${y}%`);
+  }, []);
 
   return (
-    <div className="hero" ref={ref}>
+    <div className="hero" ref={ref} onMouseMove={handleMouseMove}>
       <div className="hero-bg">
         <img src="/hero-attached.jpg" alt="Legions community impact" />
         <div className="hero-overlay" />
       </div>
 
-      {/* Layered project photos */}
+      {/* Hover light glow */}
+      <div ref={glowRef} className="hero-glow" />
+
+      {/* Subtle layered project photos */}
       <div className="hero-layers">
         <motion.div
-          className="hero-layer"
-          style={{
-            y: layer1Y,
-            width: "28vw",
-            height: "38vh",
-            right: "8%",
-            top: "12%",
-            opacity: 0.75,
-          }}
+          className="hero-layer hero-layer--1"
+          style={{ y: layer1Y, scale: layer1Scale }}
         >
           <img src="/projects/amsen-visits/IMG_8275.jpg" alt="AMSEN Visits" />
         </motion.div>
         <motion.div
-          className="hero-layer"
-          style={{
-            y: layer2Y,
-            width: "22vw",
-            height: "30vh",
-            right: "28%",
-            top: "5%",
-            opacity: 0.5,
-          }}
+          className="hero-layer hero-layer--2"
+          style={{ y: layer2Y, scale: layer2Scale }}
         >
           <img src="/projects/beach-cleanups/IMG_8270.jpg" alt="Beach Cleanups" />
-        </motion.div>
-        <motion.div
-          className="hero-layer"
-          style={{
-            y: layer3Y,
-            width: "20vw",
-            height: "26vh",
-            right: "4%",
-            bottom: "18%",
-            opacity: 0.45,
-          }}
-        >
-          <img src="/projects/tree-planting/IMG_8271.jpg" alt="Tree Planting" />
         </motion.div>
       </div>
 
@@ -127,7 +114,7 @@ function HeroSection() {
 }
 
 /* ========================================
-   Stats
+   Stats — glass panel row
    ======================================== */
 
 function StatsSection() {
@@ -135,11 +122,18 @@ function StatsSection() {
     <Section dark>
       <div className="container">
         <div className="stat-row">
-          {STATS.map((s) => (
-            <div className="stat-item" key={s.label}>
+          {STATS.map((s, i) => (
+            <motion.div
+              className="stat-item glass-panel"
+              key={s.label}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: i * 0.08 }}
+              viewport={{ once: true }}
+            >
               <span className="stat-value">{s.value}</span>
               <span className="stat-label-text">{s.label}</span>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -179,7 +173,7 @@ function EditorialSection() {
 }
 
 /* ========================================
-   Numbered Initiatives
+   Numbered Initiatives — layer transform on scroll
    ======================================== */
 
 function InitiativesSection() {
@@ -194,32 +188,7 @@ function InitiativesSection() {
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 40 }}>
           {projectsIndex.map((p, i) => (
-            <motion.div
-              key={p.slug}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: i * 0.08 }}
-              viewport={{ once: true, margin: "-60px" }}
-            >
-              <Link
-                href={`/projects/${p.slug}`}
-                className="project-card"
-                onMouseEnter={() => cursorEnter("Explore")}
-                onMouseLeave={cursorLeave}
-              >
-                <div className="project-card-image">
-                  <img
-                    src={`/projects/${p.heroImage.filename}`}
-                    alt={p.heroImage.alt}
-                  />
-                </div>
-                <div className="project-card-meta">
-                  <span className="project-card-num">({String(i + 1).padStart(2, "0")})</span>
-                  <span className="project-card-title">{p.title}</span>
-                  <span className="project-card-cat">{p.category}</span>
-                </div>
-              </Link>
-            </motion.div>
+            <InitiativeCard key={p.slug} project={p} index={i} />
           ))}
         </div>
       </div>
@@ -227,8 +196,49 @@ function InitiativesSection() {
   );
 }
 
+function InitiativeCard({ project, index }: { project: typeof projectsIndex[0]; index: number }) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: cardRef,
+    offset: ["start end", "center center"],
+  });
+
+  const imgY = useTransform(scrollYProgress, [0, 1], [40, 0]);
+  const imgScale = useTransform(scrollYProgress, [0, 1], [1.08, 1]);
+
+  return (
+    <motion.div
+      ref={cardRef}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: index * 0.08 }}
+      viewport={{ once: true, margin: "-60px" }}
+    >
+      <Link
+        href={`/projects/${project.slug}`}
+        className="project-card"
+        onMouseEnter={() => cursorEnter("Explore")}
+        onMouseLeave={cursorLeave}
+      >
+        <div className="project-card-image">
+          <motion.img
+            src={`/projects/${project.heroImage.filename}`}
+            alt={project.heroImage.alt}
+            style={{ y: imgY, scale: imgScale }}
+          />
+        </div>
+        <div className="project-card-meta">
+          <span className="project-card-num">({String(index + 1).padStart(2, "0")})</span>
+          <span className="project-card-title">{project.title}</span>
+          <span className="project-card-cat">{project.category}</span>
+        </div>
+      </Link>
+    </motion.div>
+  );
+}
+
 /* ========================================
-   Process Columns
+   Process Columns — staggered slide-up
    ======================================== */
 
 function ProcessSection() {
@@ -243,11 +253,18 @@ function ProcessSection() {
         </div>
         <div className="process-columns">
           {PROCESS_STEPS.map((step, i) => (
-            <div className="process-col" key={i}>
+            <motion.div
+              className="process-col"
+              key={i}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: i * 0.12 }}
+              viewport={{ once: true, margin: "-40px" }}
+            >
               <span className="process-num">{String(i + 1).padStart(2, "0")}</span>
               <h3 className="process-title">{step.title}</h3>
               <p className="process-desc">{step.desc}</p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -263,7 +280,7 @@ const PROCESS_STEPS = [
 ];
 
 /* ========================================
-   Testimonials
+   Testimonials — columns slider style
    ======================================== */
 
 function TestimonialsSection() {
@@ -276,17 +293,17 @@ function TestimonialsSection() {
           </p>
           <h2 className="t-h1">What people say</h2>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 40 }}>
+        <div className="testimonials-columns">
           {TESTIMONIALS.map((t, i) => (
             <motion.div
               key={i}
-              className="testimonial-card"
-              initial={{ opacity: 0, y: 30 }}
+              className="testimonial-card glass-panel"
+              initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
-              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: i * 0.15 }}
+              viewport={{ once: true, margin: "-60px" }}
             >
-              <div className="testimonial-quote-mark">"</div>
+              <div className="testimonial-quote-mark">&ldquo;</div>
               <p className="testimonial-text">{t.quote}</p>
               <p className="testimonial-author">{t.name}</p>
               <p className="testimonial-role">{t.role}</p>

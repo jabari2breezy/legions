@@ -96,25 +96,22 @@ function TenetsSection() {
           <p className="t-label" style={{ color: "var(--color-cyan)", marginBottom: 12 }}>Core Tenets</p>
           <h2 className="t-h1">What we stand on</h2>
         </div>
-        <div style={{ maxWidth: 800 }}>
+        <div className="testimonials-columns" style={{ maxWidth: 1100 }}>
           {TENETS.map((t, i) => (
             <motion.div
               key={i}
-              className="tenet-item"
-              initial={{ opacity: 0, y: 20 }}
+              className="glass-panel"
+              style={{ padding: 32, borderTop: "2px solid var(--color-cyan)" }}
+              initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
-              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: i * 0.12 }}
+              viewport={{ once: true, margin: "-60px" }}
             >
-              <div className="tenet-glyph">
-                <span className="t-number" style={{ fontSize: "1.5rem", color: "var(--color-cyan)", opacity: 0.35 }}>
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-              </div>
-              <div>
-                <h3 className="tenet-title">{t.title}</h3>
-                <p className="tenet-desc">{t.desc}</p>
-              </div>
+              <span className="process-num" style={{ marginBottom: 16 }}>
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <h3 className="tenet-title" style={{ marginTop: 8 }}>{t.title}</h3>
+              <p className="tenet-desc">{t.desc}</p>
             </motion.div>
           ))}
         </div>
