@@ -1,32 +1,32 @@
-'use client'
+"use client";
 
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-const links = [
-  { label: 'Projects', href: '/projects' },
-  { label: 'About', href: '/about' },
-  { label: 'Contact', href: '/contact' },
-]
+const NAV_ITEMS = [
+  { label: "Projects", href: "/projects" },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
+];
 
-export default function Nav() {
-  const pathname = usePathname()
+export function Nav() {
+  const pathname = usePathname();
 
   return (
-    <nav className="nav">
-      <Link href="/" className="nav-logo">Legions</Link>
-      <div className="nav-links">
-        {links.map((link) => (
+    <header className="nav">
+      <Link href="/" className="nav-logo">Legions Club</Link>
+      <nav className="nav-links">
+        {NAV_ITEMS.map((item) => (
           <Link
-            key={link.href}
-            href={link.href}
-            className={`nav-link ${pathname === link.href ? 'is-active' : ''}`}
+            key={item.href}
+            href={item.href}
+            className={`nav-link ${pathname.startsWith(item.href) ? "is-active" : ""}`}
           >
-            {link.label}
+            {item.label}
           </Link>
         ))}
-      </div>
-      <Link href="/volunteer" className="nav-cta">Get Involved</Link>
-    </nav>
-  )
+      </nav>
+      <Link href="/volunteer" className="btn-secondary nav-cta">Get Involved</Link>
+    </header>
+  );
 }

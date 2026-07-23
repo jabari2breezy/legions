@@ -1,13 +1,13 @@
-import Link from 'next/link'
+import Link from "next/link";
 
-export default function Footer() {
-  const currentYear = new Date().getFullYear()
+export function Footer() {
+  const currentYear = new Date().getFullYear();
 
   return (
     <footer className="site-footer">
       <div className="site-footer-inner">
         <div className="site-footer-brand">
-          <Link href="/" className="nav-logo">Legions</Link>
+          <Link href="/" className="nav-logo">Legions Club</Link>
           <p>A student-led community service organization in Dar es Salaam, Tanzania. We take action where it matters.</p>
         </div>
         <div className="site-footer-col">
@@ -33,11 +33,11 @@ export default function Footer() {
       </div>
       <div className="site-footer-bottom">
         <p>&copy; {currentYear} Legions Tz. All rights reserved.</p>
-        <div className="flex items-center gap-4">
-          <Link href="#" className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>Privacy Policy</Link>
-          <Link href="#" className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>Terms of Service</Link>
+        <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+          <Link href="#" style={{ font: "var(--text-label)", color: "var(--color-text-secondary)" }}>Privacy Policy</Link>
+          <Link href="#" style={{ font: "var(--text-label)", color: "var(--color-text-secondary)" }}>Terms of Service</Link>
         </div>
       </div>
     </footer>
-  )
+  );
 }

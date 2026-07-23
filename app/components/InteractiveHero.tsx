@@ -4,7 +4,7 @@ import { useRef, lazy, Suspense } from 'react'
 import Image from 'next/image'
 import { useGSAP } from '@gsap/react'
 import { gsap } from 'gsap'
-import Button from './Button'
+import { Button } from './Button'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 const GlassBlobBackground = lazy(() => import('./WebGL/GlassBlobBackground').then(m => ({ default: m.GlassBlobBackground })))
