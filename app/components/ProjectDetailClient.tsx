@@ -6,7 +6,6 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import SectionHeader from './SectionHeader'
 import Button from './Button'
-import SubpageCanvas from './SubpageCanvas'
 import ProjectHero from './ProjectHero'
 import ProjectStats from './ProjectStats'
 import ProjectStory from './ProjectStory'
@@ -16,6 +15,9 @@ import { GalleryScene } from './WebGL/GalleryScene'
 import { AssetPreloader } from './WebGL/AssetPreloader'
 import { useShouldUseWebGLGallery, GalleryFallback } from './WebGL/GalleryFallback'
 import type { Project } from '../../types/project'
+import dynamic from 'next/dynamic'
+
+const SubpageCanvas = dynamic(() => import('./SubpageCanvas'), { ssr: false })
 
 gsap.registerPlugin(ScrollTrigger)
 

@@ -9,8 +9,10 @@ import Footer from '../components/Footer'
 import SectionHeader from '../components/SectionHeader'
 import HorizontalProjectCard from '../components/HorizontalProjectCard'
 import ProjectImageBelt from '../components/ProjectImageBelt'
-import SubpageCanvas from '../components/SubpageCanvas'
 import GrainOverlay from '../components/GrainOverlay'
+import dynamic from 'next/dynamic'
+
+const SubpageCanvas = dynamic(() => import('../components/SubpageCanvas'), { ssr: false })
 import projectsIndex from '../../data/projects-index.json'
 import type { ProjectSummary } from '../../types/project'
 

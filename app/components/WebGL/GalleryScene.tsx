@@ -45,6 +45,7 @@ export function GalleryScene({ images }: GallerySceneProps) {
         pointerEvents: "none",
         zIndex: 20,
       }}
+      aria-hidden="true"
     >
       <Canvas
         orthographic

@@ -27,12 +27,23 @@ export default function HorizontalProjectCard({
     navigateWithFlip(`/projects/${slug}`, `project-${slug}`, e.currentTarget)
   }
 
+  function handleKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault()
+      navigateWithFlip(`/projects/${slug}`, `project-${slug}`, e.currentTarget)
+    }
+  }
+
   return (
     <div
       className="group relative w-full h-full rounded-3xl overflow-hidden block cursor-pointer"
       data-cursor-type="cta"
       data-magnetic
       onClick={handleClick}
+      onKeyDown={handleKeyDown}
+      tabIndex={0}
+      role="link"
+      aria-label={`View ${title} project`}
     >
       {/* Background Image */}
       <div className="absolute inset-0 z-0">

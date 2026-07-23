@@ -7,8 +7,10 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import SectionHeader from '../components/SectionHeader'
-import SubpageCanvas from '../components/SubpageCanvas'
 import GrainOverlay from '../components/GrainOverlay'
+import dynamic from 'next/dynamic'
+
+const SubpageCanvas = dynamic(() => import('../components/SubpageCanvas'), { ssr: false })
 
 gsap.registerPlugin(ScrollTrigger)
 

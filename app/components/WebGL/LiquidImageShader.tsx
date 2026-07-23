@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useMemo } from "react";
+import { useRef, useMemo, useEffect } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 
@@ -82,6 +82,13 @@ export function LiquidImageShader({
     tex.colorSpace = THREE.SRGBColorSpace;
     return tex;
   }, [imageUrl]);
+
+  // Cleanup texture on unmount
+  useEffect(() => {
+    return () => {
+      texture.dispose();
+    };
+  }, [texture]);
 
   const uniforms = useMemo(
     () => ({

@@ -91,6 +91,7 @@ export default function SubpageCanvas() {
     <div
       className="fixed inset-0 w-full h-full pointer-events-none"
       style={{ zIndex: -1 }}
+      aria-hidden="true"
     >
       <Suspense fallback={<Loader />}>
         <Canvas

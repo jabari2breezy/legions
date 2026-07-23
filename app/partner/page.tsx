@@ -8,8 +8,10 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import SectionHeader from '../components/SectionHeader'
 import Button from '../components/Button'
-import SubpageCanvas from '../components/SubpageCanvas'
 import GrainOverlay from '../components/GrainOverlay'
+import dynamic from 'next/dynamic'
+
+const SubpageCanvas = dynamic(() => import('../components/SubpageCanvas'), { ssr: false })
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -124,10 +126,22 @@ export default function Partner() {
           </div>
           <div className="glass-panel p-8 partner-form">
             <form className="flex flex-col gap-5">
-              <input type="text" placeholder="Organization Name" className="bg-[var(--color-bg-deep)] border border-[var(--color-border-subtle)] rounded-xl px-5 py-4 text-white focus:outline-none focus:border-[var(--color-cyan)] focus:ring-2 focus:ring-[var(--color-cyan)]/20 transition-all duration-300" />
-              <input type="text" placeholder="Contact Person" className="bg-[var(--color-bg-deep)] border border-[var(--color-border-subtle)] rounded-xl px-5 py-4 text-white focus:outline-none focus:border-[var(--color-cyan)] focus:ring-2 focus:ring-[var(--color-cyan)]/20 transition-all duration-300" />
-              <input type="email" placeholder="Email Address" className="bg-[var(--color-bg-deep)] border border-[var(--color-border-subtle)] rounded-xl px-5 py-4 text-white focus:outline-none focus:border-[var(--color-cyan)] focus:ring-2 focus:ring-[var(--color-cyan)]/20 transition-all duration-300" />
-              <textarea rows={4} placeholder="How would you like to partner?" className="bg-[var(--color-bg-deep)] border border-[var(--color-border-subtle)] rounded-xl px-5 py-4 text-white focus:outline-none focus:border-[var(--color-cyan)] focus:ring-2 focus:ring-[var(--color-cyan)]/20 transition-all duration-300 resize-none"></textarea>
+              <div className="flex flex-col gap-2">
+                <label htmlFor="orgName" className="sr-only">Organization Name</label>
+                <input id="orgName" type="text" placeholder="Organization Name" className="bg-[var(--color-bg-deep)] border border-[var(--color-border-subtle)] rounded-xl px-5 py-4 text-white focus:outline-none focus:border-[var(--color-cyan)] focus:ring-2 focus:ring-[var(--color-cyan)]/20 transition-all duration-300" />
+              </div>
+              <div className="flex flex-col gap-2">
+                <label htmlFor="contactPerson" className="sr-only">Contact Person</label>
+                <input id="contactPerson" type="text" placeholder="Contact Person" className="bg-[var(--color-bg-deep)] border border-[var(--color-border-subtle)] rounded-xl px-5 py-4 text-white focus:outline-none focus:border-[var(--color-cyan)] focus:ring-2 focus:ring-[var(--color-cyan)]/20 transition-all duration-300" />
+              </div>
+              <div className="flex flex-col gap-2">
+                <label htmlFor="partnerEmail" className="sr-only">Email Address</label>
+                <input id="partnerEmail" type="email" placeholder="Email Address" className="bg-[var(--color-bg-deep)] border border-[var(--color-border-subtle)] rounded-xl px-5 py-4 text-white focus:outline-none focus:border-[var(--color-cyan)] focus:ring-2 focus:ring-[var(--color-cyan)]/20 transition-all duration-300" />
+              </div>
+              <div className="flex flex-col gap-2">
+                <label htmlFor="partnerMessage" className="sr-only">How would you like to partner?</label>
+                <textarea id="partnerMessage" rows={4} placeholder="How would you like to partner?" className="bg-[var(--color-bg-deep)] border border-[var(--color-border-subtle)] rounded-xl px-5 py-4 text-white focus:outline-none focus:border-[var(--color-cyan)] focus:ring-2 focus:ring-[var(--color-cyan)]/20 transition-all duration-300 resize-none"></textarea>
+              </div>
               <Button type="submit" variant="primary" className="w-full mt-2">Send Inquiry</Button>
             </form>
           </div>

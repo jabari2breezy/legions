@@ -1,8 +1,5 @@
 'use client'
 
-import { useRef } from 'react'
-import { useGSAP } from '@gsap/react'
-import { initTextReveal } from '../utils/animations'
 import { SplitReveal } from './Transitions/SplitReveal'
 
 interface SectionHeaderProps {
@@ -20,18 +17,12 @@ export default function SectionHeader({
   align = 'center',
   className = ''
 }: SectionHeaderProps) {
-  const containerRef = useRef<HTMLDivElement>(null)
-
-  useGSAP(() => {
-    initTextReveal(containerRef.current)
-  }, { scope: containerRef })
-
   const alignClass = align === 'center' ? 'text-center mx-auto items-center' : 'text-left items-start'
 
   return (
-    <div ref={containerRef} className={`flex flex-col gap-4 max-w-3xl ${alignClass} ${className} reveal-container`}>
+    <div className={`flex flex-col gap-4 max-w-3xl ${alignClass} ${className}`}>
       {eyebrow && (
-        <h4 className="text-[var(--color-cyan)] font-mono uppercase tracking-[0.2em] text-[var(--font-size-h4)] reveal-text opacity-0">
+        <h4 className="text-[var(--color-cyan)] font-mono uppercase tracking-[0.2em] text-[var(--font-size-h4)]">
           {eyebrow}
         </h4>
       )}
@@ -43,7 +34,7 @@ export default function SectionHeader({
         {title}
       </SplitReveal>
       {subtitle && (
-        <p className="text-[var(--font-size-body-large)] text-[var(--color-text-secondary)] mt-2 reveal-text opacity-0 max-w-2xl text-balance leading-[var(--line-height-body)]">
+        <p className="text-[var(--font-size-body-large)] text-[var(--color-text-secondary)] mt-2 max-w-2xl text-balance leading-[var(--line-height-body)]">
           {subtitle}
         </p>
       )}

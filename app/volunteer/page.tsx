@@ -8,8 +8,10 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import SectionHeader from '../components/SectionHeader'
 import Button from '../components/Button'
-import SubpageCanvas from '../components/SubpageCanvas'
 import GrainOverlay from '../components/GrainOverlay'
+import dynamic from 'next/dynamic'
+
+const SubpageCanvas = dynamic(() => import('../components/SubpageCanvas'), { ssr: false })
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -112,27 +114,27 @@ export default function Volunteer() {
           <form className="flex flex-col gap-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="flex flex-col gap-2">
-                <label className="text-sm font-medium text-[var(--color-text-secondary)]">Full Name</label>
-                <input type="text" className="bg-[var(--color-bg-deep)] border border-[var(--color-border-subtle)] rounded-xl px-5 py-4 text-white focus:outline-none focus:border-[var(--color-cyan)] focus:ring-2 focus:ring-[var(--color-cyan)]/20 transition-all duration-300" />
+                <label htmlFor="fullName" className="text-sm font-medium text-[var(--color-text-secondary)]">Full Name</label>
+                <input id="fullName" type="text" className="bg-[var(--color-bg-deep)] border border-[var(--color-border-subtle)] rounded-xl px-5 py-4 text-white focus:outline-none focus:border-[var(--color-cyan)] focus:ring-2 focus:ring-[var(--color-cyan)]/20 transition-all duration-300" />
               </div>
               <div className="flex flex-col gap-2">
-                <label className="text-sm font-medium text-[var(--color-text-secondary)]">Email</label>
-                <input type="email" className="bg-[var(--color-bg-deep)] border border-[var(--color-border-subtle)] rounded-xl px-5 py-4 text-white focus:outline-none focus:border-[var(--color-cyan)] focus:ring-2 focus:ring-[var(--color-cyan)]/20 transition-all duration-300" />
+                <label htmlFor="email" className="text-sm font-medium text-[var(--color-text-secondary)]">Email</label>
+                <input id="email" type="email" className="bg-[var(--color-bg-deep)] border border-[var(--color-border-subtle)] rounded-xl px-5 py-4 text-white focus:outline-none focus:border-[var(--color-cyan)] focus:ring-2 focus:ring-[var(--color-cyan)]/20 transition-all duration-300" />
               </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="flex flex-col gap-2">
-                <label className="text-sm font-medium text-[var(--color-text-secondary)]">School / University</label>
-                <input type="text" className="bg-[var(--color-bg-deep)] border border-[var(--color-border-subtle)] rounded-xl px-5 py-4 text-white focus:outline-none focus:border-[var(--color-cyan)] focus:ring-2 focus:ring-[var(--color-cyan)]/20 transition-all duration-300" />
+                <label htmlFor="school" className="text-sm font-medium text-[var(--color-text-secondary)]">School / University</label>
+                <input id="school" type="text" className="bg-[var(--color-bg-deep)] border border-[var(--color-border-subtle)] rounded-xl px-5 py-4 text-white focus:outline-none focus:border-[var(--color-cyan)] focus:ring-2 focus:ring-[var(--color-cyan)]/20 transition-all duration-300" />
               </div>
               <div className="flex flex-col gap-2">
-                <label className="text-sm font-medium text-[var(--color-text-secondary)]">Age</label>
-                <input type="number" className="bg-[var(--color-bg-deep)] border border-[var(--color-border-subtle)] rounded-xl px-5 py-4 text-white focus:outline-none focus:border-[var(--color-cyan)] focus:ring-2 focus:ring-[var(--color-cyan)]/20 transition-all duration-300" />
+                <label htmlFor="age" className="text-sm font-medium text-[var(--color-text-secondary)]">Age</label>
+                <input id="age" type="number" className="bg-[var(--color-bg-deep)] border border-[var(--color-border-subtle)] rounded-xl px-5 py-4 text-white focus:outline-none focus:border-[var(--color-cyan)] focus:ring-2 focus:ring-[var(--color-cyan)]/20 transition-all duration-300" />
               </div>
             </div>
             <div className="flex flex-col gap-2">
-              <label className="text-sm font-medium text-[var(--color-text-secondary)]">Why do you want to join Legions?</label>
-              <textarea rows={4} className="bg-[var(--color-bg-deep)] border border-[var(--color-border-subtle)] rounded-xl px-5 py-4 text-white focus:outline-none focus:border-[var(--color-cyan)] focus:ring-2 focus:ring-[var(--color-cyan)]/20 transition-all duration-300 resize-none"></textarea>
+              <label htmlFor="whyJoin" className="text-sm font-medium text-[var(--color-text-secondary)]">Why do you want to join Legions?</label>
+              <textarea id="whyJoin" rows={4} className="bg-[var(--color-bg-deep)] border border-[var(--color-border-subtle)] rounded-xl px-5 py-4 text-white focus:outline-none focus:border-[var(--color-cyan)] focus:ring-2 focus:ring-[var(--color-cyan)]/20 transition-all duration-300 resize-none"></textarea>
             </div>
             <Button type="submit" variant="primary" className="w-full mt-4">Submit Application</Button>
           </form>

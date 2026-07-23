@@ -46,7 +46,7 @@ export default function ProjectImageBelt() {
   }, [])
 
   return (
-    <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+    <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden" aria-hidden="true">
       {/* Top strip — scrolls left */}
       <div className="absolute top-[15%] flex belt-scroll-left" style={{ width: 'max-content' }}>
         {[...strip1, ...strip1].map((src, i) => (
