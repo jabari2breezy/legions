@@ -1,205 +1,94 @@
-import Navbar from './components/Navbar'
+import Navbar from './components/Nav'
 import Footer from './components/Footer'
 import InteractiveHero from './components/InteractiveHero'
-import Marquee from './components/Marquee'
-import SectionHeader from './components/SectionHeader'
-import ProcessStep from './components/ProcessStep'
-import TestimonialCard from './components/TestimonialCard'
-import ImpactCounter from './components/ImpactCounter'
-import ProjectCard from './components/ProjectCard'
-import Button from './components/Button'
+import StatMarquee from './components/StatMarquee'
+import EditorialStatement from './components/EditorialStatement'
+import ProjectCardQuiet from './components/ProjectCardQuiet'
+import CTASectionAccent from './components/CTASectionAccent'
+import projectsIndex from '../data/projects-index.json'
+import type { ProjectSummary } from '../types/project'
+
+const projects = (projectsIndex as ProjectSummary[]).slice(0, 3)
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[var(--color-bg-deep)]">
+    <main>
       <Navbar />
-      
-      {/* 1. Interactive Hero */}
-      <InteractiveHero />
-      
-      {/* 2. Trust Marquee */}
-      <Marquee items={[
-        '5 CORE INITIATIVES',
-        'TSH 12M+ RAISED',
-        '500+ TREES PLANTED',
-        '150+ STUDENT VOLUNTEERS'
-      ]} />
 
-      {/* 3. The Mission / Story (Asymmetric 2-column) */}
-      <section className="py-[var(--spacing-section-y)] container mx-auto px-[var(--spacing-section-x)]">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-center">
-          <div className="lg:col-span-5">
-            <SectionHeader 
-              eyebrow="Our Story"
-              title="Built by Students. Driven by Impact."
-              align="left"
+      {/* 1. Hero — untouched */}
+      <InteractiveHero />
+
+      {/* 2. Stats */}
+      <StatMarquee />
+
+      {/* 3. Mission statement */}
+      <EditorialStatement>
+        What started in 2022 as a small group of high school students has evolved into one of Dar es Salaam's most active youth-led service organizations. We saw a gap between wanting to help and actually doing the work — so we bridged it.
+      </EditorialStatement>
+
+      {/* 4. Projects preview */}
+      <section className="container-narrow" style={{ paddingTop: 'var(--space-section)' }}>
+        <div style={{ marginBottom: 'clamp(32px, 4vw, 64px)' }}>
+          <span className="stat-label" style={{ color: 'var(--color-text-secondary)', marginBottom: '12px', display: 'block' }}>Our Work</span>
+          <h2 style={{ font: 'var(--text-h2)', letterSpacing: 'var(--letter-spacing-display)' }}>Selected Initiatives</h2>
+        </div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: 'var(--space-gap)' }}>
+          {projects.map((p, i) => (
+            <ProjectCardQuiet
+              key={p.slug}
+              slug={p.slug}
+              title={p.title}
+              category={p.category}
+              imageSrc={`/projects/${p.heroImage.filename}`}
+              index={i}
             />
-            <p className="mt-6 text-[var(--font-size-body-large)] text-[var(--color-text-secondary)] leading-relaxed max-w-lg">
-              What started in 2022 as a small group of high school students has evolved into one of Dar es Salaam's most active youth-led service organizations. We saw a gap between wanting to help and actually doing the work—so we bridged it.
-            </p>
-            <p className="mt-4 text-[var(--font-size-body-large)] text-[var(--color-text-secondary)] leading-relaxed max-w-lg mb-8">
-              From renovating cancer patient housing at Ujasiri House to coastal beach cleanups and tree planting, our mandate is simple: direct action, zero bureaucracy, total transparency.
-            </p>
-            <Button href="/about" variant="secondary">Read Our History</Button>
-          </div>
-          <div className="lg:col-span-7 relative">
-            <div className="aspect-[4/3] rounded-3xl overflow-hidden relative glass-panel p-2">
-              <div className="absolute inset-0 rounded-3xl overflow-hidden">
-                <img 
-                  src="/projects/ujasiri-house/IMG_8290.jpg"
-                  alt="Legions Team at Work"
-                  className="w-full h-full object-cover filter contrast-110"
-                />
+          ))}
+        </div>
+      </section>
+
+      {/* 5. Process */}
+      <section className="container-narrow" style={{ paddingTop: 'var(--space-section)' }}>
+        <span className="stat-label" style={{ color: 'var(--color-text-secondary)', marginBottom: '12px', display: 'block' }}>The Playbook</span>
+        <h2 style={{ font: 'var(--text-h2)', letterSpacing: 'var(--letter-spacing-display)', marginBottom: 'var(--space-block)' }}>How We Operate</h2>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 'var(--space-block)' }}>
+          {[
+            { n: '01', title: 'Identify Needs', desc: 'We consult with local leaders, schools, and hospitals to find areas where targeted action can create immediate relief or long-term growth.' },
+            { n: '02', title: 'Mobilize Resources', desc: 'Using our network, we crowdfund, secure in-kind donations, and organize volunteer squads faster than traditional NGOs.' },
+            { n: '03', title: 'Execute', desc: "We show up. Whether it's planting trees, painting wards, or distributing rations, our volunteers do the physical work." },
+            { n: '04', title: 'Report Back', desc: 'Complete transparency. Every shilling raised and every hour worked is documented and shared with our donors and community.' },
+          ].map((step) => (
+            <div key={step.n}>
+              <span style={{ font: 'var(--text-hero)', letterSpacing: 'var(--letter-spacing-display)', color: 'var(--color-text-secondary)', opacity: 0.3, lineHeight: 1 }}>{step.n}</span>
+              <h3 style={{ font: 'var(--text-h3)', marginTop: '8px', marginBottom: '12px' }}>{step.title}</h3>
+              <p style={{ font: 'var(--text-body)', color: 'var(--color-text-secondary)' }}>{step.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* 6. Testimonials */}
+      <section className="container-narrow" style={{ paddingTop: 'var(--space-section)' }}>
+        <span className="stat-label" style={{ color: 'var(--color-text-secondary)', marginBottom: '12px', display: 'block' }}>Community Voices</span>
+        <h2 style={{ font: 'var(--text-h2)', letterSpacing: 'var(--letter-spacing-display)', marginBottom: 'var(--space-block)' }}>The Impact We Leave</h2>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 'var(--space-gap)' }}>
+          {[
+            { quote: 'Legions stepped in when we needed them most. The dedication these students showed in renovating Ujasiri House was nothing short of inspiring.', author: 'Staff Representative', role: 'Ujasiri House / Muhimbili' },
+            { quote: "Seeing the youth take charge of our environment gives me hope. The tree planting initiative changed our school environment completely.", author: 'School Headmaster', role: 'Dar es Salaam Partner School' },
+            { quote: "I joined to get service hours, but I stayed because of the family. Legions taught me that my age doesn't limit my ability to help.", author: 'Student Volunteer', role: 'Legions Member' },
+          ].map((t) => (
+            <div key={t.author} style={{ borderTop: '1px solid var(--color-border)', paddingTop: '24px' }}>
+              <p style={{ font: 'var(--text-body-lg)', marginBottom: '16px' }}>"{t.quote}"</p>
+              <div>
+                <span style={{ font: 'var(--text-label)', textTransform: 'uppercase' as const, letterSpacing: 'var(--letter-spacing-label)', color: 'var(--color-text-secondary)' }}>{t.author}</span>
+                <span style={{ font: 'var(--text-label)', color: 'var(--color-text-secondary)', display: 'block', marginTop: '2px' }}>{t.role}</span>
               </div>
             </div>
-          </div>
+          ))}
         </div>
       </section>
 
-      {/* 4. Animated Stats */}
-      <section className="py-[var(--spacing-section-y)] bg-[var(--color-bg-deep)] relative overflow-hidden border-y border-[var(--color-border-subtle)]">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[var(--color-cyan)]/5 blur-[150px] rounded-full pointer-events-none"></div>
-        <div className="container mx-auto px-[var(--spacing-section-x)] relative z-10">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 md:gap-8">
-            <ImpactCounter end={12} prefix="TZS " suffix="M+" label="Funds Raised" />
-            <ImpactCounter end={500} suffix="+" label="Trees Planted" />
-            <ImpactCounter end={5} label="Major Initiatives" />
-            <ImpactCounter end={150} suffix="+" label="Active Volunteers" />
-          </div>
-        </div>
-      </section>
-
-      {/* 5. Projects Preview Grid */}
-      <section className="py-[var(--spacing-section-y)] container mx-auto px-[var(--spacing-section-x)]">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
-          <SectionHeader 
-            eyebrow="Our Work"
-            title="Active Initiatives."
-            align="left"
-          />
-          <Button href="/projects" variant="secondary">View All Projects</Button>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          <ProjectCard 
-            slug="tree-planting"
-            title="Tree Planting"
-            category="Environment"
-            impact="500+ Trees"
-            imageSrc="/projects/tree-planting/IMG_8271.jpg"
-          />
-          <ProjectCard 
-            slug="ujasiri-house"
-            title="Ujasiri House Renovation"
-            category="Health"
-            impact="30+ Families Daily"
-            imageSrc="/projects/ujasiri-house/IMG_8290.jpg"
-          />
-          <ProjectCard 
-            slug="beach-cleanups"
-            title="Beach Cleanups"
-            category="Environment"
-            impact="1.5+ Tons Collected"
-            imageSrc="/projects/beach-cleanups/IMG_8270.jpg"
-          />
-          <ProjectCard 
-            slug="ramadhan-project"
-            title="Ramadhan Project"
-            category="Community"
-            impact="1,200+ Reached"
-            imageSrc="/projects/ramadhan-project/IMG_8248.jpg"
-          />
-          <ProjectCard 
-            slug="amsen-visits"
-            title="AMSEN Visits"
-            category="Special Needs"
-            impact="40+ Students"
-            imageSrc="/projects/amsen-visits/IMG_8275.jpg"
-          />
-        </div>
-      </section>
-
-      {/* 6. How It Works (Process) */}
-      <section className="py-[var(--spacing-section-y)] bg-[var(--color-surface)] border-y border-[var(--color-border-subtle)]">
-        <div className="container mx-auto px-[var(--spacing-section-x)]">
-          <SectionHeader 
-            eyebrow="The Playbook"
-            title="How We Operate."
-            subtitle="We don't wait for permission to make a difference. Our model is built on speed, transparency, and community integration."
-            className="mb-20"
-          />
-          
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 max-w-5xl mx-auto">
-            <ProcessStep 
-              number="01"
-              title="Identify Needs"
-              description="We consult with local leaders, schools, and hospitals to find areas where targeted action can create immediate relief or long-term growth."
-            />
-            <ProcessStep 
-              number="02"
-              title="Mobilize Resources"
-              description="Using our network, we crowdfund, secure in-kind donations, and organize volunteer squads faster than traditional NGOs."
-            />
-            <ProcessStep 
-              number="03"
-              title="Execute"
-              description="We show up. Whether it's planting trees, painting wards, or distributing rations, our volunteers do the physical work."
-            />
-            <ProcessStep 
-              number="04"
-              title="Report Back"
-              description="Complete transparency. Every shilling raised and every hour worked is documented and shared with our donors and community."
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* 7. Testimonials */}
-      <section className="py-[var(--spacing-section-y)] container mx-auto px-[var(--spacing-section-x)]">
-        <SectionHeader 
-          eyebrow="Community Voices"
-          title="The Impact We Leave."
-          className="mb-16"
-        />
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-          <TestimonialCard 
-            quote="Legions stepped in when we needed them most. The dedication these students showed in renovating Ujasiri House was nothing short of inspiring."
-            author="Staff Representative"
-            role="Ujasiri House / Muhimbili"
-            delay={0}
-          />
-          <TestimonialCard 
-            quote="Seeing the youth take charge of our environment gives me hope. The tree planting initiative changed our school environment completely."
-            author="School Headmaster"
-            role="Dar es Salaam Partner School"
-            delay={0.2}
-          />
-          <TestimonialCard 
-            quote="I joined to get service hours, but I stayed because of the family. Legions taught me that my age doesn't limit my ability to help."
-            author="Student Volunteer"
-            role="Legions Member"
-            delay={0.4}
-          />
-        </div>
-      </section>
-
-      {/* 8. Closing CTA */}
-      <section className="py-[var(--spacing-section-y)] relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-cyan)]/10 to-transparent"></div>
-        <div className="container mx-auto px-[var(--spacing-section-x)] relative z-10 text-center flex flex-col items-center">
-          <h2 className="text-[var(--font-size-h1)] font-bold text-white mb-6 tracking-tight max-w-4xl text-balance">
-            Ready to Do the Work?
-          </h2>
-          <p className="text-[var(--font-size-body-large)] text-[var(--color-text-secondary)] mb-12 max-w-2xl text-balance">
-            Whether you want to volunteer on the frontlines or partner with us to fund the next major initiative, there is a place for you here.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Button href="/volunteer" variant="primary">Become a Volunteer</Button>
-            <Button href="/partner" variant="secondary">Partner With Us</Button>
-          </div>
-        </div>
-      </section>
+      {/* 7. CTA Accent */}
+      <CTASectionAccent />
 
       <Footer />
     </main>

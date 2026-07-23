@@ -1,136 +1,117 @@
 'use client'
 
-import { useRef, useMemo } from 'react'
-import { useGSAP } from '@gsap/react'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import SectionHeader from './SectionHeader'
-import Button from './Button'
+import { useMemo, useState } from 'react'
 import ProjectHero from './ProjectHero'
-import ProjectStats from './ProjectStats'
-import ProjectStory from './ProjectStory'
-import { RadialCarousel } from './RadialCarousel'
-import { CarouselSlider } from './CarouselSlider'
+import ProjectGallery from './ProjectGallery'
 import RelatedProjects from './RelatedProjects'
 import type { Project } from '../../types/project'
-import dynamic from 'next/dynamic'
-
-const SubpageCanvas = dynamic(() => import('./SubpageCanvas'), { ssr: false })
-
-gsap.registerPlugin(ScrollTrigger)
+import { motion } from 'motion/react'
 
 export default function ProjectDetailClient({ project }: { project: Project }) {
-  const mainRef = useRef<HTMLDivElement>(null)
-
   const allImages = useMemo(
     () => project.groups.flatMap((g) => g.images),
     [project.groups]
   )
 
-  useGSAP(() => {
-    const sections = document.querySelectorAll('.content-section')
-    sections.forEach((section) => {
-      gsap.fromTo(section,
-        { opacity: 0, y: 40 },
-        { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
-          scrollTrigger: { trigger: section, start: 'top 85%', once: true }
-        }
-      )
-    })
-
-    const planningSteps = document.querySelectorAll('.planning-step')
-    gsap.fromTo(planningSteps,
-      { opacity: 0, x: -30 },
-      { opacity: 1, x: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out',
-        scrollTrigger: { trigger: planningSteps[0], start: 'top 85%', once: true }
-      }
-    )
-
-    const impactCards = document.querySelectorAll('.impact-card')
-    gsap.fromTo(impactCards,
-      { opacity: 0, y: 30, scale: 0.95 },
-      { opacity: 1, y: 0, scale: 1, duration: 0.7, stagger: 0.12, ease: 'power3.out',
-        scrollTrigger: { trigger: impactCards[0], start: 'top 85%', once: true }
-      }
-    )
-  }, { scope: mainRef })
-
   return (
-    <div ref={mainRef}>
-      <SubpageCanvas />
-
+    <div>
       <ProjectHero project={project} />
 
-      <ProjectStats stats={project.stats} />
-
-      {/* Story Section */}
-      <section className="py-[var(--spacing-section-y)] container mx-auto px-[var(--spacing-section-x)] relative z-10">
-        <div className="max-w-4xl mx-auto">
-          <div className="mb-20 content-section">
-            <div className="flex items-center gap-3 mb-6">
-              <span className="w-8 h-[2px] bg-[var(--color-cyan)]"></span>
-              <span className="text-xs font-mono tracking-widest uppercase text-[var(--color-cyan)]">Our Story</span>
-            </div>
-            <h2 className="text-2xl md:text-3xl font-semibold text-white mb-8 leading-tight">Why This Matters</h2>
-            <ProjectStory
-              paragraphs={project.storyParagraphs}
-              testimonial={project.testimonial}
-            />
-          </div>
+      {/* Stats */}
+      <section className="project-stats">
+        <div className="container-narrow" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 'clamp(32px, 5vw, 80px)' }}>
+          {project.stats.map((stat, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+              style={{ textAlign: 'center' }}
+            >
+              <span style={{ font: 'var(--text-h1)', letterSpacing: 'var(--letter-spacing-display)', display: 'block' }}>{stat.value}</span>
+              <span style={{ font: 'var(--text-label)', textTransform: 'uppercase' as const, letterSpacing: 'var(--letter-spacing-label)', color: 'var(--color-text-secondary)' }}>{stat.label}</span>
+            </motion.div>
+          ))}
         </div>
       </section>
 
-      {/* Gallery */}
-      <section className="pb-[var(--spacing-section-y)] relative z-10">
-        <div className="max-w-6xl mx-auto">
-          {allImages.length > 0 && (
-            <div className="content-section">
-              <SectionHeader
-                eyebrow="Field Documentation"
-                title="Project Gallery"
-                align="center"
-                className="mb-8 px-[var(--spacing-section-x)]"
-              />
+      {/* Story */}
+      <section className="container-narrow" style={{ paddingTop: 'var(--space-block)' }}>
+        <div style={{ maxWidth: '800px' }}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <span style={{ font: 'var(--text-label)', textTransform: 'uppercase' as const, letterSpacing: 'var(--letter-spacing-label)', color: 'var(--color-accent)', display: 'block', marginBottom: '8px' }}>Our Story</span>
+            <h2 style={{ font: 'var(--text-h2)', letterSpacing: 'var(--letter-spacing-display)', marginBottom: '32px' }}>Why This Matters</h2>
+          </motion.div>
 
-              <div className="px-[var(--spacing-section-x)]">
-                {/* Mobile: CarouselSlider */}
-                <div className="md:hidden">
-                  <CarouselSlider slides={allImages} />
-                </div>
+          <div className="project-story-text">
+            {project.storyParagraphs.map((para, i) => (
+              <motion.p
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-60px' }}
+                transition={{ duration: 0.6, delay: i * 0.1 }}
+              >
+                {para}
+              </motion.p>
+            ))}
+          </div>
 
-                {/* Desktop: RadialCarousel */}
-                <div className="hidden md:block">
-                  <RadialCarousel
-                    items={allImages}
-                    radius={260}
-                    thumbnailSize={110}
-                    centerSize={400}
-                  />
-                </div>
-              </div>
-            </div>
+          {project.testimonial && (
+            <motion.blockquote
+              className="project-testimonial"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: 0.6 }}
+            >
+              <p>&ldquo;{project.testimonial.quote}&rdquo;</p>
+              <footer>
+                <span className="testimonial-name">{project.testimonial.name}</span>
+                <span className="testimonial-role">{project.testimonial.role}</span>
+              </footer>
+            </motion.blockquote>
           )}
         </div>
       </section>
 
-      {/* Related Projects */}
-      <section className="pb-[var(--spacing-section-y)] container mx-auto px-[var(--spacing-section-x)] relative z-10">
-        <div className="max-w-6xl mx-auto">
-          <RelatedProjects slugs={project.relatedSlugs} />
-        </div>
+      {/* Gallery */}
+      {allImages.length > 0 && (
+        <section style={{ paddingTop: 'var(--space-block)', paddingBottom: 'var(--space-block)' }}>
+          <div className="container-narrow">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              style={{ textAlign: 'center', marginBottom: '32px' }}
+            >
+              <span style={{ font: 'var(--text-label)', textTransform: 'uppercase' as const, letterSpacing: 'var(--letter-spacing-label)', color: 'var(--color-text-secondary)', display: 'block', marginBottom: '8px' }}>Field Documentation</span>
+              <h2 style={{ font: 'var(--text-h2)', letterSpacing: 'var(--letter-spacing-display)' }}>Project Gallery</h2>
+            </motion.div>
+            <ProjectGallery groups={project.groups} />
+          </div>
+        </section>
+      )}
+
+      {/* Related */}
+      <section className="container-narrow" style={{ paddingBottom: 'var(--space-section)' }}>
+        <RelatedProjects slugs={project.relatedSlugs} />
       </section>
 
       {/* CTA */}
-      <div className="container mx-auto px-[var(--spacing-section-x)] relative z-10">
-        <div className="max-w-4xl mx-auto">
-          <div className="flex flex-col sm:flex-row gap-4 items-center justify-center pt-12 border-t border-[var(--color-border-subtle)]">
-            <Button href="/projects" variant="secondary">Back to Projects</Button>
-            <Button href="/volunteer" variant="primary">Help on the Next One</Button>
-          </div>
+      <div className="container-narrow" style={{ paddingBottom: 'var(--space-section)' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', justifyContent: 'center', paddingTop: '32px', borderTop: '1px solid var(--color-border)' }}>
+          <a href="/projects" className="btn-secondary">Back to Projects</a>
+          <a href="/volunteer" className="btn-primary">Help on the Next One</a>
         </div>
       </div>
-
-      <div className="h-20" />
     </div>
   )
 }

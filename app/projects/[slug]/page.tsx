@@ -1,10 +1,12 @@
 import { notFound } from 'next/navigation'
 import fs from 'fs'
 import path from 'path'
-import Navbar from '../../components/Navbar'
+import Nav from '../../components/Nav'
 import Footer from '../../components/Footer'
 import ProjectDetailClient from '../../components/ProjectDetailClient'
 import type { Project } from '../../../types/project'
+
+export const metadata = { title: 'Project — Legions' }
 
 export function generateStaticParams() {
   const dataDir = path.join(process.cwd(), 'data/projects')
@@ -25,8 +27,8 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
   const project: Project = JSON.parse(fs.readFileSync(filePath, 'utf-8'))
 
   return (
-    <main className="min-h-screen bg-[var(--color-bg-deep)]">
-      <Navbar />
+    <main>
+      <Nav />
       <ProjectDetailClient project={project} />
       <Footer />
     </main>

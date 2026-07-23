@@ -2,7 +2,7 @@
 
 import { useState, useCallback } from 'react'
 import Image from 'next/image'
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 import Lightbox from './Lightbox'
 import type { ProjectImageGroup, ProjectImage } from '../../types/project'
 
