@@ -6,7 +6,7 @@ import { motion } from "motion/react";
 import { Nav } from "../../components/layout/Nav";
 import { SiteFooter } from "../../components/layout/SiteFooter";
 import { Section } from "../../components/primitives/Section";
-import { cursorEnter, cursorLeave } from "../../utils/cursor";
+import { cursorEnter, cursorLeave } from "@/app/utils/cursor";
 import projectsIndex from "@/data/projects-index.json";
 import type { Project } from "@/types/project";
 

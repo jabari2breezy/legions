@@ -6,7 +6,7 @@ import { motion, useScroll, useTransform } from "motion/react";
 import { Nav } from "../components/layout/Nav";
 import { SiteFooter } from "../components/layout/SiteFooter";
 import { FooterTeaser } from "../components/layout/FooterTeaser";
-import { cursorEnter, cursorLeave } from "../utils/cursor";
+import { cursorEnter, cursorLeave } from "@/app/utils/cursor";
 import projectsIndex from "@/data/projects-index.json";
 
 export default function ProjectsPage() {
