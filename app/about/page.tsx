@@ -16,9 +16,9 @@ export default function AboutPage() {
     <>
       <Nav />
       <PageHero />
-      <GrainientSection1 />
+      <StorySection />
       <TenetsSection />
-      <GrainientSection2 />
+      <TimelineSection />
       <FooterTeaser
         label="See Our Work"
         title="Five projects. One mission."
@@ -51,9 +51,9 @@ function PageHero() {
   );
 }
 
-function GrainientSection1() {
+function StorySection() {
   return (
-    <div style={{ width: "100%", height: "60vh", minHeight: 400, position: "relative" }}>
+    <div style={{ position: "relative" }}>
       <Grainient
         color1="#3bd0de"
         color2="#3B4FE0"
@@ -72,6 +72,42 @@ function GrainientSection1() {
         saturation={1.0}
         zoom={0.9}
       />
+      <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center" }}>
+        <div className="container">
+          <div className="about-grid-2col" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(40px, 6vw, 96px)", alignItems: "start" }}>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              <p className="t-label" style={{ color: "var(--color-cyan)", marginBottom: 16 }}>Our Story</p>
+              <h2 className="t-h1" style={{ marginBottom: 24 }}>From a school club to a movement</h2>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              viewport={{ once: true }}
+            >
+              <p className="t-body-lg" style={{ marginBottom: 16, color: "rgba(250,250,250,0.85)" }}>
+                Legions started in 2022 as a small group of students in Dar es Salaam who
+                refused to sit idle. What began as weekend beach cleanups grew into organized
+                community projects spanning education, environment, and infrastructure.
+              </p>
+              <p className="t-body-lg" style={{ marginBottom: 16, color: "rgba(250,250,250,0.85)" }}>
+                Today, Legions engages over 150 volunteers and has reached more than 1,200
+                individuals across five major projects. Every initiative is youth-led,
+                community-driven, and fully documented.
+              </p>
+              <p className="t-body-lg" style={{ color: "rgba(250,250,250,0.85)" }}>
+                We don&apos;t wait for funding. We don&apos;t wait for permission. We organize,
+                build, and deliver.
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
@@ -109,15 +145,15 @@ function TenetsSection() {
 }
 
 const TENETS = [
-  { title: "Youth-Led, Always", desc: "Every project is organized and executed by students. No top-down directives — just grassroots energy channeled with purpose." },
+  { title: "Youth-Led, Always", desc: "Every project is organized and executed by students. No top-down directives, just grassroots energy channeled with purpose." },
   { title: "Radical Transparency", desc: "Every shilling is tracked. Every outcome is documented. We publish results because accountability is non-negotiable." },
-  { title: "Show Up, Then Show Up Again", desc: "One-off events don't change communities. Consistent presence and follow-through do." },
+  { title: "Consistency Over One-Offs", desc: "One-time events don't change communities. Showing up repeatedly and following through does." },
   { title: "Community First", desc: "We don't impose solutions. We listen, collaborate, and build what communities actually need." },
 ];
 
-function GrainientSection2() {
+function TimelineSection() {
   return (
-    <div style={{ width: "100%", height: "60vh", minHeight: 400, position: "relative" }}>
+    <div style={{ position: "relative" }}>
       <Grainient
         color1="#3B4FE0"
         color2="#3bd0de"
@@ -136,6 +172,39 @@ function GrainientSection2() {
         saturation={1.1}
         zoom={0.85}
       />
+      <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center" }}>
+        <div className="container">
+          <div style={{ marginBottom: 48 }}>
+            <p className="t-label" style={{ color: "var(--color-cyan)", marginBottom: 12 }}>Timeline</p>
+            <h2 className="t-h1">How we got here</h2>
+          </div>
+          <div className="timeline">
+            {TIMELINE.map((item, i) => (
+              <motion.div
+                key={i}
+                className="timeline-item"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <p className="timeline-year">{item.year}</p>
+                <h3 className="timeline-title">{item.title}</h3>
+                <p className="timeline-desc">{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
+
+const TIMELINE = [
+  { year: "2022", title: "Legions Founded", desc: "A group of students in Dar es Salaam decide to stop waiting and start doing. First beach cleanup organized." },
+  { year: "2022", title: "AMSEN Partnership", desc: "First engagement with special needs students at AMSEN center. 40+ students and 25 volunteers participate." },
+  { year: "2023", title: "Tree Planting, Project MYK", desc: "500+ indigenous trees planted at public schools with a 90%+ survival rate." },
+  { year: "2023", title: "Ramadhan Project Launch", desc: "1,200+ individuals reached through food hamper distribution. 100% direct allocation." },
+  { year: "2024", title: "Ujasiri House Renovation", desc: "Complete renovation of Ujasiri House, a facility hosting 30+ families daily. 100% sweat-equity." },
+  { year: "2024", title: "150+ Active Volunteers", desc: "Legions grows to over 150 active volunteers across five major projects." },
+];

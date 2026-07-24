@@ -33,7 +33,7 @@ export default function VolunteerPage() {
               <h2 className="t-h1" style={{ marginBottom: 24 }}>Why volunteer with Legions?</h2>
               <p className="t-body-lg" style={{ color: "var(--text-secondary-dark)", marginBottom: 16 }}>
                 Legions runs on student energy. Every project is organized and executed
-                by volunteers who show up, get their hands dirty, and see the results
+                by volunteers who get their hands dirty, and see the results
                 firsthand.
               </p>
               <p className="t-body-lg" style={{ color: "var(--text-secondary-dark)", marginBottom: 32 }}>
@@ -115,7 +115,7 @@ export default function VolunteerPage() {
 
 const VOLUNTEER_BENEFITS = [
   { title: "Real Impact", desc: "Your hours translate directly into community outcomes. No middlemen, no bureaucracy." },
-  { title: "Build Skills", desc: "Project management, logistics, teamwork — skills that look good on any resume." },
+  { title: "Build Skills", desc: "Project management, logistics, teamwork: skills that look good on any resume." },
   { title: "Join a Community", desc: "150+ like-minded students working together. Friendships built through action." },
   { title: "Full Transparency", desc: "See exactly where your effort goes. Every project is documented and reported." },
 ];

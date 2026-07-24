@@ -164,8 +164,8 @@ function EditorialSection() {
       >
         <p>
           Legions was built on a simple belief: students don&apos;t need to wait
-          for permission to change their communities. We organize, we show up,
-          and we get it done.
+          for permission to change their communities. We organize, plan,
+          and deliver.
         </p>
       </motion.div>
     </Section>
@@ -184,7 +184,7 @@ function InitiativesSection() {
           <p className="t-label" style={{ color: "var(--color-cyan)", marginBottom: 12 }}>
             Our Work
           </p>
-          <h2 className="t-h1">Initiatives that move the needle</h2>
+          <h2 className="t-h1">What we&apos;ve been working on</h2>
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 40 }}>
           {projectsIndex.map((p, i) => (
@@ -271,7 +271,7 @@ function ProcessSection() {
 const PROCESS_STEPS = [
   { title: "Identify", desc: "We listen to communities and pinpoint where student energy can make the biggest difference." },
   { title: "Organize", desc: "Volunteers are briefed, logistics are locked, and teams are deployed with clear objectives." },
-  { title: "Execute", desc: "On the ground, hands on — beach cleanups, school renovations, food drives, tree planting." },
+  { title: "Execute", desc: "On the ground, hands on: beach cleanups, school renovations, food drives, tree planting." },
   { title: "Report", desc: "Every project is documented. Every impact is measured. Full transparency, always." },
 ];
 
@@ -313,7 +313,7 @@ function TestimonialsSection() {
 
 const TESTIMONIALS = [
   {
-    quote: "Legions showed up when no one else would. They didn't just talk about change — they brought paintbrushes, shovels, and a plan.",
+    quote: "Legions showed up when no one else would. They didn't just talk about change, they brought paintbrushes, shovels, and a plan.",
     name: "Amina Juma",
     role: "Ujasiri House Director",
   },

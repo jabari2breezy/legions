@@ -16,8 +16,8 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Legions — Student-Led Impact in Tanzania",
-  description: "Youth-led action. Real community change. The new standard for student-led impact in Tanzania. Est. 2022, Dar es Salaam.",
+  title: "Legions | Student-Led Impact in Tanzania",
+  description: "Youth-led community action in Tanzania. Student-organized projects in education, environment, and infrastructure. Est. 2022, Dar es Salaam.",
   icons: { icon: "/favicon.ico" },
 };
 

@@ -91,7 +91,7 @@ function ProjectStory({ project }: { project: Project }) {
         <div className="about-grid-2col" style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr", gap: "clamp(40px, 6vw, 96px)", alignItems: "start" }}>
           <div>
             <p className="t-label" style={{ color: "var(--color-cyan)", marginBottom: 12 }}>Story</p>
-            <h2 className="t-h2">The full picture</h2>
+            <h2 className="t-h2">The story</h2>
           </div>
           <div>
             {project.storyParagraphs.map((p, i) => (
