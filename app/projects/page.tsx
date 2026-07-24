@@ -6,8 +6,8 @@ import { motion, useScroll, useTransform, useSpring } from "motion/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Nav } from "@/app/components/layout/Nav";
-import { SiteFooter } from "@/app/components/layout/SiteFooter";
-import { FooterTeaser } from "@/app/components/layout/FooterTeaser";
+import { FooterContact } from "@/app/components/layout/FooterContact";
+import { SectionReveal } from "@/app/components/primitives/SectionReveal";
 import { cursorEnter, cursorLeave } from "@/app/utils/cursor";
 import projectsIndex from "@/data/projects-index.json";
 
@@ -21,17 +21,7 @@ export default function ProjectsPage() {
       <Nav />
       <PageHero />
       <ProjectsRail />
-      <FooterTeaser
-        label="Get Involved"
-        title="Your move."
-        href="/volunteer"
-        imageSrc="/projects/ramadhan-project/IMG_8248.jpg"
-      >
-        <div style={{ marginTop: 20 }}>
-          <Link href="/volunteer" className="btn btn-primary">Volunteer With Us</Link>
-        </div>
-      </FooterTeaser>
-      <SiteFooter />
+      <FooterContact />
     </>
   );
 }

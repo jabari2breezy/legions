@@ -4,6 +4,7 @@ import { ReactNode, createContext, useContext, useState, useCallback } from "rea
 import { Preloader } from "@/app/components/primitives/Preloader";
 import { SmoothScroll } from "@/app/components/primitives/SmoothScroll";
 import { CustomCursor } from "@/app/components/primitives/CustomCursor";
+import { CursorGlow } from "@/app/components/primitives/CursorGlow";
 
 const PreloaderContext = createContext<{
   complete: () => void;
@@ -21,6 +22,7 @@ export function Providers({ children }: { children: ReactNode }) {
       <SmoothScroll>
         {!done && <Preloader onComplete={complete} />}
         <CustomCursor />
+        <CursorGlow />
         <main style={{ visibility: done ? "visible" : "hidden" }}>{children}</main>
       </SmoothScroll>
     </PreloaderContext.Provider>

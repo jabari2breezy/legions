@@ -6,11 +6,9 @@ import { motion, AnimatePresence } from "motion/react";
 import projectsIndex from "@/data/projects-index.json";
 
 const NAV_LINKS = [
-  { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/projects", label: "Projects" },
   { href: "/volunteer", label: "Volunteer" },
-  { href: "/partner", label: "Partner" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -24,14 +22,14 @@ export function Nav() {
         <Link href="/" className="nav-logo">LEGIONS</Link>
         <div className="nav-right">
           <ul className="nav-links">
-            {NAV_LINKS.filter((l) => l.href !== "/").map((l) => (
+            {NAV_LINKS.map((l) => (
               <li key={l.href}>
                 <Link href={l.href}>{l.label}</Link>
               </li>
             ))}
           </ul>
           <button className="nav-menu-btn" onClick={toggle} aria-label="Toggle menu">
-            {open ? "Close" : "Menu"}
+            {open ? "Cerrar" : "Menú"}
           </button>
         </div>
       </nav>
@@ -46,7 +44,7 @@ export function Nav() {
             transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
           >
             <button className="menu-overlay-close" onClick={toggle} aria-label="Close menu">
-              Close
+              Cerrar
             </button>
 
             <div className="menu-overlay-left">

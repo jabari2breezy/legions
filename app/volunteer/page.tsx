@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { motion } from "motion/react";
 import { Nav } from "@/app/components/layout/Nav";
-import { SiteFooter } from "@/app/components/layout/SiteFooter";
+import { FooterContact } from "@/app/components/layout/FooterContact";
 import { Section } from "@/app/components/primitives/Section";
+import { SectionReveal } from "@/app/components/primitives/SectionReveal";
 
 export default function VolunteerPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -30,15 +30,19 @@ export default function VolunteerPage() {
         <div className="container" style={{ paddingBlock: "var(--space-section)" }}>
           <div className="split-2col" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(40px, 6vw, 96px)" }}>
             <div>
-              <h2 className="t-h1" style={{ marginBottom: 24 }}>Why volunteer with Legions?</h2>
-              <p className="t-body-lg" style={{ color: "var(--text-secondary-dark)", marginBottom: 16 }}>
-                Legions runs on student energy. Every project is organized and executed
-                by volunteers who get their hands dirty, and see the results
-                firsthand.
-              </p>
-              <p className="t-body-lg" style={{ color: "var(--text-secondary-dark)", marginBottom: 32 }}>
-                No experience needed. No prerequisites. Just bring your time and willingness.
-              </p>
+              <SectionReveal>
+                <h2 className="t-h1" style={{ marginBottom: 24 }}>Why volunteer with Legions?</h2>
+              </SectionReveal>
+              <SectionReveal delay={0.1}>
+                <p className="t-body-lg" style={{ color: "var(--text-secondary-dark)", marginBottom: 16 }}>
+                  Legions runs on student energy. Every project is organized and executed
+                  by volunteers who get their hands dirty, and see the results
+                  firsthand.
+                </p>
+                <p className="t-body-lg" style={{ color: "var(--text-secondary-dark)", marginBottom: 32 }}>
+                  No experience needed. No prerequisites. Just bring your time and willingness.
+                </p>
+              </SectionReveal>
               <div className="testimonials-columns" style={{ gap: 16 }}>
                 {VOLUNTEER_BENEFITS.map((b, i) => (
                   <motion.div
@@ -67,7 +71,7 @@ export default function VolunteerPage() {
                   animate={{ opacity: 1, scale: 1 }}
                   style={{ textAlign: "center", padding: "80px 40px" }}
                 >
-                  <div style={{ fontSize: "3rem", marginBottom: 16 }}>✓</div>
+                  <div style={{ fontSize: "3rem", marginBottom: 16 }}>&#10003;</div>
                   <h3 className="t-h2" style={{ marginBottom: 12 }}>Thank you</h3>
                   <p className="t-body-lg" style={{ color: "var(--text-secondary-dark)" }}>
                     We&apos;ll be in touch soon.
@@ -80,24 +84,24 @@ export default function VolunteerPage() {
                   style={{ display: "flex", flexDirection: "column", gap: 28 }}
                 >
                   <div className="form-group">
-                    <label className="form-label">Full Name</label>
-                    <input className="form-input" required />
+                    <label className="form-label" htmlFor="vol-name">Full Name</label>
+                    <input id="vol-name" className="form-input" required />
                   </div>
                   <div className="form-group">
-                    <label className="form-label">Email</label>
-                    <input className="form-input" type="email" required />
+                    <label className="form-label" htmlFor="vol-email">Email</label>
+                    <input id="vol-email" className="form-input" type="email" required />
                   </div>
                   <div className="form-group">
-                    <label className="form-label">Phone (optional)</label>
-                    <input className="form-input" />
+                    <label className="form-label" htmlFor="vol-phone">Phone (optional)</label>
+                    <input id="vol-phone" className="form-input" />
                   </div>
                   <div className="form-group">
-                    <label className="form-label">Which project interests you?</label>
-                    <input className="form-input" placeholder="e.g. Beach Cleanups, Tree Planting" />
+                    <label className="form-label" htmlFor="vol-project">Which project interests you?</label>
+                    <input id="vol-project" className="form-input" placeholder="e.g. Beach Cleanups, Tree Planting" />
                   </div>
                   <div className="form-group">
-                    <label className="form-label">Why do you want to volunteer?</label>
-                    <textarea className="form-textarea" rows={4} />
+                    <label className="form-label" htmlFor="vol-why">Why do you want to volunteer?</label>
+                    <textarea id="vol-why" className="form-textarea" rows={4} />
                   </div>
                   <button type="submit" className="btn btn-primary" style={{ alignSelf: "start" }}>
                     Sign Up
@@ -108,7 +112,7 @@ export default function VolunteerPage() {
           </div>
         </div>
       </Section>
-      <SiteFooter />
+      <FooterContact />
     </>
   );
 }

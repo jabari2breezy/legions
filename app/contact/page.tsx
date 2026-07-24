@@ -1,10 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { motion } from "motion/react";
 import { Nav } from "@/app/components/layout/Nav";
-import { SiteFooter } from "@/app/components/layout/SiteFooter";
+import { FooterContact } from "@/app/components/layout/FooterContact";
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -61,7 +60,7 @@ export default function ContactPage() {
                   animate={{ opacity: 1, scale: 1 }}
                   style={{ textAlign: "center", padding: "80px 40px" }}
                 >
-                  <div style={{ fontSize: "3rem", marginBottom: 16 }}>✓</div>
+                  <div style={{ fontSize: "3rem", marginBottom: 16 }}>&#10003;</div>
                   <h3 className="t-h2" style={{ marginBottom: 12, color: "var(--color-white)" }}>Message sent</h3>
                   <p className="t-body-lg" style={{ color: "var(--text-secondary-dark)" }}>
                     We&apos;ll get back to you soon.
@@ -74,20 +73,20 @@ export default function ContactPage() {
                   style={{ display: "flex", flexDirection: "column", gap: 28 }}
                 >
                   <div className="form-group">
-                    <label className="form-label">Name</label>
-                    <input className="form-input" required />
+                    <label className="form-label" htmlFor="contact-name">Name</label>
+                    <input id="contact-name" className="form-input" required />
                   </div>
                   <div className="form-group">
-                    <label className="form-label">Email</label>
-                    <input className="form-input" type="email" required />
+                    <label className="form-label" htmlFor="contact-email">Email</label>
+                    <input id="contact-email" className="form-input" type="email" required />
                   </div>
                   <div className="form-group">
-                    <label className="form-label">Subject</label>
-                    <input className="form-input" />
+                    <label className="form-label" htmlFor="contact-subject">Subject</label>
+                    <input id="contact-subject" className="form-input" />
                   </div>
                   <div className="form-group">
-                    <label className="form-label">Message</label>
-                    <textarea className="form-textarea" rows={5} required />
+                    <label className="form-label" htmlFor="contact-message">Message</label>
+                    <textarea id="contact-message" className="form-textarea" rows={5} required />
                   </div>
                   <button type="submit" className="btn btn-primary" style={{ alignSelf: "start" }}>
                     Send Message
@@ -98,7 +97,7 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
-      <SiteFooter />
+      <FooterContact />
     </>
   );
 }

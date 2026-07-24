@@ -3,8 +3,9 @@
 import Link from "next/link";
 import { motion } from "motion/react";
 import { Nav } from "@/app/components/layout/Nav";
-import { SiteFooter } from "@/app/components/layout/SiteFooter";
+import { FooterContact } from "@/app/components/layout/FooterContact";
 import { Section } from "@/app/components/primitives/Section";
+import { SectionReveal } from "@/app/components/primitives/SectionReveal";
 
 export default function PartnerPage() {
   return (
@@ -25,11 +26,13 @@ export default function PartnerPage() {
 
       <Section>
         <div className="container" style={{ paddingBlock: "var(--space-section)" }}>
-          <h2 className="t-h1" style={{ marginBottom: 12 }}>Why partner with Legions?</h2>
-          <p className="t-body-lg" style={{ marginBottom: 40, maxWidth: 600 }}>
-            Direct line to grassroots community impact in Tanzania.
-            Documented, transparent, and driven by student volunteers.
-          </p>
+          <SectionReveal>
+            <h2 className="t-h1" style={{ marginBottom: 12 }}>Why partner with Legions?</h2>
+            <p className="t-body-lg" style={{ marginBottom: 40, maxWidth: 600 }}>
+              Direct line to grassroots community impact in Tanzania.
+              Documented, transparent, and driven by student volunteers.
+            </p>
+          </SectionReveal>
           <div className="partner-benefits-grid">
             {PARTNER_BENEFITS.map((b, i) => (
               <motion.div
@@ -54,16 +57,18 @@ export default function PartnerPage() {
 
       <Section dark>
         <div className="container" style={{ paddingBlock: "var(--space-section)", textAlign: "center" }}>
-          <h2 className="t-h1" style={{ marginBottom: 16 }}>Ready to make a difference?</h2>
-          <p className="t-body-lg" style={{ color: "var(--text-secondary-dark)", marginBottom: 32, maxWidth: 500, marginInline: "auto" }}>
-            Reach out and let&apos;s discuss how your organization can partner with Legions.
-          </p>
+          <SectionReveal>
+            <h2 className="t-h1" style={{ marginBottom: 16 }}>Ready to make a difference?</h2>
+            <p className="t-body-lg" style={{ color: "var(--text-secondary-dark)", marginBottom: 32, maxWidth: 500, marginInline: "auto" }}>
+              Reach out and let&apos;s discuss how your organization can partner with Legions.
+            </p>
+          </SectionReveal>
           <Link href="/contact" className="btn btn-primary">
             Contact Us
           </Link>
         </div>
       </Section>
-      <SiteFooter />
+      <FooterContact />
     </>
   );
 }
