@@ -15,7 +15,6 @@ export default function HomePage() {
     <>
       <Nav />
       <HeroSection />
-      <StatsSection />
       <EditorialSection />
       <InitiativesSection />
       <ProcessSection />
@@ -112,41 +111,6 @@ function HeroSection() {
     </div>
   );
 }
-
-/* ========================================
-   Stats — glass panel row
-   ======================================== */
-
-function StatsSection() {
-  return (
-    <Section dark>
-      <div className="container">
-        <div className="stat-row">
-          {STATS.map((s, i) => (
-            <motion.div
-              className="stat-item glass-panel"
-              key={s.label}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
-              viewport={{ once: true }}
-            >
-              <span className="stat-value">{s.value}</span>
-              <span className="stat-label-text">{s.label}</span>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </Section>
-  );
-}
-
-const STATS = [
-  { value: "1,200+", label: "Individuals Reached" },
-  { value: "500+", label: "Trees Planted" },
-  { value: "150+", label: "Active Volunteers" },
-  { value: "5", label: "Major Projects" },
-];
 
 /* ========================================
    Editorial Statement
