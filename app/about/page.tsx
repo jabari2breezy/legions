@@ -1,11 +1,16 @@
 "use client";
 
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { motion } from "motion/react";
 import { Nav } from "@/app/components/layout/Nav";
 import { SiteFooter } from "@/app/components/layout/SiteFooter";
 import { FooterTeaser } from "@/app/components/layout/FooterTeaser";
 import { Section } from "@/app/components/primitives/Section";
+
+const Balatro = dynamic(() => import("@/app/components/primitives/Balatro"), {
+  ssr: false,
+});
 
 export default function AboutPage() {
   return (
@@ -49,8 +54,20 @@ function PageHero() {
 
 function StorySection() {
   return (
-    <Section className="liquid-metal">
-      <div className="container" style={{ paddingBlock: "var(--space-section)" }}>
+    <section className="section-dark balatro-section">
+      <Balatro
+        color1="#3bd0de"
+        color2="#3B4FE0"
+        color3="#0A0A0C"
+        contrast={3.0}
+        lighting={0.35}
+        spinAmount={0.2}
+        pixelFilter={600}
+        mouseInteraction={true}
+        isRotate={false}
+      />
+      <div className="balatro-overlay" />
+      <div className="container" style={{ paddingBlock: "var(--space-section)", position: "relative", zIndex: 1 }}>
         <div className="about-grid-2col" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(40px, 6vw, 96px)", alignItems: "start" }}>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -67,24 +84,24 @@ function StorySection() {
             transition={{ duration: 0.6, delay: 0.1 }}
             viewport={{ once: true }}
           >
-            <p className="t-body-lg" style={{ marginBottom: 16, color: "var(--text-secondary-dark)" }}>
+            <p className="t-body-lg" style={{ marginBottom: 16, color: "rgba(250,250,250,0.8)" }}>
               Legions started in 2022 as a small group of students in Dar es Salaam who
               refused to sit idle. What began as weekend beach cleanups grew into organized
               community projects spanning education, environment, and infrastructure.
             </p>
-            <p className="t-body-lg" style={{ marginBottom: 16, color: "var(--text-secondary-dark)" }}>
+            <p className="t-body-lg" style={{ marginBottom: 16, color: "rgba(250,250,250,0.8)" }}>
               Today, Legions engages over 150 volunteers and has reached more than 1,200
               individuals across five major projects. Every initiative is youth-led,
               community-driven, and fully documented.
             </p>
-            <p className="t-body-lg" style={{ color: "var(--text-secondary-dark)" }}>
+            <p className="t-body-lg" style={{ color: "rgba(250,250,250,0.8)" }}>
               We don&apos;t wait for funding. We don&apos;t wait for approval. We organize,
               show up, and get it done.
             </p>
           </motion.div>
         </div>
       </div>
-    </Section>
+    </section>
   );
 }
 
@@ -129,8 +146,20 @@ const TENETS = [
 
 function TimelineSection() {
   return (
-    <Section>
-      <div className="container" style={{ paddingBlock: "var(--space-section)" }}>
+    <section className="section-dark balatro-section">
+      <Balatro
+        color1="#3B4FE0"
+        color2="#3bd0de"
+        color3="#111114"
+        contrast={2.8}
+        lighting={0.3}
+        spinAmount={0.15}
+        pixelFilter={500}
+        mouseInteraction={true}
+        isRotate={false}
+      />
+      <div className="balatro-overlay" />
+      <div className="container" style={{ paddingBlock: "var(--space-section)", position: "relative", zIndex: 1 }}>
         <div style={{ marginBottom: 48 }}>
           <p className="t-label" style={{ color: "var(--color-cyan)", marginBottom: 12 }}>Timeline</p>
           <h2 className="t-h1">How we got here</h2>
@@ -152,7 +181,7 @@ function TimelineSection() {
           ))}
         </div>
       </div>
-    </Section>
+    </section>
   );
 }
 

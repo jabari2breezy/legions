@@ -1,0 +1,15 @@
+.balatro-container {
+  width: 100%;
+  height: 100%;
+}
+
+.balatro-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.balatro-wrap + * {
+  position: relative;
+  z-index: 1;
+}

@@ -1540,6 +1540,35 @@ a { color: inherit; text-decoration: none; }
   border-bottom: 1px solid rgba(250,250,250,0.15);
 }
 
+.balatro-container {
+  width: 100%;
+  height: 100%;
+}
+
+.balatro-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.balatro-section .balatro-container {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.balatro-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to bottom,
+    rgba(10, 10, 12, 0.4) 0%,
+    rgba(10, 10, 12, 0.2) 50%,
+    rgba(10, 10, 12, 0.5) 100%
+  );
+  pointer-events: none;
+}
+
 /* ========================================
    Partner Benefits Grid
    ======================================== */
