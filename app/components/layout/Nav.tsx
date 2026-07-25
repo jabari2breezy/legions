@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
+import { AsteriskSvg } from "@/app/components/primitives/AsteriskSvg";
 import projectsIndex from "@/data/projects-index.json";
 
 const NAV_LINKS = [
@@ -14,23 +15,43 @@ const NAV_LINKS = [
 
 export function Nav() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [scrollPct, setScrollPct] = useState(0);
   const toggle = useCallback(() => setOpen((v) => !v), []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 60);
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      setScrollPct(h > 0 ? Math.round((window.scrollY / h) * 100) : 0);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [open]);
 
   return (
     <>
-      <nav className="nav">
-        <Link href="/" className="nav-logo">LEGIONS</Link>
+      <nav className={`nav ${scrolled ? "is-scrolled" : ""}`}>
+        <Link href="/" className="nav-left">
+          <AsteriskSvg className="nav-asterisk" size={24} />
+          <span className="nav-logo">LEGIONS</span>
+        </Link>
         <div className="nav-right">
-          <ul className="nav-links">
-            {NAV_LINKS.map((l) => (
-              <li key={l.href}>
-                <Link href={l.href}>{l.label}</Link>
-              </li>
-            ))}
-          </ul>
           <button className="nav-menu-btn" onClick={toggle} aria-label="Toggle menu">
-            {open ? "Cerrar" : "Menú"}
+            {open ? "Cerrar" : "Menu"}
           </button>
+          <Link href="/volunteer" className="nav-cta-pill">
+            Get Involved
+          </Link>
         </div>
       </nav>
 
@@ -70,7 +91,7 @@ export function Nav() {
             </div>
 
             <div className="menu-overlay-right">
-              <p className="t-label" style={{ color: "var(--text-secondary-dark)", marginBottom: 20 }}>
+              <p className="t-label" style={{ color: "var(--color-ink-dim)", marginBottom: 20 }}>
                 Projects
               </p>
               <ul className="menu-project-list">
@@ -94,6 +115,8 @@ export function Nav() {
                 ))}
               </ul>
             </div>
+
+            <div className="menu-scroll-pct">{scrollPct}</div>
           </motion.div>
         )}
       </AnimatePresence>

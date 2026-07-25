@@ -3,8 +3,8 @@
 import { useState } from "react";
 import { motion } from "motion/react";
 import { Nav } from "@/app/components/layout/Nav";
-import { FooterContact } from "@/app/components/layout/FooterContact";
-import { Section } from "@/app/components/primitives/Section";
+import { SiteFooter } from "@/app/components/layout/SiteFooter";
+import { AsteriskSvg } from "@/app/components/primitives/AsteriskSvg";
 import { SectionReveal } from "@/app/components/primitives/SectionReveal";
 
 export default function VolunteerPage() {
@@ -20,45 +20,60 @@ export default function VolunteerPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           >
-            <p className="t-label" style={{ color: "var(--color-cyan)", marginBottom: 16 }}>Volunteer</p>
+            <p className="t-label" style={{ color: "var(--color-mint)", marginBottom: 16 }}>
+              <AsteriskSvg className="asterisk-motif" size={12} />
+              Volunteer
+            </p>
             <h1 className="t-display">Show up.<br />Make a mark.</h1>
           </motion.div>
         </div>
       </div>
 
-      <Section dark>
+      <section className="section-dark" style={{ borderTop: "1px solid var(--border-hairline)" }}>
         <div className="container" style={{ paddingBlock: "var(--space-section)" }}>
-          <div className="split-2col" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(40px, 6vw, 96px)" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(40px, 6vw, 96px)" }}>
             <div>
               <SectionReveal>
                 <h2 className="t-h1" style={{ marginBottom: 24 }}>Why volunteer with Legions?</h2>
               </SectionReveal>
               <SectionReveal delay={0.1}>
-                <p className="t-body-lg" style={{ color: "var(--text-secondary-dark)", marginBottom: 16 }}>
+                <p className="t-body-lg" style={{ color: "var(--color-ink-dim)", marginBottom: 16 }}>
                   Legions runs on student energy. Every project is organized and executed
                   by volunteers who get their hands dirty, and see the results
                   firsthand.
                 </p>
-                <p className="t-body-lg" style={{ color: "var(--text-secondary-dark)", marginBottom: 32 }}>
+                <p className="t-body-lg" style={{ color: "var(--color-ink-dim)", marginBottom: 32 }}>
                   No experience needed. No prerequisites. Just bring your time and willingness.
                 </p>
               </SectionReveal>
-              <div className="testimonials-columns" style={{ gap: 16 }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
                 {VOLUNTEER_BENEFITS.map((b, i) => (
                   <motion.div
                     key={i}
                     className="glass-panel"
-                    style={{ padding: 24, borderTop: "2px solid var(--color-cyan)" }}
+                    style={{ padding: 24 }}
                     initial={{ opacity: 0, y: 40 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: i * 0.1 }}
                     viewport={{ once: true }}
                   >
-                    <span className="process-num" style={{ fontSize: "1.5rem" }}>
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <h3 className="process-title" style={{ marginTop: 8 }}>{b.title}</h3>
-                    <p className="process-desc">{b.desc}</p>
+                    <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
+                      <span style={{
+                        fontFamily: "var(--font-display)",
+                        fontWeight: 700,
+                        fontSize: "0.7rem",
+                        letterSpacing: "0.08em",
+                        color: "var(--color-mint)",
+                      }}>
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <h3 style={{
+                        fontFamily: "var(--font-body)",
+                        fontWeight: 500,
+                        fontSize: "1.1rem",
+                      }}>{b.title}</h3>
+                    </div>
+                    <p style={{ fontSize: "0.9rem", lineHeight: 1.6, color: "var(--color-ink-dim)" }}>{b.desc}</p>
                   </motion.div>
                 ))}
               </div>
@@ -73,7 +88,7 @@ export default function VolunteerPage() {
                 >
                   <div style={{ fontSize: "3rem", marginBottom: 16 }}>&#10003;</div>
                   <h3 className="t-h2" style={{ marginBottom: 12 }}>Thank you</h3>
-                  <p className="t-body-lg" style={{ color: "var(--text-secondary-dark)" }}>
+                  <p className="t-body-lg" style={{ color: "var(--color-ink-dim)" }}>
                     We&apos;ll be in touch soon.
                   </p>
                 </motion.div>
@@ -111,8 +126,8 @@ export default function VolunteerPage() {
             </div>
           </div>
         </div>
-      </Section>
-      <FooterContact />
+      </section>
+      <SiteFooter />
     </>
   );
 }

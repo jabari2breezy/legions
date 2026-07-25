@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
 
 interface PreloaderProps {
@@ -10,11 +10,28 @@ interface PreloaderProps {
 export function Preloader({ onComplete }: PreloaderProps) {
   const [count, setCount] = useState(0);
   const [exiting, setExiting] = useState(false);
+  const prefersReduced = useRef(false);
 
   useEffect(() => {
+    prefersReduced.current = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  }, []);
+
+  const handleSkip = useCallback(() => {
+    if (exiting) return;
+    setExiting(true);
+    setTimeout(onComplete, 500);
+  }, [exiting, onComplete]);
+
+  useEffect(() => {
+    if (prefersReduced.current) {
+      setCount(100);
+      setTimeout(onComplete, 200);
+      return;
+    }
+
     let frame: number;
     let start: number | null = null;
-    const duration = 2200;
+    const duration = 2000;
 
     const tick = (ts: number) => {
       if (!start) start = ts;
@@ -27,8 +44,8 @@ export function Preloader({ onComplete }: PreloaderProps) {
       } else {
         setTimeout(() => {
           setExiting(true);
-          setTimeout(onComplete, 600);
-        }, 300);
+          setTimeout(onComplete, 500);
+        }, 200);
       }
     };
 
@@ -43,11 +60,18 @@ export function Preloader({ onComplete }: PreloaderProps) {
           className="preloader"
           exit={{
             clipPath: "inset(0 0 100% 0)",
-            transition: { duration: 0.6, ease: [0.76, 0, 0.24, 1] },
+            transition: { duration: 0.5, ease: [0.76, 0, 0.24, 1] },
           }}
+          onClick={handleSkip}
+          style={{ cursor: "pointer" }}
         >
-          <div className="preloader-wordmark">LEGIONS</div>
           <div className="preloader-counter">{String(count).padStart(3, "0")}</div>
+          <div className="preloader-line">
+            <div
+              className="preloader-line-fill"
+              style={{ width: `${count}%` }}
+            />
+          </div>
         </motion.div>
       )}
     </AnimatePresence>
