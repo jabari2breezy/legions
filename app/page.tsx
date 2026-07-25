@@ -75,8 +75,10 @@ function HeroSection() {
           </span>
           <span className="hero-stanza-line">
             <TextReveal as="span" className="hero-stanza-word" delay={0.7}>
-              Student energy,{' '}
-              <em className="t-emphasis">real impact.</em>
+              Student energy,
+            </TextReveal>{' '}
+            <TextReveal as="span" className="hero-stanza-word t-emphasis" delay={0.85}>
+              real impact.
             </TextReveal>
           </span>
         </h1>
