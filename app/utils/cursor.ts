@@ -1,5 +1,5 @@
-export function cursorEnter(label?: string) {
-  window.dispatchEvent(new CustomEvent("cursor:enter", { detail: { label } }));
+export function cursorEnter(label: string, mode: "hover" | "wheel" | "project" = "hover") {
+  window.dispatchEvent(new CustomEvent("cursor:enter", { detail: { label, mode } }));
 }
 
 export function cursorLeave() {

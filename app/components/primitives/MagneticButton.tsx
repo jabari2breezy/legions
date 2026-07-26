@@ -9,10 +9,10 @@ interface MagneticButtonProps {
   strength?: number;
 }
 
-export function MagneticButton({ 
-  children, 
+export function MagneticButton({
+  children,
   className = "",
-  strength = 0.3 
+  strength = 0.3,
 }: MagneticButtonProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -37,7 +37,7 @@ export function MagneticButton({
       onMouseMove={handleMouse}
       onMouseLeave={handleMouseLeave}
       animate={{ x: position.x, y: position.y }}
-      transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
+      transition={{ type: "spring", stiffness: 300, damping: 20, mass: 0.1 }}
       style={{ display: "inline-flex" }}
     >
       {children}

@@ -1,60 +1,65 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 interface CursorState {
   x: number;
   y: number;
   hovering: boolean;
   label: string;
-  visible: boolean;
+  mode: "default" | "hover" | "wheel" | "project";
 }
 
 export function CustomCursor() {
   const dotRef = useRef<HTMLDivElement>(null);
+  const ringRef = useRef<HTMLDivElement>(null);
   const labelRef = useRef<HTMLDivElement>(null);
   const state = useRef<CursorState>({
-    x: 0, y: 0, hovering: false, label: "", visible: false,
+    x: 0, y: 0, hovering: false, label: "", mode: "default",
   });
   const pos = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
-    // Check if touch device
-    if ("ontouchstart" in window) return;
+    if ("ontouchstart" in window || navigator.maxTouchPoints > 0) return;
 
     const onMove = (e: MouseEvent) => {
       state.current.x = e.clientX;
       state.current.y = e.clientY;
-      state.current.visible = true;
     };
 
-    const onEnterProject = (e: Event) => {
-      const customEvent = e as CustomEvent;
+    const onCursorEnter = (e: Event) => {
+      const detail = (e as CustomEvent).detail;
       state.current.hovering = true;
-      state.current.label = customEvent.detail?.label || "";
+      state.current.label = detail?.label || "";
+      state.current.mode = detail?.mode || "hover";
     };
 
-    const onLeaveProject = () => {
+    const onCursorLeave = () => {
       state.current.hovering = false;
       state.current.label = "";
+      state.current.mode = "default";
     };
 
     window.addEventListener("mousemove", onMove);
-    window.addEventListener("cursor:enter", onEnterProject as EventListener);
-    window.addEventListener("cursor:leave", onLeaveProject);
+    window.addEventListener("cursor:enter", onCursorEnter as EventListener);
+    window.addEventListener("cursor:leave", onCursorLeave);
 
     let raf: number;
     const tick = () => {
-      pos.current.x += (state.current.x - pos.current.x) * 0.15;
-      pos.current.y += (state.current.y - pos.current.y) * 0.15;
+      const lerp = 0.12;
+      pos.current.x += (state.current.x - pos.current.x) * lerp;
+      pos.current.y += (state.current.y - pos.current.y) * lerp;
 
       if (dotRef.current) {
-        dotRef.current.style.transform = `translate(${pos.current.x - 4}px, ${pos.current.y - 4}px)`;
-        dotRef.current.classList.toggle("is-hovering", state.current.hovering);
+        dotRef.current.style.transform = `translate(${pos.current.x - 3}px, ${pos.current.y - 3}px)`;
+      }
+      if (ringRef.current) {
+        ringRef.current.style.transform = `translate(${pos.current.x}px, ${pos.current.y}px)`;
+        ringRef.current.classList.toggle("is-hovering", state.current.mode === "hover");
+        ringRef.current.classList.toggle("is-wheel-hover", state.current.mode === "wheel");
+        ringRef.current.classList.toggle("is-project-hover", state.current.mode === "project");
       }
       if (labelRef.current) {
-        labelRef.current.style.transform = `translate(${state.current.x}px, ${state.current.y - 24}px)`;
-        labelRef.current.classList.toggle("is-visible", state.current.hovering && !!state.current.label);
         labelRef.current.textContent = state.current.label;
       }
 
@@ -65,15 +70,17 @@ export function CustomCursor() {
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener("mousemove", onMove);
-      window.removeEventListener("cursor:enter", onEnterProject as EventListener);
-      window.removeEventListener("cursor:leave", onLeaveProject);
+      window.removeEventListener("cursor:enter", onCursorEnter as EventListener);
+      window.removeEventListener("cursor:leave", onCursorLeave);
     };
   }, []);
 
   return (
     <>
       <div ref={dotRef} className="cursor-dot" />
-      <div ref={labelRef} className="cursor-label" />
+      <div ref={ringRef} className="cursor-ring">
+        <span ref={labelRef} className="cursor-label" />
+      </div>
     </>
   );
 }
