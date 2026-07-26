@@ -5,7 +5,7 @@ import Link from "next/link";
 import { motion } from "motion/react";
 import { Nav } from "@/app/components/layout/Nav";
 import { SiteFooter } from "@/app/components/layout/SiteFooter";
-import { AsteriskSvg } from "@/app/components/primitives/AsteriskSvg";
+import { Section } from "@/app/components/primitives/Section";
 import { cursorEnter, cursorLeave } from "@/app/utils/cursor";
 import projectsIndex from "@/data/projects-index.json";
 import type { Project } from "@/types/project";
@@ -52,6 +52,8 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
 }
 
 function ProjectHero({ project }: { project: Project }) {
+  const idx = projectsIndex.findIndex((p) => p.slug === project.slug);
+
   return (
     <div className="pd-hero">
       <div className="pd-hero-bg">
@@ -67,7 +69,7 @@ function ProjectHero({ project }: { project: Project }) {
           <div className="pd-breadcrumb">
             <Link href="/projects">Projects</Link>
             <span>/</span>
-            <span style={{ color: "var(--color-ink)" }}>{project.title}</span>
+            <span style={{ color: "var(--ink)" }}>{project.title}</span>
           </div>
           <span className="pd-category-tag">{project.category}</span>
           <h1 className="pd-title">{project.title}</h1>
@@ -84,14 +86,11 @@ function ProjectHero({ project }: { project: Project }) {
 
 function ProjectStory({ project }: { project: Project }) {
   return (
-    <section className="section-dark" style={{ borderTop: "1px solid var(--border-hairline)" }}>
+    <Section dark>
       <div className="container" style={{ paddingBlock: "var(--space-section)" }}>
         <div className="about-grid-2col" style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr", gap: "clamp(40px, 6vw, 96px)", alignItems: "start" }}>
           <div>
-            <p className="t-label" style={{ color: "var(--color-mint)", marginBottom: 12 }}>
-              <AsteriskSvg className="asterisk-motif" size={12} />
-              Story
-            </p>
+            <p className="t-label" style={{ color: "var(--mint)", marginBottom: 12 }}>Story</p>
             <h2 className="t-h2">The story</h2>
           </div>
           <div>
@@ -99,7 +98,7 @@ function ProjectStory({ project }: { project: Project }) {
               <motion.p
                 key={i}
                 className="t-body-lg"
-                style={{ marginBottom: 16, color: "var(--color-ink-dim)", maxWidth: "55ch" }}
+                style={{ marginBottom: 16, color: "var(--text-secondary-dark)", maxWidth: "55ch" }}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: i * 0.08 }}
@@ -111,7 +110,8 @@ function ProjectStory({ project }: { project: Project }) {
           </div>
         </div>
 
-        <div style={{ display: "flex", gap: 40, marginTop: "var(--space-block)", borderTop: "1px solid var(--border-hairline)", paddingTop: 32, flexWrap: "wrap" }}>
+        {/* Stats row */}
+        <div className="pd-stats-row" style={{ display: "flex", gap: 40, marginTop: "var(--space-block)", borderTop: "1px solid var(--border-dark)", paddingTop: 32, flexWrap: "wrap" }}>
           {project.stats.map((s, i) => (
             <div key={i}>
               <p className="stat-value">{s.value}</p>
@@ -120,7 +120,7 @@ function ProjectStory({ project }: { project: Project }) {
           ))}
         </div>
       </div>
-    </section>
+    </Section>
   );
 }
 
@@ -132,13 +132,10 @@ function ProjectGallery({ project }: { project: Project }) {
 
   return (
     <>
-      <section className="section-dark" style={{ borderTop: "1px solid var(--border-hairline)" }}>
+      <Section>
         <div className="container" style={{ paddingBlock: "var(--space-section)" }}>
           <div style={{ marginBottom: 48 }}>
-            <p className="t-label" style={{ color: "var(--color-mint)", marginBottom: 12 }}>
-              <AsteriskSvg className="asterisk-motif" size={12} />
-              Gallery
-            </p>
+            <p className="t-label" style={{ color: "var(--mint)", marginBottom: 12 }}>Gallery</p>
             <h2 className="t-h1">In the field</h2>
           </div>
           <div className="gallery-masonry">
@@ -156,8 +153,9 @@ function ProjectGallery({ project }: { project: Project }) {
             ))}
           </div>
         </div>
-      </section>
+      </Section>
 
+      {/* Lightbox */}
       {lightbox && (
         <div className="lightbox-backdrop" onClick={() => setLightbox(null)}>
           <button className="lightbox-close" aria-label="Close lightbox">✕</button>
@@ -175,31 +173,13 @@ function ProjectTestimonial({ project }: { project: Project }) {
   if (!project.testimonial) return null;
 
   return (
-    <section className="section-dark" style={{ borderTop: "1px solid var(--border-hairline)" }}>
+    <Section dark>
       <div className="container" style={{ paddingBlock: "var(--space-section)", maxWidth: 800 }}>
-        <div className="testimonial-quote-mark" style={{
-          fontFamily: "var(--font-emphasis)",
-          fontStyle: "italic",
-          fontSize: "5rem",
-          lineHeight: 1,
-          color: "var(--color-mint)",
-          opacity: 0.25,
-          marginBottom: -16,
-        }}>&ldquo;</div>
+        <div className="testimonial-quote-mark">"</div>
         <p className="t-h2" style={{ marginBottom: 24 }}>{project.testimonial.quote}</p>
-        <p style={{
-          fontSize: "0.65rem",
-          fontWeight: 600,
-          letterSpacing: "0.12em",
-          textTransform: "uppercase",
-          color: "var(--color-ink)",
-        }}>{project.testimonial.name}</p>
-        <p style={{
-          fontSize: "0.75rem",
-          color: "var(--color-ink-dim)",
-          marginTop: 2,
-        }}>{project.testimonial.role}</p>
+        <p className="testimonial-author">{project.testimonial.name}</p>
+        <p className="testimonial-role">{project.testimonial.role}</p>
       </div>
-    </section>
+    </Section>
   );
 }

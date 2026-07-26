@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 
 interface PreloaderProps {
@@ -10,42 +10,27 @@ interface PreloaderProps {
 export function Preloader({ onComplete }: PreloaderProps) {
   const [count, setCount] = useState(0);
   const [exiting, setExiting] = useState(false);
-  const prefersReduced = useRef(false);
+  const [done, setDone] = useState(false);
+  const startTime = useRef<number | null>(null);
 
   useEffect(() => {
-    prefersReduced.current = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  }, []);
-
-  const handleSkip = useCallback(() => {
-    if (exiting) return;
-    setExiting(true);
-    setTimeout(onComplete, 500);
-  }, [exiting, onComplete]);
-
-  useEffect(() => {
-    if (prefersReduced.current) {
-      setCount(100);
-      setTimeout(onComplete, 200);
-      return;
-    }
-
     let frame: number;
-    let start: number | null = null;
     const duration = 2000;
 
     const tick = (ts: number) => {
-      if (!start) start = ts;
-      const elapsed = ts - start;
+      if (!startTime.current) startTime.current = ts;
+      const elapsed = ts - startTime.current;
       const progress = Math.min(elapsed / duration, 1);
       setCount(Math.round(progress * 100));
 
       if (progress < 1) {
         frame = requestAnimationFrame(tick);
       } else {
+        setDone(true);
         setTimeout(() => {
           setExiting(true);
-          setTimeout(onComplete, 500);
-        }, 200);
+          setTimeout(onComplete, 800);
+        }, 400);
       }
     };
 
@@ -60,17 +45,24 @@ export function Preloader({ onComplete }: PreloaderProps) {
           className="preloader"
           exit={{
             clipPath: "inset(0 0 100% 0)",
-            transition: { duration: 0.5, ease: [0.76, 0, 0.24, 1] },
           }}
-          onClick={handleSkip}
-          style={{ cursor: "pointer" }}
+          transition={{
+            duration: 0.8,
+            ease: [0.16, 1, 0.3, 1],
+          }}
         >
-          <div className="preloader-counter">{String(count).padStart(3, "0")}</div>
-          <div className="preloader-line">
-            <div
-              className="preloader-line-fill"
-              style={{ width: `${count}%` }}
-            />
+          <div className="preloader-inner">
+            <div className="preloader-counter">
+              {String(count).padStart(2, "0")}
+            </div>
+            <div className="preloader-progress">
+              <motion.div
+                className="preloader-progress-line"
+                initial={{ width: "0%" }}
+                animate={{ width: done ? "100%" : `${count}%` }}
+                transition={{ duration: 0.1, ease: "easeOut" }}
+              />
+            </div>
           </div>
         </motion.div>
       )}

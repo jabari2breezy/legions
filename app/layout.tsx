@@ -1,28 +1,19 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, Fraunces, Inter, JetBrains_Mono } from "next/font/google";
+import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 
-const bricolage = Bricolage_Grotesque({
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-display",
-  weight: ["400", "500", "600", "700", "800"],
-});
-
-const fraunces = Fraunces({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-emphasis",
-  weight: ["400", "500", "600"],
-  style: ["normal", "italic"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-body",
-  weight: ["400", "500", "600"],
 });
 
 const jetbrains = JetBrains_Mono({
@@ -32,14 +23,14 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Legions | Youth-Led Action in Tanzania",
-  description: "A student-led community service organization in Dar es Salaam, Tanzania. We take action where it matters.",
+  title: "Legions | Student-Led Impact in Tanzania",
+  description: "Youth-led community action in Tanzania. Student-organized projects in education, environment, and infrastructure. Est. 2022, Dar es Salaam.",
   icons: { icon: "/favicon.ico" },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${bricolage.variable} ${fraunces.variable} ${inter.variable} ${jetbrains.variable}`}>
+    <html lang="en" className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrains.variable}`}>
       <body>
         <Providers>{children}</Providers>
       </body>

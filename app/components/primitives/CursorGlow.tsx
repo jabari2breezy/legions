@@ -6,9 +6,6 @@ export function CursorGlow() {
   const glowRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const isMobile = window.matchMedia("(max-width: 768px)").matches;
-    if (isMobile) return;
-
     const handleMove = (e: MouseEvent) => {
       if (!glowRef.current) return;
       glowRef.current.style.setProperty("--mx", `${e.clientX}px`);
@@ -28,7 +25,7 @@ export function CursorGlow() {
         zIndex: 1,
         pointerEvents: "none",
         background:
-          "radial-gradient(circle 350px at var(--mx, 50%) var(--my, 50%), rgba(99, 201, 168, 0.05), transparent)",
+          "radial-gradient(circle 400px at var(--mx, 50%) var(--my, 50%), rgba(77, 232, 212, 0.06), transparent)",
       }}
     />
   );

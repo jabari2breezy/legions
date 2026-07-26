@@ -5,6 +5,7 @@ import { Preloader } from "@/app/components/primitives/Preloader";
 import { SmoothScroll } from "@/app/components/primitives/SmoothScroll";
 import { CustomCursor } from "@/app/components/primitives/CustomCursor";
 import { CursorGlow } from "@/app/components/primitives/CursorGlow";
+import { GridOverlay } from "@/app/components/primitives/GridOverlay";
 
 const PreloaderContext = createContext<{
   complete: () => void;
@@ -23,7 +24,10 @@ export function Providers({ children }: { children: ReactNode }) {
         {!done && <Preloader onComplete={complete} />}
         <CustomCursor />
         <CursorGlow />
-        <main style={{ visibility: done ? "visible" : "hidden" }}>{children}</main>
+        <main style={{ visibility: done ? "visible" : "hidden" }}>
+          <GridOverlay />
+          {children}
+        </main>
       </SmoothScroll>
     </PreloaderContext.Provider>
   );

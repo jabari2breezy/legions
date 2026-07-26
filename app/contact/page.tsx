@@ -4,7 +4,6 @@ import { useState } from "react";
 import { motion } from "motion/react";
 import { Nav } from "@/app/components/layout/Nav";
 import { SiteFooter } from "@/app/components/layout/SiteFooter";
-import { AsteriskSvg } from "@/app/components/primitives/AsteriskSvg";
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -19,39 +18,36 @@ export default function ContactPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           >
-            <p className="t-label" style={{ color: "var(--color-mint)", marginBottom: 16 }}>
-              <AsteriskSvg className="asterisk-motif" size={12} />
-              Contact
-            </p>
+            <p className="t-label" style={{ color: "var(--mint)", marginBottom: 16 }}>Contact</p>
             <h1 className="t-display">Say hello.</h1>
           </motion.div>
         </div>
       </div>
 
-      <section className="section-dark" style={{ borderTop: "1px solid var(--border-hairline)" }}>
+      <section className="section-dark">
         <div className="container" style={{ paddingBlock: "var(--space-section)" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(40px, 6vw, 96px)" }}>
+          <div className="contact-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(40px, 6vw, 96px)" }}>
             <div>
-              <p className="t-body-lg" style={{ color: "var(--color-ink-dim)", marginBottom: 32 }}>
+              <p className="t-body-lg" style={{ color: "var(--text-secondary-dark)", marginBottom: 32 }}>
                 Have a question, want to collaborate, or just want to say hi?
                 We&apos;d love to hear from you.
               </p>
               <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
                 <div>
-                  <p className="t-label" style={{ color: "var(--color-ink-dim)", marginBottom: 4 }}>Email</p>
-                  <a href="mailto:legions@gmail.com" className="t-h3" style={{ color: "var(--color-mint)", transition: "color 0.3s" }}>
+                  <p className="t-label" style={{ color: "var(--text-secondary-dark)", marginBottom: 4 }}>Email</p>
+                  <a href="mailto:legions@gmail.com" className="t-h3" style={{ color: "var(--mint)", transition: "color 0.3s" }}>
                     legions@gmail.com
                   </a>
                 </div>
                 <div>
-                  <p className="t-label" style={{ color: "var(--color-ink-dim)", marginBottom: 4 }}>Location</p>
+                  <p className="t-label" style={{ color: "var(--text-secondary-dark)", marginBottom: 4 }}>Location</p>
                   <p className="t-h3">Dar es Salaam, Tanzania</p>
                 </div>
                 <div>
-                  <p className="t-label" style={{ color: "var(--color-ink-dim)", marginBottom: 4 }}>Social</p>
+                  <p className="t-label" style={{ color: "var(--text-secondary-dark)", marginBottom: 4 }}>Social</p>
                   <div style={{ display: "flex", gap: 16 }}>
-                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="t-h3" style={{ color: "var(--color-mint)", transition: "color 0.3s" }}>Instagram</a>
-                    <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="t-h3" style={{ color: "var(--color-mint)", transition: "color 0.3s" }}>Twitter</a>
+                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="t-h3" style={{ color: "var(--mint)", transition: "color 0.3s" }}>Instagram</a>
+                    <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="t-h3" style={{ color: "var(--mint)", transition: "color 0.3s" }}>Twitter</a>
                   </div>
                 </div>
               </div>
@@ -65,8 +61,8 @@ export default function ContactPage() {
                   style={{ textAlign: "center", padding: "80px 40px" }}
                 >
                   <div style={{ fontSize: "3rem", marginBottom: 16 }}>&#10003;</div>
-                  <h3 className="t-h2" style={{ marginBottom: 12 }}>Message sent</h3>
-                  <p className="t-body-lg" style={{ color: "var(--color-ink-dim)" }}>
+                  <h3 className="t-h2" style={{ marginBottom: 12, color: "var(--ink)" }}>Message sent</h3>
+                  <p className="t-body-lg" style={{ color: "var(--text-secondary-dark)" }}>
                     We&apos;ll get back to you soon.
                   </p>
                 </motion.div>
