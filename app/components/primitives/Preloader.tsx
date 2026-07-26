@@ -10,27 +10,25 @@ interface PreloaderProps {
 export function Preloader({ onComplete }: PreloaderProps) {
   const [count, setCount] = useState(0);
   const [exiting, setExiting] = useState(false);
-  const [done, setDone] = useState(false);
-  const startTime = useRef<number | null>(null);
 
   useEffect(() => {
     let frame: number;
-    const duration = 2000;
+    let start: number | null = null;
+    const duration = 2200;
 
     const tick = (ts: number) => {
-      if (!startTime.current) startTime.current = ts;
-      const elapsed = ts - startTime.current;
+      if (!start) start = ts;
+      const elapsed = ts - start;
       const progress = Math.min(elapsed / duration, 1);
       setCount(Math.round(progress * 100));
 
       if (progress < 1) {
         frame = requestAnimationFrame(tick);
       } else {
-        setDone(true);
         setTimeout(() => {
           setExiting(true);
-          setTimeout(onComplete, 800);
-        }, 400);
+          setTimeout(onComplete, 600);
+        }, 300);
       }
     };
 
@@ -45,25 +43,11 @@ export function Preloader({ onComplete }: PreloaderProps) {
           className="preloader"
           exit={{
             clipPath: "inset(0 0 100% 0)",
-          }}
-          transition={{
-            duration: 0.8,
-            ease: [0.16, 1, 0.3, 1],
+            transition: { duration: 0.6, ease: [0.76, 0, 0.24, 1] },
           }}
         >
-          <div className="preloader-inner">
-            <div className="preloader-counter">
-              {String(count).padStart(2, "0")}
-            </div>
-            <div className="preloader-progress">
-              <motion.div
-                className="preloader-progress-line"
-                initial={{ width: "0%" }}
-                animate={{ width: done ? "100%" : `${count}%` }}
-                transition={{ duration: 0.1, ease: "easeOut" }}
-              />
-            </div>
-          </div>
+          <div className="preloader-wordmark">LEGIONS</div>
+          <div className="preloader-counter">{String(count).padStart(3, "0")}</div>
         </motion.div>
       )}
     </AnimatePresence>

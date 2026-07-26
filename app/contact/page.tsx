@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { motion } from "motion/react";
 import { Nav } from "@/app/components/layout/Nav";
 import { SiteFooter } from "@/app/components/layout/SiteFooter";
@@ -18,7 +19,7 @@ export default function ContactPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           >
-            <p className="t-label" style={{ color: "var(--mint)", marginBottom: 16 }}>Contact</p>
+            <p className="t-label" style={{ color: "var(--color-cyan)", marginBottom: 16 }}>Contact</p>
             <h1 className="t-display">Say hello.</h1>
           </motion.div>
         </div>
@@ -35,7 +36,7 @@ export default function ContactPage() {
               <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
                 <div>
                   <p className="t-label" style={{ color: "var(--text-secondary-dark)", marginBottom: 4 }}>Email</p>
-                  <a href="mailto:legions@gmail.com" className="t-h3" style={{ color: "var(--mint)", transition: "color 0.3s" }}>
+                  <a href="mailto:legions@gmail.com" className="t-h3" style={{ color: "var(--color-cyan)", transition: "color 0.3s" }}>
                     legions@gmail.com
                   </a>
                 </div>
@@ -46,8 +47,8 @@ export default function ContactPage() {
                 <div>
                   <p className="t-label" style={{ color: "var(--text-secondary-dark)", marginBottom: 4 }}>Social</p>
                   <div style={{ display: "flex", gap: 16 }}>
-                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="t-h3" style={{ color: "var(--mint)", transition: "color 0.3s" }}>Instagram</a>
-                    <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="t-h3" style={{ color: "var(--mint)", transition: "color 0.3s" }}>Twitter</a>
+                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="t-h3" style={{ color: "var(--color-cyan)", transition: "color 0.3s" }}>Instagram</a>
+                    <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="t-h3" style={{ color: "var(--color-cyan)", transition: "color 0.3s" }}>Twitter</a>
                   </div>
                 </div>
               </div>
@@ -60,8 +61,8 @@ export default function ContactPage() {
                   animate={{ opacity: 1, scale: 1 }}
                   style={{ textAlign: "center", padding: "80px 40px" }}
                 >
-                  <div style={{ fontSize: "3rem", marginBottom: 16 }}>&#10003;</div>
-                  <h3 className="t-h2" style={{ marginBottom: 12, color: "var(--ink)" }}>Message sent</h3>
+                  <div style={{ fontSize: "3rem", marginBottom: 16 }}>✓</div>
+                  <h3 className="t-h2" style={{ marginBottom: 12, color: "var(--color-white)" }}>Message sent</h3>
                   <p className="t-body-lg" style={{ color: "var(--text-secondary-dark)" }}>
                     We&apos;ll get back to you soon.
                   </p>
@@ -73,20 +74,20 @@ export default function ContactPage() {
                   style={{ display: "flex", flexDirection: "column", gap: 28 }}
                 >
                   <div className="form-group">
-                    <label className="form-label" htmlFor="contact-name">Name</label>
-                    <input id="contact-name" className="form-input" required />
+                    <label className="form-label">Name</label>
+                    <input className="form-input" required />
                   </div>
                   <div className="form-group">
-                    <label className="form-label" htmlFor="contact-email">Email</label>
-                    <input id="contact-email" className="form-input" type="email" required />
+                    <label className="form-label">Email</label>
+                    <input className="form-input" type="email" required />
                   </div>
                   <div className="form-group">
-                    <label className="form-label" htmlFor="contact-subject">Subject</label>
-                    <input id="contact-subject" className="form-input" />
+                    <label className="form-label">Subject</label>
+                    <input className="form-input" />
                   </div>
                   <div className="form-group">
-                    <label className="form-label" htmlFor="contact-message">Message</label>
-                    <textarea id="contact-message" className="form-textarea" rows={5} required />
+                    <label className="form-label">Message</label>
+                    <textarea className="form-textarea" rows={5} required />
                   </div>
                   <button type="submit" className="btn btn-primary" style={{ alignSelf: "start" }}>
                     Send Message

@@ -69,7 +69,7 @@ function ProjectHero({ project }: { project: Project }) {
           <div className="pd-breadcrumb">
             <Link href="/projects">Projects</Link>
             <span>/</span>
-            <span style={{ color: "var(--ink)" }}>{project.title}</span>
+            <span style={{ color: "var(--color-white)" }}>{project.title}</span>
           </div>
           <span className="pd-category-tag">{project.category}</span>
           <h1 className="pd-title">{project.title}</h1>
@@ -90,7 +90,7 @@ function ProjectStory({ project }: { project: Project }) {
       <div className="container" style={{ paddingBlock: "var(--space-section)" }}>
         <div className="about-grid-2col" style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr", gap: "clamp(40px, 6vw, 96px)", alignItems: "start" }}>
           <div>
-            <p className="t-label" style={{ color: "var(--mint)", marginBottom: 12 }}>Story</p>
+            <p className="t-label" style={{ color: "var(--color-cyan)", marginBottom: 12 }}>Story</p>
             <h2 className="t-h2">The story</h2>
           </div>
           <div>
@@ -135,7 +135,7 @@ function ProjectGallery({ project }: { project: Project }) {
       <Section>
         <div className="container" style={{ paddingBlock: "var(--space-section)" }}>
           <div style={{ marginBottom: 48 }}>
-            <p className="t-label" style={{ color: "var(--mint)", marginBottom: 12 }}>Gallery</p>
+            <p className="t-label" style={{ color: "var(--color-cyan)", marginBottom: 12 }}>Gallery</p>
             <h2 className="t-h1">In the field</h2>
           </div>
           <div className="gallery-masonry">

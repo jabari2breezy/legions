@@ -7,7 +7,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Nav } from "@/app/components/layout/Nav";
 import { SiteFooter } from "@/app/components/layout/SiteFooter";
-import { SectionReveal } from "@/app/components/primitives/SectionReveal";
+import { FooterTeaser } from "@/app/components/layout/FooterTeaser";
 import { cursorEnter, cursorLeave } from "@/app/utils/cursor";
 import projectsIndex from "@/data/projects-index.json";
 
@@ -21,6 +21,16 @@ export default function ProjectsPage() {
       <Nav />
       <PageHero />
       <ProjectsRail />
+      <FooterTeaser
+        label="Get Involved"
+        title="Your move."
+        href="/volunteer"
+        imageSrc="/projects/ramadhan-project/IMG_8248.jpg"
+      >
+        <div style={{ marginTop: 20 }}>
+          <Link href="/volunteer" className="btn btn-primary">Volunteer With Us</Link>
+        </div>
+      </FooterTeaser>
       <SiteFooter />
     </>
   );
@@ -35,7 +45,7 @@ function PageHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
-          <p className="t-label" style={{ color: "var(--mint)", marginBottom: 16 }}>Projects</p>
+          <p className="t-label" style={{ color: "var(--color-cyan)", marginBottom: 16 }}>Projects</p>
           <h1 className="t-display">Our work<br />speaks.</h1>
         </motion.div>
       </div>
@@ -209,7 +219,7 @@ function MobileProjectCard({ project, index }: { project: typeof projectsIndex[0
             fontSize: 11,
             fontWeight: 700,
             fontFamily: "var(--font-mono)",
-            color: "var(--mint)",
+            color: "var(--color-cyan)",
             letterSpacing: "0.05em",
           }}>
             {String(index + 1).padStart(2, "0")}
@@ -227,7 +237,7 @@ function MobileProjectCard({ project, index }: { project: typeof projectsIndex[0
               fontWeight: 600,
               textTransform: "uppercase",
               letterSpacing: "0.1em",
-              color: "var(--mint)",
+              color: "var(--color-cyan)",
               marginBottom: 6,
             }}>
               {project.category}
@@ -235,7 +245,7 @@ function MobileProjectCard({ project, index }: { project: typeof projectsIndex[0
             <h3 style={{
               fontSize: "clamp(22px, 5vw, 30px)",
               fontWeight: 700,
-              color: "var(--ink)",
+              color: "var(--color-white)",
               lineHeight: 1.15,
               marginBottom: 4,
             }}>

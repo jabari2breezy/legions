@@ -5,8 +5,7 @@ import dynamic from "next/dynamic";
 import { motion } from "motion/react";
 import { Nav } from "@/app/components/layout/Nav";
 import { SiteFooter } from "@/app/components/layout/SiteFooter";
-import { TextReveal } from "@/app/components/primitives/TextReveal";
-import { SectionReveal } from "@/app/components/primitives/SectionReveal";
+import { FooterTeaser } from "@/app/components/layout/FooterTeaser";
 
 const Grainient = dynamic(() => import("@/app/components/primitives/Grainient"), {
   ssr: false,
@@ -20,6 +19,16 @@ export default function AboutPage() {
       <StorySection />
       <TenetsSection />
       <TimelineSection />
+      <FooterTeaser
+        label="See Our Work"
+        title="Five projects. One mission."
+        href="/projects"
+        imageSrc="/projects/amsen-visits/IMG_8275.jpg"
+      >
+        <div style={{ marginTop: 20 }}>
+          <Link href="/projects" className="btn btn-primary">View Projects</Link>
+        </div>
+      </FooterTeaser>
       <SiteFooter />
     </>
   );
@@ -34,7 +43,7 @@ function PageHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
-          <p className="t-label" style={{ color: "var(--mint)", marginBottom: 16 }}>About Us</p>
+          <p className="t-label" style={{ color: "var(--color-cyan)", marginBottom: 16 }}>About Us</p>
           <h1 className="t-display">Built different.<br />Built to last.</h1>
         </motion.div>
       </div>
@@ -67,13 +76,21 @@ function StorySection() {
       </div>
       <div className="container" style={{ position: "relative", zIndex: 1, paddingBlock: "var(--space-section)" }}>
         <div className="about-grid-2col" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(40px, 6vw, 96px)", alignItems: "start" }}>
-          <SectionReveal>
-            <p className="t-label" style={{ color: "var(--mint)", marginBottom: 16 }}>Our Story</p>
-            <TextReveal as="h2" className="t-h1" italic>
-              From a school club to a movement
-            </TextReveal>
-          </SectionReveal>
-          <SectionReveal delay={0.1}>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <p className="t-label" style={{ color: "var(--color-cyan)", marginBottom: 16 }}>Our Story</p>
+            <h2 className="t-h1" style={{ marginBottom: 24 }}>From a school club to a movement</h2>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            viewport={{ once: true }}
+          >
             <p className="t-body-lg" style={{ marginBottom: 16, color: "rgba(250,250,250,0.85)" }}>
               Legions started in 2022 as a small group of students in Dar es Salaam who
               refused to sit idle. What began as weekend beach cleanups grew into organized
@@ -88,7 +105,7 @@ function StorySection() {
               We don&apos;t wait for funding. We don&apos;t wait for permission. We organize,
               build, and deliver.
             </p>
-          </SectionReveal>
+          </motion.div>
         </div>
       </div>
     </div>
@@ -99,18 +116,16 @@ function TenetsSection() {
   return (
     <section className="section-dark">
       <div className="container" style={{ paddingBlock: "var(--space-section)" }}>
-        <SectionReveal>
-          <div style={{ marginBottom: 48 }}>
-            <p className="t-label" style={{ color: "var(--mint)", marginBottom: 12 }}>Core Tenets</p>
-            <h2 className="t-h1">What we stand on</h2>
-          </div>
-        </SectionReveal>
+        <div style={{ marginBottom: 48 }}>
+          <p className="t-label" style={{ color: "var(--color-cyan)", marginBottom: 12 }}>Core Tenets</p>
+          <h2 className="t-h1">What we stand on</h2>
+        </div>
         <div className="testimonials-columns tenets-columns" style={{ maxWidth: 1100 }}>
           {TENETS.map((t, i) => (
             <motion.div
               key={i}
               className="glass-panel"
-              style={{ padding: 32, borderTop: "2px solid var(--mint)" }}
+              style={{ padding: 32, borderTop: "2px solid var(--color-cyan)" }}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: i * 0.12 }}
@@ -160,12 +175,10 @@ function TimelineSection() {
         />
       </div>
       <div className="container" style={{ position: "relative", zIndex: 1, paddingBlock: "var(--space-section)" }}>
-        <SectionReveal>
-          <div style={{ marginBottom: 48 }}>
-            <p className="t-label" style={{ color: "var(--mint)", marginBottom: 12 }}>Timeline</p>
-            <h2 className="t-h1">How we got here</h2>
-          </div>
-        </SectionReveal>
+        <div style={{ marginBottom: 48 }}>
+          <p className="t-label" style={{ color: "var(--color-cyan)", marginBottom: 12 }}>Timeline</p>
+          <h2 className="t-h1">How we got here</h2>
+        </div>
         <div className="timeline">
           {TIMELINE.map((item, i) => (
             <motion.div
