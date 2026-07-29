@@ -1,40 +1,40 @@
 import { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import {
+  useScroll,
+  useSpring,
+  useTransform,
+  useMotionValue,
+  useMotionValueEvent,
+  type MotionValue,
+} from 'framer-motion';
 import { useReducedMotion } from './useReducedMotion';
 import { useIsTouchDevice } from './useIsTouchDevice';
 import { useScrollStore } from '@/store/useScrollStore';
-
-gsap.registerPlugin(ScrollTrigger);
 
 interface UseScrollEngineOptions {
   mainRef: React.RefObject<HTMLElement | null>;
   trackRef: React.RefObject<HTMLElement | null>;
   videoRef: React.RefObject<HTMLVideoElement | null>;
+  spacerRef: React.RefObject<HTMLDivElement | null>;
   slideCount: number;
 }
-
-const LERP_FACTOR = 0.08;
 
 export function useScrollEngine({
   mainRef,
   trackRef,
   videoRef,
+  spacerRef,
   slideCount,
-}: UseScrollEngineOptions): void {
+}: UseScrollEngineOptions): MotionValue<number> {
   const prefersReduced = useReducedMotion();
   const isTouch = useIsTouchDevice();
   const setProgress = useScrollStore((state) => state.setProgress);
   const setActiveSlideIndex = useScrollStore((state) => state.setActiveSlideIndex);
   const setTotalSlides = useScrollStore((state) => state.setTotalSlides);
 
+  const trackWidth = useMotionValue(0);
   const onLoadedMetadataRef = useRef(false);
   const lastVideoWriteRef = useRef(0);
-  const rafIdRef = useRef<number | null>(null);
-  const targetProgressRef = useRef(0);
-  const smoothedProgressRef = useRef(0);
-  const trackWidthRef = useRef(0);
-  const triggerRef = useRef<ScrollTrigger | null>(null);
 
   useEffect(() => {
     setTotalSlides(slideCount);
@@ -58,135 +58,91 @@ export function useScrollEngine({
     };
   }, [videoRef]);
 
-  useEffect(() => {
+  const desktopScroll = useScroll();
+  const mobileScroll = useScroll({
+    container: isTouch ? mainRef : undefined,
+  });
+
+  const scrollProgress = isTouch ? mobileScroll.scrollYProgress : desktopScroll.scrollYProgress;
+
+  const springProgress = useSpring(scrollProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.0005,
+  });
+
+  const smoothProgress = prefersReduced ? scrollProgress : springProgress;
+
+  const x = useTransform(smoothProgress, (latest) => {
+    if (isTouch) return 0;
+    return -latest * trackWidth.get();
+  });
+
+  useMotionValueEvent(smoothProgress, 'change', (latest) => {
+    setProgress(latest);
+    setActiveSlideIndex(
+      Math.min(Math.floor(latest * slideCount), slideCount - 1)
+    );
+  });
+
+  useMotionValueEvent(smoothProgress, 'change', (latest) => {
+    const video = videoRef.current;
+    if (!video) return;
     if (isTouch) return;
 
-    const main = mainRef.current;
-    const track = trackRef.current;
-    if (!main || !track) return;
+    if (
+      onLoadedMetadataRef.current &&
+      Number.isFinite(video.duration) &&
+      video.duration > 0
+    ) {
+      const now = performance.now();
+      if (now - lastVideoWriteRef.current >= 1000 / 30) {
+        video.currentTime = latest * video.duration;
+        lastVideoWriteRef.current = now;
+      }
+    }
+  });
 
-    const updateScrollDistance = (): number => {
-      return -(track.scrollWidth - window.innerWidth);
+  useEffect(() => {
+    if (isTouch) {
+      const video = videoRef.current;
+      if (video) {
+        video.autoplay = true;
+        video.loop = true;
+        video.muted = true;
+        video.playsInline = true;
+        void video.play();
+      }
+      return;
+    }
+
+    const track = trackRef.current;
+    const spacer = spacerRef.current;
+    if (!track || !spacer) return;
+
+    const update = (): void => {
+      const width = track.scrollWidth - window.innerWidth;
+      trackWidth.set(Math.max(0, width));
+      spacer.style.height = `${Math.max(0, width).toString()}px`;
     };
 
-    trackWidthRef.current = updateScrollDistance();
+    update();
 
     const observer = new ResizeObserver(() => {
-      trackWidthRef.current = updateScrollDistance();
-      ScrollTrigger.refresh();
+      requestAnimationFrame(update);
     });
     observer.observe(track);
 
-    const trigger = ScrollTrigger.create({
-      trigger: main,
-      start: 'top top',
-      end: () => `+=${Math.abs(trackWidthRef.current).toString()}`,
-      pin: !prefersReduced,
-      scrub: prefersReduced ? false : 1,
-      invalidateOnRefresh: true,
-      onUpdate: (self) => {
-        targetProgressRef.current = self.progress;
-      },
-    });
-    triggerRef.current = trigger;
-
-    const animate = (): void => {
-      const track = trackRef.current;
-      const video = videoRef.current;
-      if (!track) return;
-
-      const diff = targetProgressRef.current - smoothedProgressRef.current;
-      smoothedProgressRef.current += diff * LERP_FACTOR;
-
-      if (Math.abs(diff) < 0.0001) {
-        smoothedProgressRef.current = targetProgressRef.current;
-      }
-
-      const trackWidth = track.scrollWidth - window.innerWidth;
-      const x = -smoothedProgressRef.current * trackWidth;
-      gsap.set(track, { x });
-
-      if (
-        video &&
-        onLoadedMetadataRef.current &&
-        Number.isFinite(video.duration) &&
-        video.duration > 0
-      ) {
-        const now = performance.now();
-        const targetTime = smoothedProgressRef.current * video.duration;
-        if (now - lastVideoWriteRef.current >= 1000 / 30) {
-          video.currentTime = targetTime;
-          lastVideoWriteRef.current = now;
-        }
-      }
-
-      setProgress(smoothedProgressRef.current);
-      setActiveSlideIndex(
-        Math.min(
-          Math.floor(smoothedProgressRef.current * slideCount),
-          slideCount - 1
-        )
-      );
-
-      rafIdRef.current = requestAnimationFrame(animate);
+    const onResize = (): void => {
+      requestAnimationFrame(update);
     };
-
-    rafIdRef.current = requestAnimationFrame(animate);
+    window.addEventListener('resize', onResize);
 
     return () => {
       observer.disconnect();
-      trigger.kill();
-      ScrollTrigger.getAll().forEach((t) => {
-        t.kill();
-      });
-      if (rafIdRef.current !== null) {
-        cancelAnimationFrame(rafIdRef.current);
-      }
+      window.removeEventListener('resize', onResize);
     };
-  }, [
-    mainRef,
-    trackRef,
-    videoRef,
-    isTouch,
-    prefersReduced,
-    slideCount,
-    setProgress,
-    setActiveSlideIndex,
-  ]);
+  }, [isTouch, trackRef, spacerRef, trackWidth, videoRef]);
 
-  useEffect(() => {
-    if (!isTouch) return;
-
-    const main = mainRef.current;
-    if (!main) return;
-
-    main.style.overflowY = 'auto';
-    main.style.height = 'auto';
-
-    const video = videoRef.current;
-    if (video) {
-      video.autoplay = true;
-      video.loop = true;
-      video.muted = true;
-      video.playsInline = true;
-      void video.play();
-    }
-
-    const onScroll = (): void => {
-      const scrollTop = main.scrollTop;
-      const maxScroll = main.scrollHeight - main.clientHeight;
-      const progress = maxScroll > 0 ? scrollTop / maxScroll : 0;
-      setProgress(progress);
-      setActiveSlideIndex(
-        Math.min(Math.floor(progress * slideCount), slideCount - 1)
-      );
-    };
-
-    main.addEventListener('scroll', onScroll);
-    onScroll();
-
-    return () => {
-      main.removeEventListener('scroll', onScroll);
-    };
-  }, [isTouch, mainRef, videoRef, setProgress, setActiveSlideIndex, slideCount]);
+  return x;
 }

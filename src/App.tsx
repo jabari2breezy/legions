@@ -15,13 +15,15 @@ export default function App(): JSX.Element {
   const mainRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const spacerRef = useRef<HTMLDivElement>(null);
   const isTouch = useIsTouchDevice();
   const setCursor = useScrollStore((state) => state.setCursor);
 
-  useScrollEngine({
+  const x = useScrollEngine({
     mainRef,
     trackRef,
     videoRef,
+    spacerRef,
     slideCount: TOTAL_SLIDES,
   });
 
@@ -64,10 +66,17 @@ export default function App(): JSX.Element {
         className={
           isTouch
             ? 'relative min-h-screen overflow-y-auto'
-            : 'relative h-screen overflow-hidden'
+            : 'relative w-full'
         }
       >
-        <ScrollTrack ref={trackRef} />
+        <ScrollTrack ref={trackRef} x={x} />
+        {!isTouch && (
+          <div
+            ref={spacerRef}
+            className="pointer-events-none w-full"
+            aria-hidden="true"
+          />
+        )}
       </main>
 
       <Footer />

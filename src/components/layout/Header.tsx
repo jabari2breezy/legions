@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import type { JSX } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { fluidEase } from '@/utils/easing';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { MagneticButton } from '@/components/ui/MagneticButton';
 import { useScrollStore } from '@/store/useScrollStore';
 import { useIsTouchDevice } from '@/hooks/useIsTouchDevice';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { TODO_JOIN_URL } from '@/data/projects';
+import { fluidEase } from '@/utils/easing';
 import { cn } from '@/utils/cn';
 
 const TOTAL_SLIDES = 10;
@@ -29,20 +29,22 @@ export function Header(): JSX.Element {
     setMounted(true);
   }, []);
 
-  const scrollToSlide = async (index: number): Promise<void> => {
+  const scrollToSlide = (index: number): void => {
     if (typeof window === 'undefined') return;
-    const [{ gsap }, { ScrollToPlugin }] = await Promise.all([
-      import('gsap'),
-      import('gsap/ScrollToPlugin'),
-    ]);
-    gsap.registerPlugin(ScrollToPlugin);
+
     const target = index / TOTAL_SLIDES;
+    const behavior = prefersReduced ? 'auto' : 'smooth';
+
+    if (isTouch) {
+      const main = document.querySelector('main');
+      if (!main) return;
+      const maxScroll = main.scrollHeight - main.clientHeight;
+      main.scrollTo({ top: target * maxScroll, behavior });
+      return;
+    }
+
     const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-    gsap.to(window, {
-      scrollTo: { y: target * maxScroll },
-      duration: prefersReduced ? 0.1 : 1.2,
-      ease: fluidEase,
-    });
+    window.scrollTo({ top: target * maxScroll, behavior });
   };
 
   return (
@@ -71,7 +73,7 @@ export function Header(): JSX.Element {
               <button
                 key={item.label}
                 type="button"
-                onClick={() => { void scrollToSlide(item.index); }}
+                onClick={() => { scrollToSlide(item.index); }}
                 className={cn(
                   'text-sm font-medium transition-colors',
                   activeSlideIndex === item.index
