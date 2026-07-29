@@ -3,16 +3,19 @@ import type { JSX } from 'react';
 import { fluidEase } from '@/utils/easing';
 import { StatWidget } from '@/components/ui/StatWidget';
 import { projects } from '@/data/projects';
+import { cn } from '@/utils/cn';
 
 interface ProjectShowcaseProps {
   slideIndex: number;
   projectIndex: number;
   isActive: boolean;
+  isTouch: boolean;
 }
 
 export function ProjectShowcase({
   projectIndex,
   isActive,
+  isTouch,
 }: ProjectShowcaseProps): JSX.Element {
   const project = projects[projectIndex];
   const container = {
@@ -35,7 +38,10 @@ export function ProjectShowcase({
 
   return (
     <section
-      className="flex h-screen w-screen shrink-0 items-center justify-center px-6"
+      className={cn(
+        'flex items-center justify-center px-6 py-20',
+        isTouch ? 'min-h-screen w-full' : 'h-screen w-screen shrink-0'
+      )}
       aria-label={project.title}
       role="region"
     >

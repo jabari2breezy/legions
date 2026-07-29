@@ -9,6 +9,7 @@ import { cn } from '@/utils/cn';
 interface EthosSectionProps {
   slideIndex: number;
   isActive: boolean;
+  isTouch: boolean;
 }
 
 const cards = [
@@ -35,7 +36,7 @@ const cards = [
   },
 ];
 
-export function EthosSection({ isActive }: EthosSectionProps): JSX.Element {
+export function EthosSection({ isActive, isTouch }: EthosSectionProps): JSX.Element {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   const container = {
@@ -58,7 +59,10 @@ export function EthosSection({ isActive }: EthosSectionProps): JSX.Element {
 
   return (
     <section
-      className="flex h-screen w-screen shrink-0 items-center justify-center px-6"
+      className={cn(
+        'flex items-center justify-center px-6 py-20',
+        isTouch ? 'min-h-screen w-full' : 'h-screen w-screen shrink-0'
+      )}
       aria-label="What We Are About"
       role="region"
     >
@@ -88,7 +92,8 @@ export function EthosSection({ isActive }: EthosSectionProps): JSX.Element {
               >
                 <GlassCard
                   className={cn(
-                    'h-[70vh] p-8 transition-all duration-500',
+                    'p-8 transition-all duration-500',
+                    isTouch ? 'min-h-[60vh]' : 'h-[70vh]',
                     isDimmed && 'opacity-60'
                   )}
                   interactive

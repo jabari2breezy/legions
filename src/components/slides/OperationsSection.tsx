@@ -3,10 +3,12 @@ import type { JSX } from 'react';
 import { fluidEase } from '@/utils/easing';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { Smartphone, HardHat, HandHeart, Globe } from 'lucide-react';
+import { cn } from '@/utils/cn';
 
 interface OperationsSectionProps {
   slideIndex: number;
   isActive: boolean;
+  isTouch: boolean;
 }
 
 const cells = [
@@ -42,6 +44,7 @@ const cells = [
 
 export function OperationsSection({
   isActive,
+  isTouch,
 }: OperationsSectionProps): JSX.Element {
   const container = {
     hidden: { opacity: 0 },
@@ -63,7 +66,10 @@ export function OperationsSection({
 
   return (
     <section
-      className="flex h-screen w-screen shrink-0 items-center justify-center px-6"
+      className={cn(
+        'flex items-center justify-center px-6 py-20',
+        isTouch ? 'min-h-screen w-full' : 'h-screen w-screen shrink-0'
+      )}
       aria-label="General Operations"
       role="region"
     >

@@ -2,13 +2,15 @@ import { motion } from 'framer-motion';
 import type { JSX } from 'react';
 import { fluidEase } from '@/utils/easing';
 import { GlassCard } from '@/components/ui/GlassCard';
+import { cn } from '@/utils/cn';
 
 interface OriginSectionProps {
   slideIndex: number;
   isActive: boolean;
+  isTouch: boolean;
 }
 
-export function OriginSection({ isActive }: OriginSectionProps): JSX.Element {
+export function OriginSection({ isActive, isTouch }: OriginSectionProps): JSX.Element {
   const container = {
     hidden: { opacity: 0 },
     visible: {
@@ -29,7 +31,10 @@ export function OriginSection({ isActive }: OriginSectionProps): JSX.Element {
 
   return (
     <section
-      className="flex h-screen w-screen shrink-0 items-center justify-center px-6"
+      className={cn(
+        'flex items-center justify-center px-6 py-20',
+        isTouch ? 'min-h-screen w-full' : 'h-screen w-screen shrink-0'
+      )}
       aria-label="Why We Started"
       role="region"
     >

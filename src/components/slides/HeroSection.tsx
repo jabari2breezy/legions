@@ -7,9 +7,10 @@ import { cn } from '@/utils/cn';
 interface HeroSectionProps {
   slideIndex: number;
   isActive: boolean;
+  isTouch: boolean;
 }
 
-export function HeroSection({ isActive }: HeroSectionProps): JSX.Element {
+export function HeroSection({ isActive, isTouch }: HeroSectionProps): JSX.Element {
   const container = {
     hidden: { opacity: 0 },
     visible: {
@@ -33,7 +34,10 @@ export function HeroSection({ isActive }: HeroSectionProps): JSX.Element {
 
   return (
     <section
-      className="flex h-screen w-screen shrink-0 flex-col items-center justify-center px-6"
+      className={cn(
+        'flex flex-col items-center justify-center px-6 py-20',
+        isTouch ? 'min-h-screen w-full' : 'h-screen w-screen shrink-0'
+      )}
       aria-label="Hero"
       role="region"
     >
