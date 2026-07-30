@@ -2,30 +2,44 @@ import { useRef, useEffect } from 'react';
 import type { JSX } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
-import { gsap } from 'gsap';
 import { useRingStore } from '@/store/useRingStore';
-import { projects } from '@/data/projects';
+import { projectsMatchingFilters, projects } from '@/data/projects';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 
-const OVERVIEW_POSITION = new THREE.Vector3(0, 0, 18);
+const RADIUS_X = 11;
+const RADIUS_Z = 11;
+const OVERVIEW_POSITION = new THREE.Vector3(0, 8, 28);
 const OVERVIEW_TARGET = new THREE.Vector3(0, 0, 0);
-const FOCUS_OFFSET = 6;
+const FOCUS_OFFSET = 5;
 
 export function CameraRig(): JSX.Element {
   const { camera } = useThree();
   const prefersReduced = useReducedMotion();
   const focusedIndex = useRingStore((state) => state.focusedIndex);
   const cameraMode = useRingStore((state) => state.cameraMode);
+  const activeFilters = useRingStore((state) => state.activeFilters);
   const targetRef = useRef(new THREE.Vector3().copy(OVERVIEW_TARGET));
   const positionRef = useRef(new THREE.Vector3().copy(OVERVIEW_POSITION));
 
+  const visibleCards = (() => {
+    const filteredProjects = projectsMatchingFilters(activeFilters);
+    const filteredIds = new Set(filteredProjects.map((p) => p.id));
+    return projects
+      .flatMap((project, projectIndex) =>
+        project.images.map(() => ({ projectId: project.id, projectIndex }))
+      )
+      .filter((card) => filteredIds.has(card.projectId));
+  })();
+
   useEffect(() => {
     if (cameraMode === 'focused' && focusedIndex !== null) {
-      const count = projects.length;
-      const angle = (focusedIndex / count) * Math.PI * 2;
-      const radius = 8;
-      const planeX = radius * Math.cos(angle);
-      const planeZ = radius * Math.sin(angle);
+      const count = visibleCards.length;
+      const firstCardIndex = visibleCards.findIndex((c) => c.projectIndex === focusedIndex);
+      const angle = count > 0 && firstCardIndex !== -1
+        ? (firstCardIndex / count) * Math.PI * 2
+        : 0;
+      const planeX = RADIUS_X * Math.cos(angle);
+      const planeZ = RADIUS_Z * Math.sin(angle);
       const normalX = Math.cos(angle);
       const normalZ = Math.sin(angle);
 
@@ -42,20 +56,8 @@ export function CameraRig(): JSX.Element {
         camera.position.copy(positionRef.current);
         camera.lookAt(targetRef.current);
       } else {
-        gsap.to(positionRef.current, {
-          x: targetPosition.x,
-          y: targetPosition.y,
-          z: targetPosition.z,
-          duration: 1.2,
-          ease: 'power2.out',
-        });
-        gsap.to(targetRef.current, {
-          x: lookAtPosition.x,
-          y: lookAtPosition.y,
-          z: lookAtPosition.z,
-          duration: 1.2,
-          ease: 'power2.out',
-        });
+        positionRef.current.copy(targetPosition);
+        targetRef.current.copy(lookAtPosition);
       }
     } else {
       if (prefersReduced) {
@@ -64,27 +66,18 @@ export function CameraRig(): JSX.Element {
         camera.position.copy(positionRef.current);
         camera.lookAt(targetRef.current);
       } else {
-        gsap.to(positionRef.current, {
-          x: OVERVIEW_POSITION.x,
-          y: OVERVIEW_POSITION.y,
-          z: OVERVIEW_POSITION.z,
-          duration: 1,
-          ease: 'power2.out',
-        });
-        gsap.to(targetRef.current, {
-          x: OVERVIEW_TARGET.x,
-          y: OVERVIEW_TARGET.y,
-          z: OVERVIEW_TARGET.z,
-          duration: 1,
-          ease: 'power2.out',
-        });
+        positionRef.current.copy(OVERVIEW_POSITION);
+        targetRef.current.copy(OVERVIEW_TARGET);
       }
     }
-  }, [camera, cameraMode, focusedIndex, prefersReduced]);
+  }, [camera, cameraMode, focusedIndex, prefersReduced, visibleCards]);
 
   useFrame(() => {
-    camera.position.lerp(positionRef.current, 0.08);
-    camera.lookAt(targetRef.current);
+    if (prefersReduced) return;
+    camera.position.lerp(positionRef.current, 0.06);
+    const currentLookAt = new THREE.Vector3(0, 0, -1).applyQuaternion(camera.quaternion).add(camera.position);
+    currentLookAt.lerp(targetRef.current, 0.06);
+    camera.lookAt(currentLookAt);
   });
 
   return <></>;

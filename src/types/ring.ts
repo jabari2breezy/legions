@@ -1,6 +1,7 @@
 import type { FilterCategory } from '@/data/projects';
 
 export type CameraMode = 'overview' | 'focused';
+export type ViewMode = 'ring' | 'grid';
 
 export interface RingState {
   currentRotation: number;
@@ -8,6 +9,8 @@ export interface RingState {
   cameraMode: CameraMode;
   focusedIndex: number | null;
   activeFilters: Record<FilterCategory, string[]>;
+  viewMode: ViewMode;
+  filterPanelOpen: boolean;
 }
 
 export interface RingActions {
@@ -18,6 +21,9 @@ export interface RingActions {
   setTargetRotation: (rotation: number) => void;
   addTargetRotation: (delta: number) => void;
   tickRotation: (lerpValue: number) => void;
+  setViewMode: (mode: ViewMode) => void;
+  toggleFilterPanel: () => void;
+  setFilterPanelOpen: (open: boolean) => void;
 }
 
 export type RingStore = RingState & RingActions;

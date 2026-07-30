@@ -1,4 +1,4 @@
-import { useRef, useEffect, useMemo, useState } from 'react';
+import { useRef, useMemo, useState, useEffect } from 'react';
 import type { JSX } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
@@ -7,8 +7,16 @@ import { projectsMatchingFilters, projects } from '@/data/projects';
 import { ProjectPlane } from './ProjectPlane';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 
-const RADIUS = 8;
-const ROTATION_PER_WHEEL = 0.15;
+const RADIUS_X = 11;
+const RADIUS_Z = 11;
+const ROTATION_PER_WHEEL = 0.05;
+
+interface PhotoCard {
+  projectIndex: number;
+  imageIndex: number;
+  image: string;
+  projectId: string;
+}
 
 export function Ring(): JSX.Element {
   const groupRef = useRef<THREE.Group>(null);
@@ -19,28 +27,34 @@ export function Ring(): JSX.Element {
   const activeFilters = useRingStore((state) => state.activeFilters);
   const [anyHovered, setAnyHovered] = useState(false);
 
-  const filteredProjects = useMemo(
-    () => projectsMatchingFilters(activeFilters),
-    [activeFilters]
-  );
+  const cards = useMemo<PhotoCard[]>(() => {
+    return projects.flatMap((project, projectIndex) =>
+      project.images.map((image, imageIndex) => ({
+        projectIndex,
+        imageIndex,
+        image,
+        projectId: project.id,
+      }))
+    );
+  }, []);
 
-  const visibleIndices = useMemo(() => {
-    return projects
-      .map((project, index) =>
-        filteredProjects.some((p) => p.id === project.id) ? index : -1
-      )
+  const visibleCards = useMemo(() => {
+    const filteredProjects = projectsMatchingFilters(activeFilters);
+    const filteredIds = new Set(filteredProjects.map((p) => p.id));
+    return cards
+      .map((card, index) => (filteredIds.has(card.projectId) ? index : -1))
       .filter((index) => index !== -1);
-  }, [filteredProjects]);
+  }, [cards, activeFilters]);
 
   const angles = useMemo(() => {
-    const count = visibleIndices.length;
+    const count = visibleCards.length;
     const map = new Map<number, number>();
-    visibleIndices.forEach((globalIndex, localIndex) => {
+    visibleCards.forEach((cardIndex, localIndex) => {
       const angle = count > 0 ? (localIndex / count) * Math.PI * 2 : 0;
-      map.set(globalIndex, angle);
+      map.set(cardIndex, angle);
     });
     return map;
-  }, [visibleIndices]);
+  }, [visibleCards]);
 
   useFrame((_, delta) => {
     const group = groupRef.current;
@@ -59,64 +73,60 @@ export function Ring(): JSX.Element {
 
   useEffect(() => {
     const canvas = gl.domElement;
-
     const onWheel = (e: WheelEvent): void => {
       e.preventDefault();
       addTargetRotation(e.deltaY * ROTATION_PER_WHEEL * 0.01);
     };
-
     canvas.addEventListener('wheel', onWheel, { passive: false });
     return () => {
       canvas.removeEventListener('wheel', onWheel);
     };
   }, [gl, addTargetRotation]);
 
-  useEffect(() => {
-    const canvas = gl.domElement;
-    let startX = 0;
-    let isDragging = false;
+  // Drag rotation via a full-screen invisible plane behind the photos
+  const [isDragging, setIsDragging] = useState(false);
+  const dragStartX = useRef(0);
 
-    const onPointerDown = (e: PointerEvent): void => {
-      isDragging = true;
-      startX = e.clientX;
-    };
+  const onPointerDown = (e: { stopPropagation: () => void; clientX: number }): void => {
+    e.stopPropagation();
+    setIsDragging(true);
+    dragStartX.current = e.clientX;
+  };
 
-    const onPointerMove = (e: PointerEvent): void => {
-      if (!isDragging) return;
-      const delta = e.clientX - startX;
-      addTargetRotation(delta * 0.005);
-      startX = e.clientX;
-    };
+  const onPointerMove = (e: { clientX: number }): void => {
+    if (!isDragging) return;
+    const delta = e.clientX - dragStartX.current;
+    if (Math.abs(delta) > 1) {
+      addTargetRotation(delta * 0.004);
+      dragStartX.current = e.clientX;
+    }
+  };
 
-    const onPointerUp = (): void => {
-      isDragging = false;
-    };
-
-    canvas.addEventListener('pointerdown', onPointerDown);
-    canvas.addEventListener('pointermove', onPointerMove);
-    canvas.addEventListener('pointerup', onPointerUp);
-    canvas.addEventListener('pointerleave', onPointerUp);
-
-    return () => {
-      canvas.removeEventListener('pointerdown', onPointerDown);
-      canvas.removeEventListener('pointermove', onPointerMove);
-      canvas.removeEventListener('pointerup', onPointerUp);
-      canvas.removeEventListener('pointerleave', onPointerUp);
-    };
-  }, [gl, addTargetRotation]);
-
-
+  const onPointerUp = (): void => {
+    setIsDragging(false);
+  };
 
   return (
     <group ref={groupRef}>
-      {projects.map((project, index) => (
+      <mesh
+        position={[0, 0, -2]}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={onPointerUp}
+        onPointerLeave={onPointerUp}
+      >
+        <planeGeometry args={[100, 100]} />
+        <meshBasicMaterial transparent opacity={0} depthWrite={false} />
+      </mesh>
+      {cards.map((card, index) => (
         <ProjectPlane
-          key={project.id}
-          project={project}
-          index={index}
-          radius={RADIUS}
+          key={`${card.projectId}-${card.imageIndex}`}
+          projectIndex={card.projectIndex}
+          image={card.image}
+          radiusX={RADIUS_X}
+          radiusZ={RADIUS_Z}
           angle={angles.get(index) ?? 0}
-          visible={visibleIndices.includes(index)}
+          visible={visibleCards.includes(index)}
           anyHovered={anyHovered}
           setAnyHovered={setAnyHovered}
         />

@@ -1,188 +1,172 @@
 import { useState } from 'react';
 import type { JSX } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { SlidersHorizontal, X, ChevronUp } from 'lucide-react';
-import { GlassCard } from '@/components/ui/GlassCard';
+import { Plus } from 'lucide-react';
 import { useRingStore } from '@/store/useRingStore';
-import {
-  PROGRAMMES,
-  SCOPES,
-  STATUSES,
-  SCALES,
-  YEARS,
-  type FilterCategory,
-} from '@/data/projects';
-import { cn } from '@/utils/cn';
+import { FILTER_SECTIONS, projectsMatchingFilters } from '@/data/projects';
+import type { FilterCategory } from '@/data/projects';
 
-const CATEGORIES: { key: FilterCategory; label: string; values: readonly string[] | number[] }[] = [
-  { key: 'programme', label: 'Programme', values: PROGRAMMES },
-  { key: 'scope', label: 'Scope', values: SCOPES },
-  { key: 'status', label: 'Status', values: STATUSES },
-  { key: 'scale', label: 'Scale', values: SCALES },
-  { key: 'year', label: 'Year', values: YEARS.map(String) },
-];
-
-export function FilterPanel(): JSX.Element {
+export function FilterPanel(): JSX.Element | null {
+  const filterPanelOpen = useRingStore((state) => state.filterPanelOpen);
+  const setFilterPanelOpen = useRingStore((state) => state.setFilterPanelOpen);
   const activeFilters = useRingStore((state) => state.activeFilters);
   const setFilter = useRingStore((state) => state.setFilter);
   const clearFilters = useRingStore((state) => state.clearFilters);
-  const [expanded, setExpanded] = useState(false);
+  const [expandedCategory, setExpandedCategory] = useState<FilterCategory>('programme');
 
-  const activeCount = Object.values(activeFilters).flat().length;
+  const hasFilters = Object.values(activeFilters).some((values) => values.length > 0);
+  const filteredCount = projectsMatchingFilters(activeFilters).length;
 
   return (
-    <>
-      <div className="pointer-events-none fixed right-4 top-24 z-40 hidden flex-col items-end gap-3 md:flex">
-        <GlassCard className="pointer-events-auto max-h-[calc(100vh-8rem)] w-64 overflow-y-auto rounded-card p-4">
-          <div className="mb-4 flex items-center justify-between">
-            <div className="flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-white">
-              <SlidersHorizontal className="h-4 w-4" />
-              Filters
-            </div>
-            {activeCount > 0 && (
+    <AnimatePresence>
+      {filterPanelOpen && (
+        <>
+          {/* Backdrop */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-40 bg-black/10"
+            onClick={() => { setFilterPanelOpen(false); }}
+          />
+
+          {/* Drawer */}
+          <motion.div
+            initial={{ x: '-100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '-100%' }}
+            transition={{ duration: 0.4, ease: [0.19, 1, 0.22, 1] }}
+            className="fixed top-0 left-0 z-50 flex h-screen w-full max-w-md flex-col border-r border-black/10 bg-white"
+          >
+            {/* Header */}
+            <div className="flex items-start justify-between border-b border-black/10 px-6 py-5">
+              <div>
+                <h2 className="text-3xl font-bold tracking-tight text-black">
+                  Filter Projects
+                </h2>
+                <p className="mt-1 text-sm text-black/60">
+                  ({String(filteredCount).padStart(2, '0')})
+                </p>
+              </div>
               <button
                 type="button"
-                onClick={clearFilters}
-                className="flex items-center gap-1 text-xs text-text-secondary transition-colors hover:text-white"
+                onClick={() => { setFilterPanelOpen(false); }}
+                className="text-sm font-medium text-black underline underline-offset-4 hover:text-black/60"
               >
-                <X className="h-3 w-3" />
-                Clear
+                Close
               </button>
-            )}
-          </div>
-
-          <div className="flex flex-col gap-4">
-            {CATEGORIES.map((category) => (
-              <div key={category.key}>
-                <h3 className="mb-2 text-xs font-bold uppercase tracking-wider text-text-tertiary">
-                  {category.label}
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {category.values.map((value) => {
-                    const isActive = activeFilters[category.key].includes(String(value));
-                    return (
-                      <button
-                        key={String(value)}
-                        type="button"
-                        onClick={() => { setFilter(category.key, String(value)); }}
-                        className={cn(
-                          'rounded-full border px-2.5 py-1 text-xs font-medium transition-colors',
-                          isActive
-                            ? 'border-cyan-glow/50 bg-cyan-glow/10 text-white'
-                            : 'border-white/10 bg-white/[0.03] text-text-secondary hover:bg-white/[0.08] hover:text-white'
-                        )}
-                      >
-                        {value}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {activeCount > 0 && (
-            <div className="mt-4 border-t border-white/10 pt-3 text-xs text-text-tertiary">
-              {activeCount} active filter{activeCount === 1 ? '' : 's'}
             </div>
-          )}
-        </GlassCard>
-      </div>
 
-      <div className="fixed bottom-0 left-0 right-0 z-40 md:hidden">
-        <AnimatePresence>
-          {expanded && (
-            <motion.div
-              initial={{ y: '100%' }}
-              animate={{ y: 0 }}
-              exit={{ y: '100%' }}
-              transition={{ duration: 0.3, ease: 'easeOut' }}
-              className="pointer-events-auto max-h-[70vh] overflow-y-auto rounded-t-card border-t border-white/10 bg-[#050507]/95 p-4 backdrop-blur-[40px]"
-            >
-              <div className="mb-4 flex items-center justify-between">
-                <div className="flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-white">
-                  <SlidersHorizontal className="h-4 w-4" />
-                  Filters
-                </div>
-                <div className="flex items-center gap-3">
-                  {activeCount > 0 && (
+            {/* Clear all */}
+            {hasFilters && (
+              <div className="border-b border-black/10 px-6 py-3">
+                <button
+                  type="button"
+                  onClick={clearFilters}
+                  className="text-sm font-medium text-black/60 hover:text-black transition-colors"
+                >
+                  Clear all
+                </button>
+              </div>
+            )}
+
+            {/* Accordion */}
+            <div className="flex-1 overflow-y-auto px-6 py-4">
+              {FILTER_SECTIONS.map((section) => {
+                const isExpanded = expandedCategory === section.category;
+                const activeCount = activeFilters[section.category].length;
+
+                return (
+                  <div
+                    key={section.category}
+                    className="border-b border-black/10 last:border-b-0"
+                  >
                     <button
                       type="button"
-                      onClick={clearFilters}
-                      className="text-xs text-text-secondary transition-colors hover:text-white"
+                      onClick={() => { setExpandedCategory(isExpanded ? '' as FilterCategory : section.category); }}
+                      className="flex w-full items-center justify-between py-4 text-left"
                     >
-                      Clear
+                      <span className="text-xl font-medium text-black">
+                        {section.label}
+                      </span>
+                      <span className="flex items-center gap-2 text-black/40">
+                        {activeCount > 0 && (
+                          <span className="text-xs font-medium">({activeCount})</span>
+                        )}
+                        <Plus
+                          className={cn(
+                            'h-5 w-5 transition-transform duration-300',
+                            isExpanded && 'rotate-45'
+                          )}
+                        />
+                      </span>
                     </button>
-                  )}
-                  <button
-                    type="button"
-                    onClick={() => { setExpanded(false); }}
-                    className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-white"
-                    aria-label="Close filters"
-                  >
-                    <X className="h-4 w-4" />
-                  </button>
-                </div>
-              </div>
 
-              <div className="flex flex-col gap-4">
-                {CATEGORIES.map((category) => (
-                  <div key={category.key}>
-                    <h3 className="mb-2 text-xs font-bold uppercase tracking-wider text-text-tertiary">
-                      {category.label}
-                    </h3>
-                    <div className="flex flex-wrap gap-2">
-                      {category.values.map((value) => {
-                        const isActive = activeFilters[category.key].includes(String(value));
-                        return (
-                          <button
-                            key={String(value)}
-                            type="button"
-                            onClick={() => { setFilter(category.key, String(value)); }}
-                            className={cn(
-                              'rounded-full border px-2.5 py-1 text-xs font-medium transition-colors',
-                              isActive
-                                ? 'border-cyan-glow/50 bg-cyan-glow/10 text-white'
-                                : 'border-white/10 bg-white/[0.03] text-text-secondary hover:bg-white/[0.08] hover:text-white'
-                            )}
-                          >
-                            {value}
-                          </button>
-                        );
-                      })}
-                    </div>
+                    <AnimatePresence initial={false}>
+                      {isExpanded && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.25, ease: [0.19, 1, 0.22, 1] }}
+                          className="overflow-hidden"
+                        >
+                          <div className="pb-5">
+                            <label className="mb-3 flex cursor-pointer items-center gap-3">
+                              <input
+                                type="checkbox"
+                                checked={activeFilters[section.category].length === 0}
+                                onChange={() => {
+                                  // Clear all in this category
+                                  const next = { ...activeFilters };
+                                  next[section.category] = [];
+                                  useRingStore.setState({ activeFilters: next });
+                                }}
+                                className="h-4 w-4 border-black/30 text-black focus:ring-black"
+                              />
+                              <span className="text-sm font-medium text-black">All</span>
+                            </label>
+
+                            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+                              {section.options.map((option) => {
+                                const checked = activeFilters[section.category].includes(option.value);
+                                return (
+                                  <label
+                                    key={option.value}
+                                    className="flex cursor-pointer items-center gap-3"
+                                  >
+                                    <input
+                                      type="checkbox"
+                                      checked={checked}
+                                      onChange={() => { setFilter(section.category, option.value); }}
+                                      className="h-4 w-4 border-black/30 text-black focus:ring-black"
+                                    />
+                                    <span className="text-sm text-black">
+                                      {option.label}
+                                    </span>
+                                    <span className="ml-auto text-xs text-black/40">
+                                      ({String(option.count).padStart(2, '0')})
+                                    </span>
+                                  </label>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </div>
-                ))}
-              </div>
-
-              {activeCount > 0 && (
-                <div className="mt-4 border-t border-white/10 pt-3 text-xs text-text-tertiary">
-                  {activeCount} active filter{activeCount === 1 ? '' : 's'}
-                </div>
-              )}
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {!expanded && (
-          <div className="pointer-events-auto p-4">
-            <button
-              type="button"
-              onClick={() => { setExpanded(true); }}
-              className="flex w-full items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.03] py-3 text-sm font-bold uppercase tracking-wider text-white backdrop-blur-[40px]"
-            >
-              <SlidersHorizontal className="h-4 w-4" />
-              Filters
-              {activeCount > 0 && (
-                <span className="ml-1 rounded-full bg-cyan-glow/20 px-2 py-0.5 text-xs text-cyan-glow">
-                  {activeCount}
-                </span>
-              )}
-              <ChevronUp className="h-4 w-4" />
-            </button>
-          </div>
-        )}
-      </div>
-    </>
+                );
+              })}
+            </div>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
   );
+}
+
+function cn(...classes: (string | false | undefined)[]): string {
+  return classes.filter(Boolean).join(' ');
 }

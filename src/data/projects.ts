@@ -286,3 +286,33 @@ export function projectsMatchingFilters(
     return programmeMatch && scopeMatch && statusMatch && scaleMatch && yearMatch;
   });
 }
+
+export interface FilterOption {
+  value: string;
+  label: string;
+  count: number;
+}
+
+export interface FilterSection {
+  category: FilterCategory;
+  label: string;
+  options: FilterOption[];
+}
+
+export const FILTER_SECTIONS: FilterSection[] = [
+  { category: 'programme', label: 'Programme', options: PROGRAMMES.map((value) => ({ value, label: value, count: countByCategory('programme', value) })) },
+  { category: 'scope', label: 'Scope', options: SCOPES.map((value) => ({ value, label: value, count: countByCategory('scope', value) })) },
+  { category: 'status', label: 'Status', options: STATUSES.map((value) => ({ value, label: value, count: countByCategory('status', value) })) },
+  { category: 'scale', label: 'Scale', options: SCALES.map((value) => ({ value, label: value, count: countByCategory('scale', value) })) },
+  { category: 'year', label: 'Year', options: YEARS.map((value) => ({ value: String(value), label: String(value), count: countByCategory('year', String(value)) })) },
+];
+
+function countByCategory(category: FilterCategory, value: string): number {
+  return projects.filter((project) => {
+    if (category === 'scale') return project.scale === value;
+    if (category === 'year') return String(project.year) === value;
+    const key = category as keyof Project;
+    const field = project[key];
+    return Array.isArray(field) && field.includes(value as never);
+  }).length;
+}

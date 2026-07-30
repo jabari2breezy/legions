@@ -16,7 +16,8 @@ export const useRingStore = create<RingStore>((set, get) => ({
   cameraMode: 'overview',
   focusedIndex: null,
   activeFilters: { ...initialFilters },
-  visibleIndices: [],
+  viewMode: 'ring',
+  filterPanelOpen: false,
 
   setFocusedIndex: (index) => {
     set({
@@ -59,5 +60,17 @@ export const useRingStore = create<RingStore>((set, get) => ({
     const { currentRotation, targetRotation } = get();
     const next = currentRotation + (targetRotation - currentRotation) * lerpValue;
     set({ currentRotation: next });
+  },
+
+  setViewMode: (mode) => {
+    set({ viewMode: mode });
+  },
+
+  toggleFilterPanel: () => {
+    set((state) => ({ filterPanelOpen: !state.filterPanelOpen }));
+  },
+
+  setFilterPanelOpen: (open) => {
+    set({ filterPanelOpen: open });
   },
 }));
