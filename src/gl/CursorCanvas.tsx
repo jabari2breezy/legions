@@ -8,12 +8,12 @@ import type { JSX } from 'react';
 import { cn } from '@/utils/cn';
 
 export function CursorCanvas(): JSX.Element | null {
-  const isTouch = useIsTouchDevice();
+  const { isMobile } = useIsTouchDevice();
   const prefersReduced = useReducedMotion();
   const [hovering, setHovering] = useState(false);
 
   useEffect(() => {
-    if (isTouch || prefersReduced) return;
+    if (isMobile || prefersReduced) return;
 
     const onOver = (e: MouseEvent): void => {
       const target = e.target as HTMLElement | null;
@@ -35,9 +35,9 @@ export function CursorCanvas(): JSX.Element | null {
       document.removeEventListener('mouseover', onOver);
       document.removeEventListener('mouseout', onOut);
     };
-  }, [isTouch, prefersReduced]);
+  }, [isMobile, prefersReduced]);
 
-  if (isTouch) return null;
+  if (isMobile) return null;
 
   return (
     <>

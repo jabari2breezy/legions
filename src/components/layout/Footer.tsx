@@ -2,14 +2,10 @@ import { motion } from 'framer-motion';
 import type { JSX } from 'react';
 import { fluidEase } from '@/utils/easing';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
-import { useScrollStore } from '@/store/useScrollStore';
 import { cn } from '@/utils/cn';
 
-export function Footer(): JSX.Element | null {
+export function Footer(): JSX.Element {
   const prefersReduced = useReducedMotion();
-  const activeSlideIndex = useScrollStore((state) => state.activeSlideIndex);
-
-  if (activeSlideIndex > 0) return null;
 
   return (
     <motion.div

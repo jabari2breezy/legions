@@ -36,6 +36,8 @@ export function ProjectShowcase({
     },
   };
 
+  if (!project) return <></>;
+
   return (
     <section
       className={cn(
@@ -52,12 +54,24 @@ export function ProjectShowcase({
         animate={isActive ? 'visible' : 'hidden'}
       >
         <div className="flex flex-col justify-center">
+          <motion.p
+            variants={item}
+            className="mb-3 text-sm font-medium uppercase tracking-wider text-cyan-glow"
+          >
+            {project.location} · {project.year}
+          </motion.p>
           <motion.h2
             variants={item}
-            className="display mb-8 font-bold text-white"
+            className="display mb-4 font-bold text-white"
           >
             {project.title}
           </motion.h2>
+          <motion.p
+            variants={item}
+            className="text-body-lg text-text-secondary mb-6 leading-relaxed"
+          >
+            {project.description}
+          </motion.p>
           <motion.p
             variants={item}
             className="text-body-lg text-text-secondary mb-6 leading-relaxed"

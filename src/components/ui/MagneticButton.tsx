@@ -15,12 +15,12 @@ export function MagneticButton({
   href,
   ...props
 }: MagneticButtonProps): JSX.Element {
-  const isTouch = useIsTouchDevice();
+  const { isMobile } = useIsTouchDevice();
   const ref = useRef<HTMLAnchorElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
   const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement>): void => {
-    if (isTouch || !ref.current) return;
+    if (isMobile || !ref.current) return;
     const rect = ref.current.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;

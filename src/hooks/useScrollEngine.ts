@@ -27,7 +27,7 @@ export function useScrollEngine({
   slideCount,
 }: UseScrollEngineOptions): MotionValue<number> {
   const prefersReduced = useReducedMotion();
-  const isTouch = useIsTouchDevice();
+  const { isMobile } = useIsTouchDevice();
   const setProgress = useScrollStore((state) => state.setProgress);
   const setActiveSlideIndex = useScrollStore((state) => state.setActiveSlideIndex);
   const setTotalSlides = useScrollStore((state) => state.setTotalSlides);
@@ -60,10 +60,10 @@ export function useScrollEngine({
 
   const desktopScroll = useScroll();
   const mobileScroll = useScroll({
-    container: isTouch ? mainRef : undefined,
+    container: isMobile ? mainRef : undefined,
   });
 
-  const scrollProgress = isTouch ? mobileScroll.scrollYProgress : desktopScroll.scrollYProgress;
+  const scrollProgress = isMobile ? mobileScroll.scrollYProgress : desktopScroll.scrollYProgress;
 
   const springProgress = useSpring(scrollProgress, {
     stiffness: 100,
@@ -74,7 +74,7 @@ export function useScrollEngine({
   const smoothProgress = prefersReduced ? scrollProgress : springProgress;
 
   const x = useTransform(smoothProgress, (latest) => {
-    if (isTouch) return 0;
+    if (isMobile) return 0;
     return -latest * trackWidth.get();
   });
 
@@ -88,7 +88,7 @@ export function useScrollEngine({
   useMotionValueEvent(smoothProgress, 'change', (latest) => {
     const video = videoRef.current;
     if (!video) return;
-    if (isTouch) return;
+    if (isMobile) return;
 
     if (
       onLoadedMetadataRef.current &&
@@ -104,7 +104,7 @@ export function useScrollEngine({
   });
 
   useEffect(() => {
-    if (isTouch) {
+    if (isMobile) {
       const video = videoRef.current;
       if (video) {
         video.autoplay = true;
@@ -142,7 +142,7 @@ export function useScrollEngine({
       observer.disconnect();
       window.removeEventListener('resize', onResize);
     };
-  }, [isTouch, trackRef, spacerRef, trackWidth, videoRef]);
+  }, [isMobile, trackRef, spacerRef, trackWidth, videoRef]);
 
   return x;
 }

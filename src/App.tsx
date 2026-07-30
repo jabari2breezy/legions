@@ -8,15 +8,19 @@ import { useScrollEngine } from '@/hooks/useScrollEngine';
 import { useIsTouchDevice } from '@/hooks/useIsTouchDevice';
 import { useScrollStore } from '@/store/useScrollStore';
 import { projects } from '@/data/projects';
+import { Routes, Route } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
+
+const ProjectPage = lazy(() => import('@/pages/ProjectPage').then((m) => ({ default: m.ProjectPage })));
 
 const TOTAL_SLIDES = 4 + projects.length;
 
-export default function App(): JSX.Element {
+function HomePage(): JSX.Element {
   const mainRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const spacerRef = useRef<HTMLDivElement>(null);
-  const isTouch = useIsTouchDevice();
+  const { isTouch } = useIsTouchDevice();
   const setCursor = useScrollStore((state) => state.setCursor);
 
   const x = useScrollEngine({
@@ -81,5 +85,26 @@ export default function App(): JSX.Element {
 
       <Footer />
     </>
+  );
+}
+
+export default function App(): JSX.Element {
+  return (
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route
+        path="/projects"
+        element={(
+          <Suspense fallback={(
+            <div className="flex h-screen w-screen items-center justify-center bg-[#050507]">
+              <div className="h-8 w-8 animate-spin rounded-full border-2 border-white/20 border-t-[#00F0FF]" />
+            </div>
+          )}
+          >
+            <ProjectPage />
+          </Suspense>
+        )}
+      />
+    </Routes>
   );
 }

@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import type { JSX } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X } from 'lucide-react';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { MagneticButton } from '@/components/ui/MagneticButton';
 import { useScrollStore } from '@/store/useScrollStore';
@@ -10,9 +12,9 @@ import { TODO_JOIN_URL } from '@/data/projects';
 import { fluidEase } from '@/utils/easing';
 import { cn } from '@/utils/cn';
 
-const TOTAL_SLIDES = 10;
+const TOTAL_SLIDES = 5;
 
-const navItems = [
+const scrollNavItems = [
   { label: 'Origin', index: 1 },
   { label: 'Ethos', index: 2 },
   { label: 'Pillars', index: 3 },
@@ -20,14 +22,20 @@ const navItems = [
 ];
 
 export function Header(): JSX.Element {
-  const isTouch = useIsTouchDevice();
+  const navigate = useNavigate();
+  const { isMobile } = useIsTouchDevice();
   const prefersReduced = useReducedMotion();
   const activeSlideIndex = useScrollStore((state) => state.activeSlideIndex);
   const [mounted, setMounted] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  useEffect(() => {
+    if (!isMobile) setMenuOpen(false);
+  }, [isMobile]);
 
   const scrollToSlide = (index: number): void => {
     if (typeof window === 'undefined') return;
@@ -35,16 +43,22 @@ export function Header(): JSX.Element {
     const target = index / TOTAL_SLIDES;
     const behavior = prefersReduced ? 'auto' : 'smooth';
 
-    if (isTouch) {
+    if (isMobile) {
       const main = document.querySelector('main');
       if (!main) return;
       const maxScroll = main.scrollHeight - main.clientHeight;
       main.scrollTo({ top: target * maxScroll, behavior });
+      setMenuOpen(false);
       return;
     }
 
     const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
     window.scrollTo({ top: target * maxScroll, behavior });
+  };
+
+  const handleProjectsClick = (): void => {
+    navigate('/projects');
+    setMenuOpen(false);
   };
 
   return (
@@ -64,48 +78,106 @@ export function Header(): JSX.Element {
           </span>
         </a>
 
-        <GlassCard
-          className="hidden rounded-full px-6 py-2 md:flex"
-          interactive={false}
-        >
-          <nav className="flex items-center gap-6" aria-label="Primary">
-            {navItems.map((item) => (
-              <button
-                key={item.label}
-                type="button"
-                onClick={() => { scrollToSlide(item.index); }}
-                className={cn(
-                  'text-sm font-medium transition-colors',
-                  activeSlideIndex === item.index
-                    ? 'text-white'
-                    : 'text-text-secondary hover:text-white'
-                )}
-              >
-                {item.label}
-              </button>
-            ))}
-          </nav>
-        </GlassCard>
+        <div className="hidden md:block">
+          <GlassCard
+            className="rounded-full px-6 py-2"
+            interactive={false}
+          >
+            <nav className="flex items-center gap-6" aria-label="Primary">
+              {scrollNavItems.map((item) => (
+                <button
+                  key={item.label}
+                  type="button"
+                  onClick={() => {
+                    if (item.label === 'Projects') {
+                      handleProjectsClick();
+                    } else {
+                      scrollToSlide(item.index);
+                    }
+                  }}
+                  className={cn(
+                    'text-sm font-medium transition-colors',
+                    activeSlideIndex === item.index && item.label !== 'Projects'
+                      ? 'text-white'
+                      : 'text-text-secondary hover:text-white'
+                  )}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </nav>
+          </GlassCard>
+        </div>
 
-        <AnimatePresence>
-          {mounted && (
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, ease: fluidEase }}
-            >
-              <MagneticButton
-                inverse
-                href={TODO_JOIN_URL}
-                target="_blank"
-                rel="noopener noreferrer"
+        <div className="flex items-center gap-3">
+          <AnimatePresence>
+            {mounted && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, ease: fluidEase }}
               >
-                {isTouch ? 'Join' : 'Join Movement'}
-              </MagneticButton>
-            </motion.div>
-          )}
-        </AnimatePresence>
+                <MagneticButton
+                  inverse
+                  href={TODO_JOIN_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {isMobile ? 'Join' : 'Join Movement'}
+                </MagneticButton>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          <button
+            type="button"
+            onClick={() => { setMenuOpen((prev) => !prev); }}
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-white backdrop-blur-[40px] md:hidden"
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={menuOpen}
+          >
+            {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
       </div>
+
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.25, ease: fluidEase }}
+            className="absolute left-4 right-4 top-full mt-3 md:hidden"
+          >
+            <GlassCard className="rounded-card p-4" interactive={false}>
+              <nav className="flex flex-col gap-3" aria-label="Mobile primary">
+                {scrollNavItems.map((item) => (
+                  <button
+                    key={item.label}
+                    type="button"
+                    onClick={() => {
+                      if (item.label === 'Projects') {
+                        handleProjectsClick();
+                      } else {
+                        scrollToSlide(item.index);
+                      }
+                    }}
+                    className={cn(
+                      'text-left text-sm font-medium transition-colors',
+                      activeSlideIndex === item.index && item.label !== 'Projects'
+                        ? 'text-white'
+                        : 'text-text-secondary hover:text-white'
+                    )}
+                  >
+                    {item.label}
+                  </button>
+                ))}
+              </nav>
+            </GlassCard>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }
