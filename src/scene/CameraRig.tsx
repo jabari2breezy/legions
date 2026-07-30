@@ -6,20 +6,32 @@ import { useRingStore } from '@/store/useRingStore';
 import { projectsMatchingFilters, projects } from '@/data/projects';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 
-const RADIUS_X = 11;
-const RADIUS_Z = 11;
-const OVERVIEW_POSITION = new THREE.Vector3(0, 8, 28);
+const RADIUS_X = 14;
+const RADIUS_Z = 14;
+const RADIUS_X_MOBILE = 9;
+const RADIUS_Z_MOBILE = 9;
+const OVERVIEW_POSITION_DESKTOP = new THREE.Vector3(0, 8, 28);
+const OVERVIEW_POSITION_MOBILE = new THREE.Vector3(0, 6, 20);
 const OVERVIEW_TARGET = new THREE.Vector3(0, 0, 0);
 const FOCUS_OFFSET = 5;
 
 export function CameraRig(): JSX.Element {
-  const { camera } = useThree();
+  const { camera, size } = useThree();
+  const isMobile = size.width < 768;
+  const overviewPosition = isMobile ? OVERVIEW_POSITION_MOBILE : OVERVIEW_POSITION_DESKTOP;
+  const radiusX = isMobile ? RADIUS_X_MOBILE : RADIUS_X;
+  const radiusZ = isMobile ? RADIUS_Z_MOBILE : RADIUS_Z;
   const prefersReduced = useReducedMotion();
   const focusedIndex = useRingStore((state) => state.focusedIndex);
   const cameraMode = useRingStore((state) => state.cameraMode);
   const activeFilters = useRingStore((state) => state.activeFilters);
   const targetRef = useRef(new THREE.Vector3().copy(OVERVIEW_TARGET));
-  const positionRef = useRef(new THREE.Vector3().copy(OVERVIEW_POSITION));
+  const positionRef = useRef(new THREE.Vector3().copy(overviewPosition));
+
+  useEffect(() => {
+    camera.fov = isMobile ? 55 : 42;
+    camera.updateProjectionMatrix();
+  }, [camera, isMobile]);
 
   const visibleCards = (() => {
     const filteredProjects = projectsMatchingFilters(activeFilters);
@@ -38,8 +50,8 @@ export function CameraRig(): JSX.Element {
       const angle = count > 0 && firstCardIndex !== -1
         ? (firstCardIndex / count) * Math.PI * 2
         : 0;
-      const planeX = RADIUS_X * Math.cos(angle);
-      const planeZ = RADIUS_Z * Math.sin(angle);
+      const planeX = radiusX * Math.cos(angle);
+      const planeZ = radiusZ * Math.sin(angle);
       const normalX = Math.cos(angle);
       const normalZ = Math.sin(angle);
 
@@ -61,16 +73,16 @@ export function CameraRig(): JSX.Element {
       }
     } else {
       if (prefersReduced) {
-        positionRef.current.copy(OVERVIEW_POSITION);
+        positionRef.current.copy(overviewPosition);
         targetRef.current.copy(OVERVIEW_TARGET);
         camera.position.copy(positionRef.current);
         camera.lookAt(targetRef.current);
       } else {
-        positionRef.current.copy(OVERVIEW_POSITION);
+        positionRef.current.copy(overviewPosition);
         targetRef.current.copy(OVERVIEW_TARGET);
       }
     }
-  }, [camera, cameraMode, focusedIndex, prefersReduced, visibleCards]);
+  }, [camera, cameraMode, focusedIndex, prefersReduced, visibleCards, overviewPosition]);
 
   useFrame(() => {
     if (prefersReduced) return;

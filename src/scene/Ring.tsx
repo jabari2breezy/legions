@@ -1,14 +1,17 @@
 import { useRef, useMemo, useState, useEffect } from 'react';
 import type { JSX } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
+
 import * as THREE from 'three';
 import { useRingStore } from '@/store/useRingStore';
 import { projectsMatchingFilters, projects } from '@/data/projects';
 import { ProjectPlane } from './ProjectPlane';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 
-const RADIUS_X = 11;
-const RADIUS_Z = 11;
+const RADIUS_X = 14;
+const RADIUS_Z = 14;
+const RADIUS_X_MOBILE = 9;
+const RADIUS_Z_MOBILE = 9;
 const ROTATION_PER_WHEEL = 0.05;
 
 interface PhotoCard {
@@ -20,7 +23,10 @@ interface PhotoCard {
 
 export function Ring(): JSX.Element {
   const groupRef = useRef<THREE.Group>(null);
-  const { gl } = useThree();
+  const { gl, size } = useThree();
+  const isMobile = size.width < 768;
+  const radiusX = isMobile ? RADIUS_X_MOBILE : RADIUS_X;
+  const radiusZ = isMobile ? RADIUS_Z_MOBILE : RADIUS_Z;
   const prefersReduced = useReducedMotion();
   const targetRotation = useRingStore((state) => state.targetRotation);
   const addTargetRotation = useRingStore((state) => state.addTargetRotation);
@@ -107,7 +113,7 @@ export function Ring(): JSX.Element {
   };
 
   return (
-    <group ref={groupRef}>
+    <group ref={groupRef} rotation={[0.25, 0, 0]}>
       <mesh
         position={[0, 0, -2]}
         onPointerDown={onPointerDown}
@@ -123,8 +129,8 @@ export function Ring(): JSX.Element {
           key={`${card.projectId}-${card.imageIndex}`}
           projectIndex={card.projectIndex}
           image={card.image}
-          radiusX={RADIUS_X}
-          radiusZ={RADIUS_Z}
+          radiusX={radiusX}
+          radiusZ={radiusZ}
           angle={angles.get(index) ?? 0}
           visible={visibleCards.includes(index)}
           anyHovered={anyHovered}

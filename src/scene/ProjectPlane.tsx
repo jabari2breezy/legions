@@ -16,8 +16,8 @@ interface ProjectPlaneProps {
   setAnyHovered: (hovered: boolean) => void;
 }
 
-const PLANE_WIDTH = 1.6;
-const PLANE_HEIGHT = 1.1;
+const PLANE_WIDTH = 1.25;
+const PLANE_HEIGHT = 0.85;
 
 export function ProjectPlane({
   projectIndex,
