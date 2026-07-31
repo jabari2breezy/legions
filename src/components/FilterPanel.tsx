@@ -5,6 +5,7 @@ import { Plus } from 'lucide-react';
 import { useRingStore } from '@/store/useRingStore';
 import { FILTER_SECTIONS, projectsMatchingFilters } from '@/data/projects';
 import type { FilterCategory } from '@/data/projects';
+import { cn } from '@/utils/cn';
 
 export function FilterPanel(): JSX.Element | null {
   const filterPanelOpen = useRingStore((state) => state.filterPanelOpen);
@@ -27,7 +28,7 @@ export function FilterPanel(): JSX.Element | null {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-black/10"
+            className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm"
             onClick={() => { setFilterPanelOpen(false); }}
           />
 
@@ -37,22 +38,22 @@ export function FilterPanel(): JSX.Element | null {
             animate={{ x: 0 }}
             exit={{ x: '-100%' }}
             transition={{ duration: 0.4, ease: [0.19, 1, 0.22, 1] }}
-            className="fixed top-0 left-0 z-50 flex h-screen w-full max-w-md flex-col border-r border-black/10 bg-white"
+            className="fixed top-0 left-0 z-50 flex h-screen w-full max-w-md flex-col border-r border-white/10 bg-[#0a0a0c]/95 backdrop-blur-xl"
           >
             {/* Header */}
-            <div className="flex items-start justify-between border-b border-black/10 px-6 py-5">
+            <div className="flex items-start justify-between border-b border-white/10 px-6 py-5">
               <div>
-                <h2 className="text-3xl font-bold tracking-tight text-black">
+                <h2 className="text-3xl font-bold tracking-tight text-white">
                   Filter Projects
                 </h2>
-                <p className="mt-1 text-sm text-black/60">
+                <p className="mt-1 text-sm text-white/60">
                   ({String(filteredCount).padStart(2, '0')})
                 </p>
               </div>
               <button
                 type="button"
                 onClick={() => { setFilterPanelOpen(false); }}
-                className="text-sm font-medium text-black underline underline-offset-4 hover:text-black/60"
+                className="text-sm font-medium text-white underline underline-offset-4 hover:text-white/60"
               >
                 Close
               </button>
@@ -60,11 +61,11 @@ export function FilterPanel(): JSX.Element | null {
 
             {/* Clear all */}
             {hasFilters && (
-              <div className="border-b border-black/10 px-6 py-3">
+              <div className="border-b border-white/10 px-6 py-3">
                 <button
                   type="button"
                   onClick={clearFilters}
-                  className="text-sm font-medium text-black/60 hover:text-black transition-colors"
+                  className="text-sm font-medium text-white/60 hover:text-white transition-colors"
                 >
                   Clear all
                 </button>
@@ -80,17 +81,17 @@ export function FilterPanel(): JSX.Element | null {
                 return (
                   <div
                     key={section.category}
-                    className="border-b border-black/10 last:border-b-0"
+                    className="border-b border-white/10 last:border-b-0"
                   >
                     <button
                       type="button"
                       onClick={() => { setExpandedCategory(isExpanded ? '' as FilterCategory : section.category); }}
                       className="flex w-full items-center justify-between py-4 text-left"
                     >
-                      <span className="text-xl font-medium text-black">
+                      <span className="text-xl font-medium text-white">
                         {section.label}
                       </span>
-                      <span className="flex items-center gap-2 text-black/40">
+                      <span className="flex items-center gap-2 text-white/40">
                         {activeCount > 0 && (
                           <span className="text-xs font-medium">({activeCount})</span>
                         )}
@@ -118,14 +119,13 @@ export function FilterPanel(): JSX.Element | null {
                                 type="checkbox"
                                 checked={activeFilters[section.category].length === 0}
                                 onChange={() => {
-                                  // Clear all in this category
                                   const next = { ...activeFilters };
                                   next[section.category] = [];
                                   useRingStore.setState({ activeFilters: next });
                                 }}
-                                className="h-4 w-4 border-black/30 text-black focus:ring-black"
+                                className="h-4 w-4 rounded border-white/30 bg-white/5 text-cyan-glow focus:ring-cyan-glow"
                               />
-                              <span className="text-sm font-medium text-black">All</span>
+                              <span className="text-sm font-medium text-white">All</span>
                             </label>
 
                             <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
@@ -140,12 +140,12 @@ export function FilterPanel(): JSX.Element | null {
                                       type="checkbox"
                                       checked={checked}
                                       onChange={() => { setFilter(section.category, option.value); }}
-                                      className="h-4 w-4 border-black/30 text-black focus:ring-black"
+                                      className="h-4 w-4 rounded border-white/30 bg-white/5 text-cyan-glow focus:ring-cyan-glow"
                                     />
-                                    <span className="text-sm text-black">
+                                    <span className="text-sm text-white">
                                       {option.label}
                                     </span>
-                                    <span className="ml-auto text-xs text-black/40">
+                                    <span className="ml-auto text-xs text-white/40">
                                       ({String(option.count).padStart(2, '0')})
                                     </span>
                                   </label>
@@ -165,8 +165,4 @@ export function FilterPanel(): JSX.Element | null {
       )}
     </AnimatePresence>
   );
-}
-
-function cn(...classes: (string | false | undefined)[]): string {
-  return classes.filter(Boolean).join(' ');
 }

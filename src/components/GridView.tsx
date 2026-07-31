@@ -7,7 +7,7 @@ export function GridView(): JSX.Element {
   const setFocusedIndex = useRingStore((state) => state.setFocusedIndex);
 
   return (
-    <div className="min-h-screen bg-white px-6 pb-20 pt-36 md:px-10">
+    <div className="min-h-screen bg-[#050507] px-6 pb-20 pt-36 md:px-8">
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {projects.map((project, index) => (
           <motion.button
@@ -17,7 +17,7 @@ export function GridView(): JSX.Element {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: index * 0.05 }}
-            className="group relative aspect-[4/3] overflow-hidden bg-black/5 text-left"
+            className="group relative aspect-[4/3] overflow-hidden bg-white/5 text-left"
           >
             <img
               src={project.images[0]}

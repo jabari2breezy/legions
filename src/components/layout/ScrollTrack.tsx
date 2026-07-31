@@ -49,7 +49,7 @@ export const ScrollTrack = forwardRef<HTMLElement, ScrollTrackProps>(
           'flex items-stretch',
           isMobile
             ? 'relative h-auto w-full flex-col'
-            : 'sticky top-0 h-screen w-max flex-row overflow-hidden'
+            : 'fixed inset-0 h-screen w-max flex-row overflow-hidden'
         )}
         aria-label="Legions Tz presentation"
       >

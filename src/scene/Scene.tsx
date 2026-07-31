@@ -6,7 +6,7 @@ import { CameraRig } from './CameraRig';
 
 export function Scene(): JSX.Element {
   return (
-    <div className="fixed inset-0 -z-10 h-screen w-screen bg-white">
+    <div className="fixed inset-0 -z-10 h-screen w-screen bg-transparent">
       <Canvas
         camera={{
           position: [0, 8, 28],
@@ -17,7 +17,7 @@ export function Scene(): JSX.Element {
         gl={{ antialias: true, alpha: true }}
         dpr={[1, 2]}
       >
-        <color attach="background" args={['#ffffff']} />
+
         <ambientLight intensity={0.8} />
         <directionalLight position={[10, 10, 10]} intensity={1.2} />
         <directionalLight position={[-10, -10, -10]} intensity={0.5} />

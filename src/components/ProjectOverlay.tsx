@@ -1,7 +1,7 @@
 import type { JSX } from 'react';
+import { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, MapPin, Calendar, Maximize2 } from 'lucide-react';
-import { GlassCard } from '@/components/ui/GlassCard';
 import { useRingStore } from '@/store/useRingStore';
 import { projects } from '@/data/projects';
 import { fluidEase } from '@/utils/easing';
@@ -13,6 +13,16 @@ export function ProjectOverlay(): JSX.Element {
 
   const project = focusedIndex !== null ? projects[focusedIndex] : null;
 
+  // Disable body scroll when overlay is open
+  useEffect(() => {
+    if (!project) return;
+    const original = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = original;
+    };
+  }, [project]);
+
   return (
     <AnimatePresence>
       {project && (
@@ -20,103 +30,171 @@ export function ProjectOverlay(): JSX.Element {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.4, ease: fluidEase }}
-          className="pointer-events-auto fixed inset-0 z-50 flex items-center justify-center bg-white/80 p-4 backdrop-blur-sm md:p-8"
+          transition={{ duration: 0.5, ease: fluidEase }}
+          className="pointer-events-auto fixed inset-0 z-50 bg-[#050507]/95 backdrop-blur-md"
           onClick={clearFocus}
         >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            transition={{ duration: 0.5, ease: fluidEase }}
-            className="relative max-h-[90vh] w-full max-w-4xl overflow-y-auto rounded-[28px] border border-black/10 bg-white p-6 shadow-[0_16px_64px_rgba(0,0,0,0.1)] md:p-10"
+          <button
+            type="button"
+            onClick={clearFocus}
+            className="fixed right-6 top-6 z-50 flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition-colors hover:bg-white/10"
+            aria-label="Close project details"
+          >
+            <X className="h-5 w-5" />
+          </button>
+
+          <div
+            className="grid h-full grid-cols-1 md:grid-cols-2"
             onClick={(e) => { e.stopPropagation(); }}
           >
-            <button
-              type="button"
-              onClick={clearFocus}
-              className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full border border-black/10 bg-black/[0.03] text-black transition-colors hover:bg-black/[0.08]"
-              aria-label="Close project details"
+            {/* Left: project info */}
+            <motion.div
+              initial={{ opacity: 0, x: -40 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -40 }}
+              transition={{ duration: 0.6, ease: fluidEase, delay: 0.1 }}
+              className="flex flex-col justify-end px-6 pb-10 pt-28 md:px-12 md:pb-16"
             >
-              <X className="h-5 w-5" />
-            </button>
+              <p className="mb-3 text-xs font-medium uppercase tracking-[0.2em] text-[#00F0FF]">
+                {project.programme.join(' · ')}
+              </p>
+              <h2 className="mb-4 text-[clamp(2.5rem,6vw,5rem)] font-bold leading-[0.95] tracking-tight text-white">
+                {project.title}
+              </h2>
+              <p className="mb-8 max-w-lg text-lg leading-relaxed text-white/60">
+                {project.subtitle}
+              </p>
 
-            <p className="mb-2 text-sm font-medium uppercase tracking-wider text-[#00F0FF]">
-              {project.programme.join(' · ')}
-            </p>
-            <h2 className="display mb-4 font-bold text-black">
-              {project.title}
-            </h2>
-            <p className="text-body-lg text-black/60 mb-6 leading-relaxed">
-              {project.subtitle}
-            </p>
+              <div className="mb-8 grid grid-cols-2 gap-3 md:max-w-md">
+                <MetadataItem icon={<MapPin className="h-4 w-4" />} label="Location" value={project.location} />
+                <MetadataItem icon={<Calendar className="h-4 w-4" />} label="Year" value={String(project.year)} />
+                <MetadataItem icon={<Maximize2 className="h-4 w-4" />} label="Scale" value={project.scale} />
+                <MetadataItem icon={<span className="text-xs font-bold">S</span>} label="Status" value={project.status.join(', ')} />
+              </div>
 
-            <div className="mb-8 grid grid-cols-2 gap-3 md:grid-cols-4">
-              <MetadataItem icon={<MapPin className="h-4 w-4" />} label="Location" value={project.location} />
-              <MetadataItem icon={<Calendar className="h-4 w-4" />} label="Year" value={String(project.year)} />
-              <MetadataItem icon={<Maximize2 className="h-4 w-4" />} label="Scale" value={project.scale} />
-              <MetadataItem icon={<span className="text-xs font-bold">S</span>} label="Status" value={project.status.join(', ')} />
-            </div>
+              <div className="mb-8 max-w-lg space-y-4 text-sm leading-relaxed text-white/70">
+                <p>{project.context}</p>
+                <p>{project.description}</p>
+              </div>
 
-            <div className="mb-8 grid gap-4 md:grid-cols-2">
-              <GlassCard className="rounded-[28px] border-black/10 bg-black/[0.03] p-5 shadow-none" interactive={false}>
-                <h3 className="mb-2 text-sm font-bold uppercase tracking-wider text-black/40">
-                  Context
-                </h3>
-                <p className="text-sm leading-relaxed text-black/70">
-                  {project.context}
-                </p>
-              </GlassCard>
-              <GlassCard className="rounded-[28px] border-black/10 bg-black/[0.03] p-5 shadow-none" interactive={false}>
-                <h3 className="mb-2 text-sm font-bold uppercase tracking-wider text-black/40">
-                  Scope
-                </h3>
-                <p className="text-sm leading-relaxed text-black/70">
-                  {project.scope.join(', ')}
-                </p>
-              </GlassCard>
-            </div>
+              <div className="grid gap-3 sm:grid-cols-2 md:max-w-md">
+                {project.stats.map((stat) => (
+                  <div
+                    key={stat}
+                    className="rounded-2xl border border-white/10 bg-white/5 p-4"
+                  >
+                    <p className="text-xl font-bold leading-tight text-[#00F0FF]">
+                      {/^([\d$.%+-]+)(.*)$/.exec(stat)?.[1] ?? stat}
+                    </p>
+                    <p className="text-xs text-white/50">
+                      {/^([\d$.%+-]+)(.*)$/.exec(stat)?.[2] ?? ''}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
 
-            <p className="text-body-lg text-black/60 mb-8 leading-relaxed">
-              {project.description}
-            </p>
+            {/* Right: rolling 3D image gallery */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.6, ease: fluidEase, delay: 0.15 }}
+              className="relative hidden h-full overflow-hidden md:block"
+              style={{ perspective: '1400px' }}
+            >
+              <div className="absolute inset-0 flex flex-col items-center justify-center">
+                <RollingStrip images={project.images} title={project.title} />
+              </div>
 
-            <div className="mb-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {project.stats.map((stat) => (
+              {/* Gradient masks */}
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#050507] to-transparent" />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#050507] to-transparent" />
+            </motion.div>
+
+            {/* Mobile: vertical scroll gallery */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 40 }}
+              transition={{ duration: 0.6, ease: fluidEase, delay: 0.2 }}
+              className="flex h-full flex-col gap-4 overflow-y-auto px-6 pb-10 pt-4 md:hidden"
+            >
+              {project.images.map((image, index) => (
                 <div
-                  key={stat}
-                  className="rounded-[28px] border border-black/10 bg-black/[0.03] p-6"
-                >
-                  <p className="text-2xl font-bold leading-tight text-[#00F0FF]">
-                    {/^([\d$.%+-]+)(.*)$/.exec(stat)?.[1] ?? stat}
-                  </p>
-                  <p className="text-sm text-black/60">
-                    {/^([\d$.%+-]+)(.*)$/.exec(stat)?.[2] ?? ''}
-                  </p>
-                </div>
-              ))}
-            </div>
-
-            <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
-              {project.images.slice(0, 8).map((image, index) => (
-                <GlassCard
-                  key={`${project.id}-${index}`}
-                  className="aspect-square overflow-hidden rounded-[28px] border-black/10 p-0 shadow-none"
-                  interactive={false}
+                  key={`mobile-${project.id}-${index}`}
+                  className="overflow-hidden rounded-2xl border border-white/10 bg-white/5"
                 >
                   <img
                     src={image}
                     alt={`${project.title} ${index + 1}`}
-                    className="h-full w-full object-cover"
+                    className="aspect-[4/3] w-full object-cover"
                     loading="lazy"
                   />
-                </GlassCard>
+                </div>
               ))}
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </motion.div>
       )}
     </AnimatePresence>
+  );
+}
+
+function RollingStrip({ images, title }: { images: string[]; title: string }): JSX.Element {
+  // Triple the images so the loop feels seamless
+  const loop = [...images, ...images, ...images];
+
+  return (
+    <div
+      className="relative flex h-full w-full flex-col items-center justify-center"
+      style={{ transformStyle: 'preserve-3d' }}
+    >
+      <motion.div
+        className="flex flex-col items-center gap-8"
+        style={{ transformStyle: 'preserve-3d' }}
+        initial={{ y: '25%' }}
+        animate={{ y: '-25%' }}
+        transition={{
+          duration: 24,
+          ease: 'linear',
+          repeat: Infinity,
+        }}
+      >
+        {loop.map((image, index) => {
+          const normalized = (index % images.length) / Math.max(images.length - 1, 1);
+          const rotateX = -8 - normalized * 28;
+          const translateZ = -normalized * 320;
+          const opacity = 0.35 + (1 - normalized) * 0.65;
+
+          return (
+            <motion.div
+              key={`${image}-${index}`}
+              className="relative w-[55%] shrink-0 overflow-hidden rounded-2xl border border-white/10 shadow-2xl"
+              style={{
+                transformStyle: 'preserve-3d',
+                transform: `rotateX(${rotateX}deg) translateZ(${translateZ}px)`,
+                opacity,
+              }}
+              initial={{ opacity: 0, y: 80, rotateX: -35 }}
+              animate={{ opacity, y: 0, rotateX }}
+              transition={{
+                duration: 0.7,
+                ease: fluidEase,
+                delay: (index % images.length) * 0.06,
+              }}
+            >
+              <img
+                src={image}
+                alt={`${title} ${(index % images.length) + 1}`}
+                className="aspect-[4/3] w-full object-cover"
+                loading="lazy"
+              />
+            </motion.div>
+          );
+        })}
+      </motion.div>
+    </div>
   );
 }
 
@@ -128,12 +206,12 @@ interface MetadataItemProps {
 
 function MetadataItem({ icon, label, value }: MetadataItemProps): JSX.Element {
   return (
-    <div className={cn('rounded-[28px] border border-black/10 bg-black/[0.03] p-3 shadow-none')}>
-      <div className="mb-1 flex items-center gap-1.5 text-black/40">
+    <div className={cn('rounded-2xl border border-white/10 bg-white/5 p-3')}>
+      <div className="mb-1 flex items-center gap-1.5 text-white/40">
         {icon}
         <span className="text-xs font-bold uppercase tracking-wider">{label}</span>
       </div>
-      <p className="text-sm font-medium text-black">{value}</p>
+      <p className="text-sm font-medium text-white">{value}</p>
     </div>
   );
 }

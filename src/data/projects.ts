@@ -3,56 +3,32 @@ export const TODO_JOIN_URL =
   'https://instagram.com/legions.tz';
 
 export const PROGRAMMES = [
-  'Cultural',
-  'Education',
-  'High-Rise',
-  'Hospitality',
-  'Leisure',
-  'Mixed-Use',
-  'Office',
-  'Outdoor Retail',
-  'Renovation',
-  'Residential',
-  'Shopping Mall',
-  'Showroom',
-  'Sports',
-  'Store Design',
-  'Transport',
+  'AMSEN Visits',
+  'Ujasiri House renovation',
+  'Ramadhan project',
+  'Tree planting',
+  'Beach cleanup',
 ] as const;
 
 export const SCOPES = [
-  'Architecture',
-  'Façade',
-  'Interiors',
-  'Landscape',
-  'Masterplan',
-  'Model Making',
-  'Wayfinding',
+  'Social Inclusion',
+  'Environmental Stewardship',
+  'Facility Improvement',
+  'Food Security',
+  'Greening',
 ] as const;
 
-export const STATUSES = [
-  'Completed',
-  'Concept',
-  'In Progress',
-  'On Site',
-] as const;
+export const STATUSES = ['Completed', 'Ongoing'] as const;
 
-export const SCALES = ['<5000', '<35000', '<100000', '>100000'] as const;
+export const SCALES = ['Local', 'District', 'Coastal'] as const;
 
-export const YEARS = Array.from({ length: 2026 - 2008 + 1 }, (_, i) => 2008 + i);
+export const YEARS = [2024, 2025, 2026] as const;
 
 export type Programme = (typeof PROGRAMMES)[number];
 export type Scope = (typeof SCOPES)[number];
 export type Status = (typeof STATUSES)[number];
 export type Scale = (typeof SCALES)[number];
 export type FilterCategory = 'programme' | 'scope' | 'status' | 'scale' | 'year';
-
-export interface ProjectProps {
-  title: string;
-  context: string;
-  planning: string;
-  stats: string[];
-}
 
 export interface Project {
   id: string;
@@ -138,124 +114,124 @@ const ujasiriHouseImages = [
 
 export const projects: Project[] = [
   {
-    id: 'care-home-revival',
-    slug: 'care-home-revival',
-    title: 'Care Home Revival & Dignity Program',
-    subtitle: 'Intergenerational care, dignity and companionship',
+    id: 'amsen-visits',
+    slug: 'amsen-visits',
+    title: 'AMSEN Visits',
+    subtitle: 'Inclusive companionship for neurodivergent students',
     description:
-      'A multi-week volunteer rotation across understaffed care facilities, restoring dignity through companionship, creative enrichment, and environmental upgrades.',
+      'Regular youth-led visits to the Al Muntazir Special Needs (AMSEN) center, bringing creative arts, sensory-friendly games, and genuine peer companionship to students with special needs.',
     context:
-      'Identified understaffed facilities with minimal enrichment programming, creating dependency and despair among long-term residents.',
+      'Children with neurodivergence and special physical or intellectual needs in Dar-es-Salaam often face social isolation due to lingering societal stigma and a lack of inclusive youth-led community interaction. Legions Tz recognized that institutional care needs to be complemented by genuine human connection, social integration, and peer companionship.',
     planning:
-      'Organized multi-week volunteer rotations, deployed art supplies, installed murals, facilitated intergenerational mentorship pairings with university students.',
+      'The team held consultations with AMSEN administrators and specialized educators to understand sensory profiles, mobility needs, and comfort levels. Members prepared through inclusive engagement workshops, then planned sensory-friendly itineraries featuring creative arts, crafts, interactive music, and gentle physical games. Fundraising supplied specialized art supplies, educational toys, and individual gift packages left as permanent donations to the center.',
     stats: [
-      '120+ Elders Engaged',
-      '8 Care Facilities Transformed',
-      '600+ Volunteer Hours',
+      '40+ Special Needs Students Engaged',
+      '100% Resource Donation to Therapy Department',
+      '25+ Youth Volunteers Trained in Inclusive Civic Action',
     ],
     images: amsenVisitsImages,
     location: 'Dar es Salaam',
     year: 2024,
-    programme: ['Renovation', 'Residential'],
-    scope: ['Interiors', 'Wayfinding'],
+    programme: ['AMSEN Visits'],
+    scope: ['Social Inclusion'],
     status: ['Completed'],
-    scale: '<5000',
+    scale: 'Local',
   },
   {
-    id: 'family-economic-relief',
-    slug: 'family-economic-relief',
-    title: 'Family Economic Relief Initiative',
-    subtitle: 'Direct cash transfers and livelihood diversification',
+    id: 'beach-cleanup',
+    slug: 'beach-cleanup',
+    title: 'Beach Cleanups',
+    subtitle: 'Youth-driven coastal restoration and marine protection',
     description:
-      'A peer-to-peer safety net delivering direct mobile-money transfers and micro-skill workshops to ultra-poor families facing seasonal income collapse.',
+      'Grassroots beach cleanups along Dar-es-Salaam coastline that remove tons of plastic waste, protect marine wildlife, and restore public coastal spaces for safe community use.',
     context:
-      'Tracked ultra-poor families trapped in seasonal income collapse; single parents unable to afford food + school fees simultaneously.',
+      'Rapid urban growth along Dar-es-Salaam\'s coastline has led to severe plastic accumulation, endangering marine wildlife and degrading public coastal spaces. Driven by the urgent need for localized environmental stewardship, Legions Tz stepped in to address marine pollution directly through grassroots youth action.',
     planning:
-      'Direct peer-to-peer cash transfers via mobile money, matched with micro-skill workshops (sewing, small-scale farming) for income diversification.',
+      'Planning began with site reconnaissance to identify heavily polluted coastal sections and coordinate permissions with municipal beach governance committees. Digital recruitment rallied youth volunteers and micro-sponsors. The team procured biodegradable waste bags, gloves, safety equipment, trash pickers, and hydration stations, then established on-site waste-sorting streams and partnered with local waste collectors for proper recycling.',
     stats: [
-      '340 Families Stabilized',
-      '$12.5K Distributed',
-      '89% Remained Above Poverty Line at 6mo. Follow-up',
-    ],
-    images: ramadhanProjectImages,
-    location: 'Dar es Salaam',
-    year: 2025,
-    programme: ['Cultural'],
-    scope: ['Architecture'],
-    status: ['Completed'],
-    scale: '<5000',
-  },
-  {
-    id: 'public-space-greening',
-    slug: 'public-space-greening',
-    title: 'Public Space Reclamation & Greening',
-    subtitle: 'Community-led public realm regeneration',
-    description:
-      'A grassroots campaign to reclaim derelict ward parks and market surrounds, transforming them into safe, green gathering spaces.',
-    context:
-      'Derelict ward parks and market surrounds choked with litter, broken infrastructure, zero gathering function; community safety compromised.',
-    planning:
-      'Mobilized 80-person volunteer teams on weekend sprints, cleared rubble, planted 400+ native trees, rebuilt public seating, installed directional wayfinding.',
-    stats: [
-      '5 Public Spaces Reclaimed',
-      '400+ Trees Planted',
-      '2,000+ Weekly Visitors',
-    ],
-    images: treePlantingImages,
-    location: 'Dar es Salaam',
-    year: 2025,
-    programme: ['Leisure', 'Outdoor Retail'],
-    scope: ['Landscape', 'Masterplan'],
-    status: ['In Progress'],
-    scale: '<35000',
-  },
-  {
-    id: 'coastal-mangrove-restoration',
-    slug: 'coastal-mangrove-restoration',
-    title: 'Coastal Ecosystem & Mangrove Restoration',
-    subtitle: 'Youth ranger corps and shoreline resilience',
-    description:
-      'A youth-led coastal restoration programme replanting mangroves, training community rangers, and reversing erosion in fishing communities.',
-    context:
-      'Rapid mangrove loss driving coastal erosion, fishery collapse, and methane spike; youth unemployment in fishing communities acute.',
-    planning:
-      'Coordinated with maritime authorities; deployed 60+ youth in weekly restoration shifts, replanted 3,000+ saplings, trained community rangers in stewardship.',
-    stats: [
-      '3,200 Mangroves Established',
-      '60 Youth Trained as Rangers',
-      '15% Erosion Reversal at Pilot Site',
+      '1.5+ Tons of Waste Removed',
+      '150+ Volunteers Mobilized',
+      'Kilometers of Coastline Restored',
     ],
     images: beachCleanupImages,
     location: 'Dar es Salaam Coast',
     year: 2025,
-    programme: ['Outdoor Retail', 'Leisure'],
-    scope: ['Landscape', 'Masterplan'],
-    status: ['On Site'],
-    scale: '<100000',
+    programme: ['Beach cleanup'],
+    scope: ['Environmental Stewardship'],
+    status: ['Ongoing'],
+    scale: 'Coastal',
   },
   {
-    id: 'civic-literacy-bootcamp',
-    slug: 'civic-literacy-bootcamp',
-    title: 'Civic Literacy & Digital Inclusion Bootcamp',
-    subtitle: 'Rights awareness and digital skills training',
+    id: 'ramadhan-project',
+    slug: 'ramadhan-project',
+    title: 'Ramadhan Project',
+    subtitle: 'Dignified food security for fasting families',
     description:
-      'An 8-week bootcamp teaching civic processes, rights awareness, and essential digital tools to underserved youth and community groups.',
+      'A Ramadan initiative delivering bulk food hampers and Iftar provisions directly to underprivileged households, orphanages, and families supporting sick relatives in hospitals.',
     context:
-      'Underserved wards had near-zero civic engagement (voter registration, local budget advocacy, rights awareness); digital divide isolated vulnerable populations.',
+      'During the holy month of Ramadan, underprivileged households, local orphanages, and families supporting sick relatives in hospitals face severe economic strain due to rising food prices. Legions Tz initiated the Ramadhan Project to uphold values of charity and mutual aid.',
     planning:
-      'Ran 8-week cohorts in local community centers, taught civic process mapping, digital tools (Google Suite, Canva, mobile banking), facilitated peer teaching.',
+      'Community needs assessments identified underfunded orphanages, pediatric long-term care stays, and low-income families. Peer-to-peer digital fundraising and mobile money drives collected micro-donations. Members negotiated directly with wholesale suppliers to maximize purchasing power for rice, flour, oil, sugar, dates, and dry rations, then packed and hand-delivered balanced hampers along pre-mapped distribution routes.',
     stats: [
-      '120 Youth Graduated',
-      '85% Digital Literacy Gain',
-      '60 New Voter Registrations',
+      '1,200+ Individuals & Fasting Families Supported',
+      'Multiple Orphanages & Care Facilities Reached',
+      '100% Direct Allocation — Zero Admin Overhead',
+    ],
+    images: ramadhanProjectImages,
+    location: 'Dar es Salaam',
+    year: 2025,
+    programme: ['Ramadhan project'],
+    scope: ['Food Security'],
+    status: ['Completed'],
+    scale: 'District',
+  },
+  {
+    id: 'tree-planting',
+    slug: 'tree-planting',
+    title: 'Tree Planting',
+    subtitle: 'Maboresho Ya Kijani / Project MYK',
+    description:
+      'Urban greening and school planting drives that combat heat islands, improve air quality, and create shaded learning environments through native saplings and student guardianship.',
+    context:
+      'Urban heat island effects and rapid deforestation in Dar-es-Salaam leave many public schools and community spaces barren, exposed to extreme heat, and lacking natural shade. As part of Maboresho Ya Kijani (Green Improvements), Legions Tz sought to combat local climate vulnerability and create eco-friendly learning environments.',
+    planning:
+      'The team surveyed public school grounds lacking green cover, partnered with horticultural nurseries and environmental organizations to select resilient native shade and fruit saplings, and prepared soil, tools, and organic fertilizer. Student-led tree-guardianship agreements assigned watering and maintenance responsibilities to guarantee high survival rates.',
+    stats: [
+      '500+ Trees Planted',
+      '90%+ Survival Rate via Student Guardianship',
+      'Hundreds of Students Benefiting from Shade',
+    ],
+    images: treePlantingImages,
+    location: 'Dar es Salaam',
+    year: 2025,
+    programme: ['Tree planting'],
+    scope: ['Greening'],
+    status: ['Completed'],
+    scale: 'District',
+  },
+  {
+    id: 'ujasiri-house-renovation',
+    slug: 'ujasiri-house-renovation',
+    title: 'Ujasiri House Renovation',
+    subtitle: 'Ujasiri Revamped — a therapeutic home for healing',
+    description:
+      'A full revitalization of the Ujasiri House hostel, providing free housing and psycho-social support for pediatric cancer patients and caregivers, through paint, plaster, and therapeutic murals.',
+    context:
+      'The Ujasiri House, operated by Tumaini La Maisha (TLM), offers free housing, meals, and psycho-social support to pediatric cancer patients and their caregivers during multi-month treatment cycles at Muhimbili National Hospital. Years of continuous use had left the facility worn, faded, and sterile.',
+    planning:
+      'Multi-stage site surveys alongside TLM staff assessed wall damage, painting requirements, and spatial design needs. A dedicated fundraising campaign secured high-grade, non-toxic paints, plaster, brushes, and repair supplies. Members designed child-friendly mural concepts and color schemes for therapeutic pediatric environments, then executed scraping, plastering, priming, and hand-painted murals across living quarters and play areas.',
+    stats: [
+      '30+ Families Hosted Daily / Hundreds Annually',
+      '100% Sweat-Equity Efficiency',
+      'Complete Interior/ Exterior Spatial Transformation',
     ],
     images: ujasiriHouseImages,
     location: 'Dar es Salaam',
     year: 2026,
-    programme: ['Education', 'Renovation'],
-    scope: ['Interiors', 'Wayfinding'],
+    programme: ['Ujasiri House renovation'],
+    scope: ['Facility Improvement'],
     status: ['Completed'],
-    scale: '<5000',
+    scale: 'Local',
   },
 ];
 
@@ -300,7 +276,7 @@ export interface FilterSection {
 }
 
 export const FILTER_SECTIONS: FilterSection[] = [
-  { category: 'programme', label: 'Programme', options: PROGRAMMES.map((value) => ({ value, label: value, count: countByCategory('programme', value) })) },
+  { category: 'programme', label: 'Project', options: PROGRAMMES.map((value) => ({ value, label: value, count: countByCategory('programme', value) })) },
   { category: 'scope', label: 'Scope', options: SCOPES.map((value) => ({ value, label: value, count: countByCategory('scope', value) })) },
   { category: 'status', label: 'Status', options: STATUSES.map((value) => ({ value, label: value, count: countByCategory('status', value) })) },
   { category: 'scale', label: 'Scale', options: SCALES.map((value) => ({ value, label: value, count: countByCategory('scale', value) })) },

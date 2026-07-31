@@ -16,8 +16,8 @@ interface ProjectPlaneProps {
   setAnyHovered: (hovered: boolean) => void;
 }
 
-const PLANE_WIDTH = 1.25;
-const PLANE_HEIGHT = 0.85;
+const PLANE_WIDTH = 1.9;
+const PLANE_HEIGHT = 1.35;
 
 export function ProjectPlane({
   projectIndex,
@@ -56,10 +56,19 @@ export function ProjectPlane({
     const mesh = meshRef.current;
     if (!group || !mesh) return;
 
-    const targetScale = visible ? (hovered || isFocused ? 1.12 : 1) : 0.001;
+    const hoverLift = hovered || isFocused ? 1.6 : 0;
+    const targetPosition = position.clone().add(
+      new THREE.Vector3(
+        Math.cos(angle) * hoverLift,
+        0,
+        Math.sin(angle) * hoverLift
+      )
+    );
+
+    const targetScale = visible ? (hovered || isFocused ? 1.55 : 1) : 0.001;
     const targetOpacity = visible ? (anyHovered && !hovered && !isFocused ? 0.35 : 1) : 0;
 
-    group.position.lerp(position, 0.1);
+    group.position.lerp(targetPosition, 0.1);
     group.rotation.y = THREE.MathUtils.lerp(group.rotation.y, rotationY, 0.1);
     group.rotation.x = THREE.MathUtils.lerp(group.rotation.x, tiltX, 0.1);
     group.rotation.z = THREE.MathUtils.lerp(group.rotation.z, tiltZ, 0.1);
@@ -81,24 +90,15 @@ export function ProjectPlane({
 
   return (
     <group ref={groupRef}>
-      {/* White border backing */}
-      <mesh position={[0, 0, 0.01]} rotation={[0, Math.PI, 0]}>
-        <planeGeometry args={[PLANE_WIDTH + 0.05, PLANE_HEIGHT + 0.05]} />
+      {/* subtle backing border behind photo */}
+      <mesh position={[0, 0, -0.02]} rotation={[0, Math.PI, 0]}>
+        <planeGeometry args={[PLANE_WIDTH + 0.04, PLANE_HEIGHT + 0.04]} />
         <meshBasicMaterial
-          color={0xffffff}
+          color={0x111111}
           transparent
-          opacity={visible ? 1 : 0}
+          opacity={visible ? 0.6 : 0}
           side={THREE.DoubleSide}
-        />
-      </mesh>
-      {/* Soft shadow */}
-      <mesh position={[0.03, -0.03, 0.005]} rotation={[0, Math.PI, 0]}>
-        <planeGeometry args={[PLANE_WIDTH + 0.05, PLANE_HEIGHT + 0.05]} />
-        <meshBasicMaterial
-          color={0x000000}
-          transparent
-          opacity={visible ? 0.06 : 0}
-          side={THREE.DoubleSide}
+          depthWrite={false}
         />
       </mesh>
       <mesh

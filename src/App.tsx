@@ -7,13 +7,12 @@ import { CursorCanvas } from '@/gl/CursorCanvas';
 import { useScrollEngine } from '@/hooks/useScrollEngine';
 import { useIsTouchDevice } from '@/hooks/useIsTouchDevice';
 import { useScrollStore } from '@/store/useScrollStore';
-import { projects } from '@/data/projects';
 import { Routes, Route } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 
 const ProjectPage = lazy(() => import('@/pages/ProjectPage').then((m) => ({ default: m.ProjectPage })));
 
-const TOTAL_SLIDES = 4 + projects.length;
+const TOTAL_SLIDES = 5;
 
 function HomePage(): JSX.Element {
   const mainRef = useRef<HTMLElement>(null);
