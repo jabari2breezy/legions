@@ -11,6 +11,10 @@ interface ScrollState {
   totalSlides: number;
   setTotalSlides: (total: number) => void;
   getSlideProgress: (slideIndex: number) => number;
+  scrollTargetIndex: number | null;
+  setScrollTargetIndex: (index: number | null) => void;
+  isVirtualScroll: boolean;
+  setIsVirtualScroll: (active: boolean) => void;
 }
 
 export const useScrollStore = create<ScrollState>((set, get) => ({
@@ -32,4 +36,8 @@ export const useScrollStore = create<ScrollState>((set, get) => ({
     if (progress > slideEnd) return 1;
     return (progress - slideStart) / (slideEnd - slideStart);
   },
+  scrollTargetIndex: null,
+  setScrollTargetIndex: (index: number | null) => { set({ scrollTargetIndex: index }); },
+  isVirtualScroll: false,
+  setIsVirtualScroll: (active: boolean) => { set({ isVirtualScroll: active }); },
 }));

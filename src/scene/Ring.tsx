@@ -8,12 +8,12 @@ import { projectsMatchingFilters, projects } from '@/data/projects';
 import { ProjectPlane } from './ProjectPlane';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 
-const RADIUS_X = 15;
-const RADIUS_Z = 15;
-const RADIUS_X_MOBILE = 10;
-const RADIUS_Z_MOBILE = 10;
+const RADIUS_X = 22;
+const RADIUS_Z = 22;
+const RADIUS_X_MOBILE = 13;
+const RADIUS_Z_MOBILE = 13;
 const ROTATION_PER_WHEEL = 0.05;
-const LABEL_OFFSET = 2.6;
+const LABEL_OFFSET = 3.4;
 const PHOTOS_PER_PROJECT = 3;
 
 interface PhotoCard {
@@ -77,7 +77,7 @@ export function Ring(): JSX.Element {
   const targetRotation = useRingStore((state) => state.targetRotation);
   const addTargetRotation = useRingStore((state) => state.addTargetRotation);
   const activeFilters = useRingStore((state) => state.activeFilters);
-  const [anyHovered, setAnyHovered] = useState(false);
+  const [hoveredCardAngle, setHoveredCardAngle] = useState<number | null>(null);
 
   const allCards = useMemo<PhotoCard[]>(() => {
     let globalIndex = 0;
@@ -236,8 +236,8 @@ export function Ring(): JSX.Element {
           radiusZ={radiusZ}
           angle={cardAngles.get(card.globalIndex) ?? 0}
           visible={visibleCardIndices.has(card.globalIndex)}
-          anyHovered={anyHovered}
-          setAnyHovered={setAnyHovered}
+          hoveredCardAngle={hoveredCardAngle}
+          setHoveredCardAngle={setHoveredCardAngle}
         />
       ))}
     </group>

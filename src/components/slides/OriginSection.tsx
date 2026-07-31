@@ -33,7 +33,7 @@ export function OriginSection({ isActive, isTouch }: OriginSectionProps): JSX.El
     <section
       className={cn(
         'flex items-center justify-center px-6 py-20',
-        isTouch ? 'min-h-screen w-full' : 'h-screen w-screen shrink-0'
+        isTouch ? 'min-h-screen w-full snap-start' : 'h-screen w-screen shrink-0'
       )}
       aria-label="Why We Started"
       role="region"

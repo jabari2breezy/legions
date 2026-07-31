@@ -26,6 +26,7 @@ export function Header(): JSX.Element {
   const { isMobile } = useIsTouchDevice();
   const prefersReduced = useReducedMotion();
   const activeSlideIndex = useScrollStore((state) => state.activeSlideIndex);
+  const setScrollTargetIndex = useScrollStore((state) => state.setScrollTargetIndex);
   const [mounted, setMounted] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -41,19 +42,23 @@ export function Header(): JSX.Element {
     if (typeof window === 'undefined') return;
 
     const target = index / TOTAL_SLIDES;
-    const behavior = prefersReduced ? 'auto' : 'smooth';
 
     if (isMobile) {
       const main = document.querySelector('main');
       if (!main) return;
       const maxScroll = main.scrollHeight - main.clientHeight;
-      main.scrollTo({ top: target * maxScroll, behavior });
+      main.scrollTo({ top: target * maxScroll, behavior: prefersReduced ? 'auto' : 'smooth' });
       setMenuOpen(false);
       return;
     }
 
-    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-    window.scrollTo({ top: target * maxScroll, behavior });
+    if (prefersReduced) {
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      window.scrollTo({ top: target * maxScroll });
+      return;
+    }
+
+    setScrollTargetIndex(index);
   };
 
   const handleProjectsClick = (): void => {
@@ -66,16 +71,15 @@ export function Header(): JSX.Element {
       <div className="mx-auto flex max-w-[1920px] items-center justify-between">
         <a
           href="/"
-          className="group flex items-center gap-2 font-black tracking-tight text-lg text-white"
+          className="group flex items-center gap-2"
           aria-label="Legions Tz home"
         >
-          <span>LEGIONS TZ</span>
-          <span className="relative flex h-2 w-2">
-            {!prefersReduced && (
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-glow opacity-75" />
-            )}
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan-glow" />
-          </span>
+          <img
+            src="/legions-logo.jpg"
+            alt="Legions Tz"
+            className="h-10 w-auto rounded-lg object-contain ring-1 ring-white/10 md:h-12"
+            draggable={false}
+          />
         </a>
 
         <div className="hidden md:block">

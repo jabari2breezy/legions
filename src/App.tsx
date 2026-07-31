@@ -21,6 +21,7 @@ function HomePage(): JSX.Element {
   const spacerRef = useRef<HTMLDivElement>(null);
   const { isTouch } = useIsTouchDevice();
   const setCursor = useScrollStore((state) => state.setCursor);
+  const isVirtualScroll = useScrollStore((state) => state.isVirtualScroll);
 
   const x = useScrollEngine({
     mainRef,
@@ -68,12 +69,12 @@ function HomePage(): JSX.Element {
         ref={mainRef}
         className={
           isTouch
-            ? 'relative min-h-screen overflow-y-auto'
+            ? 'relative min-h-screen overflow-y-auto snap-y snap-proximity'
             : 'relative w-full'
         }
       >
         <ScrollTrack ref={trackRef} x={x} />
-        {!isTouch && (
+        {!isTouch && !isVirtualScroll && (
           <div
             ref={spacerRef}
             className="pointer-events-none w-full"

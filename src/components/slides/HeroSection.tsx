@@ -36,7 +36,7 @@ export function HeroSection({ isActive, isTouch }: HeroSectionProps): JSX.Elemen
     <section
       className={cn(
         'flex flex-col items-center justify-center px-6 py-20',
-        isTouch ? 'min-h-screen w-full' : 'h-screen w-screen shrink-0'
+        isTouch ? 'min-h-screen w-full snap-start' : 'h-screen w-screen shrink-0'
       )}
       aria-label="Hero"
       role="region"

@@ -76,7 +76,7 @@ export const ScrollTrack = forwardRef<HTMLElement, ScrollTrackProps>(
         <section
           className={cn(
             'flex items-center justify-center px-6 py-20',
-            isMobile ? 'min-h-screen w-full' : 'h-screen w-screen shrink-0'
+            isMobile ? 'min-h-screen w-full snap-start' : 'h-screen w-screen shrink-0'
           )}
           aria-label="Projects"
           role="region"

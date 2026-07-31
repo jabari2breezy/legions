@@ -6,14 +6,14 @@ import { useRingStore } from '@/store/useRingStore';
 import { projectsMatchingFilters, projects } from '@/data/projects';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 
-const RADIUS_X = 14;
-const RADIUS_Z = 14;
-const RADIUS_X_MOBILE = 9;
-const RADIUS_Z_MOBILE = 9;
-const OVERVIEW_POSITION_DESKTOP = new THREE.Vector3(0, 8, 28);
-const OVERVIEW_POSITION_MOBILE = new THREE.Vector3(0, 6, 20);
+const RADIUS_X = 22;
+const RADIUS_Z = 22;
+const RADIUS_X_MOBILE = 13;
+const RADIUS_Z_MOBILE = 13;
+const OVERVIEW_POSITION_DESKTOP = new THREE.Vector3(0, 9, 38);
+const OVERVIEW_POSITION_MOBILE = new THREE.Vector3(0, 7, 25);
 const OVERVIEW_TARGET = new THREE.Vector3(0, 0, 0);
-const FOCUS_OFFSET = 5;
+const FOCUS_OFFSET = 9;
 
 export function CameraRig(): JSX.Element {
   const { camera, size } = useThree();
@@ -29,7 +29,7 @@ export function CameraRig(): JSX.Element {
   const positionRef = useRef(new THREE.Vector3().copy(overviewPosition));
 
   useEffect(() => {
-    camera.fov = isMobile ? 55 : 42;
+    camera.fov = isMobile ? 58 : 48;
     camera.updateProjectionMatrix();
   }, [camera, isMobile]);
 
