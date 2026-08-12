@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
@@ -10,6 +11,7 @@ const links = [
   { href: '/work', label: 'How We Move' },
   { href: '/projects', label: 'Proof' },
   { href: '/join', label: 'Join' },
+  { href: '/volunteer', label: 'Volunteer' },
 ]
 
 export default function Nav() {
@@ -25,7 +27,14 @@ export default function Nav() {
     <header className="nav-header">
       <nav className="nav-inner container">
         <Link href="/" className="nav-logo">
-          <span className="nav-badge">L</span>
+          <Image
+            src="/logo.png"
+            alt="Legions"
+            width={40}
+            height={40}
+            className="nav-logo-image"
+            priority
+          />
           <span className="nav-wordmark">LEGIONS</span>
         </Link>
 
@@ -41,8 +50,8 @@ export default function Nav() {
           ))}
         </div>
 
-        <Link href="/join" className="nav-cta">
-          Get Involved
+        <Link href="/volunteer" className="nav-cta">
+          Volunteer
         </Link>
 
         <button

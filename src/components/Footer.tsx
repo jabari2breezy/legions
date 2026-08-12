@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 
 export default function Footer() {
@@ -7,12 +8,18 @@ export default function Footer() {
     <footer className="site-footer">
       <div className="container footer-inner">
         <Link href="/" className="footer-logo">
-          <span className="nav-badge">L</span>
+          <Image
+            src="/logo.png"
+            alt="Legions"
+            width={36}
+            height={36}
+            className="nav-logo-image"
+          />
           <span className="nav-wordmark">LEGIONS</span>
         </Link>
 
         <p className="footer-copy">
-          © {year} Legions Tz — Dar es Salaam, Tanzania · @legions.tz
+          © {year} Legions Tz · Dar es Salaam, Tanzania · @legions.tz
         </p>
 
         <div className="footer-links">

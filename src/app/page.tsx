@@ -104,15 +104,11 @@ export default function HomePage() {
                 we&apos;ll plug you into whatever is next.
               </p>
               <div className="cta-buttons">
-                <MagneticButton
-                  href="https://instagram.com/legions.tz"
-                  external
-                  className="btn-primary"
-                >
-                  Get involved →
+                <MagneticButton href="/volunteer" className="btn-primary">
+                  Volunteer signup →
                 </MagneticButton>
-                <MagneticButton href="/work" className="btn-secondary">
-                  See how it works ↑
+                <MagneticButton href="/join" className="btn-secondary">
+                  Share your interest ↑
                 </MagneticButton>
               </div>
               <div className="cta-trust">

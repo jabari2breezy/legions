@@ -186,7 +186,7 @@ export default function ProjectPage({
                 <img
                   key={i}
                   src={src}
-                  alt={`${project.title} — Photo ${i + 1}`}
+                  alt={`${project.title}, Photo ${i + 1}`}
                   loading={i < 4 ? 'eager' : 'lazy'}
                 />
               ))}

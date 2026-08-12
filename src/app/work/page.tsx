@@ -3,7 +3,7 @@ import GlassSurface from '@/components/GlassSurface'
 
 export const metadata: Metadata = {
   title: 'The Method',
-  description: 'How Legions works: direct labor, flat hierarchy, peer fundraising — every shilling goes where it matters.',
+  description: 'How Legions works: direct labor, flat hierarchy, peer fundraising. Every shilling goes where it matters.',
 }
 
 export default function WorkPage() {
@@ -27,7 +27,7 @@ export default function WorkPage() {
       description:
         'Micro-donations are raised transparently across social media using local mobile money services (M-Pesa and Tigo Pesa) with zero administrative overhead.',
       detail:
-        'Every contribution is tracked and reported publicly. Donors see exactly what their money bought — down to the last bag of rice or tin of paint.',
+        'Every contribution is tracked and reported publicly. Donors see exactly what their money bought, down to the last bag of rice or tin of paint.',
     },
   ]
 

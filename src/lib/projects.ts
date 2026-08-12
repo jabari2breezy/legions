@@ -23,7 +23,7 @@ export const projects: ProjectData[] = [
       { value: '100%', label: 'to food procurement' },
     ],
     impactNote:
-      'Hampers delivered to low-income families and local orphanages. Every shilling raised went directly to food — zero admin overhead.',
+      'Hampers delivered to low-income families and local orphanages. Every shilling raised went directly to food with zero admin overhead.',
     images: Array.from(
       { length: 13 },
       (_, i) => `/projects/ramadhan-project/ramadhan-project-${i + 1}.jpg`
@@ -36,13 +36,13 @@ export const projects: ProjectData[] = [
     subtitle: 'Tumaini La Maisha',
     location: 'Muhimbili National Hospital',
     description:
-      'Plastered, repainted, and painted custom murals at Ujasiri House — a free hostel for pediatric cancer patients and their families at Muhimbili National Hospital.',
+      'Plastered, repainted, and painted custom murals at Ujasiri House, a free hostel for pediatric cancer patients and their families at Muhimbili National Hospital.',
     stats: [
       { value: '30+', label: 'families served daily' },
       { value: '100%', label: 'volunteer labor' },
     ],
     impactNote:
-      'All funds went directly to paint and repair supplies — transforming the hostel environment for children undergoing cancer treatment.',
+      'All funds went directly to paint and repair supplies, transforming the hostel environment for children undergoing cancer treatment.',
     images: Array.from(
       { length: 15 },
       (_, i) => `/projects/ujasiri-house/ujasiri-house-${i + 1}.jpg`
@@ -74,7 +74,7 @@ export const projects: ProjectData[] = [
   },
   {
     slug: 'tree-planting',
-    title: 'Tree Planting — Project MYK',
+    title: 'Tree Planting: Project MYK',
     subtitle: 'Public schools',
     location: 'Dar es Salaam Schools',
     description:
@@ -84,7 +84,7 @@ export const projects: ProjectData[] = [
       { value: '90%+', label: 'survival rate' },
     ],
     impactNote:
-      'Hundreds of students benefiting through a student guardianship program — each tree has a young caretaker.',
+      'Hundreds of students benefiting through a student guardianship program. Each tree has a young caretaker.',
     images: Array.from(
       { length: 7 },
       (_, i) => `/projects/tree-planting/tree-planting-${i + 1}.jpg`

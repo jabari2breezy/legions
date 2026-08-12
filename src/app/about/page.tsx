@@ -3,7 +3,7 @@ import GlassSurface from '@/components/GlassSurface'
 
 export const metadata: Metadata = {
   title: 'The Origin',
-  description: 'Who Legions is and why it started — a youth volunteer group in Dar es Salaam, Tanzania.',
+  description: 'Who Legions is and why it started: a youth volunteer group in Dar es Salaam, Tanzania.',
 }
 
 export default function AboutPage() {
@@ -32,7 +32,7 @@ export default function AboutPage() {
               <p style={{ color: 'var(--text-muted)', lineHeight: '1.85', fontSize: '1.0625rem' }}>
                 Legions is a youth volunteer group based in <strong style={{ color: 'var(--text)', fontWeight: 500 }}>Dar es Salaam, Tanzania</strong>,
                 run by secondary students, university students, and young professionals.
-                No formal hierarchy, no corporate sponsors — just young people who decided
+                No formal hierarchy, no corporate sponsors. Just young people who decided
                 their community couldn&apos;t wait for someone else to act.
               </p>
             </GlassSurface>
@@ -55,7 +55,7 @@ export default function AboutPage() {
               </h2>
               <p style={{ color: 'var(--text-muted)', lineHeight: '1.85', fontSize: '1.0625rem' }}>
                 Every shilling raised goes directly to raw materials, supplies, or food.
-                Members contribute their own labor — no paid staff, no office rent, no
+                Members contribute their own labor. No paid staff, no office rent, no
                 overhead. This isn&apos;t charity tourism. It&apos;s neighbors taking care
                 of neighbors, with radical transparency through mobile money and social
                 media accountability.

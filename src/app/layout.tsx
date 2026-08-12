@@ -21,13 +21,13 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   title: {
-    template: '%s — LEGIONS',
-    default: 'LEGIONS — We don\'t wait. We show up.',
+    template: '%s | LEGIONS',
+    default: 'LEGIONS | For the youth who inspire',
   },
   description:
-    'Youth-led volunteer collective in Dar es Salaam, Tanzania. Direct labor, flat hierarchy, peer fundraising. Beach cleanups, special needs visits, food drives, tree planting, and more.',
+    'Youth-led non-profit in Dar es Salaam, Tanzania. Humanitarian action and environmental sustainability, powered by 139 student volunteers.',
   openGraph: {
-    title: 'LEGIONS — We don\'t wait. We show up.',
+    title: 'LEGIONS | For the youth who inspire',
     description: 'Youth-led volunteer collective in Dar es Salaam.',
     images: ['/og-card.png'],
   },
