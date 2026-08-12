@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Projects &amp; Impact — Legions</title>
+<meta name="description" content="Key projects and impact from Legions: AMSEN visits, beach cleanups, Ramadhan food drive, tree planting, and Ujasiri House renovation." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2322d3ee'/%3E%3Cstop offset='1' stop-color='%233b82f6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='22' fill='%2307102a'/%3E%3Ctext x='50' y='68' font-family='Arial,sans-serif' font-size='52' font-weight='900' text-anchor='middle' fill='url(%23g)'%3EL%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif'] },
+        colors: { royal: '#0b1030', abyss: '#05081f', cyanbrand: '#22d3ee', aqua: '#67e8f9' },
+      },
+    },
+  };
+</script>
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+<div class="fixed inset-0 -z-10 bg-aurora" aria-hidden="true"></div>
+
+<header class="fixed inset-x-0 top-0 z-50">
+  <nav class="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 sm:px-8">
+    <a href="index.html" class="group flex items-center gap-2.5">
+      <span class="flex h-8 w-8 items-center justify-center rounded-lg border border-cyan-400/30 bg-cyan-400/10 text-sm font-black text-cyan-300 shadow-[0_0_20px_rgba(34,211,238,0.25)]">L</span>
+      <span class="text-sm font-extrabold uppercase tracking-[0.3em] text-white/90">Legions</span>
+    </a>
+    <div class="hidden items-center gap-8 text-[13px] font-medium md:flex">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="work.html" class="nav-link">How We Work</a>
+      <a href="projects.html" class="nav-link" aria-current="page">Projects</a>
+      <a href="join.html" class="nav-link">Join</a>
+    </div>
+    <a href="join.html" class="hidden rounded-full border border-cyan-400/40 bg-cyan-400/10 px-4 py-1.5 text-[13px] font-semibold text-cyan-200 backdrop-blur-sm transition-all hover:bg-cyan-400/20 hover:text-white hover:shadow-[0_0_24px_rgba(34,211,238,0.4)] sm:inline-block">Volunteer</a>
+    <button id="menu-btn" class="flex flex-col gap-1.5 md:hidden" aria-expanded="false" aria-label="Toggle menu">
+      <span class="h-0.5 w-6 rounded-full bg-slate-200"></span>
+      <span class="h-0.5 w-6 rounded-full bg-slate-200"></span>
+      <span class="h-0.5 w-4 rounded-full bg-slate-200"></span>
+    </button>
+  </nav>
+  <div id="mobile-menu" class="hidden absolute inset-x-0 top-full border-b border-white/10 bg-[#05081f]/95 backdrop-blur-xl md:hidden">
+    <div class="flex flex-col gap-4 px-5 py-6 text-sm font-medium text-slate-300">
+      <a href="index.html" class="hover:text-cyan-300">Home</a>
+      <a href="about.html" class="hover:text-cyan-300">About</a>
+      <a href="work.html" class="hover:text-cyan-300">How We Work</a>
+      <a href="projects.html" class="text-cyan-300">Projects</a>
+      <a href="join.html" class="hover:text-cyan-300">Join</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="page-banner">
+    <div class="relative z-10 text-center">
+      <p class="text-xs font-semibold uppercase tracking-[0.4em] text-cyan-400">Projects &amp; Impact</p>
+      <h1 class="mt-4 text-balance text-5xl font-black leading-tight text-white sm:text-6xl md:text-7xl">
+        Work that speaks for itself.
+      </h1>
+    </div>
+  </section>
+
+  <section class="relative mx-auto max-w-6xl px-5 py-20 sm:px-8">
+    <div class="space-y-8">
+      <article class="glass-card reveal grid gap-8 overflow-hidden p-8 sm:p-10 lg:grid-cols-[320px_1fr]">
+        <div class="flex flex-col justify-between gap-4">
+          <div>
+            <span class="text-[11px] font-bold uppercase tracking-[0.35em] text-cyan-400">Project 01</span>
+            <h2 class="mt-3 text-2xl font-extrabold leading-tight text-white">AMSEN Special Needs Visits</h2>
+          </div>
+          <span class="inline-flex w-fit items-center gap-2 rounded-full border border-cyan-400/25 bg-cyan-400/10 px-3 py-1 text-xs font-semibold text-cyan-200">Al Muntazir Special Needs Center</span>
+        </div>
+        <div class="space-y-6">
+          <div>
+            <h3 class="text-xs font-bold uppercase tracking-[0.25em] text-slate-500">What They Did</h3>
+            <p class="mt-2 text-pretty leading-relaxed text-slate-300">Organized interactive art, music, and play sessions for students at the Al Muntazir Special Needs (AMSEN) center.</p>
+          </div>
+          <div class="border-t border-white/10 pt-6">
+            <h3 class="text-xs font-bold uppercase tracking-[0.25em] text-slate-500">Impact</h3>
+            <div class="mt-3 flex flex-wrap gap-2">
+              <span class="rounded-full border border-cyan-400/30 bg-cyan-400/10 px-3 py-1 text-xs font-semibold text-cyan-100">40+ students engaged</span>
+              <span class="rounded-full border border-cyan-400/30 bg-cyan-400/10 px-3 py-1 text-xs font-semibold text-cyan-100">100% supplies donated</span>
+              <span class="rounded-full border border-cyan-400/30 bg-cyan-400/10 px-3 py-1 text-xs font-semibold text-cyan-100">25+ volunteers trained</span>
+            </div>
+            <p class="mt-4 text-sm leading-relaxed text-slate-400">Purchased sensory art and learning supplies went entirely to the center's therapy department.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="glass-card reveal grid gap-8 overflow-hidden p-8 sm:p-10 lg:grid-cols-[320px_1fr]">
+        <div class="flex flex-col justify-between gap-4">
+          <div>
+            <span class="text-[11px] font-bold uppercase tracking-[0.35em] text-cyan-400">Project 02</span>
+            <h2 class="mt-3 text-2xl font-extrabold leading-tight text-white">Coastal Beach Cleanups</h2>
+          </div>
+          <span class="inline-flex w-fit items-center gap-2 rounded-full border border-cyan-400/25 bg-cyan-400/10 px-3 py-1 text-xs font-semibold text-cyan-200">Coco Beach &amp; Msasani</span>
+        </div>
+        <div class="space-y-6">
+          <div>
+            <h3 class="text-xs font-bold uppercase tracking-[0.25em] text-slate-500">What They Did</h3>
+            <p class="mt-2 text-pretty leading-relaxed text-slate-300">Cleared heavily polluted shorelines around Coco Beach and Msasani, sorting waste on-site for proper recycling.</p>
+          </div>
+          <div class="border-t border-white/10 pt-6">
+            <h3 class="text-xs font-bold uppercase tracking-[0.25em] text-slate-500">Impact</h3>
+            <div class="mt-3 flex flex-wrap gap-2">
+              <span class="rounded-full border border-cyan-400/30 bg-cyan-400/10 px-3 py-1 text-xs font-semibold text-cyan-100">150+ volunteers mobilized</span>
+              <span class="rounded-full border border-cyan-400/30 bg-cyan-400/10 px-3 py-1 text-xs font-semibold text-cyan-100">1.5+ tons removed</span>
+            </div>
+            <p class="mt-4 text-sm leading-relaxed text-slate-400">3,300+ lbs of plastic, glass, and trash cleared from the coastline.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="glass-card reveal grid gap-8 overflow-hidden p-8 sm:p-10 lg:grid-cols-[320px_1fr]">
+        <div class="flex flex-col justify-between gap-4">
+          <div>
+            <span class="text-[11px] font-bold uppercase tracking-[0.35em] text-cyan-400">Project 03</span>
+            <h2 class="mt-3 text-2xl font-extrabold leading-tight text-white">The Ramadhan Project</h2>
+          </div>
+          <span class="inline-flex w-fit items-center gap-2 rounded-full border border-cyan-400/25 bg-cyan-400/10 px-3 py-1 text-xs font-semibold text-cyan-200">Citywide food drive</span>
+        </div>
+        <div class="space-y-6">
+          <div>
+            <h3 class="text-xs font-bold uppercase tracking-[0.25em] text-slate-500">What They Did</h3>
+            <p class="mt-2 text-pretty leading-relaxed text-slate-300">Raised funds online to buy food in bulk directly from wholesale suppliers, assembled food packs, and hand-delivered them across target neighborhoods.</p>
+          </div>
+          <div class="border-t border-white/10 pt-6">
+            <h3 class="text-xs font-bold uppercase tracking-[0.25em] text-slate-500">Impact</h3>
+            <div class="mt-3 flex flex-wrap gap-2">
+              <span class="rounded-full border border-cyan-400/30 bg-cyan-400/10 px-3 py-1 text-xs font-semibold text-cyan-100">1,200+ fasting individuals reached</span>
+              <span class="rounded-full border border-cyan-400/30 bg-cyan-400/10 px-3 py-1 text-xs font-semibold text-cyan-100">100% to food procurement</span>
+            </div>
+            <p class="mt-4 text-sm leading-relaxed text-slate-400">Hampers delivered to low-income families and local orphanages.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="glass-card reveal grid gap-8 overflow-hidden p-8 sm:p-10 lg:grid-cols-[320px_1fr]">
+        <div class="flex flex-col justify-between gap-4">
+          <div>
+            <span class="text-[11px] font-bold uppercase tracking-[0.35em] text-cyan-400">Project 04</span>
+            <h2 class="mt-3 text-2xl font-extrabold leading-tight text-white">Tree Planting — Project MYK</h2>
+          </div>
+          <span class="inline-flex w-fit items-center gap-2 rounded-full border border-cyan-400/25 bg-cyan-400/10 px-3 py-1 text-xs font-semibold text-cyan-200">Public schools</span>
+        </div>
+        <div class="space-y-6">
+          <div>
+            <h3 class="text-xs font-bold uppercase tracking-[0.25em] text-slate-500">What They Did</h3>
+            <p class="mt-2 text-pretty leading-relaxed text-slate-300">Planted native shade and fruit trees at unshaded public schools and established student-led watering teams to keep them alive.</p>
+          </div>
+          <div class="border-t border-white/10 pt-6">
+            <h3 class="text-xs font-bold uppercase tracking-[0.25em] text-slate-500">Impact</h3>
+            <div class="mt-3 flex flex-wrap gap-2">
+              <span class="rounded-full border border-cyan-400/30 bg-cyan-400/10 px-3 py-1 text-xs font-semibold text-cyan-100">500+ trees planted</span>
+              <span class="rounded-full border border-cyan-400/30 bg-cyan-400/10 px-3 py-1 text-xs font-semibold text-cyan-100">90%+ survival rate</span>
+            </div>
+            <p class="mt-4 text-sm leading-relaxed text-slate-400">Hundreds of students benefiting through student guardianship.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="glass-card reveal grid gap-8 overflow-hidden p-8 sm:p-10 lg:grid-cols-[320px_1fr]">
+        <div class="flex flex-col justify-between gap-4">
+          <div>
+            <span class="text-[11px] font-bold uppercase tracking-[0.35em] text-cyan-400">Project 05</span>
+            <h2 class="mt-3 text-2xl font-extrabold leading-tight text-white">Ujasiri House Renovation</h2>
+          </div>
+          <span class="inline-flex w-fit items-center gap-2 rounded-full border border-cyan-400/25 bg-cyan-400/10 px-3 py-1 text-xs font-semibold text-cyan-200">Tumaini La Maisha</span>
+        </div>
+        <div class="space-y-6">
+          <div>
+            <h3 class="text-xs font-bold uppercase tracking-[0.25em] text-slate-500">What They Did</h3>
+            <p class="mt-2 text-pretty leading-relaxed text-slate-300">Plastered, repainted, and painted custom murals at Ujasiri House, a free hostel for pediatric cancer patients and their families at Muhimbili National Hospital.</p>
+          </div>
+          <div class="border-t border-white/10 pt-6">
+            <h3 class="text-xs font-bold uppercase tracking-[0.25em] text-slate-500">Impact</h3>
+            <div class="mt-3 flex flex-wrap gap-2">
+              <span class="rounded-full border border-cyan-400/30 bg-cyan-400/10 px-3 py-1 text-xs font-semibold text-cyan-100">30+ families served daily</span>
+              <span class="rounded-full border border-cyan-400/30 bg-cyan-400/10 px-3 py-1 text-xs font-semibold text-cyan-100">100% volunteer labor</span>
+            </div>
+            <p class="mt-4 text-sm leading-relaxed text-slate-400">All funds went directly to paint and repair supplies — transforming the hostel environment.</p>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+</main>
+
+<footer class="border-t border-white/10 bg-[#04061a]/60 backdrop-blur-sm">
+  <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 px-5 py-10 sm:flex-row sm:px-8">
+    <div class="flex items-center gap-2.5">
+      <span class="flex h-8 w-8 items-center justify-center rounded-lg border border-cyan-400/30 bg-cyan-400/10 text-sm font-black text-cyan-300">L</span>
+      <span class="text-sm font-extrabold uppercase tracking-[0.3em] text-white/90">Legions</span>
+    </div>
+    <p class="text-center text-xs text-slate-500">© <span id="year">2025</span> Legions Tz — Dar es Salaam, Tanzania &middot; @legions.tz</p>
+    <div class="flex items-center gap-4">
+      <a href="https://instagram.com/legions.tz" target="_blank" rel="noopener" class="text-slate-400 transition-colors hover:text-cyan-300" aria-label="Instagram">
+        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"></rect><circle cx="12" cy="12" r="4.2"></circle><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"></circle></svg>
+      </a>
+      <a href="#top" class="text-slate-400 transition-colors hover:text-cyan-300" aria-label="Back to top">
+        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" d="m5 15 7-7 7 7"></path></svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

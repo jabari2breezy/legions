@@ -4,222 +4,30 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>LEGIONS — For the youth who inspire.</title>
-<meta name="description" content="Legions is a youth volunteer group in Dar es Salaam, Tanzania. Direct labor, flat hierarchy, peer fundraising. Beach cleanups, special needs visits, food drives, tree planting, and more." />
+<meta name="description" content="Legions is a youth volunteer group in Dar es Salaam, Tanzania. Direct labor, flat hierarchy, peer fundraising." />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2322d3ee'/%3E%3Cstop offset='1' stop-color='%233b82f6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='22' fill='%2307102a'/%3E%3Ctext x='50' y='68' font-family='Arial,sans-serif' font-size='52' font-weight='900' text-anchor='middle' fill='url(%23g)'%3EL%3C/text%3E%3C/svg%3E" />
-
-<!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
-
-<!-- Tailwind CSS (Play CDN) -->
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
   tailwind.config = {
     theme: {
       extend: {
-        fontFamily: {
-          sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif'],
-        },
-        colors: {
-          royal: '#0b1030',
-          abyss: '#05081f',
-          cyanbrand: '#22d3ee',
-          aqua: '#67e8f9',
-        },
-        keyframes: {
-          'fade-up': {
-            '0%': { opacity: '0', transform: 'translateY(28px)' },
-            '100%': { opacity: '1', transform: 'translateY(0)' },
-          },
-          'grain-shift': {
-            '0%, 100%': { transform: 'translate(0, 0)' },
-            '10%': { transform: 'translate(-5%, -10%)' },
-            '20%': { transform: 'translate(-15%, 5%)' },
-            '30%': { transform: 'translate(7%, -25%)' },
-            '40%': { transform: 'translate(-5%, 25%)' },
-            '50%': { transform: 'translate(-15%, 10%)' },
-            '60%': { transform: 'translate(15%, 0%)' },
-            '70%': { transform: 'translate(0%, 15%)' },
-            '80%': { transform: 'translate(3%, 35%)' },
-            '90%': { transform: 'translate(-10%, 10%)' },
-          },
-          'pulse-line': {
-            '0%': { transform: 'scaleY(0)', transformOrigin: 'top' },
-            '50%': { transform: 'scaleY(1)', transformOrigin: 'top' },
-            '100%': { transform: 'scaleY(0)', transformOrigin: 'bottom' },
-          },
-          'float-slow': {
-            '0%, 100%': { transform: 'translateY(0)' },
-            '50%': { transform: 'translateY(-12px)' },
-          },
-        },
-        animation: {
-          'fade-up': 'fade-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both',
-          'grain-shift': 'grain-shift 8s steps(10) infinite',
-          'pulse-line': 'pulse-line 2.2s ease-in-out infinite',
-          'float-slow': 'float-slow 7s ease-in-out infinite',
-        },
+        fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif'] },
+        colors: { royal: '#0b1030', abyss: '#05081f', cyanbrand: '#22d3ee', aqua: '#67e8f9' },
       },
     },
   };
 </script>
-
-<style>
-  :root {
-    --grain-opacity: 0.055;
-    --glow-cyan: rgba(34, 211, 238, 0.35);
-  }
-
-  html {
-    scroll-behavior: smooth;
-  }
-
-  body {
-    font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
-    background-color: #05081f;
-    color: #f8fafc;
-    overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-  }
-
-  /* ---------- Film grain overlay (covers entire site) ---------- */
-  .grain {
-    position: fixed;
-    inset: -200%;
-    width: 500%;
-    height: 500%;
-    pointer-events: none;
-    z-index: 70;
-    opacity: var(--grain-opacity);
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    background-size: 300px 300px;
-    animation: grain-shift 8s steps(10) infinite;
-    mix-blend-mode: overlay;
-  }
-
-  /* ---------- Ambient background gradients ---------- */
-  .bg-aurora {
-    background:
-      radial-gradient(1100px 700px at 85% -10%, rgba(34, 211, 238, 0.16), transparent 62%),
-      radial-gradient(1000px 700px at 0% 110%, rgba(59, 130, 246, 0.2), transparent 62%),
-      radial-gradient(700px 500px at 100% 60%, rgba(103, 232, 249, 0.08), transparent 55%),
-      linear-gradient(180deg, #05081f 0%, #0a1030 45%, #12204a 75%, #0a2440 100%);
-  }
-
-  /* ---------- Glassmorphism card ---------- */
-  .glass-card {
-    position: relative;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: linear-gradient(160deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.03));
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-    border-radius: 1.5rem;
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.12),
-      inset 0 -1px 0 rgba(103, 232, 249, 0.08),
-      0 24px 60px -20px rgba(2, 6, 23, 0.7);
-    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.45s ease, box-shadow 0.45s ease;
-  }
-
-  /* Top specular highlight line */
-  .glass-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 12%;
-    right: 12%;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(103, 232, 249, 0.65), rgba(255, 255, 255, 0.35), transparent);
-    border-radius: 9999px;
-    opacity: 0.7;
-  }
-
-  /* Cyan corner glow accents */
-  .glass-card::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    pointer-events: none;
-    background: radial-gradient(320px 160px at 85% 0%, rgba(34, 211, 238, 0.1), transparent 70%);
-  }
-
-  .glass-card:hover {
-    transform: translateY(-6px);
-    border-color: rgba(103, 232, 249, 0.35);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.16),
-      0 30px 70px -18px rgba(2, 6, 23, 0.8),
-      0 0 40px -8px rgba(34, 211, 238, 0.22);
-  }
-
-  /* ---------- Giant hero title glow ---------- */
-  .hero-glow {
-    text-shadow:
-      0 0 24px rgba(34, 211, 238, 0.35),
-      0 0 90px rgba(34, 211, 238, 0.25),
-      0 0 160px rgba(59, 130, 246, 0.2),
-      0 6px 40px rgba(2, 6, 23, 0.6);
-  }
-
-  /* ---------- Scroll reveal ---------- */
-  .reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-    will-change: opacity, transform;
-  }
-  .reveal.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* ---------- Loader ---------- */
-  #loader {
-    transition: opacity 0.7s ease, visibility 0.7s ease;
-  }
-  #loader.loader-done {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-  }
-
-  /* ---------- Custom scrollbar ---------- */
-  ::-webkit-scrollbar { width: 9px; }
-  ::-webkit-scrollbar-track { background: #05081f; }
-  ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, #22d3ee, #3b82f6);
-    border-radius: 9999px;
-  }
-
-  ::selection {
-    background: rgba(34, 211, 238, 0.35);
-    color: #ffffff;
-  }
-
-  .text-balance { text-wrap: balance; }
-  .text-pretty { text-wrap: pretty; }
-
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    .grain { animation: none; }
-    .reveal { opacity: 1; transform: none; transition: none; }
-    .animate-float-slow, .animate-pulse-line, .animate-fade-up { animation: none !important; }
-  }
-</style>
+<link rel="stylesheet" href="css/styles.css" />
 </head>
+<body>
 
-<body class="font-sans">
-
-<!-- Film grain -->
 <div class="grain" aria-hidden="true"></div>
-
-<!-- Fixed ambient background -->
 <div class="fixed inset-0 -z-10 bg-aurora" aria-hidden="true"></div>
 
-<!-- Preloader -->
+<!-- Loader -->
 <div id="loader" class="fixed inset-0 z-[80] flex flex-col items-center justify-center gap-6 bg-[#05081f]">
   <div class="relative h-16 w-16">
     <div class="absolute inset-0 rounded-full border-2 border-cyan-400/20"></div>
@@ -229,52 +37,64 @@
   <p class="text-xs uppercase tracking-[0.35em] text-slate-400">Preparing the reel</p>
 </div>
 
-<!-- Navigation -->
+<!-- Nav -->
 <header class="fixed inset-x-0 top-0 z-50">
   <nav class="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 sm:px-8">
-    <a href="#top" class="group flex items-center gap-2.5">
+    <a href="index.html" class="group flex items-center gap-2.5">
       <span class="flex h-8 w-8 items-center justify-center rounded-lg border border-cyan-400/30 bg-cyan-400/10 text-sm font-black text-cyan-300 shadow-[0_0_20px_rgba(34,211,238,0.25)]">L</span>
       <span class="text-sm font-extrabold uppercase tracking-[0.3em] text-white/90">Legions</span>
     </a>
-    <div class="hidden items-center gap-8 text-[13px] font-medium text-slate-300 md:flex">
-      <a href="#who" class="transition-colors hover:text-cyan-300">Who We Are</a>
-      <a href="#how" class="transition-colors hover:text-cyan-300">How They Work</a>
-      <a href="#projects" class="transition-colors hover:text-cyan-300">Projects</a>
+
+    <div class="hidden items-center gap-8 text-[13px] font-medium md:flex">
+      <a href="index.html" class="nav-link" aria-current="page">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="work.html" class="nav-link">How We Work</a>
+      <a href="projects.html" class="nav-link">Projects</a>
+      <a href="join.html" class="nav-link">Join</a>
     </div>
-    <a href="#join" class="rounded-full border border-cyan-400/40 bg-cyan-400/10 px-4 py-1.5 text-[13px] font-semibold text-cyan-200 backdrop-blur-sm transition-all hover:bg-cyan-400/20 hover:text-white hover:shadow-[0_0_24px_rgba(34,211,238,0.4)]">
+
+    <a href="join.html" class="hidden rounded-full border border-cyan-400/40 bg-cyan-400/10 px-4 py-1.5 text-[13px] font-semibold text-cyan-200 backdrop-blur-sm transition-all hover:bg-cyan-400/20 hover:text-white hover:shadow-[0_0_24px_rgba(34,211,238,0.4)] sm:inline-block">
       Volunteer
     </a>
+
+    <button id="menu-btn" class="flex flex-col gap-1.5 md:hidden" aria-expanded="false" aria-label="Toggle menu">
+      <span class="h-0.5 w-6 rounded-full bg-slate-200"></span>
+      <span class="h-0.5 w-6 rounded-full bg-slate-200"></span>
+      <span class="h-0.5 w-4 rounded-full bg-slate-200"></span>
+    </button>
   </nav>
+
+  <div id="mobile-menu" class="hidden absolute inset-x-0 top-full border-b border-white/10 bg-[#05081f]/95 backdrop-blur-xl md:hidden">
+    <div class="flex flex-col gap-4 px-5 py-6 text-sm font-medium text-slate-300">
+      <a href="index.html" class="text-cyan-300">Home</a>
+      <a href="about.html" class="hover:text-cyan-300">About</a>
+      <a href="work.html" class="hover:text-cyan-300">How We Work</a>
+      <a href="projects.html" class="hover:text-cyan-300">Projects</a>
+      <a href="join.html" class="hover:text-cyan-300">Join</a>
+    </div>
+  </div>
 </header>
 
-<main id="top">
-
-  <!-- ============ SCROLL-DRIVEN CANVAS HERO ============ -->
+<main>
+  <!-- Hero -->
   <section id="hero-scroll" class="relative h-[300vh]">
     <div class="sticky top-0 flex h-screen w-full items-center justify-center overflow-hidden">
-      <!-- Canvas animation -->
       <canvas id="hero-canvas" class="absolute inset-0 h-full w-full"></canvas>
-
-      <!-- Cinematic overlays -->
       <div class="absolute inset-0 bg-gradient-to-b from-[#05081f]/70 via-transparent to-[#05081f]" aria-hidden="true"></div>
       <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_35%,rgba(5,8,31,0.55)_100%)]" aria-hidden="true"></div>
 
-      <!-- Centered title overlay -->
       <div class="pointer-events-none relative z-10 flex flex-col items-center justify-center px-4 text-center" id="hero-text">
         <div class="animate-fade-up">
-          <h1 class="hero-glow text-[clamp(4.5rem,20vw,17rem)] font-black leading-none tracking-[-0.04em] text-white">
-            LEGIONS
-          </h1>
-          <p class="mt-4 text-balance text-xl font-light text-slate-100/90 sm:text-2xl md:text-3xl" style="animation-delay: 0.15s;">
+          <h1 class="hero-glow text-[clamp(4.5rem,20vw,17rem)] font-black leading-none tracking-[-0.04em] text-white">LEGIONS</h1>
+          <p class="mt-4 text-balance text-xl font-light text-slate-100/90 sm:text-2xl md:text-3xl">
             For the youth who <span class="font-semibold text-cyan-300">inspire.</span>
           </p>
-          <p class="mt-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-[11px] font-medium uppercase tracking-[0.3em] text-cyan-200/90 backdrop-blur-md" style="animation-delay: 0.3s;">
+          <p class="mt-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-[11px] font-medium uppercase tracking-[0.3em] text-cyan-200/90 backdrop-blur-md">
             Dar es Salaam, Tanzania&nbsp;&nbsp;|&nbsp;&nbsp;@legions.tz
           </p>
         </div>
       </div>
 
-      <!-- Scroll cue -->
       <div id="scroll-cue" class="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 flex flex-col items-center gap-2">
         <span class="text-[10px] uppercase tracking-[0.4em] text-slate-400">Scroll</span>
         <span class="block h-10 w-px bg-gradient-to-b from-cyan-300/80 to-transparent animate-pulse-line"></span>
@@ -282,297 +102,96 @@
     </div>
   </section>
 
-  <!-- ============ WHO WE ARE ============ -->
-  <section id="who" class="relative mx-auto max-w-6xl scroll-mt-24 px-5 py-28 sm:px-8">
-    <div class="reveal">
+  <!-- Intro teaser -->
+  <section class="relative mx-auto max-w-6xl scroll-mt-24 px-5 py-28 sm:px-8">
+    <div class="reveal text-center">
       <p class="text-xs font-semibold uppercase tracking-[0.4em] text-cyan-400">Who We Are</p>
-      <h2 class="mt-4 text-balance text-4xl font-extrabold leading-tight text-white sm:text-5xl md:text-6xl">
+      <h2 class="mx-auto mt-4 max-w-3xl text-balance text-4xl font-extrabold leading-tight text-white sm:text-5xl">
         Born from the streets we call <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-blue-400">home.</span>
       </h2>
-    </div>
-
-    <div class="reveal mt-14 grid gap-8 lg:grid-cols-2">
-      <div class="glass-card p-8 sm:p-10">
-        <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-xl border border-cyan-400/30 bg-cyan-400/10 shadow-[0_0_24px_rgba(34,211,238,0.25)]">
-          <svg class="h-6 w-6 text-cyan-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18M7 21h10M12 6c2.5 0 4.5-1 4.5-2.5S14.5 1 12 1 7.5 2 7.5 3.5 9.5 6 12 6Z" />
-          </svg>
-        </div>
-        <h3 class="text-xl font-bold text-white">Who We Are</h3>
-        <p class="mt-4 text-pretty leading-relaxed text-slate-300">
-          Legions is a youth volunteer group based in <span class="font-semibold text-white">Dar es Salaam, Tanzania</span>, run by secondary students, university students, and young professionals.
-        </p>
-      </div>
-
-      <div class="glass-card p-8 sm:p-10">
-        <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-xl border border-cyan-400/30 bg-cyan-400/10 shadow-[0_0_24px_rgba(34,211,238,0.25)]">
-          <svg class="h-6 w-6 text-cyan-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v8M8 12h8M13.5 21h-3M12 3a5 5 0 0 1 5 5v3a5 5 0 0 1-10 0V8a5 5 0 0 1 5-5Z" />
-          </svg>
-        </div>
-        <h3 class="text-xl font-bold text-white">Why It Started</h3>
-        <p class="mt-4 text-pretty leading-relaxed text-slate-300">
-          Instead of waiting on traditional NGOs or large aid organizations, local youth founded Legions to address immediate community needs directly. They focus on practical, hands-on work: fixing run-down facilities, supporting vulnerable families, cleaning public spaces, and planting trees — without relying on corporate funding or heavy administration.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ HOW THEY WORK ============ -->
-  <section id="how" class="relative mx-auto max-w-6xl scroll-mt-24 px-5 py-28 sm:px-8">
-    <div class="reveal text-center">
-      <p class="text-xs font-semibold uppercase tracking-[0.4em] text-cyan-400">How They Work</p>
-      <h2 class="mx-auto mt-4 max-w-3xl text-balance text-4xl font-extrabold leading-tight text-white sm:text-5xl">
-        A flat collective. Real boots on the ground.
-      </h2>
-      <p class="mx-auto mt-5 max-w-2xl text-pretty text-slate-400">
-        Three principles keep Legions lean, transparent, and accountable — every shilling goes where it matters.
+      <p class="mx-auto mt-6 max-w-2xl text-pretty leading-relaxed text-slate-300">
+        A youth volunteer group in Dar es Salaam, run by secondary students, university students, and young professionals who refuse to wait for permission to help their city.
       </p>
-    </div>
-
-    <div class="mt-14 grid gap-6 md:grid-cols-3">
-      <!-- Card 1 -->
-      <div class="glass-card reveal p-8">
-        <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl border border-cyan-400/30 bg-gradient-to-br from-cyan-400/20 to-blue-500/10 shadow-[0_0_30px_rgba(34,211,238,0.2)]">
-          <svg class="h-7 w-7 text-cyan-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M18 11V6a2 2 0 0 0-4 0v5M14 10V4a2 2 0 0 0-4 0v2M10 10.5V6a2 2 0 0 0-4 0v8M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15" />
-          </svg>
-        </div>
-        <h3 class="text-lg font-bold text-white">Direct Labor</h3>
-        <p class="mt-3 text-sm leading-relaxed text-slate-400">
-          Members show up in person to do the physical work, ensuring donor money goes entirely toward raw materials, supplies, and food.
-        </p>
-      </div>
-
-      <!-- Card 2 -->
-      <div class="glass-card reveal p-8" style="animation-delay: 0.1s;">
-        <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl border border-cyan-400/30 bg-gradient-to-br from-cyan-400/20 to-blue-500/10 shadow-[0_0_30px_rgba(34,211,238,0.2)]">
-          <svg class="h-7 w-7 text-cyan-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
-          </svg>
-        </div>
-        <h3 class="text-lg font-bold text-white">No Ego or Hierarchy</h3>
-        <p class="mt-3 text-sm leading-relaxed text-slate-400">
-          A flat collective where any young person can jump in, volunteer, and take ownership of projects.
-        </p>
-      </div>
-
-      <!-- Card 3 -->
-      <div class="glass-card reveal p-8" style="animation-delay: 0.2s;">
-        <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl border border-cyan-400/30 bg-gradient-to-br from-cyan-400/20 to-blue-500/10 shadow-[0_0_30px_rgba(34,211,238,0.2)]">
-          <svg class="h-7 w-7 text-cyan-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7">
-            <path stroke-linecap="round" stroke-linejoin="round" d="m3 11 18-5v12L3 14v-3ZM11.6 16.8a3 3 0 1 1-5.8-1.6" />
-          </svg>
-        </div>
-        <h3 class="text-lg font-bold text-white">Peer Fundraising</h3>
-        <p class="mt-3 text-sm leading-relaxed text-slate-400">
-          Micro-donations are raised transparently across social media using local mobile money services (<span class="font-medium text-cyan-200">M-Pesa</span> and <span class="font-medium text-cyan-200">Tigo Pesa</span>) with zero administrative overhead.
-        </p>
-      </div>
+      <a href="about.html" class="mt-8 inline-flex items-center gap-2 rounded-full border border-cyan-400/40 bg-cyan-400/10 px-6 py-2.5 text-sm font-semibold text-cyan-200 transition-all hover:bg-cyan-400/20 hover:text-white">
+        Read our story <span aria-hidden="true">→</span>
+      </a>
     </div>
   </section>
 
-  <!-- ============ KEY PROJECTS & IMPACT ============ -->
-  <section id="projects" class="relative mx-auto max-w-6xl scroll-mt-24 px-5 py-28 sm:px-8">
+  <!-- How we work teaser -->
+  <section class="relative mx-auto max-w-6xl px-5 py-20 sm:px-8">
+    <div class="reveal text-center">
+      <p class="text-xs font-semibold uppercase tracking-[0.4em] text-cyan-400">How We Work</p>
+      <h2 class="mx-auto mt-4 max-w-3xl text-balance text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+        Direct labor. No ego. Peer power.
+      </h2>
+    </div>
+    <div class="mt-12 grid gap-6 md:grid-cols-3">
+      <div class="glass-card reveal p-8">
+        <h3 class="text-lg font-bold text-white">Direct Labor</h3>
+        <p class="mt-3 text-sm leading-relaxed text-slate-400">Members show up in person and do the physical work, so donor money goes to materials, supplies, and food.</p>
+      </div>
+      <div class="glass-card reveal p-8" style="transition-delay: 0.1s;">
+        <h3 class="text-lg font-bold text-white">No Ego or Hierarchy</h3>
+        <p class="mt-3 text-sm leading-relaxed text-slate-400">A flat collective where any young person can jump in, volunteer, and take ownership of projects.</p>
+      </div>
+      <div class="glass-card reveal p-8" style="transition-delay: 0.2s;">
+        <h3 class="text-lg font-bold text-white">Peer Fundraising</h3>
+        <p class="mt-3 text-sm leading-relaxed text-slate-400">Micro-donations raised transparently via M-Pesa and Tigo Pesa, with zero administrative overhead.</p>
+      </div>
+    </div>
+    <div class="reveal mt-10 text-center">
+      <a href="work.html" class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-6 py-2.5 text-sm font-semibold text-slate-200 transition-all hover:border-cyan-400/40 hover:text-white">
+        See how it works <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Projects teaser -->
+  <section class="relative mx-auto max-w-6xl px-5 py-20 sm:px-8">
     <div class="reveal text-center">
       <p class="text-xs font-semibold uppercase tracking-[0.4em] text-cyan-400">Key Projects &amp; Impact</p>
       <h2 class="mx-auto mt-4 max-w-3xl text-balance text-4xl font-extrabold leading-tight text-white sm:text-5xl">
         Small team. Measurable change.
       </h2>
     </div>
-
-    <div class="mt-14 space-y-8">
-      <!-- Project 1 -->
-      <article class="glass-card reveal grid gap-8 overflow-hidden p-8 sm:p-10 lg:grid-cols-[320px_1fr]">
-        <div class="flex flex-col justify-between gap-4">
-          <div>
-            <span class="text-[11px] font-bold uppercase tracking-[0.35em] text-cyan-400">Project 01</span>
-            <h3 class="mt-3 text-2xl font-extrabold leading-tight text-white">AMSEN Special Needs Visits</h3>
-          </div>
-          <span class="inline-flex w-fit items-center gap-2 rounded-full border border-cyan-400/25 bg-cyan-400/10 px-3 py-1 text-xs font-semibold text-cyan-200">
-            Al Muntazir Special Needs Center
-          </span>
-        </div>
-        <div class="space-y-6">
-          <div>
-            <h4 class="text-xs font-bold uppercase tracking-[0.25em] text-slate-500">What They Did</h4>
-            <p class="mt-2 text-pretty leading-relaxed text-slate-300">
-              Organized interactive art, music, and play sessions for students at the Al Muntazir Special Needs (AMSEN) center.
-            </p>
-          </div>
-          <div class="border-t border-white/10 pt-6">
-            <h4 class="text-xs font-bold uppercase tracking-[0.25em] text-slate-500">Impact</h4>
-            <div class="mt-3 flex flex-wrap gap-2">
-              <span class="rounded-full border border-cyan-400/30 bg-cyan-400/10 px-3 py-1 text-xs font-semibold text-cyan-100">40+ students engaged</span>
-              <span class="rounded-full border border-cyan-400/30 bg-cyan-400/10 px-3 py-1 text-xs font-semibold text-cyan-100">100% supplies donated</span>
-              <span class="rounded-full border border-cyan-400/30 bg-cyan-400/10 px-3 py-1 text-xs font-semibold text-cyan-100">25+ volunteers trained</span>
-            </div>
-            <p class="mt-4 text-sm leading-relaxed text-slate-400">
-              Purchased sensory art and learning supplies went entirely to the center's therapy department.
-            </p>
-          </div>
-        </div>
-      </article>
-
-      <!-- Project 2 -->
-      <article class="glass-card reveal grid gap-8 overflow-hidden p-8 sm:p-10 lg:grid-cols-[320px_1fr]">
-        <div class="flex flex-col justify-between gap-4">
-          <div>
-            <span class="text-[11px] font-bold uppercase tracking-[0.35em] text-cyan-400">Project 02</span>
-            <h3 class="mt-3 text-2xl font-extrabold leading-tight text-white">Coastal Beach Cleanups</h3>
-          </div>
-          <span class="inline-flex w-fit items-center gap-2 rounded-full border border-cyan-400/25 bg-cyan-400/10 px-3 py-1 text-xs font-semibold text-cyan-200">
-            Coco Beach &amp; Msasani
-          </span>
-        </div>
-        <div class="space-y-6">
-          <div>
-            <h4 class="text-xs font-bold uppercase tracking-[0.25em] text-slate-500">What They Did</h4>
-            <p class="mt-2 text-pretty leading-relaxed text-slate-300">
-              Cleared heavily polluted shorelines around Coco Beach and Msasani, sorting waste on-site for proper recycling.
-            </p>
-          </div>
-          <div class="border-t border-white/10 pt-6">
-            <h4 class="text-xs font-bold uppercase tracking-[0.25em] text-slate-500">Impact</h4>
-            <div class="mt-3 flex flex-wrap gap-2">
-              <span class="rounded-full border border-cyan-400/30 bg-cyan-400/10 px-3 py-1 text-xs font-semibold text-cyan-100">150+ volunteers mobilized</span>
-              <span class="rounded-full border border-cyan-400/30 bg-cyan-400/10 px-3 py-1 text-xs font-semibold text-cyan-100">1.5+ tons removed</span>
-            </div>
-            <p class="mt-4 text-sm leading-relaxed text-slate-400">
-              3,300+ lbs of plastic, glass, and trash cleared from the coastline.
-            </p>
-          </div>
-        </div>
-      </article>
-
-      <!-- Project 3 -->
-      <article class="glass-card reveal grid gap-8 overflow-hidden p-8 sm:p-10 lg:grid-cols-[320px_1fr]">
-        <div class="flex flex-col justify-between gap-4">
-          <div>
-            <span class="text-[11px] font-bold uppercase tracking-[0.35em] text-cyan-400">Project 03</span>
-            <h3 class="mt-3 text-2xl font-extrabold leading-tight text-white">The Ramadhan Project</h3>
-          </div>
-          <span class="inline-flex w-fit items-center gap-2 rounded-full border border-cyan-400/25 bg-cyan-400/10 px-3 py-1 text-xs font-semibold text-cyan-200">
-            Citywide food drive
-          </span>
-        </div>
-        <div class="space-y-6">
-          <div>
-            <h4 class="text-xs font-bold uppercase tracking-[0.25em] text-slate-500">What They Did</h4>
-            <p class="mt-2 text-pretty leading-relaxed text-slate-300">
-              Raised funds online to buy food in bulk directly from wholesale suppliers, assembled food packs, and hand-delivered them across target neighborhoods.
-            </p>
-          </div>
-          <div class="border-t border-white/10 pt-6">
-            <h4 class="text-xs font-bold uppercase tracking-[0.25em] text-slate-500">Impact</h4>
-            <div class="mt-3 flex flex-wrap gap-2">
-              <span class="rounded-full border border-cyan-400/30 bg-cyan-400/10 px-3 py-1 text-xs font-semibold text-cyan-100">1,200+ fasting individuals reached</span>
-              <span class="rounded-full border border-cyan-400/30 bg-cyan-400/10 px-3 py-1 text-xs font-semibold text-cyan-100">100% to food procurement</span>
-            </div>
-            <p class="mt-4 text-sm leading-relaxed text-slate-400">
-              Hampers delivered to low-income families and local orphanages.
-            </p>
-          </div>
-        </div>
-      </article>
-
-      <!-- Project 4 -->
-      <article class="glass-card reveal grid gap-8 overflow-hidden p-8 sm:p-10 lg:grid-cols-[320px_1fr]">
-        <div class="flex flex-col justify-between gap-4">
-          <div>
-            <span class="text-[11px] font-bold uppercase tracking-[0.35em] text-cyan-400">Project 04</span>
-            <h3 class="mt-3 text-2xl font-extrabold leading-tight text-white">Tree Planting — Project MYK</h3>
-          </div>
-          <span class="inline-flex w-fit items-center gap-2 rounded-full border border-cyan-400/25 bg-cyan-400/10 px-3 py-1 text-xs font-semibold text-cyan-200">
-            Public schools
-          </span>
-        </div>
-        <div class="space-y-6">
-          <div>
-            <h4 class="text-xs font-bold uppercase tracking-[0.25em] text-slate-500">What They Did</h4>
-            <p class="mt-2 text-pretty leading-relaxed text-slate-300">
-              Planted native shade and fruit trees at unshaded public schools and established student-led watering teams to keep them alive.
-            </p>
-          </div>
-          <div class="border-t border-white/10 pt-6">
-            <h4 class="text-xs font-bold uppercase tracking-[0.25em] text-slate-500">Impact</h4>
-            <div class="mt-3 flex flex-wrap gap-2">
-              <span class="rounded-full border border-cyan-400/30 bg-cyan-400/10 px-3 py-1 text-xs font-semibold text-cyan-100">500+ trees planted</span>
-              <span class="rounded-full border border-cyan-400/30 bg-cyan-400/10 px-3 py-1 text-xs font-semibold text-cyan-100">90%+ survival rate</span>
-            </div>
-            <p class="mt-4 text-sm leading-relaxed text-slate-400">
-              Hundreds of students benefiting through student guardianship.
-            </p>
-          </div>
-        </div>
-      </article>
-
-      <!-- Project 5 -->
-      <article class="glass-card reveal grid gap-8 overflow-hidden p-8 sm:p-10 lg:grid-cols-[320px_1fr]">
-        <div class="flex flex-col justify-between gap-4">
-          <div>
-            <span class="text-[11px] font-bold uppercase tracking-[0.35em] text-cyan-400">Project 05</span>
-            <h3 class="mt-3 text-2xl font-extrabold leading-tight text-white">Ujasiri House Renovation</h3>
-          </div>
-          <span class="inline-flex w-fit items-center gap-2 rounded-full border border-cyan-400/25 bg-cyan-400/10 px-3 py-1 text-xs font-semibold text-cyan-200">
-            Tumaini La Maisha
-          </span>
-        </div>
-        <div class="space-y-6">
-          <div>
-            <h4 class="text-xs font-bold uppercase tracking-[0.25em] text-slate-500">What They Did</h4>
-            <p class="mt-2 text-pretty leading-relaxed text-slate-300">
-              Plastered, repainted, and painted custom murals at Ujasiri House, a free hostel for pediatric cancer patients and their families at Muhimbili National Hospital.
-            </p>
-          </div>
-          <div class="border-t border-white/10 pt-6">
-            <h4 class="text-xs font-bold uppercase tracking-[0.25em] text-slate-500">Impact</h4>
-            <div class="mt-3 flex flex-wrap gap-2">
-              <span class="rounded-full border border-cyan-400/30 bg-cyan-400/10 px-3 py-1 text-xs font-semibold text-cyan-100">30+ families served daily</span>
-              <span class="rounded-full border border-cyan-400/30 bg-cyan-400/10 px-3 py-1 text-xs font-semibold text-cyan-100">100% volunteer labor</span>
-            </div>
-            <p class="mt-4 text-sm leading-relaxed text-slate-400">
-              All funds went directly to paint and repair supplies — transforming the hostel environment.
-            </p>
-          </div>
-        </div>
-      </article>
+    <div class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="glass-card reveal p-6">
+        <span class="text-[11px] font-bold uppercase tracking-[0.35em] text-cyan-400">01</span>
+        <h3 class="mt-2 text-lg font-bold text-white">AMSEN Special Needs Visits</h3>
+        <p class="mt-2 text-sm text-slate-400">40+ students engaged, 100% supplies donated.</p>
+      </div>
+      <div class="glass-card reveal p-6" style="transition-delay: 0.1s;">
+        <span class="text-[11px] font-bold uppercase tracking-[0.35em] text-cyan-400">02</span>
+        <h3 class="mt-2 text-lg font-bold text-white">Coastal Beach Cleanups</h3>
+        <p class="mt-2 text-sm text-slate-400">150+ volunteers, 1.5+ tons of waste removed.</p>
+      </div>
+      <div class="glass-card reveal p-6" style="transition-delay: 0.2s;">
+        <span class="text-[11px] font-bold uppercase tracking-[0.35em] text-cyan-400">03</span>
+        <h3 class="mt-2 text-lg font-bold text-white">The Ramadhan Project</h3>
+        <p class="mt-2 text-sm text-slate-400">1,200+ fasting individuals reached, 100% to food.</p>
+      </div>
+    </div>
+    <div class="reveal mt-10 text-center">
+      <a href="projects.html" class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-6 py-2.5 text-sm font-semibold text-slate-200 transition-all hover:border-cyan-400/40 hover:text-white">
+        View all projects <span aria-hidden="true">→</span>
+      </a>
     </div>
   </section>
 
-  <!-- ============ JOIN / CTA ============ -->
-  <section id="join" class="relative mx-auto max-w-6xl scroll-mt-24 px-5 pb-32 pt-8 sm:px-8">
+  <!-- Join CTA -->
+  <section class="relative mx-auto max-w-6xl px-5 pb-32 pt-12 sm:px-8">
     <div class="glass-card reveal relative overflow-hidden p-10 text-center sm:p-16">
       <div class="absolute inset-0 bg-[radial-gradient(500px_280px_at_50%_0%,rgba(34,211,238,0.14),transparent_70%)]" aria-hidden="true"></div>
       <div class="relative">
-        <h2 class="text-balance text-4xl font-extrabold leading-tight text-white sm:text-5xl">
-          Join the <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-blue-400">Legions.</span>
-        </h2>
-        <p class="mx-auto mt-5 max-w-xl text-pretty text-slate-400">
-          No hierarchy. No gatekeeping. If you're young and ready to work, there's a project waiting for you in Dar es Salaam.
-        </p>
-        <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <a href="https://instagram.com/legions.tz" target="_blank" rel="noopener"
-             class="rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 px-8 py-3.5 text-sm font-bold text-[#05081f] shadow-[0_0_36px_rgba(34,211,238,0.45)] transition-all hover:shadow-[0_0_52px_rgba(34,211,238,0.65)] hover:brightness-110">
-            Get Involved
-          </a>
-          <a href="#how" class="rounded-full border border-white/15 bg-white/5 px-8 py-3.5 text-sm font-semibold text-slate-200 backdrop-blur-sm transition-colors hover:border-cyan-400/40 hover:text-white">
-            See How It Works
-          </a>
-        </div>
-        <div class="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[12px] text-slate-500">
-          <span class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-cyan-400"></span>M-Pesa</span>
-          <span class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-cyan-400"></span>Tigo Pesa</span>
-          <span class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-cyan-400"></span>100% direct to projects</span>
-          <span class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-cyan-400"></span>Zero admin overhead</span>
-        </div>
+        <h2 class="text-balance text-4xl font-extrabold leading-tight text-white sm:text-5xl">Join the <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-blue-400">Legions.</span></h2>
+        <p class="mx-auto mt-5 max-w-xl text-pretty text-slate-400">No hierarchy. No gatekeeping. If you're young and ready to work, there's a project waiting for you.</p>
+        <a href="join.html" class="mt-8 inline-flex rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 px-8 py-3.5 text-sm font-bold text-[#05081f] shadow-[0_0_36px_rgba(34,211,238,0.45)] transition-all hover:shadow-[0_0_52px_rgba(34,211,238,0.65)] hover:brightness-110">Get Involved</a>
       </div>
     </div>
   </section>
-
 </main>
 
-<!-- Footer -->
 <footer class="border-t border-white/10 bg-[#04061a]/60 backdrop-blur-sm">
   <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 px-5 py-10 sm:flex-row sm:px-8">
     <div class="flex items-center gap-2.5">
@@ -582,165 +201,16 @@
     <p class="text-center text-xs text-slate-500">© <span id="year">2025</span> Legions Tz — Dar es Salaam, Tanzania &middot; @legions.tz</p>
     <div class="flex items-center gap-4">
       <a href="https://instagram.com/legions.tz" target="_blank" rel="noopener" class="text-slate-400 transition-colors hover:text-cyan-300" aria-label="Instagram">
-        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7">
-          <rect x="2.5" y="2.5" width="19" height="19" rx="5.5"></rect>
-          <circle cx="12" cy="12" r="4.2"></circle>
-          <circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"></circle>
-        </svg>
+        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"></rect><circle cx="12" cy="12" r="4.2"></circle><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"></circle></svg>
       </a>
       <a href="#top" class="text-slate-400 transition-colors hover:text-cyan-300" aria-label="Back to top">
-        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7">
-          <path stroke-linecap="round" stroke-linejoin="round" d="m5 15 7-7 7 7"></path>
-        </svg>
+        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" d="m5 15 7-7 7 7"></path></svg>
       </a>
     </div>
   </div>
 </footer>
 
-<script>
-(function () {
-  'use strict';
-
-  /* ============================================================
-   *  SCROLL-DRIVEN CANVAS HERO
-   *  Preloads 114 frames from /hero, maps scroll progress 0..1
-   *  to frame index, draws with object-fit:cover math.
-   * ============================================================ */
-  var FRAME_COUNT = 114;
-  var canvas = document.getElementById('hero-canvas');
-  var ctx = canvas.getContext('2d');
-  var wrapper = document.getElementById('hero-scroll');
-  var heroText = document.getElementById('hero-text');
-  var scrollCue = document.getElementById('scroll-cue');
-  var loader = document.getElementById('loader');
-  var loaderPct = document.getElementById('loader-pct');
-
-  var images = [];
-  var loaded = 0;
-  var currentIndex = -1;
-  var rafPending = false;
-
-  function frameUrl(i) {
-    var n = String(i + 1);
-    while (n.length < 3) n = '0' + n;
-    return 'hero/ezgif-frame-' + n + '.jpg';
-  }
-
-  /* Preload all frames */
-  for (var i = 0; i < FRAME_COUNT; i++) {
-    (function (idx) {
-      var img = new Image();
-      img.onload = img.onerror = function () {
-        loaded++;
-        if (loaded >= FRAME_COUNT) {
-          loaderPct.textContent = '100%';
-          setTimeout(function () {
-            loader.classList.add('loader-done');
-          }, 350);
-          scheduleDraw();
-        } else {
-          loaderPct.textContent = Math.round((loaded / FRAME_COUNT) * 100) + '%';
-        }
-      };
-      img.src = frameUrl(idx);
-      images[idx] = img;
-    })(i);
-  }
-
-  /* Size canvas backing store to devicePixelRatio (capped at 2x) */
-  function resizeCanvas() {
-    var dpr = Math.min(window.devicePixelRatio || 1, 2);
-    var w = canvas.clientWidth;
-    var h = canvas.clientHeight;
-    canvas.width = Math.max(1, Math.round(w * dpr));
-    canvas.height = Math.max(1, Math.round(h * dpr));
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  }
-
-  /* Mimic CSS object-fit: cover */
-  function drawCover(img) {
-    var w = canvas.clientWidth;
-    var h = canvas.clientHeight;
-    var iw = img.naturalWidth || 1280;
-    var ih = img.naturalHeight || 720;
-    var scale = Math.max(w / iw, h / ih);
-    var dw = iw * scale;
-    var dh = ih * scale;
-    ctx.clearRect(0, 0, w, h);
-    ctx.drawImage(img, (w - dw) / 2, (h - dh) / 2, dw, dh);
-  }
-
-  function drawFrame(idx) {
-    if (idx < 0 || idx >= FRAME_COUNT) return;
-    var img = images[idx];
-    if (img && img.complete && img.naturalWidth) {
-      drawCover(img);
-    }
-  }
-
-  /* rAF-gated redraw to avoid redundant paints */
-  function scheduleDraw() {
-    if (rafPending) return;
-    rafPending = true;
-    requestAnimationFrame(function () {
-      rafPending = false;
-      drawFrame(currentIndex);
-    });
-  }
-
-  function onScroll() {
-    var total = wrapper.offsetHeight - window.innerHeight;
-    var scrolled = Math.max(0, Math.min(total, -wrapper.getBoundingClientRect().top));
-    var progress = total > 0 ? scrolled / total : 0;
-
-    /* Map progress 0..1 to frame index */
-    var idx = Math.min(FRAME_COUNT - 1, Math.max(0, Math.round(progress * (FRAME_COUNT - 1))));
-    if (idx !== currentIndex) {
-      currentIndex = idx;
-      scheduleDraw();
-    }
-
-    /* Fade / scale title as the reel plays out */
-    var t = 1 - Math.min(1, progress * 1.1);
-    if (heroText) {
-      heroText.style.opacity = Math.max(0, t).toFixed(3);
-      heroText.style.transform = 'translateY(' + (progress * 60) + 'px) scale(' + (1 - progress * 0.08) + ')';
-    }
-    if (scrollCue) {
-      scrollCue.style.opacity = Math.max(0, 1 - progress * 2.5).toFixed(3);
-    }
-  }
-
-  /* ---------- Scroll reveal ---------- */
-  var revealEls = document.querySelectorAll('.reveal');
-  if ('IntersectionObserver' in window) {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-    revealEls.forEach(function (el) { io.observe(el); });
-  } else {
-    revealEls.forEach(function (el) { el.classList.add('is-visible'); });
-  }
-
-  /* ---------- Footer year ---------- */
-  var yearEl = document.getElementById('year');
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-  /* ---------- Init ---------- */
-  resizeCanvas();
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', function () {
-    resizeCanvas();
-    drawFrame(currentIndex);
-  });
-  drawFrame(0);
-  onScroll();
-})();
-</script>
+<script src="js/main.js"></script>
+<script src="js/hero.js"></script>
 </body>
 </html>
