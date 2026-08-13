@@ -7,6 +7,7 @@ type ProjectGallerySequenceProps = {
   slug: string
   title: string
   images: string[]
+  galleryImages?: string[]
 }
 
 type Segment = {
@@ -32,12 +33,11 @@ function buildSegments(slug: string, images: string[]): Segment[] {
   }
   if (slug === 'ujasiri-house') {
     return [
-      { src: a, className: 'gallery-seq__item gallery-seq__item--slider' },
+      { src: a, className: 'gallery-seq__item gallery-seq__item--support' },
       { src: b, className: 'gallery-seq__item gallery-seq__item--support' },
-      { src: c, className: 'gallery-seq__item gallery-seq__item--support' },
-      { src: d, className: 'gallery-seq__item gallery-seq__item--large' },
-      { src: e, className: 'gallery-seq__item gallery-seq__item--support' },
-      ...images.slice(5).map((src) => ({ src, className: 'gallery-seq__item gallery-seq__item--support' })),
+      { src: c, className: 'gallery-seq__item gallery-seq__item--large' },
+      { src: d, className: 'gallery-seq__item gallery-seq__item--support' },
+      ...images.slice(4).map((src) => ({ src, className: 'gallery-seq__item gallery-seq__item--support' })),
     ]
   }
   if (slug === 'beach-cleanups') {
@@ -61,14 +61,28 @@ function buildSegments(slug: string, images: string[]): Segment[] {
       { src: g, className: 'gallery-seq__item gallery-seq__item--support' },
     ]
   }
+  if (slug === 'amsen-visits') {
+    return [
+      { src: a, className: 'gallery-seq__item gallery-seq__item--mid' },
+      { src: b, className: 'gallery-seq__item gallery-seq__item--support' },
+      { src: c, className: 'gallery-seq__item gallery-seq__item--support' },
+      { src: d, className: 'gallery-seq__item gallery-seq__item--support' },
+      { src: e, className: 'gallery-seq__item gallery-seq__item--support' },
+    ]
+  }
   return images.map((src, index) => ({
     src,
     className: `gallery-seq__item gallery-seq__item--${index === 0 ? 'primary' : 'support'}`,
   }))
 }
 
-export default function ProjectGallerySequence({ slug, title, images }: ProjectGallerySequenceProps) {
-  const segments = useMemo(() => buildSegments(slug, images), [slug, images])
+export default function ProjectGallerySequence({
+  slug,
+  title,
+  images,
+  galleryImages,
+}: ProjectGallerySequenceProps) {
+  const segments = useMemo(() => buildSegments(slug, galleryImages ?? images), [slug, galleryImages, images])
   const [active, setActive] = useState<number | null>(null)
 
   return (

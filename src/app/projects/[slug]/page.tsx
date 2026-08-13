@@ -237,7 +237,22 @@ export default function ProjectPage({
                 <span className="project-detail-visual-caption">Before and after anchor.</span>
               </div>
             ) : null}
-            <ProjectGallerySequence slug={project.slug} title={project.title} images={project.images} />
+            <ProjectGallerySequence
+              slug={project.slug}
+              title={project.title}
+              images={project.images}
+              galleryImages={
+                project.slug === 'ujasiri-house'
+                  ? project.images.slice(2)
+                  : project.slug === 'amsen-visits'
+                    ? project.images.slice(0, 5)
+                    : project.slug === 'beach-cleanups'
+                      ? project.images
+                      : project.slug === 'ramadhan'
+                        ? project.images
+                        : project.images
+              }
+            />
           </div>
 
           {project.slug !== 'ramadhan' && <FieldLog entries={project.fieldLog} />}
