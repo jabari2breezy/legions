@@ -17,8 +17,8 @@ export default function JoinPage() {
             Bring your name, <span className="accent">email, and reason.</span>
           </h1>
           <p className="page-subtitle">
-            Tell us who you are, how to reach you, and why Legions matters to you.
-            We will follow up with the right next step.
+            Add your full name, email, and why you want in. We will follow up with
+            the right next step.
           </p>
         </div>
       </section>
@@ -29,7 +29,7 @@ export default function JoinPage() {
             <SignupForm
               type="interest"
               source="join page"
-              heading="Tell us you're interested"
+              heading="Name, email, why."
               description="Use this quick form if you want to volunteer, donate, or help document the work."
               submitLabel="Send my details"
             />
