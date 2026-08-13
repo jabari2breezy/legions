@@ -4,6 +4,7 @@ import './globals.css'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import ScrollSystem from '@/components/ScrollSystem'
+import { readContent } from '@/lib/content'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -38,15 +39,20 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const content = readContent()
   return (
     <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
       <body>
         <div className="noise-overlay" aria-hidden="true" />
         <div className="bg-deep" aria-hidden="true" />
-        <Nav />
+        <Nav brandLine={content.site.brandLine} />
         <ScrollSystem />
         <main>{children}</main>
-        <Footer />
+        <Footer
+          email={content.site.footerEmail}
+          socialHandle={content.site.footerSocialHandle}
+          copyrightText={content.site.footerCopyrightText}
+        />
       </body>
     </html>
   )

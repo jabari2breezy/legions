@@ -14,7 +14,7 @@ const links = [
   { href: '/volunteer', label: 'Volunteer' },
 ]
 
-export default function Nav() {
+export default function Nav({ brandLine }: { brandLine: string }) {
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
 
@@ -37,6 +37,7 @@ export default function Nav() {
           />
           <span className="nav-wordmark">LEGIONS</span>
         </Link>
+        <span className="nav-brandline">{brandLine}</span>
 
         <div className="nav-links">
           {links.map(({ href, label }) => (

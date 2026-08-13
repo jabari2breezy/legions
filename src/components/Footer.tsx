@@ -1,25 +1,24 @@
-import Image from 'next/image'
 import Link from 'next/link'
 
-export default function Footer() {
-  const year = new Date().getFullYear()
+export default function Footer({
+  email,
+  socialHandle,
+  copyrightText,
+}: {
+  email: string
+  socialHandle: string
+  copyrightText: string
+}) {
 
   return (
     <footer className="site-footer">
       <div className="container footer-inner">
         <Link href="/" className="footer-logo">
-          <Image
-            src="/logo.png"
-            alt="Legions"
-            width={36}
-            height={36}
-            className="nav-logo-image"
-          />
           <span className="nav-wordmark">LEGIONS</span>
         </Link>
 
         <p className="footer-copy">
-          © {year} Legions Tz · Dar es Salaam, Tanzania · @legions.tz
+          {copyrightText} · {socialHandle} · {email}
         </p>
 
         <div className="footer-links">

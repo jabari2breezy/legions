@@ -7,6 +7,7 @@ import BeforeAfterSlider from '@/components/BeforeAfterSlider'
 import FieldLog from '@/components/FieldLog'
 import NextProjectSwipe from '@/components/NextProjectSwipe'
 import { MotionCopy, MotionHeading } from '@/components/PageMotion'
+import ProjectGallerySequence from '@/components/ProjectGallerySequence'
 
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }))
@@ -194,17 +195,29 @@ export default function ProjectPage({
 
           <div className="project-detail-copy">
             <h2 className="project-detail-section-title">What happened</h2>
-            <p>{project.description}</p>
+            <p>
+              {project.slug === 'ramadhan' &&
+                'The food was bought directly from wholesale suppliers in bulk, which kept the same budget moving farther and made the sourcing feel like an actual supply run instead of a donation handoff.'}
+              {project.slug === 'ujasiri-house' &&
+                'Tumaini La Maisha means hope for life, and the renovation focused on the parts of the house families touch every day, not just the parts people photograph once.'}
+              {project.slug === 'beach-cleanups' &&
+                'The cleanups were coordinated so the shoreline could be cleared in passes, with sorting and hauling handled as separate jobs instead of one big pile at the end.'}
+              {project.slug === 'tree-planting' &&
+                'Caretakers at the schools kept the watering and follow-up moving after the planting day, which is the real reason the survival rate matters instead of just the planting count.'}
+              {project.slug === 'amsen-visits' &&
+                'The visits centered on hands-on time with donated materials, so the activity table and supplies carried the day more than any posed group shot.'}
+            </p>
             {project.slug === 'ujasiri-house' && (
               <p className="note">
-                Tumaini La Maisha means “hope for life.” The renovation supports the
-                families who stay there while children receive treatment.
+                The space supports the families who stay there while children receive
+                treatment.
               </p>
             )}
             {project.slug === 'tree-planting' && (
               <p className="note">
-                Project MYK is tied to school grounds where the new trees are being
-                watched, watered, and kept alive after planting.
+                Project MYK is tied to school grounds where new trees are monitored
+                and watered after planting. No return-visit growth photo exists in the
+                current assets yet.
               </p>
             )}
             <p className="note">{project.impactNote}</p>
@@ -213,29 +226,18 @@ export default function ProjectPage({
           {project.slug === 'ramadhan' && <FieldLog entries={project.fieldLog} />}
 
           <div style={{ marginTop: '4rem' }}>
-            <h2 className="project-detail-section-title">
-              {project.slug === 'ujasiri-house' ? 'Before and after' : 'Gallery'}
-            </h2>
-            <div className="photo-grid">
-              {(project.slug === 'ramadhan'
-                ? [firstImage, secondImage, thirdImage]
-                : project.slug === 'ujasiri-house'
-                  ? [secondImage, thirdImage, project.images[3], project.images[4]]
-                  : project.slug === 'beach-cleanups'
-                    ? [firstImage, secondImage, thirdImage, project.images[4]]
-                    : project.slug === 'tree-planting'
-                      ? [firstImage, secondImage, project.images[5], project.images[6]]
-                      : [firstImage, secondImage, thirdImage]
-              ).map((src, i) => (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  key={i}
-                  src={src}
-                  alt={`${project.title}, Photo ${i + 1}`}
-                  loading={i < 4 ? 'eager' : 'lazy'}
+            <h2 className="project-detail-section-title">Gallery</h2>
+            {project.slug === 'ujasiri-house' ? (
+              <div className="project-detail-visual project-detail-visual--before-after">
+                <BeforeAfterSlider
+                  before={project.compareImages?.before ?? firstImage}
+                  after={project.compareImages?.after ?? secondImage}
+                  alt={project.title}
                 />
-              ))}
-            </div>
+                <span className="project-detail-visual-caption">Before and after anchor.</span>
+              </div>
+            ) : null}
+            <ProjectGallerySequence slug={project.slug} title={project.title} images={project.images} />
           </div>
 
           {project.slug !== 'ramadhan' && <FieldLog entries={project.fieldLog} />}
