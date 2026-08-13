@@ -2,7 +2,7 @@
  * Legions volunteer / interest signup -> Google Sheets
  *
  * Setup:
- * 1. Open https://docs.google.com/spreadsheets/d/1t7DdwNfpiwDG59f_dkcNiS7jz1l-QQo6hT4OE6rHhCM/edit
+ * 1. Open https://docs.google.com/spreadsheets/d/16gcDtan5zGQWZ1FB7CjUUUkNZXNR_4QDJDgUfxpeZ7U/edit
  * 2. Extensions > Apps Script
  * 3. Replace the default code with this file
  * 4. Run setupSheet once (authorize when prompted)
@@ -12,7 +12,7 @@
  * 6. Copy the web app URL into GOOGLE_SHEETS_WEBAPP_URL in your hosting env
  */
 
-const SHEET_ID = '1t7DdwNfpiwDG59f_dkcNiS7jz1l-QQo6hT4OE6rHhCM';
+const SHEET_ID = '16gcDtan5zGQWZ1FB7CjUUUkNZXNR_4QDJDgUfxpeZ7U';
 const SHEET_NAME = 'Signups';
 
 function setupSheet() {
