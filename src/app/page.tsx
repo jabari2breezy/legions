@@ -3,19 +3,43 @@ import HomeHero from '@/components/HomeHero'
 import ProjectPreviewCard from '@/components/ProjectPreviewCard'
 import GlassSurface from '@/components/GlassSurface'
 import MagneticButton from '@/components/MagneticButton'
+import { MotionCopy, MotionHeading } from '@/components/PageMotion'
 
 export default function HomePage() {
   return (
     <>
       <HomeHero />
 
+      <section className="section" id="problem" data-scroll-panel>
+        <div className="container">
+          <MotionHeading>
+            <span className="label" data-scroll-title>
+              Why this work exists
+            </span>
+            <h2 className="section-heading">
+              Overflowing waste on public beaches. Families missing meals during
+              Ramadhan. Schools that need shade, trees, and care.
+            </h2>
+          </MotionHeading>
+          <MotionCopy>
+            <p className="section-intro section-intro--quiet">
+              The five projects on this site answer those exact conditions, one
+              piece of visible work at a time.
+            </p>
+          </MotionCopy>
+        </div>
+      </section>
+
       <section className="section" id="who" data-scroll-panel>
         <div className="container">
-          <span className="label" data-scroll-title>
-            Who we are
-          </span>
-          <h2 className="section-heading">Who We Are</h2>
-          <div className="origin-body origin-body--tight">
+          <MotionHeading>
+            <span className="label" data-scroll-title>
+              Who we are
+            </span>
+            <h2 className="section-heading">Who We Are</h2>
+          </MotionHeading>
+          <MotionCopy>
+            <div className="origin-body origin-body--tight">
             <p>
               Legions moves where the need is visible: patched up walls, cleared
               shorelines, trees in the ground, families with one less thing to
@@ -23,7 +47,8 @@ export default function HomePage() {
               graduates, and young professionals putting their hands where the
               problem is.
             </p>
-          </div>
+            </div>
+          </MotionCopy>
         </div>
       </section>
 

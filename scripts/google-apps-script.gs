@@ -44,7 +44,7 @@ function doPost(e) {
       payload.timestamp || new Date().toISOString(),
       payload.name || '',
       payload.email || '',
-      payload.message || '',
+      payload.reason || payload.message || '',
       payload.type || 'interest',
     ]);
 

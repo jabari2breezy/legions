@@ -5,6 +5,8 @@ import type { Metadata } from 'next'
 import GlassSurface from '@/components/GlassSurface'
 import BeforeAfterSlider from '@/components/BeforeAfterSlider'
 import FieldLog from '@/components/FieldLog'
+import NextProjectSwipe from '@/components/NextProjectSwipe'
+import { MotionCopy, MotionHeading } from '@/components/PageMotion'
 
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }))
@@ -45,6 +47,8 @@ export default function ProjectPage({
 }) {
   const project = getProjectBySlug(params.slug)
   if (!project) notFound()
+  const currentIndex = projects.findIndex((item) => item.slug === project.slug)
+  const nextProject = projects[(currentIndex + 1) % projects.length]
 
   const [firstImage, secondImage, thirdImage] = project.images
 
@@ -52,14 +56,20 @@ export default function ProjectPage({
     <>
       <section className="page-banner">
         <div className="container page-banner-content">
-          <Link href="/projects" className="back-link">
-            ← Back to projects
-          </Link>
-          <span className="label" style={{ display: 'block', marginTop: '2rem' }}>
-            {project.subtitle}
-          </span>
-          <h1 className="page-title">{project.title}</h1>
-          <p className="page-subtitle">{project.location}</p>
+          <MotionCopy>
+            <Link href="/projects" className="back-link">
+              Back to projects
+            </Link>
+          </MotionCopy>
+          <MotionHeading>
+            <span className="label" style={{ display: 'block', marginTop: '2rem' }}>
+              {project.subtitle}
+            </span>
+            <h1 className="page-title">{project.title}</h1>
+          </MotionHeading>
+          <MotionCopy>
+            <p className="page-subtitle">{project.location}</p>
+          </MotionCopy>
         </div>
       </section>
 
@@ -185,15 +195,38 @@ export default function ProjectPage({
           <div className="project-detail-copy">
             <h2 className="project-detail-section-title">What happened</h2>
             <p>{project.description}</p>
+            {project.slug === 'ujasiri-house' && (
+              <p className="note">
+                Tumaini La Maisha means “hope for life.” The renovation supports the
+                families who stay there while children receive treatment.
+              </p>
+            )}
+            {project.slug === 'tree-planting' && (
+              <p className="note">
+                Project MYK is tied to school grounds where the new trees are being
+                watched, watered, and kept alive after planting.
+              </p>
+            )}
             <p className="note">{project.impactNote}</p>
           </div>
 
-          <FieldLog entries={project.fieldLog} />
+          {project.slug === 'ramadhan' && <FieldLog entries={project.fieldLog} />}
 
           <div style={{ marginTop: '4rem' }}>
-            <h2 className="project-detail-section-title">Gallery</h2>
+            <h2 className="project-detail-section-title">
+              {project.slug === 'ujasiri-house' ? 'Before and after' : 'Gallery'}
+            </h2>
             <div className="photo-grid">
-              {project.images.map((src, i) => (
+              {(project.slug === 'ramadhan'
+                ? [firstImage, secondImage, thirdImage]
+                : project.slug === 'ujasiri-house'
+                  ? [secondImage, thirdImage, project.images[3], project.images[4]]
+                  : project.slug === 'beach-cleanups'
+                    ? [firstImage, secondImage, thirdImage, project.images[4]]
+                    : project.slug === 'tree-planting'
+                      ? [firstImage, secondImage, project.images[5], project.images[6]]
+                      : [firstImage, secondImage, thirdImage]
+              ).map((src, i) => (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
                   key={i}
@@ -203,6 +236,17 @@ export default function ProjectPage({
                 />
               ))}
             </div>
+          </div>
+
+          {project.slug !== 'ramadhan' && <FieldLog entries={project.fieldLog} />}
+
+          <div style={{ marginTop: '5rem' }}>
+            <NextProjectSwipe
+              href={`/projects/${nextProject.slug}`}
+              title={nextProject.title}
+              subtitle={nextProject.subtitle}
+              image={nextProject.images[0]}
+            />
           </div>
         </div>
       </section>

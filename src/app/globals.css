@@ -90,6 +90,18 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--accent);
 }
 
+.section-intro {
+  max-width: 38rem;
+  margin-top: 1.25rem;
+  color: var(--text-muted);
+  font-size: clamp(1rem, 1.3vw, 1.15rem);
+}
+
+.section-intro--quiet {
+  margin-left: auto;
+  margin-right: 0;
+}
+
 /* ─── LAYOUT ─── */
 .container {
   width: 100%;
@@ -256,6 +268,52 @@ h1, h2, h3, h4, h5, h6 {
   height: 2px;
   border-radius: 9999px;
   background: linear-gradient(90deg, transparent, var(--accent), transparent);
+}
+
+.next-project-swipe {
+  display: block;
+  border-top: 1px solid var(--border);
+  padding-top: 1.5rem;
+}
+
+.next-project-swipe__inner {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 1rem;
+  align-items: stretch;
+  min-height: 20rem;
+}
+
+.next-project-swipe__copy {
+  padding: 1.5rem 0;
+}
+
+.next-project-swipe__copy h3 {
+  font-size: clamp(2rem, 4vw, 4rem);
+  margin-top: 0.75rem;
+}
+
+.next-project-swipe__copy p {
+  max-width: 28rem;
+  margin-top: 0.75rem;
+  color: var(--text-muted);
+}
+
+.next-project-swipe__media {
+  position: relative;
+  min-height: 16rem;
+  border-radius: 1.25rem;
+  overflow: hidden;
+}
+
+.next-project-swipe__media img {
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .next-project-swipe__inner {
+    grid-template-columns: 1fr;
+  }
 }
 
 .nav-cta {
