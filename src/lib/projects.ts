@@ -10,6 +10,7 @@ export interface ProjectData {
   layout: 'numbers' | 'gallery' | 'horizontal' | 'counter' | 'narrative'
   fieldLog: { time: string; message: string }[]
   compareImages?: { before: string; after: string }
+  secondaryCompareImages?: { before: string; after: string }
 }
 
 export const projects: ProjectData[] = [
@@ -50,14 +51,24 @@ export const projects: ProjectData[] = [
     ],
     impactNote:
       'The renovation focused on paint, repairs, and comfort for children undergoing cancer treatment and their families.',
-    images: Array.from(
-      { length: 15 },
-      (_, i) => `/projects/ujasiri-house/ujasiri-house-${i + 1}.jpg`
-    ),
+    images: [
+      '/projects/ujasiri-house/before.jpg',
+      '/projects/ujasiri-house/after.jpg',
+      '/projects/ujasiri-house/before2.jpg',
+      '/projects/ujasiri-house/after2.jpg',
+      ...Array.from(
+        { length: 15 },
+        (_, i) => `/projects/ujasiri-house/ujasiri-house-${i + 1}.jpg`
+      ),
+    ],
     layout: 'gallery',
     compareImages: {
-      before: '/projects/ujasiri-house/ujasiri-house-1.jpg',
-      after: '/projects/ujasiri-house/ujasiri-house-2.jpg',
+      before: '/projects/ujasiri-house/before.jpg',
+      after: '/projects/ujasiri-house/after.jpg',
+    },
+    secondaryCompareImages: {
+      before: '/projects/ujasiri-house/before2.jpg',
+      after: '/projects/ujasiri-house/after2.jpg',
     },
     fieldLog: [
       { time: '08:00', message: 'At the gate. Paint and tools are here.' },

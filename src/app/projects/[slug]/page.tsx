@@ -213,11 +213,30 @@ export default function ProjectPage({
                 treatment.
               </p>
             )}
+            {project.slug === 'ramadhan' && (
+              <p className="note">
+                Buying from wholesale suppliers in bulk let the team stretch the same
+                money farther and keep the drive centered on procurement instead of
+                presentation.
+              </p>
+            )}
+            {project.slug === 'beach-cleanups' && (
+              <p className="note">
+                The sorting work happened on site, so recyclable waste and mixed trash
+                were separated before the final haul instead of dumped into one pile.
+              </p>
+            )}
             {project.slug === 'tree-planting' && (
               <p className="note">
                 Project MYK is tied to school grounds where new trees are monitored
                 and watered after planting. No return-visit growth photo exists in the
                 current assets yet.
+              </p>
+            )}
+            {project.slug === 'amsen-visits' && (
+              <p className="note">
+                The center got materials the kids could actually handle and use, so the
+                activity table mattered more than any posed visit photo.
               </p>
             )}
             <p className="note">{project.impactNote}</p>
@@ -237,13 +256,23 @@ export default function ProjectPage({
                 <span className="project-detail-visual-caption">Before and after anchor.</span>
               </div>
             ) : null}
+            {project.slug === 'ujasiri-house' && project.secondaryCompareImages ? (
+              <div className="project-detail-visual project-detail-visual--before-after" style={{ marginTop: '1.5rem' }}>
+                <BeforeAfterSlider
+                  before={project.secondaryCompareImages.before}
+                  after={project.secondaryCompareImages.after}
+                  alt={`${project.title} detail`}
+                />
+                <span className="project-detail-visual-caption">Second renovation pair.</span>
+              </div>
+            ) : null}
             <ProjectGallerySequence
               slug={project.slug}
               title={project.title}
               images={project.images}
               galleryImages={
                 project.slug === 'ujasiri-house'
-                  ? project.images.slice(2)
+                  ? project.images.slice(4)
                   : project.slug === 'amsen-visits'
                     ? project.images.slice(0, 5)
                     : project.slug === 'beach-cleanups'
