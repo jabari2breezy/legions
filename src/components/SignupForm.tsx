@@ -7,6 +7,7 @@ type SignupFormProps = {
   type: 'interest' | 'volunteer'
   heading: string
   description: string
+  source?: string
   submitLabel?: string
 }
 
@@ -16,6 +17,7 @@ export default function SignupForm({
   type,
   heading,
   description,
+  source = type,
   submitLabel = 'Submit',
 }: SignupFormProps) {
   const [state, setState] = useState<FormState>('idle')
@@ -30,16 +32,17 @@ export default function SignupForm({
     const data = new FormData(form)
 
     try {
-      const response = await fetch('/api/signup', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: data.get('name'),
-          email: data.get('email'),
-          message: data.get('message'),
-          type,
-        }),
-      })
+        const response = await fetch('/api/signup', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: data.get('name'),
+            email: data.get('email'),
+            reason: data.get('reason'),
+            type,
+            source,
+          }),
+        })
 
       if (!response.ok) {
         const payload = await response.json().catch(() => ({}))
@@ -95,10 +98,10 @@ export default function SignupForm({
             <label className="signup-field">
               <span>Why you&apos;re interested</span>
               <textarea
-                name="message"
+                name="reason"
                 required
                 rows={4}
-                placeholder="Tell us what draws you to Legions and how you'd like to help."
+                placeholder="Tell us what draws you to Legions and how you would like to help."
                 disabled={state === 'submitting'}
               />
             </label>

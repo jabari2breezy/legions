@@ -14,18 +14,14 @@ export default function HomePage() {
           <span className="label" data-scroll-title>
             Who we are
           </span>
-          <h2 className="section-heading">
-            Built here, <span className="accent">for here.</span>
-          </h2>
+          <h2 className="section-heading">Who We Are</h2>
           <div className="origin-body origin-body--tight">
             <p>
-              Legions is a youth volunteer collective in Dar es Salaam. We move
-              when the need is visible: fixing run-down spaces, supporting
-              families, clearing waste, and planting trees.
-            </p>
-            <p>
-              No hierarchy. No waiting for permission. Just students, graduates,
-              and young professionals putting hands where the problem is.
+              Legions moves where the need is visible: patched up walls, cleared
+              shorelines, trees in the ground, families with one less thing to
+              worry about. No hierarchy. No waiting on permission. Just students,
+              graduates, and young professionals putting their hands where the
+              problem is.
             </p>
           </div>
         </div>
@@ -47,21 +43,22 @@ export default function HomePage() {
             }}
           >
             We keep the structure light so the work stays honest. Every shilling
-            goes straight to materials, food, tools, and supplies.
+            goes straight to materials, food, tools, and supplies. Nothing sits in
+            an account.
           </p>
           <div className="method-grid">
             {[
               {
                 title: 'Direct labor',
-                desc: 'If a wall gets painted or a beach gets cleared, Legions members are there doing it themselves.',
+                desc: "If a wall needs painting or a beach needs clearing, you'll find Legions members doing it themselves, not managing someone else who is.",
               },
               {
                 title: 'No hierarchy',
-                desc: 'People lead by showing up. There are no gatekeepers, titles, or long approval chains.',
+                desc: 'People lead by showing up, not by title. No gatekeepers, no approval chains, no waiting for a meeting.',
               },
               {
                 title: 'Peer fundraising',
-                desc: 'Micro-donations move through M-Pesa and Tigo Pesa, tracked publicly and spent immediately.',
+                desc: 'Micro donations move through M-Pesa and Tigo Pesa in minutes, tracked in public, spent within days.',
               },
             ].map((item) => (
               <GlassSurface key={item.title} className="method-card">
@@ -76,10 +73,10 @@ export default function HomePage() {
       <section className="section" id="projects" data-scroll-panel>
         <div className="container">
           <span className="label" data-scroll-title>
-            Proof over posture
+            No spin. Just receipts.
           </span>
           <h2 className="section-heading">
-            Five projects. <span className="accent">Five ways to show up.</span>
+            Proof of work
           </h2>
           <div className="projects-grid">
             {projects.map((project) => (
@@ -100,8 +97,8 @@ export default function HomePage() {
                 Bring hands, <span className="accent">not status.</span>
               </h2>
               <p className="cta-body">
-                If you want to volunteer, donate, or help document the work,
-                we&apos;ll plug you into whatever is next.
+                Want to volunteer, donate, or help document the work? Tell us what
+                you&apos;ve got, we&apos;ll plug you into whatever&apos;s next.
               </p>
               <div className="cta-buttons">
                 <MagneticButton href="/volunteer" className="btn-primary">

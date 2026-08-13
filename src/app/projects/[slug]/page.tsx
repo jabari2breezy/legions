@@ -3,6 +3,8 @@ import Link from 'next/link'
 import { projects, getProjectBySlug } from '@/lib/projects'
 import type { Metadata } from 'next'
 import GlassSurface from '@/components/GlassSurface'
+import BeforeAfterSlider from '@/components/BeforeAfterSlider'
+import FieldLog from '@/components/FieldLog'
 
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }))
@@ -92,12 +94,20 @@ export default function ProjectPage({
             {project.layout === 'gallery' && (
               <div className="project-detail-layout project-detail-layout--gallery">
                 <div className="project-detail-visual project-detail-visual--before-after">
-                  <div className="project-detail-before-after">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={firstImage} alt={project.title} />
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={secondImage} alt={project.title} />
-                  </div>
+                  {project.compareImages ? (
+                    <BeforeAfterSlider
+                      before={project.compareImages.before}
+                      after={project.compareImages.after}
+                      alt={project.title}
+                    />
+                  ) : (
+                    <div className="project-detail-before-after">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={firstImage} alt={project.title} />
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={secondImage} alt={project.title} />
+                    </div>
+                  )}
                   <span className="project-detail-visual-caption">Gallery led, before and after.</span>
                 </div>
                 <div>
@@ -177,6 +187,8 @@ export default function ProjectPage({
             <p>{project.description}</p>
             <p className="note">{project.impactNote}</p>
           </div>
+
+          <FieldLog entries={project.fieldLog} />
 
           <div style={{ marginTop: '4rem' }}>
             <h2 className="project-detail-section-title">Gallery</h2>

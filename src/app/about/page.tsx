@@ -2,8 +2,9 @@ import type { Metadata } from 'next'
 import GlassSurface from '@/components/GlassSurface'
 
 export const metadata: Metadata = {
-  title: 'The Origin',
-  description: 'Who Legions is and why it started: a youth volunteer group in Dar es Salaam, Tanzania.',
+  title: 'About',
+  description:
+    'Who Legions is and why it started. A youth volunteer collective in Dar es Salaam, Tanzania.',
 }
 
 export default function AboutPage() {
@@ -12,12 +13,11 @@ export default function AboutPage() {
       <section className="page-banner">
         <div className="container page-banner-content">
           <span className="label">Who we are</span>
-          <h1 className="page-title">
-            Built here, <span className="accent">for here.</span>
-          </h1>
+          <h1 className="page-title">Legions is where the need is visible.</h1>
           <p className="page-subtitle">
-            Legions is a youth volunteer collective in Dar es Salaam, built by
-            students, graduates, and young professionals who got tired of waiting.
+            Legions moves where the need is visible: patched up walls, cleared
+            shorelines, trees in the ground, families with one less thing to worry
+            about.
           </p>
         </div>
       </section>
@@ -27,40 +27,43 @@ export default function AboutPage() {
           <div style={{ display: 'grid', gap: '2rem', maxWidth: '800px' }}>
             <GlassSurface className="detail-panel">
               <h2 style={{ fontSize: '1.5rem', textTransform: 'none', letterSpacing: 'normal', lineHeight: '1.3', marginBottom: '1rem' }}>
-                Who we are
+                Youth-Centric Leadership
               </h2>
               <p style={{ color: 'var(--text-muted)', lineHeight: '1.85', fontSize: '1.0625rem' }}>
-                Legions is a youth volunteer group based in <strong style={{ color: 'var(--text)', fontWeight: 500 }}>Dar es Salaam, Tanzania</strong>,
-                run by secondary students, university students, and young professionals.
-                No formal hierarchy, no corporate sponsors. Just young people who decided
-                their community couldn&apos;t wait for someone else to act.
+                The organization relies heavily on the energy, fresh perspectives, and
+                leadership of its student members to plan and execute its goals. It
+                transforms empathy into tangible, hands-on action.
               </p>
             </GlassSurface>
 
             <GlassSurface className="detail-panel">
               <h2 style={{ fontSize: '1.5rem', textTransform: 'none', letterSpacing: 'normal', lineHeight: '1.3', marginBottom: '1rem' }}>
-                Why it started
+                Collaborative Action
               </h2>
               <p style={{ color: 'var(--text-muted)', lineHeight: '1.85', fontSize: '1.0625rem' }}>
-                Instead of waiting on traditional NGOs or large aid organizations, local
-                youth founded Legions to address immediate community needs directly.
-                They focus on practical, hands-on work: fixing run-down facilities,
-                supporting vulnerable families, cleaning public spaces, and planting trees.
+                Legions does not operate in a silo. A core part of its strategy
+                involves collaborating with like-minded organizations, pooling
+                resources, and expanding its network to maximize its footprint across
+                Dar es Salaam.
               </p>
             </GlassSurface>
 
             <GlassSurface className="detail-panel">
               <h2 style={{ fontSize: '1.5rem', textTransform: 'none', letterSpacing: 'normal', lineHeight: '1.3', marginBottom: '1rem' }}>
-                What drives us
+                Operational Agility
               </h2>
               <p style={{ color: 'var(--text-muted)', lineHeight: '1.85', fontSize: '1.0625rem' }}>
-                Every shilling raised goes directly to raw materials, supplies, or food.
-                Members contribute their own labor. No paid staff, no office rent, no
-                overhead. This isn&apos;t charity tourism. It&apos;s neighbors taking care
-                of neighbors, with radical transparency through mobile money and social
-                media accountability.
+                Because the club is powered entirely by high school and university
+                students, it can mobilize quickly for rapid response community needs
+                and sustained campaigns. Over 139 student volunteers have contributed
+                more than 2,600 hours of service.
               </p>
             </GlassSurface>
+
+            <p style={{ color: 'var(--text-subtle)', fontSize: '0.875rem', lineHeight: '1.7' }}>
+              Timeline note: Legions grew through student organizing, community
+              partnerships, and steady work on the ground across Dar es Salaam.
+            </p>
           </div>
         </div>
       </section>

@@ -4,7 +4,7 @@ import SignupForm from '@/components/SignupForm'
 export const metadata: Metadata = {
   title: 'Volunteer Signup',
   description:
-    'Sign up to volunteer with Legions Club in Dar es Salaam. Join 139 student volunteers making real change.',
+    'Sign up to volunteer with Legions Club in Dar es Salaam. Your details go straight into the volunteer sheet.',
 }
 
 export default function VolunteerPage() {
@@ -14,12 +14,11 @@ export default function VolunteerPage() {
         <div className="container page-banner-content">
           <span className="label">Volunteer</span>
           <h1 className="page-title">
-            Join the <span className="accent">movement.</span>
+            Sign up to <span className="accent">show up.</span>
           </h1>
           <p className="page-subtitle">
-            Legions is powered by youth volunteers. High school and university
-            students across Dar es Salaam lead humanitarian action and environmental
-            initiatives. Add your name and we&apos;ll connect you to what&apos;s next.
+            Add your name, email, and a short note about why you want in. The form
+            goes straight to our Google Sheet so we can follow up quickly.
           </p>
         </div>
       </section>
@@ -29,25 +28,11 @@ export default function VolunteerPage() {
           <div className="volunteer-page-layout">
             <SignupForm
               type="volunteer"
+              source="volunteer page"
               heading="New volunteer signup"
-              description="Fill in your details below. Your information goes directly to our team spreadsheet so we can follow up quickly."
+              description="This page is just for new volunteers. Send your details and we will place you where the work is happening."
               submitLabel="Sign up to volunteer"
             />
-
-            <div className="volunteer-stats">
-              <div className="volunteer-stat">
-                <span className="volunteer-stat-value">139</span>
-                <span className="volunteer-stat-label">student volunteers</span>
-              </div>
-              <div className="volunteer-stat">
-                <span className="volunteer-stat-value">2,600+</span>
-                <span className="volunteer-stat-label">hours of service</span>
-              </div>
-              <div className="volunteer-stat">
-                <span className="volunteer-stat-value">2</span>
-                <span className="volunteer-stat-label">core pillars: humanitarian & environmental</span>
-              </div>
-            </div>
           </div>
         </div>
       </section>

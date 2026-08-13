@@ -2,8 +2,9 @@ import type { Metadata } from 'next'
 import GlassSurface from '@/components/GlassSurface'
 
 export const metadata: Metadata = {
-  title: 'The Method',
-  description: 'How Legions works: direct labor, flat hierarchy, peer fundraising. Every shilling goes where it matters.',
+  title: 'How We Move',
+  description:
+    'How Legions works: direct labor, no hierarchy, and peer fundraising. Every shilling goes where it matters.',
 }
 
 export default function WorkPage() {
@@ -11,23 +12,17 @@ export default function WorkPage() {
     {
       title: 'Direct Labor',
       description:
-        'Members show up in person to do the physical work, ensuring donor money goes entirely toward raw materials, supplies, and food. No contractors, no middlemen.',
-      detail:
-        'When we renovate a hospital hostel, our volunteers hold the paint brushes. When we clean a beach, our volunteers fill the bags. The work is ours.',
+        "If a wall needs painting or a beach needs clearing, you'll find Legions members doing it themselves, not managing someone else who is.",
     },
     {
       title: 'No Ego or Hierarchy',
       description:
-        'A flat collective where any young person can jump in, volunteer, and take ownership of projects. No titles, no gatekeeping.',
-      detail:
-        'A secondary school student has as much say as a university graduate. Projects are led by whoever has the energy and the plan, not by seniority.',
+        'People lead by showing up, not by title. No gatekeepers, no approval chains, no waiting for a meeting.',
     },
     {
       title: 'Peer Fundraising',
       description:
-        'Micro-donations are raised transparently across social media using local mobile money services (M-Pesa and Tigo Pesa) with zero administrative overhead.',
-      detail:
-        'Every contribution is tracked and reported publicly. Donors see exactly what their money bought, down to the last bag of rice or tin of paint.',
+        'Micro donations move through M-Pesa and Tigo Pesa in minutes, tracked in public, spent within days.',
     },
   ]
 
@@ -40,8 +35,9 @@ export default function WorkPage() {
             Hands in. <span className="accent">Overhead out.</span>
           </h1>
           <p className="page-subtitle">
-            Three rules keep Legions lean, transparent, and accountable: do the
-            work yourself, keep the structure flat, and show receipts.
+            We keep the structure light so the work stays honest. Every shilling
+            goes straight to materials, food, tools, and supplies. Nothing sits in
+            an account.
           </p>
         </div>
       </section>
@@ -79,9 +75,6 @@ export default function WorkPage() {
                 </div>
                 <p style={{ color: 'var(--text-muted)', lineHeight: '1.85', fontSize: '1.0625rem' }}>
                   {p.description}
-                </p>
-                <p style={{ color: 'var(--text-subtle)', lineHeight: '1.7', fontSize: '0.9375rem', marginTop: '1rem' }}>
-                  {p.detail}
                 </p>
               </GlassSurface>
             ))}

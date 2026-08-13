@@ -4,7 +4,8 @@ import ProjectPreviewCard from '@/components/ProjectPreviewCard'
 
 export const metadata: Metadata = {
   title: 'The Work',
-  description: 'Legions projects in Dar es Salaam: AMSEN visits, beach cleanups, Ramadhan food drive, tree planting, and Ujasiri House renovation.',
+  description:
+    'Legions projects in Dar es Salaam: AMSEN visits, beach cleanups, Ramadhan food drive, tree planting, and Ujasiri House renovation.',
 }
 
 export default function ProjectsPage() {
@@ -13,13 +14,10 @@ export default function ProjectsPage() {
       <section className="page-banner">
         <div className="container page-banner-content">
           <span className="label">Proof of work</span>
-          <h1 className="page-title">
-            Five projects.{' '}
-            <span className="accent">No generic packaging.</span>
-          </h1>
+          <h1 className="page-title">No spin. Just receipts.</h1>
           <p className="page-subtitle">
-            Each project uses a layout that fits its story, not a one-size-fits-all
-            template.
+            The rail below is the destination. Scroll through the work, then open
+            the project that needs your attention.
           </p>
         </div>
       </section>
