@@ -41,7 +41,10 @@ export async function POST(request: Request) {
       const text = await response.text()
       console.error('Google Sheets submission failed:', text)
       return NextResponse.json(
-        { error: 'Could not save your details. Please try again.' },
+        {
+          error:
+            'Could not save your details. Please redeploy the Google Apps Script web app and make sure it points to the new spreadsheet.',
+        },
         { status: 502 }
       )
     }
